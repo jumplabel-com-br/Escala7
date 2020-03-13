@@ -3447,13 +3447,13 @@ video.responsive-video {
 
   @media only screen and (min-width: 601px) {
     .container {
-      width: 85%;
+      width: auto;
     }
   }
 
   @media only screen and (min-width: 993px) {
     .container {
-      width: 70%;
+      width: auto;
     }
   }
 
@@ -3804,6 +3804,15 @@ video.responsive-video {
       left: auto;
       right: auto;
     }
+
+    .row .col.m3-custom.box-card {
+      width: 30%;
+      margin-left: auto;
+      left: auto;
+      right: auto;
+    }
+
+
     .row .col.offset-m1 {
       margin-left: 8.3333333333%;
     }
