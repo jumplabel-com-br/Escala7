@@ -1,3 +1,7 @@
+<?php
+	session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -204,11 +208,11 @@
 			</div>
 		</div>
 		<div class="col s12 m8">
-			<form id="createUsua">
+			<form id="createUser">
 				<div class="input-field">
 					<i class="material-icons prefix">textsms</i>
-					<input type="text" name="Name" id="Name" class="autocomplete">
-					<label for="Name">Nome</label>
+					<input type="text" name="Nome" id="Nome" class="autocomplete">
+					<label for="Nome">Nome</label>
 				</div>
 
 				<div class="input-field">
@@ -225,6 +229,12 @@
 
 				<div class="input-field">
 					<i class="material-icons prefix">textsms</i>
+					<input type="text" id="Senha" class="autocomplete">
+					<label for="Senha">Senha</label>
+				</div>
+
+				<div class="input-field">
+					<i class="material-icons prefix">textsms</i>
 					<select id="Status">
 						<option value="" disabled selected>Status</option>
 						<option value="1">Ativo</option>
@@ -234,7 +244,7 @@
 
 				<div class="input-field">
 					<i class="material-icons prefix">textsms</i>
-					<select id="TipoUsuario">
+					<select id="UserType">
 						<option value="" disabled selected>Tipo de usuário</option>
 						<option value="1">Administrador</option>
 						<option value="2">Cliente</option>
@@ -247,16 +257,20 @@
 	<div class="modal-footer">
 		<div class="row">
 			<div class="col s4 center-align">
-				<a class="waves-effect waves-light btn" onclick="">Limpar</a>
+				<a class="waves-effect waves-light btn" onclick="clearForm('#createUser')">Limpar</a>
 			</div>
 			<div class="col s8 right-align">
-				<a class="waves-effect waves-light btn" onclick="create();">Salvar</a>
+				<a class="waves-effect waves-light btn">Salvar</a>
 			</div>
 		</div>
 	</div>
 </div>
 
 <input type="hidden" name="valueScanner" id="valueScanner">
+<input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">
+<input type="hidden" name="UserInactivity" id="UserInactivity" value="<?=$_SESSION['User']?>">
+<input type="hidden" name="DateRegistration" id="DateRegistration" value="<?=date("d-m-Y H:i", mktime())?>">
+<input type="hidden" name="DateInactivity" id="DateInactivity" value="<?=date("d-m-Y H:i", mktime())?>">
 <!-- Compiled and minified JavaScript -->
 <script type="text/javascript" src="ajax/AjaxGenericDB.js"></script>
 <script type="text/javascript">
@@ -309,14 +323,25 @@
   	/* Act on the event */
   });
 
+  function clearForm(form){
+  	document.querySelectorAll(`${form} input`).forEach(input => input.value = '');
+  }
+
   function create(){
 
-  	let Name = $('#Name').val();
-  	let CPF = $('#CPF').val();
+  	let Nome = $('#Nome').val();
   	let Email = $('#Email').val();
+  	let CPF = $('#CPF').val();
+  	let Senha = $('#Senha').val();
   	let Status = $('#Status').val();
-  	let tipoUsuario = $('#tipoUsuario').val();
+  	let UserType = $('#UserType').val();
+  	let UserRegistration = $('#UserRegistration').val();
+  	let DateRegistration = $('#DateRegistration').val();
+  	let UserInactivity = $('#UserInactivity').val();
+  	let DateInactivity = $('#DateInactivity').val();
+
   	let option = 'Insert';
+
   	let param = {
   		Name,
   		CPF,
@@ -329,7 +354,7 @@
   	let Schema = 'Escala7';
   	let tableName = 'Users';
   	let colums = 'Name, CPF, Email, Senha'
-  	let lastquery = `'${param.Name}', '${param.CPF}', '${param.Email}', ''`;
+  	let lastquery = `'${param.Name}', '${param.CPF}', '${param.Email}', '${param.Senha}'`;
   	let setQuery = '';
   	let where = '';
   	let sql = '';

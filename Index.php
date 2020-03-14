@@ -29,8 +29,6 @@
 	</head>
 
 	<body>
-
-
 		<section class="Escala-7 mt-3">
 			<div class="container">
 				<div class="row">
@@ -97,7 +95,7 @@
 				})
 				.done(function(data) {
 					console.log("success");
-					data == 'True' ? redirectToAction('Home.html') : '';
+					data == 'True' ? redirectToAction('Home.php') : '';
 				})
 				.fail(function() {
 					console.log("error");

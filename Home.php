@@ -1,3 +1,7 @@
+<?php
+	session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,6 +71,7 @@
 
 
 	<input type="hidden" name="valueScanner" id="valueScanner">
+	<input type="hidden" name="" value="<?=$_SESSION['User']?>">
 	<!-- Compiled and minified JavaScript -->
 	<script type="text/javascript" src="ajax/AjaxGenericDB.js"></script>
 	<script type="text/javascript">

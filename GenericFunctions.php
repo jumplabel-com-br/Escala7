@@ -26,6 +26,8 @@ function validLogin($sql, $link){
 
 		if (isset($dados_usuario['CPF'])) {
 			echo 'True';
+			session_start();
+			$_SESSION["User"] = $dados_usuario['CPF'];
 			return true;
 		}else{
 			echo 'False';
