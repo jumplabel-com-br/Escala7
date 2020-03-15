@@ -19,11 +19,11 @@ function Insert($Schema, $tableName, $colums,  $lastquery){
 }
 
 function Update($Schema, $tableName, $setQuery, $where){
-	return 'update $Schema.$tableName set $setQuery where $where';
+	return "update $Schema.$tableName set $setQuery where $where";
 }
 
 function Delete($Schema, $tableName, $where){
-	return 'delete from $Schema.$tableName where $where';
+	return "delete from $Schema.$tableName where $where";
 }
 
 

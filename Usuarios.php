@@ -1,5 +1,5 @@
 <?php
-	session_start();
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -59,25 +59,25 @@
 	<ul class="sidenav" id="mobile-demo">
 		<li class="tab" id="li-img-logo-max"><a href=""><img src="https://escala7.com.br/wp-content/uploads/2020/02/cropped-Escala-7-Logotipo-11.png" alt="" class="responsive-img img-in-li"></a></li>
 		<li class="li-icon"><a href="#"> &nbsp;</a></li>
-		<li class="li-icon"><a href="#"><i class="material-icons">account_circle</i> Usuários</a></li>
-		<li class="li-icon"><a href="#"><i class="material-icons">record_voice_over</i> Campanahs</a></li>
-		<li class="li-icon"><a href="#"><i class="material-icons">assignment</i> Questionário</a></li>
-		<li class="li-icon"><a href="#"><i class="material-icons">check_box</i> Respostas</a></li>
-		<li class="li-icon"><a href="#"><i class="material-icons">videocam</i> Video Institucional</a></li>
-		<li class="li-icon"><a href="#"><i class="material-icons">settings</i> Sair</a></li>
+		<li class="li-icon" title="Usuários"><a href="#"><i class="material-icons">account_circle</i> Usuários</a></li>
+		<li class="li-icon" title="Campanhas"><a href="Campanhas.php"><i class="material-icons">record_voice_over</i> Campanahs</a></li>
+		<li class="li-icon" title="Questionário"><a href="#"><i class="material-icons">assignment</i> Questionário</a></li>
+		<li class="li-icon" title="Respostas"><a href="#"><i class="material-icons">check_box</i> Respostas</a></li>
+		<li class="li-icon" title="Video Institucional"><a href="#"><i class="material-icons">videocam</i> Video Institucional</a></li>
+		<li class="li-icon" title="Sair"><a href="#"><i class="material-icons">settings</i> Sair</a></li>
 	</ul>
 
 	<ul class="sidenav-min" id="mobile-demo-1">
 		<li class="tab" id="li-img-logo-min"><img src="https://escala7.com.br/wp-content/uploads/2020/02/cropped-Escala-7-Logotipo-11.png" alt="" class="responsive-img img-in-li"></li>
 		<li class="li-icon"><a href="#"> &nbsp;</a></li>
-		<li class="li-icon"><a href="#"><i class="material-icons">account_circle</i></a></li>
-		<li class="li-icon"><a href="#"><i class="material-icons">record_voice_over</i></a></li>
-		<li class="li-icon"><a href="#"><i class="material-icons">assignment</i></a></li>
-		<li class="li-icon"><a href="#"><i class="material-icons">check_box</i></a></li>
-		<li class="li-icon"><a href="#"><i class="material-icons">videocam</i></a></li>
+		<li class="li-icon" title="Usuários"><a href="#"><i class="material-icons">account_circle</i></a></li>
+		<li class="li-icon" title="Campanhas"><a href="Campanhas.php"><i class="material-icons">record_voice_over</i></a></li>
+		<li class="li-icon" title="Questionário"><a href="#"><i class="material-icons">assignment</i></a></li>
+		<li class="li-icon" title="Respostas"><a href="#"><i class="material-icons">check_box</i></a></li>
+		<li class="li-icon" title="Video Instituciona"><a href="#"><i class="material-icons">videocam</i></a></li>
 		<li class="li-icon"><p>&nbsp;</p></li>
 		<li class="li-icon"><p>&nbsp;</p></li>
-		<li class="li-icon"><a href="#"><i class="material-icons">settings</i></a></li>
+		<li class="li-icon" title="Sair"><a href="#"><i class="material-icons">settings</i></a></li>
 	</ul>
 </div>
 
@@ -95,7 +95,7 @@
 				<div class="right-align">
 					<i class="fas fa-ellipsis-h dropdown-trigger" data-target='dropdown1'></i>
 					<ul id='dropdown1' class='dropdown-content'>
-						<li><a href="#modal1" class="modal-trigger"><i class="material-icons right">send</i>visualizar mais</a></li>
+						<li><a href="#modalUser" class="modal-trigger"><i class="material-icons right">send</i>visualizar mais</a></li>
 						<li><a href="#">editar <i class="material-icons right">send</i></a></li>
 					</ul>
 				</div>
@@ -117,7 +117,7 @@
 				<div class="right-align">
 					<i class="fas fa-ellipsis-h dropdown-trigger" data-target='dropdown1'></i>
 					<ul id='dropdown1' class='dropdown-content'>
-						<li><a href="#modal1" class="modal-trigger"><i class="material-icons right">send</i>visualizar mais</a></li>
+						<li><a href="#modalUser" class="modal-trigger"><i class="material-icons right">send</i>visualizar mais</a></li>
 						<li><a href="#">editar <i class="material-icons right">send</i></a></li>
 					</ul>
 				</div>
@@ -139,7 +139,7 @@
 				<div class="right-align">
 					<i class="fas fa-ellipsis-h dropdown-trigger" data-target='dropdown1'></i>
 					<ul id='dropdown1' class='dropdown-content'>
-						<li><a href="#modal1" class="modal-trigger"><i class="material-icons right">send</i>visualizar mais</a></li>
+						<li><a href="#modalUser" class="modal-trigger"><i class="material-icons right">send</i>visualizar mais</a></li>
 						<li><a href="#">editar <i class="material-icons right">send</i></a></li>
 					</ul>
 				</div>
@@ -161,7 +161,7 @@
 				<div class="right-align">
 					<i class="fas fa-ellipsis-h dropdown-trigger" data-target='dropdown1'></i>
 					<ul id='dropdown1' class='dropdown-content'>
-						<li><a href="#modal1" class="modal-trigger"><i class="material-icons right">send</i>visualizar mais</a></li>
+						<li><a href="#modalUser" class="modal-trigger"><i class="material-icons right">send</i>visualizar mais</a></li>
 						<li><a href="#">editar <i class="material-icons right">send</i></a></li>
 					</ul>
 				</div>
@@ -185,7 +185,7 @@
 			</div>
 
 			<div class="col s6 right-align">
-				<button class="btn waves-effect waves-light modal-trigger" type="button" name="action" href="#modal1">
+				<button class="btn waves-effect waves-light modal-trigger" type="button" name="action" href="#modalUser" onclick="$('.btn-action-formUser').html('Salvar');optionCRUDUsers('Salvar');">
 					<i class="material-icons left">add</i>
 					Cadastrar
 				</button>
@@ -195,7 +195,7 @@
 </div>
 
 <!-- Modal Structure -->
-<div id="modal1" class="modal">
+<div id="modalUser" class="modal">
 	<div class="row">
 		<div class="col s12 m4">
 			<div class="">
@@ -208,7 +208,7 @@
 			</div>
 		</div>
 		<div class="col s12 m8">
-			<form id="createUser">
+			<form id="formUser">
 				<div class="input-field">
 					<i class="material-icons prefix">textsms</i>
 					<input type="text" name="Nome" id="Nome" class="autocomplete">
@@ -229,7 +229,7 @@
 
 				<div class="input-field">
 					<i class="material-icons prefix">textsms</i>
-					<input type="text" id="Senha" class="autocomplete">
+					<input type="password" id="Senha" class="autocomplete">
 					<label for="Senha">Senha</label>
 				</div>
 
@@ -238,7 +238,7 @@
 					<select id="Status">
 						<option value="" disabled selected>Status</option>
 						<option value="1">Ativo</option>
-						<option value="2">Desativado</option>
+						<option value="0">Desativado</option>
 					</select>
 				</div>
 
@@ -250,6 +250,8 @@
 						<option value="2">Cliente</option>
 					</select>
 				</div>
+
+				<input type="hidden" name="Id" id="Id">
 			</form>
 		</div>
 	</div>
@@ -257,210 +259,30 @@
 	<div class="modal-footer">
 		<div class="row">
 			<div class="col s4 center-align">
-				<a class="waves-effect waves-light btn" onclick="clearForm('#createUser')">Limpar</a>
+				<a class="waves-effect waves-light btn" onclick="clearForm('#formUser')">Limpar</a>
 			</div>
 			<div class="col s8 right-align">
-				<a class="waves-effect waves-light btn">Salvar</a>
+				<a class="waves-effect waves-light btn btn-action-formUser"></a>
 			</div>
 		</div>
 	</div>
 </div>
 
+<div id="modalProgress" class="modal modal-progress">
+    <div class="modal-content">
+        <div class="progress">
+    	  <div class="indeterminate"></div>
+	  	</div>
+    </div>
+  </div>
+
 <input type="hidden" name="valueScanner" id="valueScanner">
 <input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">
 <input type="hidden" name="UserInactivity" id="UserInactivity" value="<?=$_SESSION['User']?>">
-<input type="hidden" name="DateRegistration" id="DateRegistration" value="<?=date("d-m-Y H:i", mktime())?>">
-<input type="hidden" name="DateInactivity" id="DateInactivity" value="<?=date("d-m-Y H:i", mktime())?>">
 <!-- Compiled and minified JavaScript -->
 <script type="text/javascript" src="ajax/AjaxGenericDB.js"></script>
-<script type="text/javascript">
-	
-
-
-	document.addEventListener('DOMContentLoaded', function() {
-		var elems = document.querySelectorAll('.sidenav');
-		var instances = M.Sidenav.init(elems);
-	});
-
-	document.addEventListener('DOMContentLoaded', function() {
-		var elems = document.querySelectorAll('.dropdown-trigger');
-		var instances = M.Dropdown.init(elems);
-	});
-
-	document.addEventListener('DOMContentLoaded', function() {
-		var elems = document.querySelectorAll('.modal');
-		var instances = M.Modal.init(elems);
-	});
-
-	document.addEventListener('DOMContentLoaded', function() {
-		var elems = document.querySelectorAll('select');
-		var instances = M.FormSelect.init(elems,);
-	});
-
-  // Or with jQuery
-
-  $(document).ready(function(){
-  	$('.sidenav').sidenav();
-  	$('.dropdown-trigger').dropdown();
-  	$('.modal').modal();
-  	$('select').formSelect();
-  });
-
-
-  $('#li-img-logo-min').on('click', function(event) {
-  	$('#mobile-demo').show();
-  	$('.container-usuarios').addClass('desktop');
-  	$('#mobile-demo-1').hide();
-  	event.preventDefault();
-  	/* Act on the event */
-  });
-
-  $('#li-img-logo-max').on('click', function(event) {
-  	$('#mobile-demo').hide();
-  	$('.container-usuarios').removeClass('desktop');
-  	$('#mobile-demo-1').show();
-  	event.preventDefault();
-  	/* Act on the event */
-  });
-
-  function clearForm(form){
-  	document.querySelectorAll(`${form} input`).forEach(input => input.value = '');
-  }
-
-  function create(){
-
-  	let Nome = $('#Nome').val();
-  	let Email = $('#Email').val();
-  	let CPF = $('#CPF').val();
-  	let Senha = $('#Senha').val();
-  	let Status = $('#Status').val();
-  	let UserType = $('#UserType').val();
-  	let UserRegistration = $('#UserRegistration').val();
-  	let DateRegistration = $('#DateRegistration').val();
-  	let UserInactivity = $('#UserInactivity').val();
-  	let DateInactivity = $('#DateInactivity').val();
-
-  	let option = 'Insert';
-
-  	let param = {
-  		Name,
-  		CPF,
-  		Email,
-  		Status,
-  		tipoUsuario
-  	}
-
-
-  	let Schema = 'Escala7';
-  	let tableName = 'Users';
-  	let colums = 'Name, CPF, Email, Senha'
-  	let lastquery = `'${param.Name}', '${param.CPF}', '${param.Email}', '${param.Senha}'`;
-  	let setQuery = '';
-  	let where = '';
-  	let sql = '';
-
-  	let params = {
-  		Schema, 
-  		tableName,
-  		colums,
-  		lastquery,
-  		setQuery,
-  		where,
-  		sql,
-  		option
-  	}
-
-  	//let sql = `insert into Escala7.Users (Name, CPF, Email, Senha) values ('${param.Name}', '${param.CPF}', '${param.Email}', '')`;
-  	// console.log(sql, option)
-
-  	$.ajax({
-  		url: 'DBInserts.php',
-  		type: 'POST',
-  		dataType: 'html',
-  		data: params,
-  	})
-  	.done(function(data) {
-  		console.log("success: ", data);
-  		select();
-  	})
-  	.fail(function() {
-  		console.log("error");
-  	});
-  	
-  }
-
-  function select(){
-  	let sql = 'SELECT * FROM Escala7.Users';
-  	let option = 'Select';
-
-
-  	let Schema = 'Escala7';
-  	let tableName = 'Users';
-  	let colums = '';
-  	let lastquery = ``;
-  	let setQuery = '';
-
-  	let params = {
-  		sql,
-  		option,
-  		Schema,
-  		tableName,
-  		colums,
-  		lastquery,
-  		setQuery
-  	}
-
-  	$.ajax({
-  		url: 'DBInserts.php',
-  		type: 'POST',
-  		dataType: 'json',
-  		data: params,
-  	})
-  	.done(function(data) {
-  		console.log("success select: ", data);
-
-  		if (data.length > 0) {
-  			$('.row-cards-usuarios').html(templateCardsUsuarios(data));
-  			$('.dropdown-trigger').dropdown();
-  		}
-  	})
-  	.fail(function() {
-  		console.log("error");
-  	});
-  	
-  }
-
-  function templateCardsUsuarios(model){
-
-  	return model.map(x => {
-  		return`
-  		<div class="col s12 m3">
-  		<div class="card">
-  		<div class="right-align">
-  		<i class="fas fa-ellipsis-h dropdown-trigger" data-target='dropdown1'></i>
-  		<ul id='dropdown1' class='dropdown-content'>
-  		<li><a href="#modal1" class="modal-trigger"><i class="material-icons right">send</i>visualizar mais</a></li>
-  		<li><a href="#">editar <i class="material-icons right">send</i></a></li>
-  		</ul>
-  		</div>
-  		<div class="card-content center-align">
-  		<span class="card-title"><i class="xl material-icons">account_box</i></span>
-  		</div>
-  		<div class="card-action">
-  		<p class="center-align">
-  		Nome: ${x.Name}
-  		<br>
-  		${x.CPF}
-  		</p>
-  		</div>
-  		</div>
-  		</div>
-  		`});
-  }
-
-  select();
-</script>
 <script src="materialize/js/materialize.js"></script>
+<script type="text/javascript" src="js/Usuarios/Usuarios.js"></script>
 <!--
 <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript" src="js/geoLocation.js"></script>

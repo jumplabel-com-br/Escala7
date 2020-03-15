@@ -66,7 +66,7 @@
 							</div>
 
 							<div class="col s6 right-align">
-								<button class="btn waves-effect waves-light" type="submit" name="action" onclick="ValidatorCPF($('.cpf').val()) == true ? validUser() : '';">Login
+								<button class="btn waves-effect waves-light" type="submit" name="action" onclick="ValidatorCPF($('.cpf').val()) == true && $('#autocomplete-input-text-password').val() != '' ? validUser() : M.toast({html: 'Informe um CPF e Senha válida', displayLength: 4000});">Login
 									<i class="material-icons right">send</i>
 								</button>
 							</div>
@@ -82,6 +82,28 @@
 		<script type="text/javascript" src="materialize/js/materialize.js"></script>
 		<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
 		<script type="text/javascript">
+			var randomPassword = '';
+
+			function SendEmail(){
+
+				let destinatario = 'matheus01gomes01ferreira2001@gmail.com';
+				let senha = randomPassword;
+
+				$.ajax({
+					url: 'SendEmail.php',
+					type: 'POST',
+					dataType: 'html',
+					data: {destinatario, senha},
+				})
+				.done(function(data) {
+					console.log("success: ", data);
+					M.toast({html: data, displayLength: 4000});
+				})
+				.fail(function() {
+					console.log("error");
+				});
+				
+			}
 
 			function validUser(){
 				let sql = `select CPF, Senha from Escala7.Users where CPF = '${$('#autocomplete-input-cpf').val().replace(/[.|-]/g,'')}' and Senha = '${$('#autocomplete-input-password').val()}'`
@@ -105,13 +127,15 @@
 
 			function newPassoword(){
 				var arrayToRandomic = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'];
-				var random = '';
+				
 
 				for (i = 0; i < 32 ; i++) {
-					random += arrayToRandomic[Math.ceil(Math.random() * (arrayToRandomic.length - 1))]
+					randomPassword += arrayToRandomic[Math.ceil(Math.random() * (arrayToRandomic.length - 1))]
 				}
 
-				alert(`sua nova senha é: ${random}`)
+				SendEmail();
+
+				//alert(`sua nova senha é: ${randomPassword}`)
 			}
 
 			function ValidatorCPF(strCPF, strView) {

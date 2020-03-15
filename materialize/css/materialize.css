@@ -9165,3 +9165,26 @@ input[type=range]::-ms-thumb {
     margin-left: 25%
   }
 }
+
+.modal-progress{
+  z-index: 1003;
+    display: block;
+    opacity: 0;
+    top: 10%;
+    transform: scaleX(1) scaleY(1);
+
+    display: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    background-color: transparent; 
+    padding: 0;
+    /* max-height: 70%; */
+    width: 55%;
+    margin: auto;
+    overflow-y: auto;
+    border-radius: 2px;
+    will-change: top, opacity;
+
+    box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0), 0 0px 0px 0px rgba(0, 0, 0, 0), 0 0px 0px 0px rgba(0, 0, 0, 0);
+}
