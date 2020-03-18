@@ -1,4 +1,5 @@
 <?php
+
 // O remetente deve ser um e-mail do seu domínio conforme determina a RFC 822.
 // O return-path deve ser ser o mesmo e-mail do remetente.
 $destinatario = $_POST["destinatario"];

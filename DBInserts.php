@@ -7,15 +7,15 @@ $link = $objBd->conecta_mysql();
 $sql = (isset($_POST['sql'])) ? $_POST['sql'] : '';
 $Schema = (isset($_POST['Schema'])) ? $_POST['Schema'] : '';
 $tableName = (isset($_POST['tableName'])) ? $_POST['tableName'] : '';
-$colums = (isset($_POST['colums'])) ? $_POST['colums'] : '';
+$columns = (isset($_POST['columns'])) ? $_POST['columns'] : '';
 $lastquery = (isset($_POST['lastquery'])) ? $_POST['lastquery'] : '';
 $setQuery = (isset($_POST['setQuery'])) ? $_POST['setQuery'] : '';
 $where = (isset($_POST['where'])) ? $_POST['where'] : '';
 $option = (isset($_POST['option'])) ? $_POST['option'] : '';
 
 
-function Insert($Schema, $tableName, $colums,  $lastquery){
-	return "insert into $Schema.$tableName ($colums) values ($lastquery)";
+function Insert($Schema, $tableName, $columns,  $lastquery){
+	return "insert into $Schema.$tableName ($columns) values ($lastquery)";
 }
 
 function Update($Schema, $tableName, $setQuery, $where){
@@ -26,10 +26,19 @@ function Delete($Schema, $tableName, $where){
 	return "delete from $Schema.$tableName where $where";
 }
 
+function Select($Schema, $columns, $tableName, $where){
+	$querySql = "select $columns from $Schema.$tableName where $where";
+	$query = mysqli_query($link, $querySql);
+	$data = mysqli_fetch_all($query, MYSQLI_ASSOC);
+
+		// Escreve o resultado JSON:
+	echo json_encode($data);
+}
+
 
 switch ($option) {
 	case 'Insert':
-		$sqlQuery = Insert($Schema, $tableName, $colums, $lastquery);
+		$sqlQuery = Insert($Schema, $tableName, $columns, $lastquery);
 		mysqli_query($link, $sqlQuery);
 	break;
 

@@ -116,8 +116,8 @@
 					data: {sql, option},
 				})
 				.done(function(data) {
-					console.log("success");
-					data == 'True' ? redirectToAction('Home.php') : '';
+					console.log("success: ", data);
+					data ? redirectToAction('Home.php') : '';
 				})
 				.fail(function() {
 					console.log("error");
@@ -211,8 +211,7 @@
 					document.querySelector('.autocomplete-input-text-password').style.display =  'none';
 				};
 			})
-
-
+			
 			$('.cpf').mask('000.000.000-00', {reverse: true});
 		</script>
 	</body>

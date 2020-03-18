@@ -64,7 +64,7 @@ session_start();
 		<li class="li-icon" title="Questionário"><a href="#"><i class="material-icons">assignment</i> Questionário</a></li>
 		<li class="li-icon" title="Respostas"><a href="#"><i class="material-icons">check_box</i> Respostas</a></li>
 		<li class="li-icon" title="Video Institucional"><a href="#"><i class="material-icons">videocam</i> Video Institucional</a></li>
-		<li class="li-icon" title="Sair"><a href="#"><i class="material-icons">settings</i> Sair</a></li>
+		<li class="li-icon" title="Sair"><a onclick="logoff();"><i class="material-icons">settings</i> Sair</a></li>
 	</ul>
 
 	<ul class="sidenav-min" id="mobile-demo-1">
@@ -77,7 +77,7 @@ session_start();
 		<li class="li-icon" title="Video Instituciona"><a href="#"><i class="material-icons">videocam</i></a></li>
 		<li class="li-icon"><p>&nbsp;</p></li>
 		<li class="li-icon"><p>&nbsp;</p></li>
-		<li class="li-icon" title="Sair"><a href="#"><i class="material-icons">settings</i></a></li>
+		<li class="li-icon" title="Sair"><a onclick="logoff();"><i class="material-icons">settings</i></a></li>
 	</ul>
 </div>
 
@@ -111,7 +111,7 @@ session_start();
 					<td>02/02/2019</td>
 					<td>20/02/2020</td>
 					<td>Inativo</td>
-					<td><i class="fas fa-edit"></i></td>
+					<td><a href="#modalCampanha" class="modal-trigger"><i class="fas fa-edit"></i></a></td>
 				</tr>
 				<tr>
 					<td>#56987326</td>
@@ -119,7 +119,7 @@ session_start();
 					<td>06/12/2019</td>
 					<td>23/12/2019</td>
 					<td>Inativo</td>
-					<td><i class="fas fa-edit"></i></td>
+					<td><a href="#modalCampanha" class="modal-trigger"><i class="fas fa-edit"></i></a></td>
 				</tr>
 				<tr>
 					<td>#56987355</td>
@@ -127,14 +127,98 @@ session_start();
 					<td>02/12/2019</td>
 					<td>10/01/2020</td>
 					<td>Ativo</td>
-					<td><i class="fas fa-edit"></i></td>
+					<td><a href="#modalCampanha" class="modal-trigger"><i class="fas fa-edit"></i></a></td>
 				</tr>
 			</tbody>
 		</table>
+		<br>
+		<div class="container-footer">
+			<div class="row">
+				<div class="col s6 left-align">
+					<button class="btn waves-effect waves-light" type="button" name="action">Relatório</button>
+				</div>
+
+				<div class="col s6 right-align">
+					<button class="btn waves-effect waves-light modal-trigger" type="button" name="action" href="#modalCampanha" onclick="$('.btn-action-formCampanha').html('Salvar');optionCRUDCampanhas('Salvar');">
+						<i class="material-icons left">add</i>
+						Cadastrar
+					</button>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<div class="row center-align white">
 		
+	</div>
+</div>
+
+<!-- Modal Structure -->
+<div id="modalCampanha" class="modal">
+	<div class="row">
+		<div class="col s12 m12">
+			<div class="row">
+				<div class="col s12">
+					<span class="card-title">
+						<h4>Editar Campanha</h4>
+						<h5>adminitrador</h5>
+					</span>
+				</div>
+			</div>
+			<form id="formCampanha">
+				<div class="input-field">
+					<i class="material-icons prefix">textsms</i>
+					<input type="text" name="QRCode" id="QRCode" class="autocomplete">
+					<label for="QRCode">QR Code</label>
+				</div>
+
+				<div class="input-field">
+					<i class="material-icons prefix">textsms</i>
+					<input type="text" id="Campanha" class="autocomplete">
+					<label for="Campanha">Campanha</label>
+				</div>
+
+				<div class="input-field">
+					<i class="material-icons prefix">textsms</i>
+					<input type="text" id="Dt_Inicio" class="datepicker">
+					<label for="Dt_Inicio">Data Inicio</label>
+				</div>
+
+				<div class="input-field">
+					<i class="material-icons prefix">textsms</i>
+					<input type="text" id="Dt_Termino" class="datepicker">
+					<label for="Dt_Termino">Data Término</label>
+				</div>
+
+				<div class="input-field">
+					<i class="material-icons prefix">textsms</i>
+					<select id="Status">
+						<option value="" disabled selected>Status</option>
+						<option value="1">Ativo</option>
+						<option value="0">Desativado</option>
+					</select>
+				</div>
+
+				<div class="input-field">
+					<i class="material-icons prefix">textsms</i>
+					<input type="text" id="iFame" class="autocomplete">
+					<label for="iFame">iFame</label>
+				</div>
+
+				<input type="hidden" name="Id" id="Id">
+			</form>
+		</div>
+	</div>
+
+	<div class="modal-footer">
+		<div class="row">
+			<div class="col s4 center-align">
+				<a class="waves-effect waves-light btn" onclick="clearForm('#formCampanha')">Limpar</a>
+			</div>
+			<div class="col s8 right-align">
+				<a class="waves-effect waves-light btn btn-action-formCampanha"></a>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -145,62 +229,16 @@ session_start();
 		</div>
 	</div>
 </div>
-
 <input type="hidden" name="valueScanner" id="valueScanner">
 <input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">
 <input type="hidden" name="UserInactivity" id="UserInactivity" value="<?=$_SESSION['User']?>">
+
+<?=date_default_timezone_set('America/Sao_Paulo');?>
 <!-- Compiled and minified JavaScript -->
 <script type="text/javascript" src="ajax/AjaxGenericDB.js"></script>
+<script type="text/javascript" src="ajax/GenericFunctions.js"></script>
 <script src="materialize/js/materialize.js"></script>
-<script type="text/javascript">
-	var dataInfos;
-
-	document.addEventListener('DOMContentLoaded', function() {
-		var elems = document.querySelectorAll('.sidenav');
-		var instances = M.Sidenav.init(elems);
-	});
-
-	document.addEventListener('DOMContentLoaded', function() {
-		var elems = document.querySelectorAll('.dropdown-trigger');
-		var instances = M.Dropdown.init(elems);
-	});
-
-	document.addEventListener('DOMContentLoaded', function() {
-		var elems = document.querySelectorAll('.modal');
-		var instances = M.Modal.init(elems);
-	});
-
-	document.addEventListener('DOMContentLoaded', function() {
-		var elems = document.querySelectorAll('select');
-		var instances = M.FormSelect.init(elems,);
-	});
-
-  // Or with jQuery
-
-  $(document).ready(function(){
-  	$('.sidenav').sidenav();
-  	$('.dropdown-trigger').dropdown();
-  	$('.modal').modal();
-  	$('select').formSelect();
-  });
-
-
-  $('#li-img-logo-min').on('click', function(event) {
-  	$('#mobile-demo').show();
-  	$('.container-usuarios').addClass('desktop');
-  	$('#mobile-demo-1').hide();
-  	event.preventDefault();
-  	/* Act on the event */
-  });
-
-  $('#li-img-logo-max').on('click', function(event) {
-  	$('#mobile-demo').hide();
-  	$('.container-usuarios').removeClass('desktop');
-  	$('#mobile-demo-1').show();
-  	event.preventDefault();
-  	/* Act on the event */
-  });
-</script>
+<script type="text/javascript" src="js/Campanhas/Campanhas.js?<?=date('d/m/Y-H:i:s')?>"></script>
 <!--
 <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript" src="js/geoLocation.js"></script>

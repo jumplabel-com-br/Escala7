@@ -4,8 +4,8 @@ require_once('conn.php');
 $objBd = new db();
 $link = $objBd->conecta_mysql();
 
-$sql = $_POST['sql'];
-$option = $_POST['option'];
+$sql = (isset($_POST['sql'])) ? $_POST['sql'] : '';
+$option = (isset($_POST['option'])) ? $_POST['option'] : '';
 
 
 function select_db($sql,$link){
@@ -25,13 +25,13 @@ function validLogin($sql, $link){
 		$dados_usuario = mysqli_fetch_array($result);
 
 		if (isset($dados_usuario['CPF'])) {
-			echo 'True';
 			session_start();
 			$_SESSION["User"] = $dados_usuario['CPF'];
+			echo true;
 			return true;
-		}else{
-			echo 'False';
-			return ;
+		}else{;
+			echo false;
+			return;
 		}
 
 	}
@@ -40,11 +40,17 @@ function validLogin($sql, $link){
 
 switch ($option){
 	case 'select_db':
-		select_db($sql,$link);
+	select_db($sql,$link);
 	break;
 	
 	case 'validLogin':
-		validLogin($sql, $link);
+	validLogin($sql, $link);
+	break;
+
+	case 'logoff':
+	echo 'session_destroy'; 
+	session_start();
+	session_destroy();
 	break;
 }
 

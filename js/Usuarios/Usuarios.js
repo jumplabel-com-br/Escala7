@@ -1,27 +1,5 @@
 var dataInfos;
 
-	document.addEventListener('DOMContentLoaded', function() {
-		var elems = document.querySelectorAll('.sidenav');
-		var instances = M.Sidenav.init(elems);
-	});
-
-	document.addEventListener('DOMContentLoaded', function() {
-		var elems = document.querySelectorAll('.dropdown-trigger');
-		var instances = M.Dropdown.init(elems);
-	});
-
-	document.addEventListener('DOMContentLoaded', function() {
-		var elems = document.querySelectorAll('.modal');
-		var instances = M.Modal.init(elems);
-	});
-
-	document.addEventListener('DOMContentLoaded', function() {
-		var elems = document.querySelectorAll('select');
-		var instances = M.FormSelect.init(elems,);
-	});
-
-  // Or with jQuery
-
   $(document).ready(function(){
   	$('.sidenav').sidenav();
   	$('.dropdown-trigger').dropdown();
@@ -76,7 +54,7 @@ var dataInfos;
 
   	let Schema = 'Escala7';
   	let tableName = 'Users';
-  	let colums = 'Nome,Email,CPF,Senha,Status,UserType,UserRegistration,DateRegistration,UserInactivity,DateInactivity'
+  	let columns = 'Nome,Email,CPF,Senha,Status,UserType,UserRegistration,DateRegistration,UserInactivity,DateInactivity'
   	let lastquery = `'${param.Nome}','${param.Email}','${param.CPF}','${param.Senha}',${param.Status},'${param.UserType}','${param.UserRegistration}',now(),'${param.UserInactivity}',now()`;
 
     let setQuery = `Nome = '${param.Nome}',Email = '${param.Email}',CPF = '${param.CPF}', Senha = '${param.Senha}', Status = ${param.Status},
@@ -90,7 +68,7 @@ var dataInfos;
   	let params = {
   		Schema, 
   		tableName,
-  		colums,
+  		columns,
   		lastquery,
   		option,
       setQuery,
