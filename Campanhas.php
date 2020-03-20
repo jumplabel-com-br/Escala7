@@ -12,6 +12,7 @@ session_start();
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<!-- Compiled and minified CSS -->
 	<link rel="stylesheet" href="materialize/css/materialize.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css?<?=date('d/m/Y-H:i:s')?>">
 	<!--Let browser know website is optimized for mobile-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -45,7 +46,7 @@ session_start();
 	</style>
 </head>
 
-<body class="grey lighten-3">
+<body class="background background-home">
 
 	<!--
 	
@@ -54,6 +55,7 @@ session_start();
 	</script>
 	<a class="btn" onclick="M.toast({html: toastHTML, completeCallback: function(){alert('Your toast was dismissed')}, displayLength: 4000})">Toast!</a>
 -->
+<!--
 
 <div>
 	<ul class="sidenav" id="mobile-demo">
@@ -152,6 +154,102 @@ session_start();
 		
 	</div>
 </div>
+-->
+
+
+<div class="container">
+	<div class="row center-align">
+		<div class="col s12 center-align">
+			<div class="col s4"></div>
+			<div class="col s4">
+				<img src="images/DESK/1_wireframes_web_login/logo_branco.png" class="responsive-img tooltipped" data-position="bottom" data-tooltip="Home" onclick="window.location.href='Home.php'">
+			</div>
+			<div class="col s4"></div>
+		</div>
+
+		<div class="col s12">
+			<h3 class="white-text"><strong>Campanhas Cadastradas</strong></h3>
+			<h5 class="white-text">Administrador</h5>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col s12 m3">
+		<div class="card white card-home">
+			<div class="card-content white-text">
+				<ul class="list-ul-organize">
+					<li class="li-icon"><a href="#"> &nbsp;</a></li>
+					<li class="li-icon" title="Usuários"><a href="Usuarios.php"><i class="material-icons i-default">account_circle</i> Usuários</a></li>
+					<li class="li-icon" title="Campanhas"><a href="Campanhas.php"><i class="material-icons i-default">record_voice_over</i> Campanahs</a></li>
+					<li class="li-icon" title="Questionário"><a href="#"><i class="material-icons i-default">assignment</i> Questionário</a></li>
+					<li class="li-icon" title="Respostas"><a href="#"><i class="material-icons i-default">check_box</i> Respostas</a></li>
+					<li class="li-icon" title="Video Institucional"><a href="VideoInstitucional.php"><i class="material-icons i-default">videocam</i> Video Institucional</a></li>
+					<li class="li-icon" title="Sair"><a href="#"><i class="material-icons i-default">settings</i> Sair</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="col s12 m9">
+		<div class="card white">
+			<div class="card-content white-text card-campanha">
+				<table class="responsive-table">
+					<thead class="color-default">
+						<tr>
+							<th>QR Code</th>
+							<th>Campanha</th>
+							<th>Data Iniciio</th>
+							<th>Data Término</th>
+							<th>Status</th>
+							<th></th>
+						</tr>
+					</thead>
+
+					<tbody class="color-default">
+						<tr>
+							<td>#25698823</td>
+							<td>Campanha A</td>
+							<td>02/02/2019</td>
+							<td>20/02/2020</td>
+							<td>Inativo</td>
+							<td><a href="#modalCampanha" class="modal-trigger"><i class="fas fa-edit"></i></a></td>
+						</tr>
+						<tr>
+							<td>#56987326</td>
+							<td>Campanha B</td>
+							<td>06/12/2019</td>
+							<td>23/12/2019</td>
+							<td>Inativo</td>
+							<td><a href="#modalCampanha" class="modal-trigger"><i class="fas fa-edit"></i></a></td>
+						</tr>
+						<tr>
+							<td>#56987355</td>
+							<td>Campanha C</td>
+							<td>02/12/2019</td>
+							<td>10/01/2020</td>
+							<td>Ativo</td>
+							<td><a href="#modalCampanha" class="modal-trigger"><i class="fas fa-edit"></i></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="col s12 m9">
+		<div class="cards-footer">
+			<div class="col s6 m3 left-align">
+				<button class="btn btn-default" type="submit">Relatório</button>
+			</div>
+			<div class="col s6 m9 right-align">
+				<button class="btn btn-default" type="submit"><span class="d-none-mobile">+</span> Cadastrar</button>
+			</div>
+		</div>
+	</div>
+
+</div>
+
 
 <!-- Modal Structure -->
 <div id="modalCampanha" class="modal">
@@ -232,8 +330,6 @@ session_start();
 <input type="hidden" name="valueScanner" id="valueScanner">
 <input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">
 <input type="hidden" name="UserInactivity" id="UserInactivity" value="<?=$_SESSION['User']?>">
-
-<?=date_default_timezone_set('America/Sao_Paulo');?>
 <!-- Compiled and minified JavaScript -->
 <script type="text/javascript" src="ajax/AjaxGenericDB.js"></script>
 <script type="text/javascript" src="ajax/GenericFunctions.js"></script>

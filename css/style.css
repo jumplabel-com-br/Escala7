@@ -1,0 +1,145 @@
+@media (min-width: 601px){
+	.background{
+		background-repeat: no-repeat;
+		background-size:100%;
+		bottom: 0;
+		color: black;
+		left: 0;
+		overflow: auto;
+		padding: 3em;
+		position: absolute;
+		right: 0;
+		text-align: center;
+		top: 0;
+	}
+
+	.background-index{
+		background-image: url('../images/DESK/1_wireframes_web_login/fundo_grafismo.png');
+	}
+
+	.background-home{
+		background-image: url('../images/DESK/2_wireframes_web_adm/fundo.png');	
+	}
+}
+
+@media (max-width: 600px){
+	.background{
+		background-repeat: no-repeat;
+		background-size: 100%;
+		bottom: 0;
+		color: black;
+		left: 0;
+		overflow: auto;
+		padding: 3em;
+		position: absolute;
+		right: 0;
+		text-align: center;
+		top: 0;
+	}
+
+	.background-index{
+		background-image: url('../images/MOBILE/1_wireframes_mobile_login/fundo.png');
+	}
+
+	.background-home{
+		background-image: url('../images/MOBILE/1_wireframes_mobile_login/fundo.png');	
+	}
+
+	.d-none-mobile{
+		display: none;
+	}
+
+}
+
+.color-white,
+i.material-icons {
+	color: #fff;
+}
+
+i.i-default{
+	color: #5B87BF !important;
+}
+
+.color-default{
+	color: #2A64AD;
+}
+
+.btn-default i.material-icons{
+	color: #2A64AD;
+}
+
+.btn {
+	border-radius: 10px;
+}
+
+.autocomplete.c-blue,
+.select-wrapper input.select-dropdown:focus,
+.select-wrapper input.select-dropdown {
+	border-bottom: solid 1px #2A64AD !important;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]) + label.c-blue,
+.input-field > label.c-blue,
+.dropdown-content li > span,
+.select-wrapper input.select-dropdown {
+	color: #2A64AD !important;
+}
+
+.btn-blue{
+	background-color: #2A64AD;
+	color: #fff;
+}
+
+.btn-default {
+	background-color: #fff;
+	color: #2A64AD;
+}
+
+.btn-default:hover,
+.btn-blue:hover {
+	background-color: #F39FB8!important;
+	color: #fff !important;
+}
+
+.card-home {
+	height: 500px;
+}
+
+
+.list-ul-organize li{
+	text-align: left;
+	margin-top: 5%;
+}
+
+.list-ul-organize li:last-child{
+	margin-top: 60%;
+}
+
+.f-Helvetica-Bold{
+	font-family: 'Helvetica';
+    text-transform: uppercase;
+}
+
+.ml-10-p{
+	 margin-top: 10%;
+}
+
+.card-usuario{
+	height: 215px;
+}
+
+.card-campanha{
+	height: 450px;
+}
+
+.card .card-content p.card-ml-20-p{
+	margin-top: 20% !important
+}
+
+.width-complete{
+	width: 100%;
+}
+
+.modal{
+	height: 600px;
+}

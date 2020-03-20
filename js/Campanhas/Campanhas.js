@@ -6,6 +6,7 @@ $(document).ready(function(){
   $('.modal').modal();
   $('select').formSelect();
   $('.datepicker').datepicker();
+  $('.tooltipped').tooltip();
 });
 
 

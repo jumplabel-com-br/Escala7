@@ -1,5 +1,5 @@
 <?php
-	session_start();
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +11,8 @@
 	<!--Import Google Icon Font-->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<!-- Compiled and minified CSS -->
-	<link rel="stylesheet" href="materialize/css/materialize.css">
+	<link rel="stylesheet" href="materialize/css/materialize.css?<?=date('d/m/Y-H:i:s')?>">
+	<link rel="stylesheet" type="text/css" href="css/style.css?<?=date('d/m/Y-H:i:s')?>">
 	<!--Let browser know website is optimized for mobile-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -43,8 +44,9 @@
 	</style>
 </head>
 
-<body class="grey lighten-3">
+<body class="background background-home">
 
+	<!--
 	<ul class="sidenav" id="mobile-demo">
 		<li class="tab" id="li-img-logo-max"><a href=""><img src="https://escala7.com.br/wp-content/uploads/2020/02/cropped-Escala-7-Logotipo-11.png" alt="" class="responsive-img img-in-li"></a></li>
 		<li class="li-icon"><a href="#"> &nbsp;</a></li>
@@ -68,13 +70,76 @@
 		<li class="li-icon"><p>&nbsp;</p></li>
 		<li class="li-icon" title="Sair"><a href="#"><i class="material-icons">settings</i></a></li>
 	</ul>
+-->
+
+<div class="container">
+	<div class="row center-align">
+		<div class="col s12 center-align">
+			<div class="col s4"></div>
+			<div class="col s4">
+				<img src="images/DESK/1_wireframes_web_login/logo_branco.png" class="responsive-img tooltipped" data-position="bottom" data-tooltip="Home" onclick="window.location.href='Home.php'">
+			</div>
+			<div class="col s4"></div>
+		</div>
+
+		<div class="col s12">
+			<h3 class="white-text"><strong>olá Henrique</strong></h3>
+			<h5 class="white-text">Administrador</h5>
+		</div>
+	</div>
+</div>
 
 
-	<input type="hidden" name="valueScanner" id="valueScanner">
-	<input type="hidden" name="" value="<?=$_SESSION['User']?>">
-	<!-- Compiled and minified JavaScript -->
-	<script type="text/javascript" src="ajax/AjaxGenericDB.js"></script>
-	<script type="text/javascript">
+<div class="row">
+	<div class="col s12 m3">
+		<div class="card white card-home">
+			<div class="card-content white-text">
+				<ul class="list-ul-organize">
+					<li class="li-icon"><a href="#"> &nbsp;</a></li>
+					<li class="li-icon" title="Usuários"><a href="Usuarios.php"><i class="material-icons i-default">account_circle</i> Usuários</a></li>
+					<li class="li-icon" title="Campanhas"><a href="Campanhas.php"><i class="material-icons i-default">record_voice_over</i> Campanahs</a></li>
+					<li class="li-icon" title="Questionário"><a href="#"><i class="material-icons i-default">assignment</i> Questionário</a></li>
+					<li class="li-icon" title="Respostas"><a href="#"><i class="material-icons i-default">check_box</i> Respostas</a></li>
+					<li class="li-icon" title="Video Institucional"><a href="VideoInstitucional.php"><i class="material-icons i-default">videocam</i> Video Institucional</a></li>
+					<li class="li-icon" title="Sair"><a href="#"><i class="material-icons i-default">settings</i> Sair</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="col s12 m3">
+		<div class="card white card-home">
+			<div class="card-content white-text">
+				<span class="card-title color-default f-Helvetica-Bold left-align">Implatação <br> por Campanha</span>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="col s12 m3">
+		<div class="card white card-home">
+			<div class="card-content white-text">
+				<span class="card-title color-default f-Helvetica-Bold left-align">Questiónarios <br> Preenchidos</span>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="col s12 m3">
+		<div class="card white card-home">
+			<div class="card-content white-text">
+				<span class="card-title color-default f-Helvetica-Bold left-align">Campanhas <br> Cadastradas</span>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<input type="hidden" name="valueScanner" id="valueScanner">
+<input type="hidden" name="" value="<?=$_SESSION['User']?>">
+<!-- Compiled and minified JavaScript -->
+<script type="text/javascript" src="ajax/AjaxGenericDB.js"></script>
+<script type="text/javascript">
 		//selectDb(`select CPF, Senha from Escala7.Users`, 'json') 
 		
 
@@ -94,18 +159,18 @@
   });
 
   $('#li-img-logo-min').on('click', function(event) {
-			$('#mobile-demo').show();
-			$('#mobile-demo-1').hide();
-			event.preventDefault();
-			/* Act on the event */
-		});
+  	$('#mobile-demo').show();
+  	$('#mobile-demo-1').hide();
+  	event.preventDefault();
+  	/* Act on the event */
+  });
 
-		$('#li-img-logo-max').on('click', function(event) {
-			$('#mobile-demo').hide();
-			$('#mobile-demo-1').show();
-			event.preventDefault();
-			/* Act on the event */
-		});
+  $('#li-img-logo-max').on('click', function(event) {
+  	$('#mobile-demo').hide();
+  	$('#mobile-demo-1').show();
+  	event.preventDefault();
+  	/* Act on the event */
+  });
 </script>
 <script src="materialize/js/materialize.js"></script>
 <!--

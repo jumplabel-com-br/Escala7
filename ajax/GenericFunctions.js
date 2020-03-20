@@ -27,9 +27,6 @@ function select(sql, nameFunction, columns, tableName, where){
 
 	let option = 'Select';
 	let Schema = 'Escala7';
-	let columns = columns;
-	let tableName = tableName;
-	let where = where;
 
 	let params = {
 		sql,

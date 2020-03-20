@@ -5,6 +5,9 @@ var dataInfos;
   	$('.dropdown-trigger').dropdown();
   	$('.modal').modal();
   	$('select').formSelect();
+    $('.tooltipped').tooltip();
+
+    $('#modal1').modal('open');
   });
 
 

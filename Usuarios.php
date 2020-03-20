@@ -12,6 +12,7 @@ session_start();
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<!-- Compiled and minified CSS -->
 	<link rel="stylesheet" href="materialize/css/materialize.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css?<?=date('d/m/Y-H:i:s')?>">
 	<!--Let browser know website is optimized for mobile-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -45,7 +46,7 @@ session_start();
 	</style>
 </head>
 
-<body class="grey lighten-3">
+<body class="background background-home">
 
 	<!--
 	
@@ -54,7 +55,7 @@ session_start();
 	</script>
 	<a class="btn" onclick="M.toast({html: toastHTML, completeCallback: function(){alert('Your toast was dismissed')}, displayLength: 4000})">Toast!</a>
 -->
-
+<!--
 <div>
 	<ul class="sidenav" id="mobile-demo">
 		<li class="tab" id="li-img-logo-max"><a href=""><img src="https://escala7.com.br/wp-content/uploads/2020/02/cropped-Escala-7-Logotipo-11.png" alt="" class="responsive-img img-in-li"></a></li>
@@ -193,6 +194,225 @@ session_start();
 		</div>
 	</div>
 </div>
+-->
+
+<div class="container">
+	<div class="row center-align">
+		<div class="col s12 center-align">
+			<div class="col s4"></div>
+			<div class="col s4">
+				<img src="images/DESK/1_wireframes_web_login/logo_branco.png" class="responsive-img tooltipped" data-position="bottom" data-tooltip="Home" onclick="window.location.href='Home.php'">
+			</div>
+			<div class="col s4"></div>
+		</div>
+
+		<div class="col s12">
+			<h3 class="white-text"><strong>Usuários Cadastrados</strong></h3>
+			<h5 class="white-text">Administrador</h5>
+		</div>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="col s12 m3">
+		<div class="card white card-home">
+			<div class="card-content white-text">
+				<ul class="list-ul-organize">
+					<li class="li-icon"><a href="#"> &nbsp;</a></li>
+					<li class="li-icon" title="Usuários"><a href="Usuarios.php"><i class="material-icons i-default">account_circle</i> Usuários</a></li>
+					<li class="li-icon" title="Campanhas"><a href="Campanhas.php"><i class="material-icons i-default">record_voice_over</i> Campanahs</a></li>
+					<li class="li-icon" title="Questionário"><a href="#"><i class="material-icons i-default">assignment</i> Questionário</a></li>
+					<li class="li-icon" title="Respostas"><a href="#"><i class="material-icons i-default">check_box</i> Respostas</a></li>
+					<li class="li-icon" title="Video Institucional"><a href="VideoInstitucional.php"><i class="material-icons i-default">videocam</i> Video Institucional</a></li>
+					<li class="li-icon" title="Sair"><a href="#"><i class="material-icons i-default">settings</i> Sair</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="col s12 m1"></div>
+
+	<div class="col s12 m2 tooltipped" data-position="top" data-tooltip="Clique para Editar/Visualizar">
+		<div class="card white">
+			<div class="card-content white-text card-usuario">
+				<img src="images/DESK/3_wireframes_web_usuarios_cadastrados/icone_usuario.png" class="responsive-img">
+				<p class="card-ml-20-p">
+					<span class="color-default">Matheus Gomes Ferreira</span>
+					<span class="color-default">478.975.138-40</span>
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="col s12 m2 tooltipped" data-position="top" data-tooltip="Clique para Editar/Visualizar">
+		<div class="card white">
+			<div class="card-content white-text card-usuario">
+				<img src="images/DESK/3_wireframes_web_usuarios_cadastrados/icone_usuario.png" class="responsive-img">
+				<p class="card-ml-20-p">
+					<span class="color-default">Matheus Gomes Ferreira</span>
+					<span class="color-default">478.975.138-40</span>
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="col s12 m2 tooltipped" data-position="top" data-tooltip="Clique para Editar/Visualizar">
+		<div class="card white">
+			<div class="card-content white-text card-usuario">
+				<img src="images/DESK/3_wireframes_web_usuarios_cadastrados/icone_usuario.png" class="responsive-img">
+				<p class="card-ml-20-p">
+					<span class="color-default">Matheus Gomes Ferreira</span>
+					<span class="color-default">478.975.138-40</span>
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="col s12 m2 tooltipped" data-position="top" data-tooltip="Clique para Editar/Visualizar">
+		<div class="card white">
+			<div class="card-content white-text card-usuario">
+				<img src="images/DESK/3_wireframes_web_usuarios_cadastrados/icone_usuario.png" class="responsive-img">
+				<p class="card-ml-20-p">
+					<span class="color-default">Matheus Gomes Ferreira</span>
+					<span class="color-default">478.975.138-40</span>
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="col s12 m1"></div>
+
+	<div class="col s12 m2 tooltipped" data-position="top" data-tooltip="Clique para Editar/Visualizar">
+		<div class="card white">
+			<div class="card-content white-text card-usuario">
+				<img src="images/DESK/3_wireframes_web_usuarios_cadastrados/icone_usuario.png" class="responsive-img">
+				<p class="card-ml-20-p">
+					<span class="color-default">Matheus Gomes Ferreira</span>
+					<span class="color-default">478.975.138-40</span>
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="col s12 m2 tooltipped" data-position="top" data-tooltip="Clique para Editar/Visualizar">
+		<div class="card white">
+			<div class="card-content white-text card-usuario">
+				<img src="images/DESK/3_wireframes_web_usuarios_cadastrados/icone_usuario.png" class="responsive-img">
+				<p class="card-ml-20-p">
+					<span class="color-default">Matheus Gomes Ferreira</span>
+					<span class="color-default">478.975.138-40</span>
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="col s12 m2 tooltipped" data-position="top" data-tooltip="Clique para Editar/Visualizar">
+		<div class="card white">
+			<div class="card-content white-text card-usuario">
+				<img src="images/DESK/3_wireframes_web_usuarios_cadastrados/icone_usuario.png" class="responsive-img">
+				<p class="card-ml-20-p">
+					<span class="color-default">Matheus Gomes Ferreira</span>
+					<span class="color-default">478.975.138-40</span>
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="col s12 m2 tooltipped" data-position="top" data-tooltip="Clique para Editar/Visualizar">
+		<div class="card white">
+			<div class="card-content white-text card-usuario">
+				<img src="images/DESK/3_wireframes_web_usuarios_cadastrados/icone_usuario.png" class="responsive-img">
+				<p class="card-ml-20-p">
+					<span class="color-default">Matheus Gomes Ferreira</span>
+					<span class="color-default">478.975.138-40</span>
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="col s12 m9">
+		<div class="cards-footer">
+			<div class="col s12 m1"></div>
+			<div class="col s6 m2">
+				<button class="btn btn-default" type="submit">Relatório</button>
+			</div>
+			<div class="col s2 m7"></div>
+			<div class="col s6 m2 right-align">
+				<button class="btn btn-default" type="submit"><span class="d-none-mobile">+</span> Cadastrar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="modal1" class="modal">
+	<div class="modal-content">
+		
+		<div class="col s12 m12 right-align">
+			<img src="icons/close.png" class="responsive-img modal-close">
+		</div>
+		
+		<div class="">
+			<div class="col s12 m3">
+				<img src="icons/user-bgd-blue.png" class="responsive-img">
+			</div>
+		</div>
+
+		<div class="container center-align">
+
+			<div class="input-field col s12 m7">
+				<input type="text" name="Nome" id="Nome" class="autocomplete c-blue">
+				<label for="Nome" class="c-blue">Nome</label>
+			</div>
+			
+			<div class="input-field col s12 m7">
+				
+				<input type="text" id="CPF" class="autocomplete c-blue">
+				<label for="CPF" class="c-blue">CPF</label>
+			</div>
+
+			<div class="input-field col s12 m7">
+				
+				<input type="text" id="Email" class="autocomplete c-blue">
+				<label for="Email" class="c-blue">Email</label>
+			</div>
+
+			<div class="input-field col s12 m7">
+				
+				<input type="password" id="Senha" class="autocomplete c-blue">
+				<label for="Senha" class="c-blue">Senha</label>
+			</div>
+
+			<div class="input-field col s12 m7">
+				
+				<select id="Status" class="c-blue">
+					<option value="" disabled selected>Status</option>
+					<option value="1">Ativo</option>
+					<option value="0">Desativado</option>
+				</select>
+			</div>
+
+			<div class="input-field col s12 m7">
+				
+				<select id="UserType" class="c-blue">
+					<option value="" disabled selected>Tipo de usuário</option>
+					<option value="1">Administrador</option>
+					<option value="2">Cliente</option>
+				</select>
+			</div>
+
+			<input type="hidden" name="Id" id="Id">
+
+			<div class="modal-footer">
+					<div class="col s12 m12">
+						<button type="button" class="btn btn-blue">Editar</button>
+					</div>
+			</div>
+		</div>
+	</div>
+	
+</div>
+
 
 <!-- Modal Structure -->
 <div id="modalUser" class="modal">
@@ -269,12 +489,12 @@ session_start();
 </div>
 
 <div id="modalProgress" class="modal modal-progress">
-    <div class="modal-content">
-        <div class="progress">
-    	  <div class="indeterminate"></div>
-	  	</div>
-    </div>
-  </div>
+	<div class="modal-content">
+		<div class="progress">
+			<div class="indeterminate"></div>
+		</div>
+	</div>
+</div>
 
 <input type="hidden" name="valueScanner" id="valueScanner">
 <input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">

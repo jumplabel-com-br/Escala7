@@ -10,7 +10,6 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
 	<link rel="stylesheet" type="text/css" href="materialize/css/materialize.css">
-	<link rel="stylesheet" type="text/css" href="materialize/css/materialize.min.css">
 	<!--Let browser know website is optimized for mobile-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -19,121 +18,126 @@
 	<script type="text/javascript" src="jQuery-Mask-Plugin-master/dist/jquery.mask.min.js"></script>
 	<script type="text/javascript" src="jQuery-Mask-Plugin-master/src/jquery.mask.js"></script>
 
-	<style type="text/css">
-		/*.Escala-7-Logo{
-			background: url('fotos/Escala-7-Logo.png') no-repeat;
-			background-position: 50%;
-			z-index: -1;
-			}*/
-		</style>
-	</head>
+	<link rel="stylesheet" type="text/css" href="css/style.css?<?=date('d/m/Y-H:i:s')?>">
+</head>
 
-	<body>
-		<section class="Escala-7 mt-3">
-			<div class="container">
-				<div class="row">
-					<div class="col s12">
-						<div class="row">
-							<div class="input-field col s12">
-								<i class="material-icons prefix">assignment_ind</i>
-								<input type="text" id="autocomplete-input-cpf" class="autocomplete cpf">
-								<label for="autocomplete-input-cpf">CPF</label>
-							</div>
-						</div>
+<body class="background background-index">
+	<section class="mt-3">
+		<div class="container ml-10-p">
+			<div class="row center-align">
+				<div class="col s12 center-align">
+					<div class="col s4"></div>
+					<div class="col s4">
+						<img src="images/DESK/1_wireframes_web_login/logo_branco.png" class="responsive-img">
 					</div>
+					<div class="col s4"></div>
 				</div>
+			</div>
 
-				<div class="row">
-					<div class="col s12">
-						<div class="row">
-							<div class="input-field col s12">
-								<i class="material-icons prefix remove_red_eye">remove_red_eye</i>
-								<input type="password" id="autocomplete-input-password" class="autocomplete autocomplete-input-password">
-								<label for="password" class="autocomplete-input-password">Senha</label>
-
-								<input type="text" id="autocomplete-input-text-password" class="autocomplete autocomplete-input-text-password" style="display: none">
-								<label for="autocomplete-input" class="autocomplete-input-text-password" style="display: none">Senha</label>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col s12">
-						<div class="row">
-							<div class="col s6 left-align">
-								<span class="helper-text" data-error="wrong" data-success="left" onclick="newPassoword();">Esqueceu a senha?</span>
-							</div>
-
-							<div class="col s6 right-align">
-								<button class="btn waves-effect waves-light" type="submit" name="action" onclick="ValidatorCPF($('.cpf').val()) == true && $('#autocomplete-input-text-password').val() != '' ? validUser() : M.toast({html: 'Informe um CPF e Senha válida', displayLength: 4000});">Login
-									<i class="material-icons right">send</i>
-								</button>
-							</div>
-
+			
+			<div class="row center-align">
+				<div class="col s12">
+					<div class="row">
+						<div class="input-field col s12">
+							<i class="material-icons prefix">assignment_ind</i>
+							<input type="text" id="autocomplete-input-cpf" class="autocomplete cpf color-white">
+							<label for="autocomplete-input-cpf">CPF</label>
 						</div>
 					</div>
 				</div>
 			</div>
-		</section>
+			
 
-		<!-- Compiled and minified JavaScript -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-		<script type="text/javascript" src="materialize/js/materialize.js"></script>
-		<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
-		<script type="text/javascript">
-			var randomPassword = '';
+			<div class="row">
+				<div class="col s12">
+					<div class="row">
+						<div class="input-field col s12">
+							<i class="material-icons prefix remove_red_eye">remove_red_eye</i>
+							<input type="password" id="autocomplete-input-password" class="autocomplete autocomplete-input-password color-white">
+							<label for="password" class="autocomplete-input-password">Senha</label>
 
-			function SendEmail(){
+							<input type="text" id="autocomplete-input-text-password" class="autocomplete autocomplete-input-text-password color-white" style="display: none">
+							<label for="autocomplete-input" class="autocomplete-input-text-password" style="display: none">Senha</label>
+						</div>
+					</div>
+				</div>
+				<div class="col s12 center-align">
+					<span class="helper-text color-white" data-error="wrong" data-success="left" onclick="newPassoword();">Esqueci minha senha?</span>
+				</div>
+			</div>
 
-				let destinatario = 'matheus01gomes01ferreira2001@gmail.com';
-				let senha = randomPassword;
+			<div class="row">
+				<div class="col s12">
+					<div class="row">
+						<div class="col s12 center-align">
+							<button class="btn btn-default" type="submit" name="action" onclick="ValidatorCPF($('.cpf').val()) == true && $('#autocomplete-input-text-password').val() != '' ? validUser() : M.toast({html: 'Informe um CPF e Senha válida', displayLength: 4000});">Entrar
+								<i class="material-icons right">send</i>
+							</button>
+						</div>
 
-				$.ajax({
-					url: 'SendEmail.php',
-					type: 'POST',
-					dataType: 'html',
-					data: {destinatario, senha},
-				})
-				.done(function(data) {
-					console.log("success: ", data);
-					M.toast({html: data, displayLength: 4000});
-				})
-				.fail(function() {
-					console.log("error");
-				});
-				
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<script type="text/javascript" src="materialize/js/materialize.js"></script>
+	<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+	<script type="text/javascript">
+		var randomPassword = '';
+
+		function SendEmail(){
+
+			let destinatario = 'matheus01gomes01ferreira2001@gmail.com';
+			let senha = randomPassword;
+
+			$.ajax({
+				url: 'SendEmail.php',
+				type: 'POST',
+				dataType: 'html',
+				data: {destinatario, senha},
+			})
+			.done(function(data) {
+				console.log("success: ", data);
+				M.toast({html: data, displayLength: 4000});
+			})
+			.fail(function() {
+				console.log("error");
+			});
+
+		}
+
+		function validUser(){
+			let sql = `select CPF, Senha from Escala7.Users where CPF = '${$('#autocomplete-input-cpf').val().replace(/[.|-]/g,'')}' and Senha = '${$('#autocomplete-input-password').val()}'`
+			let option = 'validLogin';
+
+			$.ajax({
+				url: 'GenericFunctions.php',
+				type: 'POST',
+				dataType: 'html',
+				data: {sql, option},
+			})
+			.done(function(data) {
+				console.log("success: ", data);
+				data ? redirectToAction('Home.php') : '';
+			})
+			.fail(function() {
+				console.log("error");
+			});
+
+		}
+
+		function newPassoword(){
+			var arrayToRandomic = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'];
+
+
+			for (i = 0; i < 32 ; i++) {
+				randomPassword += arrayToRandomic[Math.ceil(Math.random() * (arrayToRandomic.length - 1))]
 			}
 
-			function validUser(){
-				let sql = `select CPF, Senha from Escala7.Users where CPF = '${$('#autocomplete-input-cpf').val().replace(/[.|-]/g,'')}' and Senha = '${$('#autocomplete-input-password').val()}'`
-				let option = 'validLogin';
-
-				$.ajax({
-					url: 'GenericFunctions.php',
-					type: 'POST',
-					dataType: 'html',
-					data: {sql, option},
-				})
-				.done(function(data) {
-					console.log("success: ", data);
-					data ? redirectToAction('Home.php') : '';
-				})
-				.fail(function() {
-					console.log("error");
-				});
-				
-			}
-
-			function newPassoword(){
-				var arrayToRandomic = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'];
-				
-
-				for (i = 0; i < 32 ; i++) {
-					randomPassword += arrayToRandomic[Math.ceil(Math.random() * (arrayToRandomic.length - 1))]
-				}
-
-				SendEmail();
+			SendEmail();
 
 				//alert(`sua nova senha é: ${randomPassword}`)
 			}
@@ -172,47 +176,47 @@
 					}
 					else
 						return Toast('CPF Inválido');
-			}
+				}
 
-			function redirectToAction(strView){
+				function redirectToAction(strView){
 					window.location.href = strView;
-			}
+				}
 
-			function Toast(str){
-				M.toast({html: str})
-			}
+				function Toast(str){
+					M.toast({html: str})
+				}
 
-			$('#autocomplete-input-password').on('keyup', function(e){
-				$('#autocomplete-input-text-password').val($('#autocomplete-input-password').val())
-			});
+				$('#autocomplete-input-password').on('keyup', function(e){
+					$('#autocomplete-input-text-password').val($('#autocomplete-input-password').val())
+				});
 
-			$('#autocomplete-input-text-password').on('keyup', function(e){
-				$('#autocomplete-input-password').val($('#autocomplete-input-text-password').val())
-			});
+				$('#autocomplete-input-text-password').on('keyup', function(e){
+					$('#autocomplete-input-password').val($('#autocomplete-input-text-password').val())
+				});
 
-			$('.remove_red_eye').mouseenter(function(event) {
-				$('.autocomplete-input-password').hide();
-				$('.autocomplete-input-text-password').show();
+				$('.remove_red_eye').mouseenter(function(event) {
+					$('.autocomplete-input-password').hide();
+					$('.autocomplete-input-text-password').show();
 
-			});
+				});
 
-			$('.remove_red_eye').mouseout(function(event) {
-				$('.autocomplete-input-password').show();
-				$('.autocomplete-input-text-password').hide();
+				$('.remove_red_eye').mouseout(function(event) {
+					$('.autocomplete-input-password').show();
+					$('.autocomplete-input-text-password').hide();
 
-			});
+				});
 
-			document.querySelector('.remove_red_eye').addEventListener('click', function(){
-				if (document.querySelector('.autocomplete-input-password').style.display == 'block') {
-					document.querySelector('.autocomplete-input-password').style.display = 'none';
-					document.querySelector('.autocomplete-input-text-password').style.display = 'block';
-				}else{
-					document.querySelector('.autocomplete-input-password').style.display = 'block'
-					document.querySelector('.autocomplete-input-text-password').style.display =  'none';
-				};
-			})
-			
-			$('.cpf').mask('000.000.000-00', {reverse: true});
-		</script>
-	</body>
-	</html>
+				document.querySelector('.remove_red_eye').addEventListener('click', function(){
+					if (document.querySelector('.autocomplete-input-password').style.display == 'block') {
+						document.querySelector('.autocomplete-input-password').style.display = 'none';
+						document.querySelector('.autocomplete-input-text-password').style.display = 'block';
+					}else{
+						document.querySelector('.autocomplete-input-password').style.display = 'block'
+						document.querySelector('.autocomplete-input-text-password').style.display =  'none';
+					};
+				})
+
+				$('.cpf').mask('000.000.000-00', {reverse: true});
+			</script>
+		</body>
+		</html>

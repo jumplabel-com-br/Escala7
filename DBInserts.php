@@ -31,7 +31,7 @@ function Select($Schema, $columns, $tableName, $where){
 	$query = mysqli_query($link, $querySql);
 	$data = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
-		// Escreve o resultado JSON:
+	// Escreve o resultado JSON:
 	echo json_encode($data);
 }
 
