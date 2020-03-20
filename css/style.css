@@ -1,18 +1,4 @@
 @media (min-width: 601px){
-	.background{
-		background-repeat: no-repeat;
-		background-size:100%;
-		bottom: 0;
-		color: black;
-		left: 0;
-		overflow: auto;
-		padding: 3em;
-		position: absolute;
-		right: 0;
-		text-align: center;
-		top: 0;
-	}
-
 	.background-index{
 		background-image: url('../images/DESK/1_wireframes_web_login/fundo_grafismo.png');
 	}
@@ -23,20 +9,6 @@
 }
 
 @media (max-width: 600px){
-	.background{
-		background-repeat: no-repeat;
-		background-size: 100%;
-		bottom: 0;
-		color: black;
-		left: 0;
-		overflow: auto;
-		padding: 3em;
-		position: absolute;
-		right: 0;
-		text-align: center;
-		top: 0;
-	}
-
 	.background-index{
 		background-image: url('../images/MOBILE/1_wireframes_mobile_login/fundo.png');
 	}
@@ -50,6 +22,18 @@
 	}
 
 }
+
+.background{
+	padding: 3rem;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
 
 .color-white,
 i.material-icons {
@@ -117,11 +101,11 @@ input[type=text]:not(.browser-default):focus:not([readonly]) + label.c-blue,
 
 .f-Helvetica-Bold{
 	font-family: 'Helvetica';
-    text-transform: uppercase;
+	text-transform: uppercase;
 }
 
 .ml-10-p{
-	 margin-top: 10%;
+	margin-top: 10%;
 }
 
 .card-usuario{
