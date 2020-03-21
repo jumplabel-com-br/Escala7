@@ -209,7 +209,7 @@ session_start();
 	</div>
 
 </div>
-
+<input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">
 
 <div id="modalProgress" class="modal modal-progress">
 	<div class="modal-content">	

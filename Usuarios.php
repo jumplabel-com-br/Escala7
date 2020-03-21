@@ -232,257 +232,87 @@ session_start();
 	</div>
 
 	<div class="col s12 m1"></div>
-
-	<div class="col s12 m2 tooltipped" data-position="top" data-tooltip="Clique para Editar/Visualizar">
-		<div class="card white">
-			<div class="card-content white-text card-usuario">
-				<img src="images/DESK/3_wireframes_web_usuarios_cadastrados/icone_usuario.png" class="responsive-img">
-				<p class="card-ml-20-p">
-					<span class="color-default">Matheus Gomes Ferreira</span>
-					<span class="color-default">478.975.138-40</span>
-				</p>
-			</div>
-		</div>
-	</div>
-
-	<div class="col s12 m2 tooltipped" data-position="top" data-tooltip="Clique para Editar/Visualizar">
-		<div class="card white">
-			<div class="card-content white-text card-usuario">
-				<img src="images/DESK/3_wireframes_web_usuarios_cadastrados/icone_usuario.png" class="responsive-img">
-				<p class="card-ml-20-p">
-					<span class="color-default">Matheus Gomes Ferreira</span>
-					<span class="color-default">478.975.138-40</span>
-				</p>
-			</div>
-		</div>
-	</div>
-
-	<div class="col s12 m2 tooltipped" data-position="top" data-tooltip="Clique para Editar/Visualizar">
-		<div class="card white">
-			<div class="card-content white-text card-usuario">
-				<img src="images/DESK/3_wireframes_web_usuarios_cadastrados/icone_usuario.png" class="responsive-img">
-				<p class="card-ml-20-p">
-					<span class="color-default">Matheus Gomes Ferreira</span>
-					<span class="color-default">478.975.138-40</span>
-				</p>
-			</div>
-		</div>
-	</div>
-
-	<div class="col s12 m2 tooltipped" data-position="top" data-tooltip="Clique para Editar/Visualizar">
-		<div class="card white">
-			<div class="card-content white-text card-usuario">
-				<img src="images/DESK/3_wireframes_web_usuarios_cadastrados/icone_usuario.png" class="responsive-img">
-				<p class="card-ml-20-p">
-					<span class="color-default">Matheus Gomes Ferreira</span>
-					<span class="color-default">478.975.138-40</span>
-				</p>
-			</div>
-		</div>
-	</div>
-
-	<div class="col s12 m1"></div>
-
-	<div class="col s12 m2 tooltipped" data-position="top" data-tooltip="Clique para Editar/Visualizar">
-		<div class="card white">
-			<div class="card-content white-text card-usuario">
-				<img src="images/DESK/3_wireframes_web_usuarios_cadastrados/icone_usuario.png" class="responsive-img">
-				<p class="card-ml-20-p">
-					<span class="color-default">Matheus Gomes Ferreira</span>
-					<span class="color-default">478.975.138-40</span>
-				</p>
-			</div>
-		</div>
-	</div>
-
-	<div class="col s12 m2 tooltipped" data-position="top" data-tooltip="Clique para Editar/Visualizar">
-		<div class="card white">
-			<div class="card-content white-text card-usuario">
-				<img src="images/DESK/3_wireframes_web_usuarios_cadastrados/icone_usuario.png" class="responsive-img">
-				<p class="card-ml-20-p">
-					<span class="color-default">Matheus Gomes Ferreira</span>
-					<span class="color-default">478.975.138-40</span>
-				</p>
-			</div>
-		</div>
-	</div>
-
-	<div class="col s12 m2 tooltipped" data-position="top" data-tooltip="Clique para Editar/Visualizar">
-		<div class="card white">
-			<div class="card-content white-text card-usuario">
-				<img src="images/DESK/3_wireframes_web_usuarios_cadastrados/icone_usuario.png" class="responsive-img">
-				<p class="card-ml-20-p">
-					<span class="color-default">Matheus Gomes Ferreira</span>
-					<span class="color-default">478.975.138-40</span>
-				</p>
-			</div>
-		</div>
-	</div>
-
-	<div class="col s12 m2 tooltipped" data-position="top" data-tooltip="Clique para Editar/Visualizar">
-		<div class="card white">
-			<div class="card-content white-text card-usuario">
-				<img src="images/DESK/3_wireframes_web_usuarios_cadastrados/icone_usuario.png" class="responsive-img">
-				<p class="card-ml-20-p">
-					<span class="color-default">Matheus Gomes Ferreira</span>
-					<span class="color-default">478.975.138-40</span>
-				</p>
-			</div>
-		</div>
+	<div class="col s12 m8" style="overflow-x: auto; height: 475px; padding-bottom: 10px;">
+		<div class="row-cards-usuarios"></div>
 	</div>
 
 	<div class="col s12 m9">
 		<div class="cards-footer">
 			<div class="col s12 m1"></div>
-			<div class="col s6 m2">
+			<div class="col s6 m2 center">
 				<button class="btn btn-default" type="submit">Relatório</button>
 			</div>
 			<div class="col s2 m7"></div>
 			<div class="col s6 m2 right-align">
-				<button class="btn btn-default" type="submit"><span class="d-none-mobile">+</span> Cadastrar</button>
+				<button class="btn btn-default" type="button" onclick="setHTMLButtonModal('Salvar')" class="modal-trigger"><span class="d-none-mobile">+</span> Cadastrar</button>
 			</div>
 		</div>
 	</div>
 </div>
 
-<div id="modal1" class="modal">
+<div id="modalUser" class="modal">
 	<div class="modal-content">
-		
 		<div class="col s12 m12 right-align">
-			<img src="icons/close.png" class="responsive-img modal-close">
+			<img src="icons/close.png" class="responsive-img modal-close" onclick="clearForm('#formUser');">
 		</div>
 		
 		<div class="">
-			<div class="col s12 m3">
+			<div class="col s12 m3 center-align">
 				<img src="icons/user-bgd-blue.png" class="responsive-img">
 			</div>
 		</div>
 
 		<div class="container center-align">
-
-			<div class="input-field col s12 m7">
-				<input type="text" name="Nome" id="Nome" class="autocomplete c-blue">
-				<label for="Nome" class="c-blue">Nome</label>
-			</div>
-			
-			<div class="input-field col s12 m7">
-				
-				<input type="text" id="CPF" class="autocomplete c-blue">
-				<label for="CPF" class="c-blue">CPF</label>
-			</div>
-
-			<div class="input-field col s12 m7">
-				
-				<input type="text" id="Email" class="autocomplete c-blue">
-				<label for="Email" class="c-blue">Email</label>
-			</div>
-
-			<div class="input-field col s12 m7">
-				
-				<input type="password" id="Senha" class="autocomplete c-blue">
-				<label for="Senha" class="c-blue">Senha</label>
-			</div>
-
-			<div class="input-field col s12 m7">
-				
-				<select id="Status" class="c-blue">
-					<option value="" disabled selected>Status</option>
-					<option value="1">Ativo</option>
-					<option value="0">Desativado</option>
-				</select>
-			</div>
-
-			<div class="input-field col s12 m7">
-				
-				<select id="UserType" class="c-blue">
-					<option value="" disabled selected>Tipo de usuário</option>
-					<option value="1">Administrador</option>
-					<option value="2">Cliente</option>
-				</select>
-			</div>
-
-			<input type="hidden" name="Id" id="Id">
-
-			<div class="modal-footer">
-					<div class="col s12 m12">
-						<button type="button" class="btn btn-blue">Editar</button>
-					</div>
-			</div>
-		</div>
-	</div>
-	
-</div>
-
-
-<!-- Modal Structure -->
-<div id="modalUser" class="modal">
-	<div class="row">
-		<div class="col s12 m4">
-			<div class="">
-				<div class="card-image">
-					<span class="card-title"></span>
-				</div>
-				<div class="card-content center-align">
-					<p><i class="xl material-icons">account_circle</i></p>
-				</div>
-			</div>
-		</div>
-		<div class="col s12 m8">
 			<form id="formUser">
-				<div class="input-field">
-					<i class="material-icons prefix">textsms</i>
-					<input type="text" name="Nome" id="Nome" class="autocomplete">
-					<label for="Nome">Nome</label>
+				<div class="input-field col s12 m7">
+					<input type="text" name="Nome" id="Nome" class="autocomplete c-blue">
+					<label for="Nome" class="c-blue">Nome</label>
 				</div>
 
-				<div class="input-field">
-					<i class="material-icons prefix">textsms</i>
-					<input type="text" id="CPF" class="autocomplete">
-					<label for="CPF">CPF</label>
+				<div class="input-field col s12 m7">
+
+					<input type="text" id="CPF" class="autocomplete c-blue">
+					<label for="CPF" class="c-blue">CPF</label>
 				</div>
 
-				<div class="input-field">
-					<i class="material-icons prefix">textsms</i>
-					<input type="text" id="Email" class="autocomplete">
-					<label for="Email">Email</label>
+				<div class="input-field col s12 m7">
+
+					<input type="text" id="Email" class="autocomplete c-blue">
+					<label for="Email" class="c-blue">Email</label>
 				</div>
 
-				<div class="input-field">
-					<i class="material-icons prefix">textsms</i>
-					<input type="password" id="Senha" class="autocomplete">
-					<label for="Senha">Senha</label>
+				<div class="input-field col s12 m7">
+
+					<input type="password" id="Senha" class="autocomplete c-blue">
+					<label for="Senha" class="c-blue">Senha</label>
 				</div>
 
-				<div class="input-field">
-					<i class="material-icons prefix">textsms</i>
-					<select id="Status">
+				<div class="input-field col s12 m7">
+
+					<select id="Status" class="c-blue">
 						<option value="" disabled selected>Status</option>
 						<option value="1">Ativo</option>
 						<option value="0">Desativado</option>
 					</select>
 				</div>
 
-				<div class="input-field">
-					<i class="material-icons prefix">textsms</i>
-					<select id="UserType">
+				<div class="input-field col s12 m7">
+
+					<select id="UserType" class="c-blue">
 						<option value="" disabled selected>Tipo de usuário</option>
 						<option value="1">Administrador</option>
 						<option value="2">Cliente</option>
 					</select>
 				</div>
 
+				<input type="hidden" name="controlButton" id="controlButton" value="Salvar">
 				<input type="hidden" name="Id" id="Id">
 			</form>
-		</div>
-	</div>
 
-	<div class="modal-footer">
-		<div class="row">
-			<div class="col s4 center-align">
-				<a class="waves-effect waves-light btn" onclick="clearForm('#formUser')">Limpar</a>
-			</div>
-			<div class="col s8 right-align">
-				<a class="waves-effect waves-light btn btn-action-formUser"></a>
+			<div class="modal-footer">
+				<div class="col s12 m12">
+					<button type="button" class="btn btn-blue btn-action-formUser">Salvar</button>
+				</div>
 			</div>
 		</div>
 	</div>

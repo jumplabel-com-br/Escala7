@@ -5976,7 +5976,7 @@ video.responsive-video {
   line-height: 32px;
   padding: 0 12px;
   border-radius: 16px;
-  background-color: #e4e4e4;
+  background-color: #F39FB8;
   margin-bottom: 5px;
   margin-right: 5px;
 }
@@ -8789,7 +8789,7 @@ input[type=range]::-ms-thumb {
   -webkit-flex: 1 auto;
   -ms-flex: 1 auto;
   flex: 1 auto;
-  background-color: #26a69a;
+  background-color: #F39FB8;
   color: #fff;
   padding: 20px 22px;
   font-weight: 500;
@@ -8847,11 +8847,11 @@ input[type=range]::-ms-thumb {
 }
 
 .datepicker-table td.is-today {
-  color: #26a69a;
+  color: #F39FB8;
 }
 
 .datepicker-table td.is-selected {
-  background-color: #26a69a;
+  background-color: #2A64AD;
   color: #fff;
 }
 
@@ -8895,7 +8895,7 @@ input[type=range]::-ms-thumb {
 .datepicker-clear,
 .datepicker-today,
 .datepicker-done {
-  color: #26a69a;
+  color: #2A64AD;
   padding: 0 1rem;
 }
 

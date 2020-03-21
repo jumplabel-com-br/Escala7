@@ -40,7 +40,7 @@
 					<div class="row">
 						<div class="input-field col s12">
 							<i class="material-icons prefix">assignment_ind</i>
-							<input type="text" id="autocomplete-input-cpf" class="autocomplete cpf color-white">
+							<input type="text" id="autocomplete-input-cpf" class="autocomplete cpf color-white bb-white-input">
 							<label for="autocomplete-input-cpf">CPF</label>
 						</div>
 					</div>

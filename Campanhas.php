@@ -253,6 +253,67 @@ session_start();
 
 <!-- Modal Structure -->
 <div id="modalCampanha" class="modal">
+	<div class="modal-content">
+		<div class="col s12 m12 right-align">
+			<img src="icons/close.png" class="responsive-img modal-close" onclick="clearForm('#formUser');">
+		</div>
+		
+		<div class="">
+			<div class="col s12 m3 center-align">
+				<img src="icons/user-bgd-blue.png" class="responsive-img">
+			</div>
+		</div>
+
+		<div class="container center-align">
+			<form id="formUser">
+				<div class="input-field col s12 m7">
+					<input type="text" name="QRCode" id="QRCode" class="autocomplete c-blue">
+					<label for="QRCode" class="c-blue">QR Code</label>
+				</div>
+
+				<div class="input-field col s12 m7">
+					<input type="text" id="Campanha" class="autocomplete c-blue">
+					<label for="Campanha" class="c-blue">Campanha</label>
+				</div>
+
+				<div class="input-field col s12 m7">
+					<input type="text" id="Dt_Inicio" class="datepicker c-blue">
+					<label for="Dt_Inicio" class="c-blue">Data Inicio</label>
+				</div>
+
+				<div class="input-field col s12 m7">
+					<input type="text" id="Dt_Termino" class="datepicker c-blue">
+					<label for="Dt_Termino" class="c-blue">Data Término</label>
+				</div>
+
+				<div class="input-field col s12 m7">
+					<select id="Status" class="c-blue">
+						<option value="" disabled selected>Status</option>
+						<option value="1">Ativo</option>
+						<option value="0">Desativado</option>
+					</select>
+				</div>
+
+				<div class="input-field col s12 m7">
+					<input type="text" id="iFame" class="autocomplete c-blue">
+					<label for="iFame" class="c-blue" class="c-blue">iFame</label>
+				</div>
+
+				<input type="hidden" name="controlButton" id="controlButton" value="Salvar">
+				<input type="hidden" name="Id" id="Id">
+			</form>
+
+			<div class="modal-footer">
+				<div class="col s12 m12">
+					<button type="button" class="btn btn-blue btn-action-formUser">Salvar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div id="modalCampanha" class="modal">
 	<div class="row">
 		<div class="col s12 m12">
 			<div class="row">

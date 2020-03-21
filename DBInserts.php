@@ -15,6 +15,8 @@ $option = (isset($_POST['option'])) ? $_POST['option'] : '';
 
 
 function Insert($Schema, $tableName, $columns,  $lastquery){
+	//echo "insert into $Schema.$tableName ($columns) values ($lastquery)";
+	//die;
 	return "insert into $Schema.$tableName ($columns) values ($lastquery)";
 }
 
@@ -26,8 +28,16 @@ function Delete($Schema, $tableName, $where){
 	return "delete from $Schema.$tableName where $where";
 }
 
-function Select($Schema, $columns, $tableName, $where){
-	$querySql = "select $columns from $Schema.$tableName where $where";
+function Select($Schema, $columns, $tableName, $where, $link){
+	$querySql = "select $columns from $Schema.$tableName";
+
+	if (strlen(trim($where)) > 0) {
+		$querySql.=" where $where";
+	}
+
+	//echo $querySql;
+	//die;
+
 	$query = mysqli_query($link, $querySql);
 	$data = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
@@ -35,30 +45,24 @@ function Select($Schema, $columns, $tableName, $where){
 	echo json_encode($data);
 }
 
-
 switch ($option) {
 	case 'Insert':
-		$sqlQuery = Insert($Schema, $tableName, $columns, $lastquery);
-		mysqli_query($link, $sqlQuery);
+	$sqlQuery = Insert($Schema, $tableName, $columns, $lastquery);
+	mysqli_query($link, $sqlQuery);
 	break;
 
 	case 'Update':
-		$sqlQuery = Update($Schema, $tableName, $setQuery, $where);
-		mysqli_query($link, $sqlQuery);
+	$sqlQuery = Update($Schema, $tableName, $setQuery, $where);
+	mysqli_query($link, $sqlQuery);
 	break;
 
 	case 'Delete':
-		$sqlQuery = Delete($Schema, $tableName, $where);
-		mysqli_query($link, $sqlQuery);
+	$sqlQuery = Delete($Schema, $tableName, $where);
+	mysqli_query($link, $sqlQuery);
 	break;
 
 	case 'Select':
-
-		$query = mysqli_query($link, $sql);
-		$data = mysqli_fetch_all($query, MYSQLI_ASSOC);
-
-		// Escreve o resultado JSON:
-		echo json_encode($data);
+	Select($Schema, $columns, $tableName, $where, $link);
 	break;
 }
 ?>

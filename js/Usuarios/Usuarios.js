@@ -6,8 +6,6 @@ var dataInfos;
   	$('.modal').modal();
   	$('select').formSelect();
     $('.tooltipped').tooltip();
-
-    $('#modal1').modal('open');
   });
 
 
@@ -86,7 +84,7 @@ var dataInfos;
   	})
   	.done(function(data) {
   		console.log("success: ", data);
-  		select('SELECT * FROM Escala7.Users', 'templateCardsUsuarios');
+  		select('*', 'templateCardsUsuarios');
       $('#modalUser').modal('close');
   	})
   	.fail(function() {
@@ -95,17 +93,17 @@ var dataInfos;
   	
   }
 
-  function select(sql, nameFunction){
+  function select(columns, nameFunction, option = 'Select', where = ''){
 
-  	let option = 'Select';
   	let Schema = 'Escala7';
   	let tableName = 'Users';
 
   	let params = {
-  		sql,
   		option,
   		Schema,
   		tableName,
+      columns,
+      where
   	}
 
   	$.ajax({
@@ -131,6 +129,8 @@ var dataInfos;
   		}
 
       $('#modalProgress').modal('close');
+      $('.tooltipped').tooltip();
+
   	})
   	.fail(function() {
   		console.log("error");
@@ -144,28 +144,44 @@ var dataInfos;
 
   	return model.map(x => {
   		return`
-  		<div class="col s12 m3">
-  		  <div class="card">
-  		    <div class="right-align">
-  		      <i class="fas fa-ellipsis-h dropdown-trigger" data-target='dropdown1'></i>
-  		      <ul id='dropdown1' class='dropdown-content'>
-  		        <li><a href="#modalUser" class="modal-trigger" onclick="$('#modalUser').modal('open');$('.btn-action-formUser').html('Editar'); select('select * from  Escala7.Users where id = ${x.Id}', 'inputsCardsValues');optionCRUDUsers('Editar');disabledInputsCards('#modalUser')"><i class="material-icons right">send</i>visualizar mais</a></li>
-  		        <li><a href="#modalUser" class="modal-trigger" onclick="$('#modalUser').modal('open');$('.btn-action-formUser').html('Editar'); select('select * from  Escala7.Users where id = ${x.Id}', 'inputsCardsValues');optionCRUDUsers('Editar');">editar <i class="material-icons right">send</i></a></li>
-  		      </ul>
-  		    </div>
-  		    <div class="card-content center-align">
-  		      <span class="card-title"><i class="xl material-icons">account_box</i></span>
-  		    </div>
-  		    <div class="card-action">
-  		      <p class="center-align">
-  		        Nome: ${x.Nome}
-  		        <br>
-  		        ${x.CPF}
-  		      </p>
-  		    </div>
-  		  </div>
-  		</div>
+  		<div class="col s12 m3 tooltipped" data-position="top" data-tooltip="Clique para Editar/Visualizar" onclick="setHTMLButtonModal('Editar', ${x.Id});" class="modal-trigger">
+        <div class="card white">
+          <div class="card-content white-text card-usuario center-align">
+            <img src="images/DESK/3_wireframes_web_usuarios_cadastrados/icone_usuario.png" class="responsive-img">
+            <p class="card-ml-20-p">
+              <p class="color-default">${x.Nome}</p>
+              <p class="color-default">${x.CPF}</p>
+            </p>
+          </div>
+        </div>
+      </div>
   		`});
+  }
+
+  function setHTMLButtonModal(tipo, id){
+
+    $('#modalUser').modal('open');
+
+    if (tipo == 'Salvar') {
+      clearForm('#formUser');
+
+      $('#controlButton').val('Salvar')  
+      $('.btn-action-formUser').on('click', function(event) {
+        CRUDUsers('Insert');
+        
+      });
+
+    }else if(tipo == 'Editar'){
+      select('*', 'inputsCardsValues', 'Select', `id = ${id}`);
+      $('#formUser #Id').val(id);
+      $('#controlButton').val('Editar');
+
+      $('.btn-action-formUser').on('click', function(event) {
+        CRUDUsers('Update');
+      });
+    }
+
+    $('.btn-action-formUser').html($('#controlButton').val());
   }
 
   function disabledInputsCards(formName){
@@ -211,5 +227,5 @@ var dataInfos;
   }
 
   jQuery(document).ready(function($) {
-    select('SELECT * FROM Escala7.Users', 'templateCardsUsuarios');
+    select('*', 'templateCardsUsuarios');
   });
