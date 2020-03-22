@@ -206,14 +206,14 @@ session_start();
 						</tr>
 					</thead>
 
-					<tbody class="color-default">
+					<tbody class="color-default tbody-campanhas">
 						<tr>
 							<td>#25698823</td>
 							<td>Campanha A</td>
 							<td>02/02/2019</td>
 							<td>20/02/2020</td>
 							<td>Inativo</td>
-							<td><a href="#modalCampanha" class="modal-trigger"><i class="fas fa-edit"></i></a></td>
+							<td><a href="#modalCampanha" class="modal-trigger" onclick="optionCRUDCampanhas('Editar')"><i class="fas fa-edit"></i></a></td>
 						</tr>
 						<tr>
 							<td>#56987326</td>
@@ -221,7 +221,7 @@ session_start();
 							<td>06/12/2019</td>
 							<td>23/12/2019</td>
 							<td>Inativo</td>
-							<td><a href="#modalCampanha" class="modal-trigger"><i class="fas fa-edit"></i></a></td>
+							<td><a href="#modalCampanha" class="modal-trigger" onclick="optionCRUDCampanhas('Editar')"><i class="fas fa-edit"></i></a></td>
 						</tr>
 						<tr>
 							<td>#56987355</td>
@@ -229,7 +229,7 @@ session_start();
 							<td>02/12/2019</td>
 							<td>10/01/2020</td>
 							<td>Ativo</td>
-							<td><a href="#modalCampanha" class="modal-trigger"><i class="fas fa-edit"></i></a></td>
+							<td><a href="#modalCampanha" class="modal-trigger" onclick="optionCRUDCampanhas('Editar')"><i class="fas fa-edit"></i></a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -243,7 +243,7 @@ session_start();
 				<button class="btn btn-default" type="submit">Relatório</button>
 			</div>
 			<div class="col s6 m9 right-align">
-				<button class="btn btn-default" type="submit"><span class="d-none-mobile">+</span> Cadastrar</button>
+				<button class="btn btn-default" type="button" onclick="$('#modalCampanha').modal('open');optionCRUDCampanhas('Salvar')"><span class="d-none-mobile">+</span> Cadastrar</button>
 			</div>
 		</div>
 	</div>
@@ -255,7 +255,7 @@ session_start();
 <div id="modalCampanha" class="modal">
 	<div class="modal-content">
 		<div class="col s12 m12 right-align">
-			<img src="icons/close.png" class="responsive-img modal-close" onclick="clearForm('#formUser');">
+			<img src="icons/close.png" class="responsive-img modal-close" onclick="clearForm('#formCampanha')">
 		</div>
 		
 		<div class="">
@@ -265,7 +265,7 @@ session_start();
 		</div>
 
 		<div class="container center-align">
-			<form id="formUser">
+			<form id="formCampanha">
 				<div class="input-field col s12 m7">
 					<input type="text" name="QRCode" id="QRCode" class="autocomplete c-blue">
 					<label for="QRCode" class="c-blue">QR Code</label>
@@ -305,77 +305,8 @@ session_start();
 
 			<div class="modal-footer">
 				<div class="col s12 m12">
-					<button type="button" class="btn btn-blue btn-action-formUser">Salvar</button>
+					<button type="button" class="btn btn-blue btn-action-formCampanha">Salvar</button>
 				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-
-<div id="modalCampanha" class="modal">
-	<div class="row">
-		<div class="col s12 m12">
-			<div class="row">
-				<div class="col s12">
-					<span class="card-title">
-						<h4>Editar Campanha</h4>
-						<h5>adminitrador</h5>
-					</span>
-				</div>
-			</div>
-			<form id="formCampanha">
-				<div class="input-field">
-					<i class="material-icons prefix">textsms</i>
-					<input type="text" name="QRCode" id="QRCode" class="autocomplete">
-					<label for="QRCode">QR Code</label>
-				</div>
-
-				<div class="input-field">
-					<i class="material-icons prefix">textsms</i>
-					<input type="text" id="Campanha" class="autocomplete">
-					<label for="Campanha">Campanha</label>
-				</div>
-
-				<div class="input-field">
-					<i class="material-icons prefix">textsms</i>
-					<input type="text" id="Dt_Inicio" class="datepicker">
-					<label for="Dt_Inicio">Data Inicio</label>
-				</div>
-
-				<div class="input-field">
-					<i class="material-icons prefix">textsms</i>
-					<input type="text" id="Dt_Termino" class="datepicker">
-					<label for="Dt_Termino">Data Término</label>
-				</div>
-
-				<div class="input-field">
-					<i class="material-icons prefix">textsms</i>
-					<select id="Status">
-						<option value="" disabled selected>Status</option>
-						<option value="1">Ativo</option>
-						<option value="0">Desativado</option>
-					</select>
-				</div>
-
-				<div class="input-field">
-					<i class="material-icons prefix">textsms</i>
-					<input type="text" id="iFame" class="autocomplete">
-					<label for="iFame">iFame</label>
-				</div>
-
-				<input type="hidden" name="Id" id="Id">
-			</form>
-		</div>
-	</div>
-
-	<div class="modal-footer">
-		<div class="row">
-			<div class="col s4 center-align">
-				<a class="waves-effect waves-light btn" onclick="clearForm('#formCampanha')">Limpar</a>
-			</div>
-			<div class="col s8 right-align">
-				<a class="waves-effect waves-light btn btn-action-formCampanha"></a>
 			</div>
 		</div>
 	</div>

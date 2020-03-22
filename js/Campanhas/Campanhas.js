@@ -7,6 +7,8 @@ $(document).ready(function(){
   $('select').formSelect();
   $('.datepicker').datepicker();
   $('.tooltipped').tooltip();
+
+  select('templateTableCampanhas');
 });
 
 
@@ -28,7 +30,7 @@ $('#li-img-logo-max').on('click', function(event) {
 
 
 function clearForm(form){
- document.querySelectorAll(`${form} input`).forEach(input => input.value = '');
+  document.querySelectorAll(`${form} input`).forEach(input => input.value = '');
 }
 
 function CRUDCampanhas(option){
@@ -56,7 +58,7 @@ function CRUDCampanhas(option){
 
   let Schema = 'Escala7';
   let tableName = 'Campanhas';
-  let columns = 'QRCode,Campanha,Dt_Inicio,Dt_Termino,Status,iFame,UserRegistration,DateRegistration,UserInactivity,DateInactivity'
+  let columns = 'QRCode,Campanha,Dt_Inicio,Dt_Termino,Status,IFrame,UserRegistration,DateRegistration,UserInactivity,DateInactivity'
   let lastquery = `'${param.QRCode}','${param.Campanha}','${param.Dt_Inicio}','${param.Dt_Termino}',${param.Status},'${param.iFame}','${param.UserRegistration}',now(),'${param.UserInactivity}',now()`;
 
   let setQuery = `QRCode = '${param.QRCode}',Campanha = '${param.Campanha}',Dt_Inicio = '${param.Dt_Inicio}', Dt_Termino = '${param.Dt_Termino}', Status = ${param.Status},
@@ -85,7 +87,7 @@ function CRUDCampanhas(option){
   })
   .done(function(data) {
     console.log("success: ", data);
-    select('SELECT * FROM Escala7.Camapnhas', 'templateTableCampanhas');
+    select('templateTableCampanhas');
     $('#modalUser').modal('close');
   })
   .fail(function() {
@@ -94,17 +96,21 @@ function CRUDCampanhas(option){
 
 }
 
-function select(sql, nameFunction){
+function select(nameFunction, id){
 
  let option = 'Select';
  let Schema = 'Escala7';
  let tableName = 'Campanhas';
 
+ let columns = '*';
+ let where = id > 0 ? `id = ${id}` : '';
+
  let params = {
-  sql,
   option,
   Schema,
   tableName,
+  columns,
+  where
 }
 
 $.ajax({
@@ -122,12 +128,17 @@ $.ajax({
 
   if (data.length > 0 && nameFunction == 'templateTableCampanhas') {
 
-   $('.row-cards-usuarios').html(templateTableCampanhas(data));
-   $('.dropdown-trigger').dropdown();
+    $('.tbody-campanhas').html(templateTableCampanhas(data));
+    $('.dropdown-trigger').dropdown();
+    $('#modalCampanha').modal('close');
+    clearForm('#formCampanha');
 
- }
+  }else if (data.length > 0 && id > 0) {
+    setInputsModal(data);
+  }
 
- $('#modalProgress').modal('close');
+
+  $('#modalProgress').modal('close');
 })
 .fail(function() {
   console.log("error");
@@ -138,26 +149,46 @@ $.ajax({
 }
 
 function templateTableCampanhas(model){
-    return model.map(x => {
-      return`
-        <tr>
-          <td>${x.QRCode}</td>
-          <td>${x.Campanha}</td>
-          <td>${x.Dt_Inicio}</td>
-          <td>${x.Dt_Termino}</td>
-          <td>${x.Status}</td>
-          <td><a href="#modalCampanhas" class="modal-trigger"><i class="fas fa-edit"></i></a></td>
-        </tr>
-      `});
+  return model.map(x => {
+    return`
+      <tr>
+        <td>${x.QRCode}</td>
+        <td>${x.Campanha}</td>
+        <td>${DateFormatPtBr(x.Dt_Inicio)}</td>
+        <td>${DateFormatPtBr(x.Dt_Termino)}</td>
+        <td>${x.Status}</td>
+        <td><a href="#modalCampanha" class="modal-trigger" onclick="optionCRUDCampanhas('Editar'); select('', ${x.Id})"><i class="fas fa-edit"></i></a></td>
+      </tr>
+    `});
+}
+
+function setInputsModal(model){
+
+  $('label[for="QRCode"]').addClass('active');
+  $('label[for="Campanha"]').addClass('active');
+  $('label[for="Dt_Inicio"]').addClass('active');
+  $('label[for="Dt_Termino"]').addClass('active');
+  $('label[for="Status"]').addClass('active');
+  $('label[for="iFame"]').addClass('active');
+
+
+  $('#QRCode').val(model[0].QRCode);
+  $('#Campanha').val(model[0].Campanha);
+  $('#Dt_Inicio').val(DateFormtDatePicker(model[0].Dt_Inicio));
+  $('#Dt_Termino').val(DateFormtDatePicker(model[0].Dt_Termino));
+  $('#Status').val(model[0].Status);
+  $('#iFame').val(model[0].IFrame);
+
+   $('#Status').formSelect();
 }
 
 function dateFormart(inputDate){
-  date = inputDate.replace(',').split(" ");
+  date = inputDate.replace(',','').split(" ");
 
-  Year = date[2];
-  Month;
-  Day = date[1];
-  Hours = " 00:00:00";
+  let Year = date[2];
+  let Month;
+  let Day = date[1];
+  let Hours = " 00:00:00";
 
   if (date[0] == "Jan") {
     Month = "01";
@@ -188,18 +219,68 @@ function dateFormart(inputDate){
   return `${Year}-${Month}-${Day} ${Hours}`;
 }
 
+function DateFormatPtBr(value){
+  value = value.replace(' 00:00:00','');
+  value = value.split('-')
+
+  date = `${value[2]}/${value[1]}/${value[0]}`;
+  return date;
+}
+
+function DateFormtDatePicker(value){
+  value = value.replace(' 00:00:00','');
+  value = value.split('-');
+
+  let Year = value[0];
+  let Month;
+  let Day = value[2];
+
+  if (value[1] == "01") {
+    Month = "Jan";
+  }else if(value[1] == "02"){
+    Month = "Feb";
+  }else if(value[1] == "03"){
+    Month = "Mar";
+  }else if(value[1] == "04"){
+    Month = "Apr";
+  }else if(value[1] == "05"){
+    Month = "May";
+  }else if(value[1] == "06"){
+    Month = "Jun";
+  }else if(value[1] == "07"){
+    Month = "Jul";
+  }else if(value[1] == "08"){
+    Month = "Aug";
+  }else if(value[1] == "09"){
+    Month = "Sep";
+  }else if(value[1] == "10"){
+    Month = "Oct";
+  }else if(value[1] == "11"){
+    Month = "Nov";
+  }else if(value[1] == "12"){
+    Month = "Dec";
+  }
+
+  return `${Month} ${Day}, ${Year}`
+
+}
+
 function optionCRUDCampanhas(buttonHtml){
-    if (buttonHtml == 'Salvar') {
-      
-      $('.btn-action-formCampanha').on('click', function(event) {
-        CRUDCampanhas('Insert');
+
+  $('.btn-action-formCampanha').html(buttonHtml);
+
+  if (buttonHtml == 'Salvar') {
+    clearForm('#formCampanha');
+
+    $('.btn-action-formCampanha').on('click', function(event) {
+      CRUDCampanhas('Insert');
         //event.preventDefault();
       });
 
-    }else if (buttonHtml == 'Editar') {
-      $('.btn-action-formCampanha').on('click', function(event) {
-        CRUDCampanhas('Update');
+  }else if (buttonHtml == 'Editar') {
+    $('.btn-action-formCampanha').on('click', function(event) {
+      CRUDCampanhas('Update');
        // event.preventDefault();
-      });
-    }
+     });
   }
+}

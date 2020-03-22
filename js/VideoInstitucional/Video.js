@@ -4,13 +4,14 @@ jQuery(document).ready(function($) {
 	returnIframe();
 });
 
-var countChip = $('.chip').length;
+
+let chip;
 
 function keypressChip(){
-	$('.chips').on('keyup', function(e) {
 
+	$('.chips').on('keyup', function(e) {
 		key = e.keyCode || e.which
-		if (key == 13 && countChip === 0) {
+		if (key == 13) {
 			onChipUpdate();
 		}
 
@@ -18,7 +19,7 @@ function keypressChip(){
 }
 
 function onChipAdd(option = 'Insert'){
-	M.toast({html: 'Só pode ser inserido um Video institucional, deletar o anterior para um novo!'})
+	
 
 	let Schema = 'Escala7'
 	let tableName = 'VideoInstitucional'
@@ -45,6 +46,7 @@ function onChipAdd(option = 'Insert'){
 	})
 	.done(function() {
 		console.log("success insert");
+		M.toast({html: 'Video Atualizado com êxito!'});
 		returnIframe();
 	})
 	.fail(function() {
@@ -84,6 +86,8 @@ function returnIframe(option = 'Select'){
 			$('.chips').chips({data: [{tag: link}], limit: 1});
 
 			$('.cards-footer iframe').attr({'src':link})	
+
+			 chip = $('.chip').length;
 		}
 	})
 	.fail(function() {
@@ -93,11 +97,12 @@ function returnIframe(option = 'Select'){
 }
 
 function onChipUpdate(option = 'Update'){
+	
 	let Schema = 'Escala7'
 	let tableName = 'VideoInstitucional'
 	let link = $('.chips input').val();
 	let Status = 1
-	let UserRegistration = $('#UserRegistration').val();    
+	let UserRegistration = $('#UserRegistration').val(); 
 
 	let setQuery = 'Status = 0';
 	let where = `Status = 1`;
@@ -108,7 +113,7 @@ function onChipUpdate(option = 'Update'){
 		tableName,
 		setQuery,
 		where		    	
-	}
+	}  
 
 	$.ajax({
 		url: 'DBInserts.php',

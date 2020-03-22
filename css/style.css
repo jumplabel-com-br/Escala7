@@ -59,8 +59,8 @@ i.i-default{
 .autocomplete.c-blue,
 .select-wrapper input.select-dropdown:focus,
 .select-wrapper input.select-dropdown,
-input[type=text]:not(.browser-default) {
-	border-bottom: solid 1px #2A64AD ;
+input.c-blue {
+	border-bottom: solid 1px #2A64AD !important ;
 }
 
 input[type=text]:not(.browser-default):focus:not([readonly]) + label.c-blue,
@@ -135,4 +135,8 @@ input[type=text]:not(.browser-default):focus:not([readonly]) + label.c-blue,
 
 .modal.datepicker-modal{
 	height: auto;
+}
+
+.card-campanha{
+	overflow-y: auto;
 }
