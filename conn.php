@@ -18,7 +18,7 @@ class db{
 
 		//cria a conexao
 		$con = mysqli_connect($this->host, $this->usuario, $this->senha, $this->database);
-		//$conn = mssql_select_db($this->host, $this->usuario, $this->senha)
+		
 		//ajustar o charset de comunicação entre a aplicação e o banco de dados
 		mysqli_set_charset($con, 'utf8');
 

@@ -1,6 +1,7 @@
 jQuery(document).ready(function($) {
 	$('.chips').chips({placeholder: 'Cole o llink do iframe desejado e pressione Enter', onChipAdd: keypressChip(), limit: 1});
 	$('.tooltipped').tooltip();
+	$('.dropdown-trigger').dropdown();
 	returnIframe();
 });
 

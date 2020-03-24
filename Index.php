@@ -1,3 +1,11 @@
+<?php
+
+$getType = (isset($_GET["type"])) && !(empty($_GET["type"])) ? $_GET["type"] : header('Location: Error.php?Message=p-n-e');
+$IdCampanha = (isset($_GET["IC"]))  && $_GET["type"] == 'user' ? $_GET["IC"] : header('Location: Error.php?Message=p-n-e');
+	//echo 'teste: '.$getType;
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +29,7 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css?<?=date('d/m/Y-H:i:s')?>">
 </head>
 
-<body class="background background-index">
+<body class="background-option background-index">
 	<section class="mt-3">
 		<div class="container ml-10-p">
 			<div class="row center-align">
@@ -34,43 +42,77 @@
 				</div>
 			</div>
 
-			
-			<div class="row center-align">
+			<?php
+			if ($getType === 'adm') {				
+				echo '
+				<div class="row center-align">
 				<div class="col s12">
-					<div class="row">
-						<div class="input-field col s12">
-							<i class="material-icons prefix">assignment_ind</i>
-							<input type="text" id="autocomplete-input-cpf" class="autocomplete cpf color-white bb-white-input">
-							<label for="autocomplete-input-cpf">CPF</label>
-						</div>
-					</div>
+				<div class="row">
+				<div class="input-field col s12">
+				<i class="material-icons prefix">assignment_ind</i>
+				<input type="text" id="autocomplete-input-cpf" class="autocomplete cpf color-white bb-white-input">
+				<label for="autocomplete-input-cpf">CPF</label>
 				</div>
-			</div>
-			
+				</div>
+				</div>
+				</div>
 
-			<div class="row">
+
+				<div class="row">
 				<div class="col s12">
-					<div class="row">
-						<div class="input-field col s12">
-							<i class="material-icons prefix remove_red_eye">remove_red_eye</i>
-							<input type="password" id="autocomplete-input-password" class="autocomplete autocomplete-input-password color-white">
-							<label for="password" class="autocomplete-input-password">Senha</label>
+				<div class="row">
+				<div class="input-field col s12">
+				<i class="material-icons prefix remove_red_eye">remove_red_eye</i>
+				<input type="password" id="autocomplete-input-password" class="autocomplete autocomplete-input-password color-white">
+				<label for="password" class="autocomplete-input-password">Senha</label>
 
-							<input type="text" id="autocomplete-input-text-password" class="autocomplete autocomplete-input-text-password color-white" style="display: none">
-							<label for="autocomplete-input" class="autocomplete-input-text-password" style="display: none">Senha</label>
-						</div>
-					</div>
+				<input type="text" id="autocomplete-input-text-password" class="autocomplete autocomplete-input-text-password color-white" style="display: 		none">
+				<label for="autocomplete-input" class="autocomplete-input-text-password" style="display: none">Senha</label>
+				</div>
+				</div>
 				</div>
 				<div class="col s12 center-align">
-					<span class="helper-text color-white" data-error="wrong" data-success="left" onclick="newPassoword();">Esqueci minha senha?</span>
+				<span class="helper-text color-white" data-error="wrong" data-success="left" onclick="newPassoword();">Esqueci minha senha?</span>
 				</div>
-			</div>
+				</div>
+				';
+			}else if($getType == 'user'){
+				echo '
+				<div class="row center-align">
+				<div class="col s12">
+				<div class="row">
+				<div class="input-field col s12">
+				<i class="material-icons prefix">assignment_ind</i>
+				<input type="text" id="autocomplete-input-cpf" class="autocomplete cpf color-white bb-white-input">
+				<label for="autocomplete-input-cpf">CPF</label>
+				</div>
+				</div>
+				</div>
+				</div>
 
+
+				<div class="row">
+				<div class="col s12">
+				<div class="row">
+				<div class="input-field col s12">
+				<i class="material-icons prefix assignment_ind">assignment_ind</i>
+				<select id="Campanha" disabled>
+				</select>
+				</div>
+				</div>
+				</div>
+				<div class="col s12 center-align">
+				<span class="helper-text color-white" data-error="wrong" data-success="left" onclick="newPassoword();">Esqueci minha senha?</span>
+				</div>
+				</div>
+				';
+			};
+			?>
 			<div class="row">
 				<div class="col s12">
 					<div class="row">
 						<div class="col s12 center-align">
-							<button class="btn btn-default" type="submit" name="action" onclick="ValidatorCPF($('.cpf').val()) == true && $('#autocomplete-input-text-password').val() != '' ? validUser() : M.toast({html: 'Informe um CPF e Senha válida', displayLength: 4000});">Entrar
+							<button class="btn btn-default pulse" type="submit" name="action" onclick="verificaUsuario()">Entrar
 								<i class="material-icons right">send</i>
 							</button>
 						</div>
@@ -81,12 +123,90 @@
 		</div>
 	</section>
 
+	<div id="modalProgress" class="modal modal-progress">
+		<div class="modal-content center">
+			<div class="preloader-wrapper big active">
+				<div class="spinner-layer spinner-blue-only">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div><div class="gap-patch">
+						<div class="circle"></div>
+					</div><div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<!-- Compiled and minified JavaScript -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 	<script type="text/javascript" src="materialize/js/materialize.js"></script>
 	<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
 	<script type="text/javascript">
 		var randomPassword = '';
+		var Campanha = "<?=$IdCampanha?>";
+		var getType = "<?=$getType?>";
+
+
+		$(document).ready(function($) {
+			$('select').formSelect({classes : 'text-white'});
+			$('.modal').modal();
+			getType == 'user' ?  selectedCampanha() : '';
+		});
+
+
+		function verificaUsuario(){
+			ValidatorCPF($('.cpf').val()) == true && $('#autocomplete-input-text-password').val() != '' ? validUser() : M.toast({html: 'Informe um CPF e Senha válida', displayLength: 4000});
+		}
+
+		function selectedCampanha(option = 'Select'){
+
+			let Schema = 'Escala7';
+			let tableName = 'Campanhas';
+			let columns = 'Id, Campanha';
+
+			let params = {
+				option,
+				Schema,
+				tableName,
+				columns
+
+			}
+
+			$.ajax({
+				url: 'DBInserts.php',
+				type: 'POST',
+				dataType: 'json',
+				data: params,
+				beforeSend: function(){
+					$('#modalProgress').modal('open');
+				}
+			})
+			.done(function(data) {
+				console.log("success: ", data);
+
+				if (data.length > 0 ) {
+					$('#Campanha').html(templateCamapnha(data));
+					$('select').formSelect({classes : 'text-white'});
+				}
+
+				$('#modalProgress').modal('close');
+			})
+			.fail(function() {
+				console.log("error");
+			});
+			
+		}
+
+		function templateCamapnha(model){
+			return model.map(x =>{
+				return`
+				<option value="${x.Id}" ${x.Id == Campanha ? `selected` : ''}>${x.Campanha}</option>
+				`;
+			}
+			)
+		}
 
 		function SendEmail(){
 
@@ -110,8 +230,10 @@
 		}
 
 		function validUser(){
-			let sql = `select CPF, Senha from Escala7.Users where CPF = '${$('#autocomplete-input-cpf').val().replace(/[.|-]/g,'')}' and Senha = '${$('#autocomplete-input-password').val()}'`
+			let sql = `select CPF, Senha from Escala7.Users where CPF = '${$('#autocomplete-input-cpf').val().replace(/[.|-]/g,'')}'`
 			let option = 'validLogin';
+
+			getType == 'adm' ? sql += ` and Senha = '${$('#autocomplete-input-password').val()}'` : '';
 
 			$.ajax({
 				url: 'GenericFunctions.php',
@@ -120,8 +242,20 @@
 				data: {sql, option},
 			})
 			.done(function(data) {
-				console.log("success: ", data);
-				data ? redirectToAction('Home.php') : '';
+				console.log("success:",data);
+
+				if (data.trim() == 'true') {
+					if (getType == 'adm') {
+						
+						redirectToAction(`Home.php?getType=${getType}`);
+
+					}else if (getType == 'user') {
+						
+						redirectToAction(`HomeMobile.php?getType=${getType}&IC=${Campanha}`);
+					}
+				}else{
+					M.toast({html: 'Informe um CPF e Senha válida', displayLength: 4000});
+				}
 			})
 			.fail(function() {
 				console.log("error");
@@ -206,15 +340,17 @@
 
 				});
 
-				document.querySelector('.remove_red_eye').addEventListener('click', function(){
-					if (document.querySelector('.autocomplete-input-password').style.display == 'block') {
-						document.querySelector('.autocomplete-input-password').style.display = 'none';
-						document.querySelector('.autocomplete-input-text-password').style.display = 'block';
-					}else{
-						document.querySelector('.autocomplete-input-password').style.display = 'block'
-						document.querySelector('.autocomplete-input-text-password').style.display =  'none';
-					};
-				})
+				if(document.querySelector('.remove_red_eye') != null) {
+					document.querySelector('.remove_red_eye').addEventListener('click', function(){
+						if (document.querySelector('.autocomplete-input-password').style.display == 'block') {
+							document.querySelector('.autocomplete-input-password').style.display = 'none';
+							document.querySelector('.autocomplete-input-text-password').style.display = 'block';
+						}else{
+							document.querySelector('.autocomplete-input-password').style.display = 'block'
+							document.querySelector('.autocomplete-input-text-password').style.display =  'none';
+						};
+					})
+				}
 
 				$('.cpf').mask('000.000.000-00', {reverse: true});
 			</script>

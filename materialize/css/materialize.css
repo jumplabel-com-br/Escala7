@@ -3397,7 +3397,7 @@ video.responsive-video {
   }
 
   span.badge.new:after {
-    content: " new";
+    content: "Inspecionar";
   }
 
   span.badge[data-badge-caption]::after {

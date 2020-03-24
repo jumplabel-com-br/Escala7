@@ -35,6 +35,13 @@ function clearForm(form){
 
 function CRUDCampanhas(option){
 
+
+  validarForm('#formCampanha');
+
+    if (v == false) {
+      return false;
+    }
+
   let QRCode = $('#QRCode').val();
   let Campanha = $('#Campanha').val();
   let Dt_Inicio = dateFormart($('#Dt_Inicio').val());
@@ -156,7 +163,7 @@ function templateTableCampanhas(model){
         <td>${x.Campanha}</td>
         <td>${DateFormatPtBr(x.Dt_Inicio)}</td>
         <td>${DateFormatPtBr(x.Dt_Termino)}</td>
-        <td>${x.Status}</td>
+        <td>${x.Status == 1 ? 'Ativo' : 'Inativo'}</td>
         <td><a href="#modalCampanha" class="modal-trigger" onclick="optionCRUDCampanhas('Editar'); select('', ${x.Id})"><i class="fas fa-edit"></i></a></td>
       </tr>
     `});

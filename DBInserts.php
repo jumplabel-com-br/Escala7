@@ -45,6 +45,22 @@ function Select($Schema, $columns, $tableName, $where, $link){
 	echo json_encode($data);
 }
 
+function SelectAdvanced($sql, $link){
+	echo strtolower(split(" ",$sql)[0]);
+	die;
+	
+	if (strtolower(split(" ",$sql)[0]) != "select") {
+		return 'False';
+		die;	
+	}
+
+	$query = mysqli_query($link, $querySql);
+	$data = mysqli_fetch_all($query, MYSQLI_ASSOC);
+
+	// Escreve o resultado JSON:
+	echo json_encode($data);	
+}
+
 switch ($option) {
 	case 'Insert':
 	$sqlQuery = Insert($Schema, $tableName, $columns, $lastquery);
@@ -63,6 +79,10 @@ switch ($option) {
 
 	case 'Select':
 	Select($Schema, $columns, $tableName, $where, $link);
+	break;
+
+	case 'SelectAdvanced':
+	Select($sql, $link);
 	break;
 }
 ?>

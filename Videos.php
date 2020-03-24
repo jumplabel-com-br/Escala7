@@ -156,63 +156,46 @@ session_start();
 </div>
 -->
 
+<div class="row">
+	<div class="col s6 m6">
+			<a href="HomeMobile.php"><i class="medium material-icons">keyboard_backspace</i></a>
+	</div>
 
-<div class="container">
-	<div class="row center-align">
-		<div class="col s12 center-align">
-			<div class="col s4"></div>
-			<div class="col s4">
-				<img src="images/DESK/1_wireframes_web_login/logo_branco.png" class="responsive-img tooltipped" data-position="bottom" data-tooltip="Home" onclick="window.location.href='Home.php'">
+	<div class="col s6 m6">
+			<a href="HomeMobile.php"><i class="medium material-icons right">home</i></a>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col s12 m12">
+		<div class="card-content center white color-default">
+			<div class="center col s12 white">
+				<h5>Video Institucional</h5>
 			</div>
-			<div class="col s4"></div>
 		</div>
+	</div>	
+</div>
 
-		<div class="col s12">
-			<h3 class="white-text"><strong>Campanhas Cadastradas</strong></h3>
-			<h5 class="white-text">Administrador</h5>
+<div class="row">
+	<div class="col s12 m12">
+		<div class="cards-footer">
+			<iframe height="397" src="https://www.youtube.com/embed/J6xsvPW7em4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="width-complete"></iframe>
 		</div>
 	</div>
 </div>
 
 <div class="row">
-	<div class="col s12 m3">
-		<div class="card white card-home">
-			<div class="card-content white-text">
-				<ul class="list-ul-organize">
-					<li class="li-icon"><a href="#"> &nbsp;</a></li>
-					<li class="li-icon" title="Usuários"><a href="Usuarios.php"><i class="material-icons i-default">account_circle</i> Usuários</a></li>
-					<li class="li-icon" title="Campanhas"><a href="Campanhas.php"><i class="material-icons i-default">record_voice_over</i> Campanhas</a></li>
-					<li class="li-icon dropdown-trigger" title="Questionário" href="#dropdownQuestionario"><a href="#"><i class="material-icons i-default">assignment</i> Questionário</a></li>
-					<ul id='dropdownQuestionario' class='dropdown-content'>
-						<li><a href="Questionario.php">Questionário</a></li>
-						<li><a href="Perguntas.php">Perguntas</a></li>
-					</ul>
-					<li class="li-icon" title="Respostas"><a href="#"><i class="material-icons i-default">check_box</i> Respostas</a></li>
-					<li class="li-icon" title="Video Institucional"><a href="VideoInstitucional.php"><i class="material-icons i-default">videocam</i> Video Institucional</a></li>
-					<li class="li-icon sair" title="Sair"><a onclick="logoff();"><i class="material-icons i-default">settings</i> Sair</a></li>
-				</ul>
+	<div class="col s12 m12">
+		<div class="card-content center">
+			<div class="center col s12">
+				<button class="btn">Video Concluído</button>
 			</div>
 		</div>
-	</div>
-
-
-	<div class="col s12 m9">
-		<div class="chips"></div>
-		<!--
-		<div class="card white">
-			<div class="card-content white-text card-campanha">
-			<iframe width="500" height="538" src="https://www.youtube.com/embed/J6xsvPW7em4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-			</div>
-		</div>-->
-	</div>
-
-	<div class="col s12 m9">
-		<div class="cards-footer">
-			<iframe height="397" src="https://www.youtube.com/embed/J6xsvPW7em4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="width-complete"></iframe>
-		</div>
-	</div>
-
+	</div>	
 </div>
+
+
+
 <input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">
 
 <div id="modalProgress" class="modal modal-progress">
@@ -230,12 +213,5 @@ session_start();
 <script type="text/javascript" src="ajax/GenericFunctions.js"></script>
 <script src="materialize/js/materialize.js"></script>
 <script type="text/javascript" src="js/VideoInstitucional/Video.js?<?=date('d/m/Y-H:i:s')?>"></script>
-<script type="text/javascript" src="js/Generic.js"></script>
-<!--
-<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script type="text/javascript" src="js/geoLocation.js"></script>
-<script type="text/javascript" src="js/readQrCode.js"></script>
-<script type="text/javascript" src="js/takePicture.js"></script>
--->
 </body>
 </html>

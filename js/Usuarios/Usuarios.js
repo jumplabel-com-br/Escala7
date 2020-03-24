@@ -25,11 +25,13 @@ var dataInfos;
   	/* Act on the event */
   });
 
-  function clearForm(form){
-  	document.querySelectorAll(`${form} input`).forEach(input => input.value = '');
-  }
-
   function CRUDUsers(option){
+    
+    validarForm('#formUser');
+
+    if (v == false) {
+      return false;
+    }
 
     let Id = $('#Id').val();
   	let Nome = $('#Nome').val();
@@ -180,6 +182,8 @@ var dataInfos;
         CRUDUsers('Update');
       });
     }
+
+    $('select').formSelect();
 
     $('.btn-action-formUser').html($('#controlButton').val());
   }

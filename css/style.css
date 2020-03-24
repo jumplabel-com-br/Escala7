@@ -6,6 +6,17 @@
 	.background-home{
 		background-image: url('../images/DESK/2_wireframes_web_adm/fundo.png');	
 	}
+
+	.background-option{
+		padding: 3rem;
+		top: 0;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
 }
 
 @media (max-width: 600px){
@@ -19,6 +30,14 @@
 
 	.d-none-mobile{
 		display: none;
+	}
+
+	.background-option{
+		margin-top: 50%;
+	}
+
+	.i-default.right{
+		margin-left: 0
 	}
 
 }
@@ -70,6 +89,13 @@ input[type=text]:not(.browser-default):focus:not([readonly]) + label.c-blue,
 	color: #2A64AD !important;
 }
 
+.select-wrapper.text-white input.select-dropdown,
+.select-wrapper.text-white input.select-dropdown:focus, 
+.select-wrapper.text-white input.select-dropdown {
+	color: #fff !important;
+	border-bottom: 1px solid #fff !important;
+}
+
 .btn-blue{
 	background-color: #2A64AD;
 	color: #fff;
@@ -100,7 +126,7 @@ input[type=text]:not(.browser-default):focus:not([readonly]) + label.c-blue,
 	margin-top: 5%;
 }
 
-.list-ul-organize li:last-child{
+.list-ul-organize .sair{
 	margin-top: 60%;
 }
 
@@ -113,12 +139,23 @@ input[type=text]:not(.browser-default):focus:not([readonly]) + label.c-blue,
 	margin-top: 10%;
 }
 
+
+.mt-50-p{
+	margin-top: 50%;
+}
+
+.mb-50-p{
+	margin-bottom: 50%;
+}
+
 .card-usuario{
 	height: 215px;
 }
 
-.card-campanha{
+.card-campanha,
+.card-Questionario{
 	height: 450px;
+	overflow-y: auto;
 }
 
 .card .card-content p.card-ml-20-p{
@@ -137,6 +174,26 @@ input[type=text]:not(.browser-default):focus:not([readonly]) + label.c-blue,
 	height: auto;
 }
 
-.card-campanha{
-	overflow-y: auto;
+.btn-rounded.b-blue.bkg-white.c-blue{
+	border-radius: 50px;
+	color: #2A64AD;
+	border: 1px solid #2A64AD;
+	background-color: #fff;
+	height: auto;
+	font-size: 15px;
+	width: 240px;
+}
+
+.btn-rounded.b-blue.bkg-white.c-blue.topics-buttons{
+	width: 240px;
+}
+
+.btn-rounded.b-blue.bkg-blue.c-white{
+	border-radius: 50px;
+	color: #fff;
+	border: 1px solid #2A64AD;
+	background-color: #2A64AD;
+	height: auto;
+	width: 230px;	
+	font-size: 15px;
 }

@@ -62,7 +62,7 @@ session_start();
 		<li class="tab" id="li-img-logo-max"><a href=""><img src="https://escala7.com.br/wp-content/uploads/2020/02/cropped-Escala-7-Logotipo-11.png" alt="" class="responsive-img img-in-li"></a></li>
 		<li class="li-icon"><a href="#"> &nbsp;</a></li>
 		<li class="li-icon" title="Usuários"><a href="Usuarios.php"><i class="material-icons">account_circle</i> Usuários</a></li>
-		<li class="li-icon" title="Campanhas"><a href="#"><i class="material-icons">record_voice_over</i> Campanahs</a></li>
+		<li class="li-icon" title="Campanhas"><a href="#"><i class="material-icons">record_voice_over</i> Campanhas</a></li>
 		<li class="li-icon" title="Questionário"><a href="#"><i class="material-icons">assignment</i> Questionário</a></li>
 		<li class="li-icon" title="Respostas"><a href="#"><i class="material-icons">check_box</i> Respostas</a></li>
 		<li class="li-icon" title="Video Institucional"><a href="#"><i class="material-icons">videocam</i> Video Institucional</a></li>
@@ -181,11 +181,15 @@ session_start();
 				<ul class="list-ul-organize">
 					<li class="li-icon"><a href="#"> &nbsp;</a></li>
 					<li class="li-icon" title="Usuários"><a href="Usuarios.php"><i class="material-icons i-default">account_circle</i> Usuários</a></li>
-					<li class="li-icon" title="Campanhas"><a href="Campanhas.php"><i class="material-icons i-default">record_voice_over</i> Campanahs</a></li>
-					<li class="li-icon" title="Questionário"><a href="#"><i class="material-icons i-default">assignment</i> Questionário</a></li>
-					<li class="li-icon" title="Respostas"><a href="#"><i class="material-icons i-default">check_box</i> Respostas</a></li>
+					<li class="li-icon" title="Campanhas"><a href="Campanhas.php"><i class="material-icons i-default">record_voice_over</i> Campanhas</a></li>
+					<li class="li-icon dropdown-trigger" title="Questionário" href="#dropdownQuestionario"><a href="#"><i class="material-icons i-default">assignment</i> Questionário</a></li>
+						<ul id='dropdownQuestionario' class='dropdown-content'>
+							<li><a href="Questionario.php">Questionário</a></li>
+							<li><a href="Perguntas.php">Perguntas</a></li>
+						</ul>
+					<li class="li-icon" title="Respostas"><a href="Respostas.php"><i class="material-icons i-default">check_box</i> Respostas</a></li>
 					<li class="li-icon" title="Video Institucional"><a href="VideoInstitucional.php"><i class="material-icons i-default">videocam</i> Video Institucional</a></li>
-					<li class="li-icon" title="Sair"><a href="#"><i class="material-icons i-default">settings</i> Sair</a></li>
+					<li class="li-icon sair" title="Sair"><a onclick="logoff();"><i class="material-icons i-default">settings</i> Sair</a></li>
 				</ul>
 			</div>
 		</div>
@@ -267,27 +271,27 @@ session_start();
 		<div class="container center-align">
 			<form id="formCampanha">
 				<div class="input-field col s12 m7">
-					<input type="text" name="QRCode" id="QRCode" class="autocomplete c-blue">
+					<input type="text" name="QRCode" id="QRCode" class="autocomplete c-blue" plc="QR Code">
 					<label for="QRCode" class="c-blue">QR Code</label>
 				</div>
 
 				<div class="input-field col s12 m7">
-					<input type="text" id="Campanha" class="autocomplete c-blue">
+					<input type="text" id="Campanha" class="autocomplete c-blue" plc="Campanha">
 					<label for="Campanha" class="c-blue">Campanha</label>
 				</div>
 
 				<div class="input-field col s12 m7">
-					<input type="text" id="Dt_Inicio" class="datepicker c-blue">
+					<input type="text" id="Dt_Inicio" class="datepicker c-blue" plc="Data Inicio">
 					<label for="Dt_Inicio" class="c-blue">Data Inicio</label>
 				</div>
 
 				<div class="input-field col s12 m7">
-					<input type="text" id="Dt_Termino" class="datepicker c-blue">
+					<input type="text" id="Dt_Termino" class="datepicker c-blue" plc="Data Término">
 					<label for="Dt_Termino" class="c-blue">Data Término</label>
 				</div>
 
 				<div class="input-field col s12 m7">
-					<select id="Status" class="c-blue">
+					<select id="Status" class="c-blue" plc="Status">
 						<option value="" disabled selected>Status</option>
 						<option value="1">Ativo</option>
 						<option value="0">Desativado</option>
@@ -295,7 +299,7 @@ session_start();
 				</div>
 
 				<div class="input-field col s12 m7">
-					<input type="text" id="iFame" class="autocomplete c-blue">
+					<input type="text" id="iFame" class="autocomplete c-blue" plc="Iframe">
 					<label for="iFame" class="c-blue" class="c-blue">iFame</label>
 				</div>
 
@@ -327,6 +331,7 @@ session_start();
 <script type="text/javascript" src="ajax/GenericFunctions.js"></script>
 <script src="materialize/js/materialize.js"></script>
 <script type="text/javascript" src="js/Campanhas/Campanhas.js?<?=date('d/m/Y-H:i:s')?>"></script>
+<script type="text/javascript" src="js/Generic.js"></script>
 <!--
 <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript" src="js/geoLocation.js"></script>

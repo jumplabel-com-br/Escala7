@@ -1,5 +1,22 @@
 <?php
 session_start();
+require_once('conn.php');
+
+$user = isset($_SESSION['User']) ? $_SESSION['User'] : '';
+$objBd = new db();
+$link = $objBd->conecta_mysql();
+$sql = "select CPF from Escala7.Users where CPF = '$user'"; 
+
+//echo $sql;
+//die;
+
+
+$result = mysqli_query($link, $sql);
+$dados_usuario = mysqli_fetch_array($result);
+
+		if (!isset($dados_usuario['CPF']) || empty($dados_usuario['CPF'])) {
+			header('Location: Error.php');
+		}
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +68,7 @@ session_start();
 		<li class="tab" id="li-img-logo-max"><a href=""><img src="https://escala7.com.br/wp-content/uploads/2020/02/cropped-Escala-7-Logotipo-11.png" alt="" class="responsive-img img-in-li"></a></li>
 		<li class="li-icon"><a href="#"> &nbsp;</a></li>
 		<li class="li-icon" title="Usuários"><a href="Usuarios.php"><i class="material-icons">account_circle</i> Usuários</a></li>
-		<li class="li-icon" title="Campanhas"><a href="#"><i class="material-icons">record_voice_over</i> Campanahs</a></li>
+		<li class="li-icon" title="Campanhas"><a href="#"><i class="material-icons">record_voice_over</i> Campanhas</a></li>
 		<li class="li-icon" title="Questionário"><a href="#"><i class="material-icons">assignment</i> Questionário</a></li>
 		<li class="li-icon" title="Respostas"><a href="#"><i class="material-icons">check_box</i> Respostas</a></li>
 		<li class="li-icon" title="Video Institucional"><a href="#"><i class="material-icons">videocam</i> Video Institucional</a></li>
@@ -97,11 +114,15 @@ session_start();
 				<ul class="list-ul-organize">
 					<li class="li-icon"><a href="#"> &nbsp;</a></li>
 					<li class="li-icon" title="Usuários"><a href="Usuarios.php"><i class="material-icons i-default">account_circle</i> Usuários</a></li>
-					<li class="li-icon" title="Campanhas"><a href="Campanhas.php"><i class="material-icons i-default">record_voice_over</i> Campanahs</a></li>
-					<li class="li-icon" title="Questionário"><a href="#"><i class="material-icons i-default">assignment</i> Questionário</a></li>
+					<li class="li-icon" title="Campanhas"><a href="Campanhas.php"><i class="material-icons i-default">record_voice_over</i> Campanhas</a></li>
+					<li class="li-icon dropdown-trigger" title="Questionário" href="#dropdownQuestionario"><a href="#"><i class="material-icons i-default">assignment</i> Questionário</a></li>
+						<ul id='dropdownQuestionario' class='dropdown-content'>
+							<li><a href="Questionario.php">Questionário</a></li>
+							<li><a href="Perguntas.php">Perguntas</a></li>
+						</ul>
 					<li class="li-icon" title="Respostas"><a href="#"><i class="material-icons i-default">check_box</i> Respostas</a></li>
 					<li class="li-icon" title="Video Institucional"><a href="VideoInstitucional.php"><i class="material-icons i-default">videocam</i> Video Institucional</a></li>
-					<li class="li-icon" title="Sair"><a href="#"><i class="material-icons i-default">settings</i> Sair</a></li>
+					<li class="li-icon sair" title="Sair"><a onclick="logoff();"><i class="material-icons i-default">settings</i> Sair</a></li>
 				</ul>
 			</div>
 		</div>
@@ -139,6 +160,7 @@ session_start();
 <input type="hidden" name="" value="<?=$_SESSION['User']?>">
 <!-- Compiled and minified JavaScript -->
 <script type="text/javascript" src="ajax/AjaxGenericDB.js"></script>
+<script type="text/javascript" src="ajax/GenericFunctions.js"></script>
 <script type="text/javascript">
 		//selectDb(`select CPF, Senha from Escala7.Users`, 'json') 
 		

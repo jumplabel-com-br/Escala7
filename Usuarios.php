@@ -61,7 +61,7 @@ session_start();
 		<li class="tab" id="li-img-logo-max"><a href=""><img src="https://escala7.com.br/wp-content/uploads/2020/02/cropped-Escala-7-Logotipo-11.png" alt="" class="responsive-img img-in-li"></a></li>
 		<li class="li-icon"><a href="#"> &nbsp;</a></li>
 		<li class="li-icon" title="Usuários"><a href="#"><i class="material-icons">account_circle</i> Usuários</a></li>
-		<li class="li-icon" title="Campanhas"><a href="Campanhas.php"><i class="material-icons">record_voice_over</i> Campanahs</a></li>
+		<li class="li-icon" title="Campanhas"><a href="Campanhas.php"><i class="material-icons">record_voice_over</i> Campanhas</a></li>
 		<li class="li-icon" title="Questionário"><a href="#"><i class="material-icons">assignment</i> Questionário</a></li>
 		<li class="li-icon" title="Respostas"><a href="#"><i class="material-icons">check_box</i> Respostas</a></li>
 		<li class="li-icon" title="Video Institucional"><a href="#"><i class="material-icons">videocam</i> Video Institucional</a></li>
@@ -221,11 +221,15 @@ session_start();
 				<ul class="list-ul-organize">
 					<li class="li-icon"><a href="#"> &nbsp;</a></li>
 					<li class="li-icon" title="Usuários"><a href="Usuarios.php"><i class="material-icons i-default">account_circle</i> Usuários</a></li>
-					<li class="li-icon" title="Campanhas"><a href="Campanhas.php"><i class="material-icons i-default">record_voice_over</i> Campanahs</a></li>
-					<li class="li-icon" title="Questionário"><a href="#"><i class="material-icons i-default">assignment</i> Questionário</a></li>
+					<li class="li-icon" title="Campanhas"><a href="Campanhas.php"><i class="material-icons i-default">record_voice_over</i> Campanhas</a></li>
+					<li class="li-icon dropdown-trigger" title="Questionário" href="#dropdownQuestionario"><a href="#"><i class="material-icons i-default">assignment</i> Questionário</a></li>
+					<ul id='dropdownQuestionario' class='dropdown-content'>
+						<li><a href="Questionario.php">Questionário</a></li>
+						<li><a href="Perguntas.php">Perguntas</a></li>
+					</ul>
 					<li class="li-icon" title="Respostas"><a href="#"><i class="material-icons i-default">check_box</i> Respostas</a></li>
 					<li class="li-icon" title="Video Institucional"><a href="VideoInstitucional.php"><i class="material-icons i-default">videocam</i> Video Institucional</a></li>
-					<li class="li-icon" title="Sair"><a href="#"><i class="material-icons i-default">settings</i> Sair</a></li>
+					<li class="li-icon sair" title="Sair"><a onclick="logoff();"><i class="material-icons i-default">settings</i> Sair</a></li>
 				</ul>
 			</div>
 		</div>
@@ -265,31 +269,30 @@ session_start();
 		<div class="container center-align">
 			<form id="formUser">
 				<div class="input-field col s12 m7">
-					<input type="text" name="Nome" id="Nome" class="autocomplete c-blue">
+					<input type="text" name="Nome" id="Nome" class="autocomplete c-blue" plc="Nome">
 					<label for="Nome" class="c-blue">Nome</label>
 				</div>
 
 				<div class="input-field col s12 m7">
 
-					<input type="text" id="CPF" class="autocomplete c-blue">
+					<input type="text" id="CPF" class="autocomplete c-blue" plc="CPF">
 					<label for="CPF" class="c-blue">CPF</label>
 				</div>
 
 				<div class="input-field col s12 m7">
 
-					<input type="text" id="Email" class="autocomplete c-blue">
+					<input type="text" id="Email" class="autocomplete c-blue" plc="Email">
 					<label for="Email" class="c-blue">Email</label>
 				</div>
 
 				<div class="input-field col s12 m7">
 
-					<input type="password" id="Senha" class="autocomplete c-blue">
+					<input type="password" id="Senha" class="autocomplete c-blue" plc="Senha">
 					<label for="Senha" class="c-blue">Senha</label>
 				</div>
 
 				<div class="input-field col s12 m7">
-
-					<select id="Status" class="c-blue">
+					<select id="Status" class="c-blue" plc="Status">
 						<option value="" disabled selected>Status</option>
 						<option value="1">Ativo</option>
 						<option value="0">Desativado</option>
@@ -298,7 +301,7 @@ session_start();
 
 				<div class="input-field col s12 m7">
 
-					<select id="UserType" class="c-blue">
+					<select id="UserType" class="c-blue" plc="Tipo de Usuario">
 						<option value="" disabled selected>Tipo de usuário</option>
 						<option value="1">Administrador</option>
 						<option value="2">Cliente</option>
@@ -331,8 +334,10 @@ session_start();
 <input type="hidden" name="UserInactivity" id="UserInactivity" value="<?=$_SESSION['User']?>">
 <!-- Compiled and minified JavaScript -->
 <script type="text/javascript" src="ajax/AjaxGenericDB.js"></script>
+<script type="text/javascript" src="ajax/GenericFunctions.js"></script>
 <script src="materialize/js/materialize.js"></script>
 <script type="text/javascript" src="js/Usuarios/Usuarios.js"></script>
+<script type="text/javascript" src="js/Generic.js"></script>
 <!--
 <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript" src="js/geoLocation.js"></script>
