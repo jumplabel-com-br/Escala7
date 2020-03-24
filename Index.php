@@ -1,8 +1,8 @@
 <?php
 
-$getType = (isset($_GET["type"])) && !(empty($_GET["type"])) ? $_GET["type"] : header('Location: Error.php?Message=p-n-e');
-$IdCampanha = (isset($_GET["IC"]))  && $_GET["type"] == 'user' ? $_GET["IC"] : header('Location: Error.php?Message=p-n-e');
-	//echo 'teste: '.$getType;
+$getType = (isset($_GET["type"])) && $_GET["type"] == 'adm' || $_GET["type"] == 'cl' ? $_GET["type"] : header('Location: Error.php?Message=p-n-e');
+$IdCampanha = (isset($_GET["IC"])) && $_GET["type"] == 'user' ? $_GET["IC"] : '';
+//	echo 'teste: '.$getType;
 
 ?>
 
