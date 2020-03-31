@@ -1,5 +1,13 @@
 var v;
 
+$(document).ready(function($) {
+    $('.sidenav').sidenav();
+    $('.dropdown-trigger').dropdown();
+    $('.modal').modal();
+    $('select').formSelect();
+    $('.tooltipped').tooltip();
+});
+
 function validarEmail(email){
 	return /^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/.test(email);
 }

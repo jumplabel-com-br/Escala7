@@ -1,7 +1,6 @@
 <?php
-session_start();
+	session_start();
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -211,30 +210,7 @@ session_start();
 					</thead>
 
 					<tbody class="color-default tbody-campanhas">
-						<tr>
-							<td>#25698823</td>
-							<td>Campanha A</td>
-							<td>02/02/2019</td>
-							<td>20/02/2020</td>
-							<td>Inativo</td>
-							<td><a href="#modalCampanha" class="modal-trigger" onclick="optionCRUDCampanhas('Editar')"><i class="fas fa-edit"></i></a></td>
-						</tr>
-						<tr>
-							<td>#56987326</td>
-							<td>Campanha B</td>
-							<td>06/12/2019</td>
-							<td>23/12/2019</td>
-							<td>Inativo</td>
-							<td><a href="#modalCampanha" class="modal-trigger" onclick="optionCRUDCampanhas('Editar')"><i class="fas fa-edit"></i></a></td>
-						</tr>
-						<tr>
-							<td>#56987355</td>
-							<td>Campanha C</td>
-							<td>02/12/2019</td>
-							<td>10/01/2020</td>
-							<td>Ativo</td>
-							<td><a href="#modalCampanha" class="modal-trigger" onclick="optionCRUDCampanhas('Editar')"><i class="fas fa-edit"></i></a></td>
-						</tr>
+						
 					</tbody>
 				</table>
 			</div>
@@ -247,7 +223,7 @@ session_start();
 				<button class="btn btn-default" type="submit">Relatório</button>
 			</div>
 			<div class="col s6 m9 right-align">
-				<button class="btn btn-default" type="button" onclick="$('#modalCampanha').modal('open');optionCRUDCampanhas('Salvar')"><span class="d-none-mobile">+</span> Cadastrar</button>
+				<button class="btn btn-default" type="button" onclick="$('#modalCampanha').modal('open');clearForm('#formCampanha');$('select').formSelect();"><span class="d-none-mobile">+</span> Cadastrar</button>
 			</div>
 		</div>
 	</div>
@@ -299,8 +275,8 @@ session_start();
 				</div>
 
 				<div class="input-field col s12 m7">
-					<input type="text" id="iFame" class="autocomplete c-blue" plc="Iframe">
-					<label for="iFame" class="c-blue" class="c-blue">iFame</label>
+					<input type="text" id="IFrame" class="autocomplete c-blue" plc="IFrame">
+					<label for="IFrame" class="c-blue" class="c-blue">IFrame</label>
 				</div>
 
 				<input type="hidden" name="controlButton" id="controlButton" value="Salvar">
@@ -309,7 +285,7 @@ session_start();
 
 			<div class="modal-footer">
 				<div class="col s12 m12">
-					<button type="button" class="btn btn-blue btn-action-formCampanha">Salvar</button>
+					<button type="button" class="btn btn-blue btn-action-formCampanha" onclick="$(this).html() == 'Salvar' ? CRUDCampanhas('Insert') : CRUDCampanhas('Update')">Salvar</button>
 				</div>
 			</div>
 		</div>

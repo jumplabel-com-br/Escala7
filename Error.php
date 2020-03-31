@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 $User = isset($_SESSION['User']);
 
 ?>

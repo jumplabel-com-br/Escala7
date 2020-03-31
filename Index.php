@@ -1,7 +1,32 @@
 <?php
+session_start();
+require_once('DBInserts.php');
 
-$getType = (isset($_GET["type"])) && $_GET["type"] == 'adm' || $_GET["type"] == 'cl' ? $_GET["type"] : header('Location: Error.php?Message=p-n-e');
-$IdCampanha = (isset($_GET["IC"])) && $_GET["type"] == 'user' ? $_GET["IC"] : '';
+$getType = (isset($_GET["type"])) ? $_GET["type"] : '';
+$IdCampanha = (isset($_GET["IC"])) ? $_GET["IC"] : '';
+$QrCodeCampanha = (isset($_GET["QCC"])) ? $_GET["QCC"] : '';
+$countCampanha = 2; 
+
+if ($getType != 'adm' && $getType != '') {
+	$countCampanha = Select('Escala7', 'Campanha', 'Campanhas', "Id = $IdCampanha and QRCode = '#$QrCodeCampanha'", $link);
+}
+
+
+//echo "Id = $IdCampanha and QRCode = '#$QrCodeCampanha'"."teste: ".empty(Select('Escala7', 'Campanha', 'Campanhas', "Id = $IdCampanha and QRCode = '#$QrCodeCampanha'", $link));
+//die;
+
+//echo 'strlen: '.strlen($countCampanha);
+//die;	
+
+if (empty($getType)) {
+	header('Location: Error.php?M=Type-not-found');
+}else if ($getType == 'cli' && (empty($IdCampanha) || empty($QrCodeCampanha))) {
+	header('Location: Error.php?M=Params-not-found');
+}else if ($getType == 'usr' && (empty($IdCampanha) || empty($QrCodeCampanha))) {
+	header('Location: Error.php?M=Params-not-found');
+}else if (strlen($countCampanha) == 2 && $getType != 'adm' && $getType != '') {
+	header('Location: Error.php?M=Params-not-found');
+}
 //	echo 'teste: '.$getType;
 
 ?>
@@ -43,68 +68,65 @@ $IdCampanha = (isset($_GET["IC"])) && $_GET["type"] == 'user' ? $_GET["IC"] : ''
 			</div>
 
 			<?php
-			if ($getType === 'adm') {				
+			if ($getType === 'adm' || $getType === 'cli') {				
 				echo '
-				<div class="row center-align">
-				<div class="col s12">
-				<div class="row">
-				<div class="input-field col s12">
-				<i class="material-icons prefix">assignment_ind</i>
-				<input type="text" id="autocomplete-input-cpf" class="autocomplete cpf color-white bb-white-input">
-				<label for="autocomplete-input-cpf">CPF</label>
-				</div>
-				</div>
-				</div>
-				</div>
+					<div class="row center-align">
+						<div class="col s12">
+							<div class="row">
+								<div class="input-field col s12">
+									<i class="material-icons prefix">assignment_ind</i>
+									<input type="text" id="autocomplete-input-usuario" class="autocomplete usuario color-white bb-white-input">
+									<label for="autocomplete-input-usuario">Usuário</label>
+								</div>
+							</div>
+						</div>
+					</div>
 
 
-				<div class="row">
-				<div class="col s12">
-				<div class="row">
-				<div class="input-field col s12">
-				<i class="material-icons prefix remove_red_eye">remove_red_eye</i>
-				<input type="password" id="autocomplete-input-password" class="autocomplete autocomplete-input-password color-white">
-				<label for="password" class="autocomplete-input-password">Senha</label>
+					<div class="row">
+						<div class="col s12">
+							<div class="row">
+								<div class="input-field col s12">
+									<i class="material-icons prefix remove_red_eye">remove_red_eye</i>
+									<input type="password" id="autocomplete-input-password" class="autocomplete autocomplete-input-password color-white">
+									<label for="password" class="autocomplete-input-password">Senha</label>
 
-				<input type="text" id="autocomplete-input-text-password" class="autocomplete autocomplete-input-text-password color-white" style="display: 		none">
-				<label for="autocomplete-input" class="autocomplete-input-text-password" style="display: none">Senha</label>
-				</div>
-				</div>
-				</div>
-				<div class="col s12 center-align">
-				<span class="helper-text color-white" data-error="wrong" data-success="left" onclick="newPassoword();">Esqueci minha senha?</span>
-				</div>
-				</div>
+									<input type="text" id="autocomplete-input-text-password" class="autocomplete autocomplete-input-text-password color-white" style="display: 		none">
+									<label for="autocomplete-input" class="autocomplete-input-text-password" style="display: none">Senha</label>
+								</div>
+							</div>
+						</div>
+						<div class="col s12 center-align">
+							<span class="helper-text color-white" data-error="wrong" data-success="left" onclick="newPassoword();">Esqueci minha senha?</span>
+						</div>
+					</div>
 				';
-			}else if($getType == 'user'){
+			}else if($getType == 'usr'){
 				echo '
-				<div class="row center-align">
-				<div class="col s12">
-				<div class="row">
-				<div class="input-field col s12">
-				<i class="material-icons prefix">assignment_ind</i>
-				<input type="text" id="autocomplete-input-cpf" class="autocomplete cpf color-white bb-white-input">
-				<label for="autocomplete-input-cpf">CPF</label>
-				</div>
-				</div>
-				</div>
-				</div>
+					<div class="row center-align">
+						<div class="col s12">
+							<div class="row">
+								<div class="input-field col s12">
+									<i class="material-icons prefix">assignment_ind</i>
+									<input type="text" id="autocomplete-input-cpf" class="autocomplete cpf color-white bb-white-input">
+									<label for="autocomplete-input-cpf">CPF</label>
+								</div>
+							</div>
+						</div>
+					</div>
 
 
-				<div class="row">
-				<div class="col s12">
-				<div class="row">
-				<div class="input-field col s12">
-				<i class="material-icons prefix assignment_ind">assignment_ind</i>
-				<select id="Campanha" disabled>
-				</select>
-				</div>
-				</div>
-				</div>
-				<div class="col s12 center-align">
-				<span class="helper-text color-white" data-error="wrong" data-success="left" onclick="newPassoword();">Esqueci minha senha?</span>
-				</div>
-				</div>
+					<div class="row">
+						<div class="col s12">
+							<div class="row">
+								<div class="input-field col s12">
+									<i class="material-icons prefix assignment_ind">assignment_ind</i>
+									<select id="Campanha" disabled>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
 				';
 			};
 			?>
@@ -152,12 +174,19 @@ $IdCampanha = (isset($_GET["IC"])) && $_GET["type"] == 'user' ? $_GET["IC"] : ''
 		$(document).ready(function($) {
 			$('select').formSelect({classes : 'text-white'});
 			$('.modal').modal();
-			getType == 'user' ?  selectedCampanha() : '';
+			getType == 'usr' ?  selectedCampanha() : '';
 		});
 
 
 		function verificaUsuario(){
-			ValidatorCPF($('.cpf').val()) == true && $('#autocomplete-input-text-password').val() != '' ? validUser() : M.toast({html: 'Informe um CPF e Senha válida', displayLength: 4000});
+			
+				if (getType == 'adm' || getType == 'cl' && $('#autocomplete-input-text-password').val() != '') {
+					validUser();
+				}else if(getType == 'usr' && $('#Campanha').val() != '' && ValidatorCPF($('#autocomplete-input-cpf').val())){
+					validUser();
+				}else{
+					M.toast({html: 'Informe um Usuario e Senha/Campanha válida', displayLength: 4000});
+				}
 		}
 
 		function selectedCampanha(option = 'Select'){
@@ -230,7 +259,14 @@ $IdCampanha = (isset($_GET["IC"])) && $_GET["type"] == 'user' ? $_GET["IC"] : ''
 		}
 
 		function validUser(){
-			let sql = `select CPF, Senha from Escala7.Users where CPF = '${$('#autocomplete-input-cpf').val().replace(/[.|-]/g,'')}'`
+
+			if (getType == 'usr') {
+				redirectToAction(`HomeMobile.php?getType=${getType}&IC=${Campanha}`);
+				return false;
+			}
+
+
+			let sql = `select CPF, Senha from Escala7.Users where Email = '${$('#autocomplete-input-usuario').val()}'`
 			let option = 'validLogin';
 
 			getType == 'adm' ? sql += ` and Senha = '${$('#autocomplete-input-password').val()}'` : '';
@@ -249,12 +285,9 @@ $IdCampanha = (isset($_GET["IC"])) && $_GET["type"] == 'user' ? $_GET["IC"] : ''
 						
 						redirectToAction(`Home.php?getType=${getType}`);
 
-					}else if (getType == 'user') {
-						
-						redirectToAction(`HomeMobile.php?getType=${getType}&IC=${Campanha}`);
 					}
 				}else{
-					M.toast({html: 'Informe um CPF e Senha válida', displayLength: 4000});
+					M.toast({html: 'Informe um Usuario e Senha válida', displayLength: 4000});
 				}
 			})
 			.fail(function() {

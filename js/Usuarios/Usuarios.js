@@ -26,22 +26,26 @@ var dataInfos;
   });
 
   function CRUDUsers(option){
-    
+    let Id = $('#Id').val();
+    let Nome = $('#Nome').val();
+    let Email = $('#Email').val();
+    let CPF = $('#CPF').val();
+    let Senha = $('#Senha').val();
+    let Status = $('#Status').val();
+    let UserType = $('#UserType').val();
+    let UserRegistration = $('#UserRegistration').val();
+    let UserInactivity = $('#UserInactivity').val();
+
+    select('CPF', '', 'Select', `email = '${Email}' or CPF = '${CPF}'`, true);
+
     validarForm('#formUser');
 
     if (v == false) {
+      $('#modalProgress').modal('close');
       return false;
+      console.log('v: ',v)
     }
 
-    let Id = $('#Id').val();
-  	let Nome = $('#Nome').val();
-  	let Email = $('#Email').val();
-  	let CPF = $('#CPF').val();
-  	let Senha = $('#Senha').val();
-  	let Status = $('#Status').val();
-  	let UserType = $('#UserType').val();
-  	let UserRegistration = $('#UserRegistration').val();
-  	let UserInactivity = $('#UserInactivity').val();
 
   	let param = {
   		Nome,
@@ -95,7 +99,7 @@ var dataInfos;
   	
   }
 
-  function select(columns, nameFunction, option = 'Select', where = ''){
+  function select(columns, nameFunction, option = 'Select', where = '', search = false){
 
   	let Schema = 'Escala7';
   	let tableName = 'Users';
@@ -128,7 +132,15 @@ var dataInfos;
 
   		}else if(nameFunction == 'inputsCardsValues'){
   			inputsCardsValues(data)
-  		}
+  		}else{
+        return dataInfos;
+      }
+
+      if (dataInfos.length > 0 && $('.btn-action-formUser').html() == 'Salvar' && search == true) {
+        M.toast({html: 'Email ou CPF já cadastrados', displayLength: 4000});
+        $('#modalProgress').modal('close');
+        return false;
+      }
 
       $('#modalProgress').modal('close');
       $('.tooltipped').tooltip();
@@ -136,7 +148,7 @@ var dataInfos;
   	})
   	.fail(function() {
   		console.log("error");
-      M.toast({html: 'Erro ao processar dados, informe o suporte', displayLength: 4000})
+      M.toast({html: 'Erro ao processar dados, informe o suporte ou tente novamente mais tarde', displayLength: 4000})
       $('#modalProgress').modal('close');
   	})
   	
@@ -168,19 +180,10 @@ var dataInfos;
       clearForm('#formUser');
 
       $('#controlButton').val('Salvar')  
-      $('.btn-action-formUser').on('click', function(event) {
-        CRUDUsers('Insert');
-        
-      });
-
     }else if(tipo == 'Editar'){
       select('*', 'inputsCardsValues', 'Select', `id = ${id}`);
       $('#formUser #Id').val(id);
       $('#controlButton').val('Editar');
-
-      $('.btn-action-formUser').on('click', function(event) {
-        CRUDUsers('Update');
-      });
     }
 
     $('select').formSelect();
@@ -212,22 +215,6 @@ var dataInfos;
 
   	 $('#Status').formSelect();
   	 $('#UserType').formSelect();
-  }
-
-  function optionCRUDUsers(buttonHtml){
-    if (buttonHtml == 'Salvar') {
-      
-      $('.btn-action-formUser').on('click', function(event) {
-        CRUDUsers('Insert');
-        //event.preventDefault();
-      });
-
-    }else if (buttonHtml == 'Editar') {
-      $('.btn-action-formUser').on('click', function(event) {
-        CRUDUsers('Update');
-       // event.preventDefault();
-      });
-    }
   }
 
   jQuery(document).ready(function($) {

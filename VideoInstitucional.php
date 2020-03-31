@@ -208,7 +208,7 @@ session_start();
 
 	<div class="col s12 m9">
 		<div class="cards-footer">
-			<iframe height="397" src="https://www.youtube.com/embed/J6xsvPW7em4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="width-complete"></iframe>
+			<iframe height="397" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="width-complete"></iframe>
 		</div>
 	</div>
 

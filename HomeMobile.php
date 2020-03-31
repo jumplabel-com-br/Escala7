@@ -61,7 +61,7 @@ $User = isset($_SESSION['User']);
 
 			<div class="row">
 				<div class="col s12">
-					<h5 class="color-default left">Campanha B</h5>
+					<h5 class="color-default left">Campanha A</h5>
 				</div>
 			</div>
 
@@ -82,7 +82,7 @@ $User = isset($_SESSION['User']);
 				</div>
 
 				<div class="col s6">
-					<h5 class="color-default right">10/03/2019</h5>
+					<h5 class="color-default right">02/02/2019</h5>
 				</div>
 			</div>
 			<hr>

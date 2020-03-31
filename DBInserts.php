@@ -42,7 +42,7 @@ function Select($Schema, $columns, $tableName, $where, $link){
 	$data = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
 	// Escreve o resultado JSON:
-	echo json_encode($data);
+	return json_encode($data);
 }
 
 function SelectAdvanced($sql, $link){
@@ -63,26 +63,26 @@ function SelectAdvanced($sql, $link){
 
 switch ($option) {
 	case 'Insert':
-	$sqlQuery = Insert($Schema, $tableName, $columns, $lastquery);
-	mysqli_query($link, $sqlQuery);
+		$sqlQuery = Insert($Schema, $tableName, $columns, $lastquery);
+		mysqli_query($link, $sqlQuery);
 	break;
 
 	case 'Update':
-	$sqlQuery = Update($Schema, $tableName, $setQuery, $where);
-	mysqli_query($link, $sqlQuery);
+		$sqlQuery = Update($Schema, $tableName, $setQuery, $where);
+		mysqli_query($link, $sqlQuery);
 	break;
 
 	case 'Delete':
-	$sqlQuery = Delete($Schema, $tableName, $where);
-	mysqli_query($link, $sqlQuery);
+		$sqlQuery = Delete($Schema, $tableName, $where);
+		mysqli_query($link, $sqlQuery);
 	break;
 
 	case 'Select':
-	Select($Schema, $columns, $tableName, $where, $link);
+		echo Select($Schema, $columns, $tableName, $where, $link);
 	break;
 
 	case 'SelectAdvanced':
-	Select($sql, $link);
+		echo Select($sql, $link);
 	break;
 }
 ?>

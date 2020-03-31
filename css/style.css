@@ -185,7 +185,7 @@ input[type=text]:not(.browser-default):focus:not([readonly]) + label.c-blue,
 }
 
 .btn-rounded.b-blue.bkg-white.c-blue.topics-buttons{
-	width: 240px;
+	width: 241px;
 }
 
 .btn-rounded.b-blue.bkg-blue.c-white{

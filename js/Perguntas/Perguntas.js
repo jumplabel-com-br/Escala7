@@ -1,14 +1,7 @@
 var dataInfos;
 
 $(document).ready(function(){
-  $('.sidenav').sidenav();
-  $('.dropdown-trigger').dropdown();
-  $('.modal').modal();
-  $('select').formSelect();
-  $('.datepicker').datepicker();
-  $('.tooltipped').tooltip();
-
-  select('templateTableCampanhas');
+  select('templateTablePerguntas');
 });
 
 
@@ -33,28 +26,73 @@ function clearForm(form){
   document.querySelectorAll(`${form} input`).forEach(input => input.value = '');
 }
 
-function CRUDCampanhas(option){
+function selectedQuestionario(option = 'Select'){
 
+  let Schema = 'Escala7';
+  let tableName = 'Questionarios';
+  let columns = 'Id, Name';
 
-  validarForm('#formCampanha');
+  let params = {
+    option,
+    Schema,
+    tableName,
+    columns
 
-    if (v == false) {
-      return false;
+  }
+
+  $.ajax({
+    url: 'DBInserts.php',
+    type: 'POST',
+    dataType: 'json',
+    data: params,
+    beforeSend: function(){
+      $('#modalProgress').modal('open');
+    }
+  })
+  .done(function(data) {
+    console.log("success: ", data);
+
+    if (data.length > 0 ) {
+      $('#Questionarios').html(templateQuestionario(data));
+      $('select').formSelect();
     }
 
+    $('#modalProgress').modal('close');
+  })
+  .fail(function() {
+    console.log("error");
+  });
+
+}
+
+function templateQuestionario(model){
+  return `
+  <option value="">Questionarios</option>
+  ${model.map(x =>{
+    return `<option value="${x.Id}">${x.Name}</option>`;
+    }).join('')}`
+}
+function CRUDPerguntas(option){
+
+
+  validarForm('#formPergunta');
+
+  if (v == false) {
+    return false;
+  }
+
   let Id = $('#Id').val();
-  let QRCode = $('#QRCode').val();
-  let Campanha = $('#Campanha').val();
-  let Dt_Inicio = dateFormart($('#Dt_Inicio').val());
-  let Dt_Termino = dateFormart($('#Dt_Termino').val());
+  let Questionario = dateFormart($('#Questionario').val());
+  let Pergunta = dateFormart($('#Pergunta').val());
+  let Tipo = $('#Tipo').val();
   let Status = $('#Status').val();
-  let IFrame = $('#IFrame').val();
+  let Resposta = $('#Resposta').val();
   let UserRegistration = $('#UserRegistration').val();
   let UserInactivity = $('#UserInactivity').val();
 
   let param = {
     QRCode,
-    Campanha,
+    Pergunta,
     Dt_Inicio,
     Dt_Termino,
     Status,
@@ -65,11 +103,11 @@ function CRUDCampanhas(option){
 
 
   let Schema = 'Escala7';
-  let tableName = 'Campanhas';
-  let columns = 'QRCode,Campanha,Dt_Inicio,Dt_Termino,Status,IFrame,UserRegistration,DateRegistration,UserInactivity,DateInactivity'
-  let lastquery = `'${param.QRCode}','${param.Campanha}','${param.Dt_Inicio}','${param.Dt_Termino}',${param.Status},'${param.IFrame}','${param.UserRegistration}',now(),'${param.UserInactivity}',now()`;
+  let tableName = 'Perguntas';
+  let columns = 'QRCode,Pergunta,Dt_Inicio,Dt_Termino,Status,IFrame,UserRegistration,DateRegistration,UserInactivity,DateInactivity'
+  let lastquery = `'${param.QRCode}','${param.Pergunta}','${param.Dt_Inicio}','${param.Dt_Termino}',${param.Status},'${param.IFrame}','${param.UserRegistration}',now(),'${param.UserInactivity}',now()`;
 
-  let setQuery = `QRCode = '${param.QRCode}',Campanha = '${param.Campanha}',Dt_Inicio = '${param.Dt_Inicio}', Dt_Termino = '${param.Dt_Termino}', Status = ${param.Status},
+  let setQuery = `QRCode = '${param.QRCode}',Pergunta = '${param.Pergunta}',Dt_Inicio = '${param.Dt_Inicio}', Dt_Termino = '${param.Dt_Termino}', Status = ${param.Status},
   IFrame = '${param.IFrame}',UserRegistration = '${param.UserRegistration}'`
   let where = `id = ${Id}`
 
@@ -95,8 +133,8 @@ function CRUDCampanhas(option){
   })
   .done(function(data) {
     console.log("success: ", data);
-    select('templateTableCampanhas');
-    $('.btn-action-formCampanha').html() == 'Salvar' ? clearForm('#formCampanha') : '';
+    select('templateTablePerguntas');
+    $('.btn-action-formPergunta').html() == 'Salvar' ? clearForm('#formPergunta') : '';
     $('#modalUser').modal('close');
   })
   .fail(function() {
@@ -109,7 +147,7 @@ function select(nameFunction, id){
 
  let option = 'Select';
  let Schema = 'Escala7';
- let tableName = 'Campanhas';
+ let tableName = 'Perguntas';
 
  let columns = '*';
  let where = id > 0 ? `id = ${id}` : '';
@@ -135,12 +173,12 @@ $.ajax({
   console.log("success select: ", data);
   dataInfos = data;
 
-  if (data.length > 0 && nameFunction == 'templateTableCampanhas') {
+  if (data.length > 0 && nameFunction == 'templateTablePerguntas') {
 
-    $('.tbody-campanhas').html(templateTableCampanhas(data));
+    $('.tbody-questionarios').html(templateTablePerguntas(data));
     $('.dropdown-trigger').dropdown();
-    $('#modalCampanha').modal('close');
-    clearForm('#formCampanha');
+    $('#modalPergunta').modal('close');
+    clearForm('#formPergunta');
 
   }else if (data.length > 0 && id > 0) {
     setInputsModal(data);
@@ -157,24 +195,24 @@ $.ajax({
 
 }
 
-function templateTableCampanhas(model){
+function templateTablePerguntas(model){
   return model.map(x => {
     return`
-      <tr>
-        <td>${x.QRCode}</td>
-        <td>${x.Campanha}</td>
-        <td>${DateFormatPtBr(x.Dt_Inicio)}</td>
-        <td>${DateFormatPtBr(x.Dt_Termino)}</td>
-        <td>${x.Status == 1 ? 'Ativo' : 'Inativo'}</td>
-        <td><a href="#modalCampanha" class="modal-trigger" onclick="$('.btn-action-formCampanha').html('Editar'); select('', ${x.Id})"><i class="fas fa-edit"></i></a></td>
-      </tr>
+    <tr>
+    <td>${x.QRCode}</td>
+    <td>${x.Pergunta}</td>
+    <td>${DateFormatPtBr(x.Dt_Inicio)}</td>
+    <td>${DateFormatPtBr(x.Dt_Termino)}</td>
+    <td>${x.Status == 1 ? 'Ativo' : 'Inativo'}</td>
+    <td><a href="#modalPergunta" class="modal-trigger" onclick="$('.btn-action-formPergunta').html('Editar'); select('', ${x.Id});selectedquestionario();"><i class="fas fa-edit"></i></a></td>
+    </tr>
     `});
 }
 
 function setInputsModal(model){
 
   $('label[for="QRCode"]').addClass('active');
-  $('label[for="Campanha"]').addClass('active');
+  $('label[for="Pergunta"]').addClass('active');
   $('label[for="Dt_Inicio"]').addClass('active');
   $('label[for="Dt_Termino"]').addClass('active');
   $('label[for="Status"]').addClass('active');
@@ -183,13 +221,13 @@ function setInputsModal(model){
 
   $('#Id').val(model[0].Id);
   $('#QRCode').val(model[0].QRCode);
-  $('#Campanha').val(model[0].Campanha);
+  $('#Pergunta').val(model[0].Pergunta);
   $('#Dt_Inicio').val(DateFormtDatePicker(model[0].Dt_Inicio));
   $('#Dt_Termino').val(DateFormtDatePicker(model[0].Dt_Termino));
   $('#Status').val(model[0].Status);
   $('#IFrame').val(model[0].IFrame);
 
-   $('select').formSelect();
+  $('select').formSelect();
 }
 
 function dateFormart(inputDate){

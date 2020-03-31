@@ -314,7 +314,7 @@ session_start();
 
 			<div class="modal-footer">
 				<div class="col s12 m12">
-					<button type="button" class="btn btn-blue btn-action-formUser">Salvar</button>
+					<button type="button" class="btn btn-blue btn-action-formUser" onclick="$(this).html() == 'Salvar' ? CRUDUsers('Insert') : CRUDUsers('Update');">Salvar</button>
 				</div>
 			</div>
 		</div>
