@@ -11,6 +11,7 @@ $columns = (isset($_POST['columns'])) ? $_POST['columns'] : '';
 $lastquery = (isset($_POST['lastquery'])) ? $_POST['lastquery'] : '';
 $setQuery = (isset($_POST['setQuery'])) ? $_POST['setQuery'] : '';
 $where = (isset($_POST['where'])) ? $_POST['where'] : '';
+$complement = (isset($_POST['complement'])) ? $_POST['complement'] : '';
 $option = (isset($_POST['option'])) ? $_POST['option'] : '';
 
 
@@ -28,11 +29,15 @@ function Delete($Schema, $tableName, $where){
 	return "delete from $Schema.$tableName where $where";
 }
 
-function Select($Schema, $columns, $tableName, $where, $link){
+function Select($Schema, $columns, $tableName, $where, $complement, $link){
 	$querySql = "select $columns from $Schema.$tableName";
 
 	if (strlen(trim($where)) > 0) {
 		$querySql.=" where $where";
+	}
+
+	if (strlen(trim($complement)) > 0) {
+		$querySql.=" $complement";
 	}
 
 	//echo $querySql;
@@ -46,16 +51,16 @@ function Select($Schema, $columns, $tableName, $where, $link){
 }
 
 function SelectAdvanced($sql, $link){
-	echo strtolower(split(" ",$sql)[0]);
-	die;
+	$indiceSql = strtolower($sql);
+	$querySql = $sql;
 	
-	if (strtolower(split(" ",$sql)[0]) != "select") {
+	$query = mysqli_query($link, $querySql);
+	$data = mysqli_fetch_all($query, MYSQLI_ASSOC);
+
+	if (explode(' ', $indiceSql)[0] != "select") {
 		return 'False';
 		die;	
 	}
-
-	$query = mysqli_query($link, $querySql);
-	$data = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
 	// Escreve o resultado JSON:
 	echo json_encode($data);	
@@ -78,11 +83,11 @@ switch ($option) {
 	break;
 
 	case 'Select':
-		echo Select($Schema, $columns, $tableName, $where, $link);
+		echo Select($Schema, $columns, $tableName, $where, $complement, $link);
 	break;
 
 	case 'SelectAdvanced':
-		echo Select($sql, $link);
+		SelectAdvanced($sql, $link);
 	break;
 }
 ?>

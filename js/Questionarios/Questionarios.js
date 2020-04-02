@@ -168,7 +168,7 @@ function setInputsModal(model){
   $('#Name').val(model[0].Name);
   $('#Status').val(model[0].Status);
 
-   $('#Status').formSelect();
+   $('select').formSelect();
 }
 
 function optionCRUDQuestionarios(buttonHtml){

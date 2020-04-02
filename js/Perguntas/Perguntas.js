@@ -1,7 +1,7 @@
 var dataInfos;
 
 $(document).ready(function(){
-  select('templateTablePerguntas');
+ Perguntas();
 });
 
 
@@ -24,6 +24,20 @@ $('#li-img-logo-max').on('click', function(event) {
 
 function clearForm(form){
   document.querySelectorAll(`${form} input`).forEach(input => input.value = '');
+}
+
+function Perguntas(){
+  let sql = `SELECT perguntas.*, questionarios.Name FROM Escala7.Perguntas as perguntas
+    join Escala7.Questionarios as questionarios on perguntas.IdQuestionario = questionarios.Id;`
+  
+  SelectAdvanced(sql);
+
+  let data = dataSelectAdvanced;
+
+  $('.tbody-Perguntas').html(templateTablePerguntas(data));
+  $('.dropdown-trigger').dropdown();
+  $('#modalPergunta').modal('close');
+  clearForm('#formPergunta');
 }
 
 function selectedQuestionario(option = 'Select'){
@@ -50,7 +64,6 @@ function selectedQuestionario(option = 'Select'){
     }
   })
   .done(function(data) {
-    console.log("success: ", data);
 
     if (data.length > 0 ) {
       $('#Questionarios').html(templateQuestionario(data));
@@ -72,6 +85,7 @@ function templateQuestionario(model){
     return `<option value="${x.Id}">${x.Name}</option>`;
     }).join('')}`
 }
+
 function CRUDPerguntas(option){
 
 
@@ -82,8 +96,8 @@ function CRUDPerguntas(option){
   }
 
   let Id = $('#Id').val();
-  let Questionario = dateFormart($('#Questionario').val());
-  let Pergunta = dateFormart($('#Pergunta').val());
+  let Questionario = $('#Questionario').val();
+  let Pergunta = $('#Pergunta').val();
   let Tipo = $('#Tipo').val();
   let Status = $('#Status').val();
   let Resposta = $('#Resposta').val();
@@ -91,24 +105,21 @@ function CRUDPerguntas(option){
   let UserInactivity = $('#UserInactivity').val();
 
   let param = {
-    QRCode,
+    Questionario,
     Pergunta,
-    Dt_Inicio,
-    Dt_Termino,
+    Tipo,
     Status,
-    IFrame,
     UserRegistration,
-    UserInactivity
+    UserInactivity,
   }
 
 
   let Schema = 'Escala7';
   let tableName = 'Perguntas';
-  let columns = 'QRCode,Pergunta,Dt_Inicio,Dt_Termino,Status,IFrame,UserRegistration,DateRegistration,UserInactivity,DateInactivity'
-  let lastquery = `'${param.QRCode}','${param.Pergunta}','${param.Dt_Inicio}','${param.Dt_Termino}',${param.Status},'${param.IFrame}','${param.UserRegistration}',now(),'${param.UserInactivity}',now()`;
+  let columns = 'Questionario,Pergunta,Tipo,Status,UserRegistration,DateRegistration,UserInactivity,DateInactivity'
+  let lastquery = `'${param.Questionario}','${param.Pergunta}','${param.Tipo}','${param.Status}','${param.UserRegistration}',now(),'${param.UserInactivity}',now()`;
 
-  let setQuery = `QRCode = '${param.QRCode}',Pergunta = '${param.Pergunta}',Dt_Inicio = '${param.Dt_Inicio}', Dt_Termino = '${param.Dt_Termino}', Status = ${param.Status},
-  IFrame = '${param.IFrame}',UserRegistration = '${param.UserRegistration}'`
+  let setQuery = `Questionario = '${param.Questionario}',Pergunta = '${param.Pergunta}',Tipo = '${param.Tipo}', Status = '${param.Status}', UserRegistration = '${param.UserRegistration}'`
   let where = `id = ${Id}`
 
   if ($('#Status').val() == 0) {
@@ -132,9 +143,16 @@ function CRUDPerguntas(option){
     data: params,
   })
   .done(function(data) {
-    console.log("success: ", data);
-    select('templateTablePerguntas');
-    $('.btn-action-formPergunta').html() == 'Salvar' ? clearForm('#formPergunta') : '';
+
+    //if (Id.length > 0 && data.length > 0) {
+    //  select('templateRespostas', Id, 'Respostas', '*');
+    //}else if (data.length > 0) {
+    //  select('', '', 'Perguntas', 'Id', 'oder by id desc');
+    //  console.log('2')
+    //};
+    //Perguntas();
+    //$('.btn-action-formPergunta').html() == 'Salvar' ? clearForm('#formPergunta') : '';
+
     $('#modalUser').modal('close');
   })
   .fail(function() {
@@ -143,14 +161,56 @@ function CRUDPerguntas(option){
 
 }
 
-function select(nameFunction, id){
+function CRUDRespostas(option = 'Insert'){
+
+
+  let resposta = $('#Resposta').val();
+  let IdQuestionario = $('#Questionarios').val();
+  let Schema = 'Escala7';
+  let tableName = 'Respostas';
+  let columns = 'IdQuestionario, Respostas'
+  let lastquery = `${IdQuestionario}, '${resposta}'`;
+
+
+  let param = {
+    Schema,
+    tableName,
+    columns,
+    lastquery,
+    option
+  }
+
+  $.ajax({
+    url: 'DBInserts.php',
+    type: 'POST',
+    dataType: 'html',
+    data: param,
+    beforeSend: function(){
+      $('#modalProgress').modal('open');
+    }
+  })
+  .done(function() {
+    console.log("success respostas");
+
+    select('templateRespostas', $('#Questionarios').val(), 'Respostas', '*');
+
+    $('#modalProgress').modal('close');
+  })
+  .fail(function() {
+    console.log("error");
+  });
+  
+}
+
+function select(nameFunction, id, tableName = 'Perguntas', columns = '*', complement){
 
  let option = 'Select';
  let Schema = 'Escala7';
- let tableName = 'Perguntas';
-
- let columns = '*';
  let where = id > 0 ? `id = ${id}` : '';
+
+if (id > 0 && tableName == 'Respostas') {
+  where = `IdQuestionario = ${id}`;
+}
 
  let params = {
   option,
@@ -170,18 +230,18 @@ $.ajax({
   }
 })
 .done(function(data) {
-  console.log("success select: ", data);
-  dataInfos = data;
 
-  if (data.length > 0 && nameFunction == 'templateTablePerguntas') {
+  if (data.length > 0 && id > 0 && nameFunction == '') {
 
-    $('.tbody-questionarios').html(templateTablePerguntas(data));
-    $('.dropdown-trigger').dropdown();
-    $('#modalPergunta').modal('close');
-    clearForm('#formPergunta');
-
-  }else if (data.length > 0 && id > 0) {
     setInputsModal(data);
+    select('templateRespostas', $('#Id').val(), 'Respostas', '*');
+
+  }else if (data.length > 0 && nameFunction == 'templateRespostas') {
+    
+    $('.tbody-Respostas').html(templateRespostas(data));
+    
+  }else{
+    return data;
   }
 
 
@@ -199,33 +259,37 @@ function templateTablePerguntas(model){
   return model.map(x => {
     return`
     <tr>
-    <td>${x.QRCode}</td>
-    <td>${x.Pergunta}</td>
-    <td>${DateFormatPtBr(x.Dt_Inicio)}</td>
-    <td>${DateFormatPtBr(x.Dt_Termino)}</td>
-    <td>${x.Status == 1 ? 'Ativo' : 'Inativo'}</td>
-    <td><a href="#modalPergunta" class="modal-trigger" onclick="$('.btn-action-formPergunta').html('Editar'); select('', ${x.Id});selectedquestionario();"><i class="fas fa-edit"></i></a></td>
+      <td>${x.Name}</td>
+      <td>${x.Pergunta}</td>
+      <td>${x.Status == 1 ? 'Ativo' : 'Inativo'}</td>
+      <td><a href="#modalPergunta" class="modal-trigger" onclick="$('.btn-action-formPergunta').html('Editar'); select('', ${x.Id});selectedQuestionario();"><i class="fas fa-edit"></i></a></td>
     </tr>
     `});
 }
 
+function templateRespostas(model){
+  return model.map((x, i) => {
+    return`
+      <tr>
+        <td>${i + 1}</td>
+        <td>${x.Respostas}</td>
+      </tr>
+    `
+  })
+}
+
 function setInputsModal(model){
 
-  $('label[for="QRCode"]').addClass('active');
   $('label[for="Pergunta"]').addClass('active');
-  $('label[for="Dt_Inicio"]').addClass('active');
-  $('label[for="Dt_Termino"]').addClass('active');
+  $('label[for="Tipo"]').addClass('active');
   $('label[for="Status"]').addClass('active');
-  $('label[for="IFrame"]').addClass('active');
 
 
   $('#Id').val(model[0].Id);
-  $('#QRCode').val(model[0].QRCode);
+  $('#Questionarios').val(model[0].IdQuestionario);
   $('#Pergunta').val(model[0].Pergunta);
-  $('#Dt_Inicio').val(DateFormtDatePicker(model[0].Dt_Inicio));
-  $('#Dt_Termino').val(DateFormtDatePicker(model[0].Dt_Termino));
+  $('#Tipo').val(model[0].Tipo);
   $('#Status').val(model[0].Status);
-  $('#IFrame').val(model[0].IFrame);
 
   $('select').formSelect();
 }

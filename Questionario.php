@@ -100,21 +100,7 @@ session_start();
 						</thead>
 
 						<tbody class="color-default tbody-Questionarios">
-							<tr>
-								<td>Questionario A</td>
-								<td>Inativo</td>
-								<td><a href="#modalQuestionario" class="modal-trigger" onclick="optionCRUDQuestionarios('Editar')"><i class="fas fa-edit"></i></a></td>
-							</tr>
-							<tr>
-								<td>Questionario B</td>
-								<td>Inativo</td>
-								<td><a href="#modalQuestionario" class="modal-trigger" onclick="optionCRUDQuestionarios('Editar')"><i class="fas fa-edit"></i></a></td>
-							</tr>
-							<tr>
-								<td>Questionario C</td>
-								<td>Ativo</td>
-								<td><a href="#modalQuestionario" class="modal-trigger" onclick="optionCRUDQuestionarios('Editar')"><i class="fas fa-edit"></i></a></td>
-							</tr>
+							
 						</tbody>
 					</table>
 				</div>
@@ -156,6 +142,14 @@ session_start();
 					</div>
 
 					<div class="input-field col s12 m7">
+						<select id="Campanhas" class="c-blue" plc="Campanhas">
+							<option value="" disabled selected>Campanhas</option>
+							<option value="1">Ativo</option>
+							<option value="0">Desativado</option>
+						</select>
+					</div>
+
+					<div class="input-field col s12 m7">
 						<select id="Status" class="c-blue">
 							<option value="" disabled selected>Status</option>
 							<option value="1">Ativo</option>
@@ -190,7 +184,7 @@ session_start();
 	<script type="text/javascript" src="ajax/AjaxGenericDB.js"></script>
 	<script type="text/javascript" src="ajax/GenericFunctions.js"></script>
 	<script src="materialize/js/materialize.js"></script>
+	<script type="text/javascript" src="js/Generic.js?<?=date('d/m/Y-H:i:s')?>"></script>
 	<script type="text/javascript" src="js/Questionarios/Questionarios.js?<?=date('d/m/Y-H:i:s')?>"></script>
-	<script type="text/javascript" src="js/Generic.js"></script>
 </body>
 </html>

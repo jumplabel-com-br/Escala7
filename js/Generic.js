@@ -1,4 +1,5 @@
 var v;
+var dataSelectAdvanced;
 
 $(document).ready(function($) {
     $('.sidenav').sidenav();
@@ -29,6 +30,23 @@ function validarForm(form){
     });
 
     return v;
+}
+
+function SelectAdvanced(sql, option = 'SelectAdvanced'){
+    $.ajax({
+        url: 'DBInserts.php',
+        type: 'POST',
+        dataType: 'json',
+        async: false,
+        data: {option, sql},
+    })
+    .done(function(data) {
+        dataSelectAdvanced = data;
+    })
+    .fail(function() {
+        console.log("error");
+    });
+    
 }
 
 function clearForm(form){

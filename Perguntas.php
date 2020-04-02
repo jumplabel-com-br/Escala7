@@ -73,7 +73,7 @@ session_start();
 					<ul class="list-ul-organize">
 						<li class="li-icon"><a href="#"> &nbsp;</a></li>
 						<li class="li-icon" title="Usuários"><a href="Usuarios.php"><i class="material-icons i-default">account_circle</i> Usuários</a></li>
-						<li class="li-icon" title="Questionarios" ><a href="Questionarios.php"><i class="material-icons i-default">record_voice_over</i> Campanhas</a></li>
+						<li class="li-icon" title="Campanhas" ><a href="Campanhas.php"><i class="material-icons i-default">record_voice_over</i> Campanhas</a></li>
 						<li class="li-icon dropdown-trigger" title="Questionário" href="#dropdownQuestionario"><a href="#"><i class="material-icons i-default">assignment</i> Questionários</a></li>
 						<ul id='dropdownQuestionario' class='dropdown-content'>
 							<li><a href="Questionario.php">Questionário</a></li>
@@ -101,33 +101,7 @@ session_start();
 						</thead>
 
 						<tbody class="color-default tbody-Perguntas">
-							<tr>
-								<td>Pergunta A</td>
-								<td>Quantas pontas tem um quadrado ?</td>
-								<td>
-									<a href="#modalPergunta" class="modal-trigger" onclick="$('#modalPergunta').modal('open');">
-										<i class="fas fa-edit"></i>
-									</a>
-								</td>
-							</tr>
-							<tr>
-								<td>Pergunta B</td>
-								<td>Quantas pontas tem um triangulo ?</td>
-								<td>
-									<a href="#modalPergunta" class="modal-trigger" onclick="$('#modalPergunta').modal('open');">
-										<i class="fas fa-edit"></i>
-									</a>
-								</td>
-							</tr>
-							<tr>
-								<td>Pergunta C</td>
-								<td>Quantas pontas tem um exagono ?</td>
-								<td>
-									<a href="#modalPergunta" class="modal-trigger" onclick="$('#modalPergunta').modal('open');">
-										<i class="fas fa-edit"></i>
-									</a>
-								</td>
-							</tr>
+							
 						</tbody>
 					</table>
 				</div>
@@ -140,7 +114,7 @@ session_start();
 					<button class="btn btn-default" type="submit">Relatório</button>
 				</div>
 				<div class="col s6 m9 right-align">
-					<button class="btn btn-default" type="button" onclick="$('#modalPergunta').modal('open');selectedQuestionario();"><span class="d-none-mobile">+</span> Cadastrar</button>
+					<button class="btn btn-default" type="button" onclick="selectedQuestionario();$('#modalPergunta').modal('open');"><span class="d-none-mobile">+</span> Cadastrar</button>
 				</div>
 			</div>
 		</div>
@@ -192,7 +166,22 @@ session_start();
 					<div class="input-field col s12 m7">
 						<input type="text" name="Resposta" id="Resposta" class="autocomplete c-blue" plc="Resposta">
 						<label for="Resposta" class="c-blue">Resposta</label>
-						<i class="material-icons prefix right i-default" onclick="CRUDPerguntas('Create')">add_circle</i>
+						<i class="material-icons prefix right i-default" onclick="CRUDRespostas();">add_circle</i>
+					</div>
+
+					<div class="input-field col s12 m7">
+						<table class="responsive-table">
+						<thead class="color-default">
+							<tr>
+								<th>#</th>
+								<th>Respotas</th>
+							</tr>
+						</thead>
+
+						<tbody class="color-default tbody-Respostas">
+							
+						</tbody>
+					</table>
 					</div>
 
 
@@ -223,7 +212,7 @@ session_start();
 	<script type="text/javascript" src="ajax/AjaxGenericDB.js"></script>
 	<script type="text/javascript" src="ajax/GenericFunctions.js"></script>
 	<script src="materialize/js/materialize.js"></script>
-	<script type="text/javascript" src="js/Perguntas/Perguntas.js?<?=date('d/m/Y-H:i:s')?>"></script>
 	<script type="text/javascript" src="js/Generic.js?<?=date('d/m/Y-H:i:s')?>"></script>
+	<script type="text/javascript" src="js/Perguntas/Perguntas.js?<?=date('d/m/Y-H:i:s')?>"></script>
 </body>
 </html>
