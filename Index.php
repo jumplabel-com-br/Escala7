@@ -8,7 +8,7 @@ $QrCodeCampanha = (isset($_GET["QCC"])) ? $_GET["QCC"] : '';
 $countCampanha = 2; 
 
 if ($getType != 'adm' && $getType != '') {
-	$countCampanha = Select('Escala7', 'Campanha', 'Campanhas', "Id = $IdCampanha and QRCode = '#$QrCodeCampanha'", $link);
+	$countCampanha = Select('Escala7', 'Campanha', 'Campanhas', "Id = $IdCampanha and QRCode = '$QrCodeCampanha'", "",$link);
 }
 
 

@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+$getType = $_GET["getType"];
+$IC = $_GET["IC"];
 ?>
 
 <!DOCTYPE html>
@@ -158,11 +161,11 @@ session_start();
 
 <div class="row">
 	<div class="col s6 m6">
-			<a href="HomeMobile.php"><i class="medium material-icons">keyboard_backspace</i></a>
+			<a href="HomeMobile.php?getType=usr&IC=<?=$IC?>"><i class="medium material-icons">keyboard_backspace</i></a>
 	</div>
 
 	<div class="col s6 m6">
-			<a href="HomeMobile.php"><i class="medium material-icons right">home</i></a>
+			<a href="HomeMobile.php?getType=usr&IC=<?=$IC?>"><i class="medium material-icons right">home</i></a>
 	</div>
 </div>
 

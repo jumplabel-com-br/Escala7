@@ -50,7 +50,7 @@
 	bottom: 0;
 	background-position: center center;
 	background-repeat: no-repeat;
-	background-size: cover;
+	background-size: cover;	
 }
 
 
@@ -196,4 +196,24 @@ input[type=text]:not(.browser-default):focus:not([readonly]) + label.c-blue,
 	height: auto;
 	width: 230px;	
 	font-size: 15px;
+}
+
+.min-cards-footer{
+	padding-top: 5%;
+	padding-bottom: 5%;
+	background-color: #fff;
+	color: #2A64AD;
+}
+
+.mt-2{
+	margin-top: 2rem;
+}
+
+.opacity-70{
+	background-color: rgba(0,0,0,234);
+}
+
+#myCamera video{
+	width: 100% !important;
+	height: auto !important;
 }

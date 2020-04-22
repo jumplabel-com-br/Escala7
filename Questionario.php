@@ -74,12 +74,12 @@ session_start();
 						<li class="li-icon"><a href="#"> &nbsp;</a></li>
 						<li class="li-icon" title="Usuários"><a href="Usuarios.php"><i class="material-icons i-default">account_circle</i> Usuários</a></li>
 						<li class="li-icon" title="Campanhas" ><a href="Campanhas.php"><i class="material-icons i-default">record_voice_over</i> Campanhas</a></li>
-						<li class="li-icon dropdown-trigger" title="Questionário" href="#dropdownQuestionario"><a href="#"><i class="material-icons i-default">assignment</i> Questionário</a></li>
+						<li class="li-icon dropdown-trigger" title="Questionário" href="#dropdownQuestionario"><a href="#"><i class="material-icons i-default">assignment</i> Questionários</a></li>
 						<ul id='dropdownQuestionario' class='dropdown-content'>
-							<li><a href="Questionario.php">Questionário</a></li>
+							<li><a href="Questionario.php">Questionários</a></li>
 							<li><a href="Perguntas.php">Perguntas</a></li>
 						</ul>
-						<li class="li-icon" title="Respostas"><a href="#"><i class="material-icons i-default">check_box</i> Respostas</a></li>
+						<li class="li-icon" title="Respostas"><a href="Respostas.php"><i class="material-icons i-default">check_box</i> Respostas</a></li>
 						<li class="li-icon" title="Video Institucional"><a href="VideoInstitucional.php"><i class="material-icons i-default">videocam</i> Video Institucional</a></li>
 						<li class="li-icon sair" title="Sair"><a onclick="logoff();"><i class="material-icons i-default">settings</i> Sair</a></li>
 					</ul>
@@ -142,14 +142,6 @@ session_start();
 					</div>
 
 					<div class="input-field col s12 m7">
-						<select id="Campanhas" class="c-blue" plc="Campanhas">
-							<option value="" disabled selected>Campanhas</option>
-							<option value="1">Ativo</option>
-							<option value="0">Desativado</option>
-						</select>
-					</div>
-
-					<div class="input-field col s12 m7">
 						<select id="Status" class="c-blue">
 							<option value="" disabled selected>Status</option>
 							<option value="1">Ativo</option>
@@ -181,10 +173,10 @@ session_start();
 	<input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">
 	<input type="hidden" name="UserInactivity" id="UserInactivity" value="<?=$_SESSION['User']?>">
 	<!-- Compiled and minified JavaScript -->
+	<script type="text/javascript" src="js/Generic.js?<?=date('d/m/Y-H:i:s')?>"></script>
 	<script type="text/javascript" src="ajax/AjaxGenericDB.js"></script>
 	<script type="text/javascript" src="ajax/GenericFunctions.js"></script>
 	<script src="materialize/js/materialize.js"></script>
-	<script type="text/javascript" src="js/Generic.js?<?=date('d/m/Y-H:i:s')?>"></script>
 	<script type="text/javascript" src="js/Questionarios/Questionarios.js?<?=date('d/m/Y-H:i:s')?>"></script>
 </body>
 </html>

@@ -4,26 +4,34 @@ $(document).ready(function(){
  Perguntas();
 });
 
-
+/*
 $('#li-img-logo-min').on('click', function(event) {
   $('#mobile-demo').show();
   $('.container-usuarios').addClass('desktop');
   $('#mobile-demo-1').hide();
   event.preventDefault();
   /* Act on the event */
-});
+//});
 
-$('#li-img-logo-max').on('click', function(event) {
+/*$('#li-img-logo-max').on('click', function(event) {
   $('#mobile-demo').hide();
   $('.container-usuarios').removeClass('desktop');
   $('#mobile-demo-1').show();
   event.preventDefault();
   /* Act on the event */
-});
+//});
 
 
 function clearForm(form){
   document.querySelectorAll(`${form} input`).forEach(input => input.value = '');
+}
+
+function toggleRespostas(){
+  if ($('#Tipo').val() == 1) {
+    $('.add-circle-respostas, #table-Respostas').show();
+  }else{
+     $('.add-circle-respostas, #table-Respostas').hide();
+  }
 }
 
 function Perguntas(){
@@ -144,15 +152,6 @@ function CRUDPerguntas(option){
   })
   .done(function(data) {
 
-    //if (Id.length > 0 && data.length > 0) {
-    //  select('templateRespostas', Id, 'Respostas', '*');
-    //}else if (data.length > 0) {
-    //  select('', '', 'Perguntas', 'Id', 'oder by id desc');
-    //  console.log('2')
-    //};
-    //Perguntas();
-    //$('.btn-action-formPergunta').html() == 'Salvar' ? clearForm('#formPergunta') : '';
-
     $('#modalUser').modal('close');
   })
   .fail(function() {
@@ -185,6 +184,7 @@ function CRUDRespostas(option = 'Insert'){
     type: 'POST',
     dataType: 'html',
     data: param,
+    async: false,
     beforeSend: function(){
       $('#modalProgress').modal('open');
     }
@@ -292,6 +292,7 @@ function setInputsModal(model){
   $('#Status').val(model[0].Status);
 
   $('select').formSelect();
+  toggleRespostas();
 }
 
 function dateFormart(inputDate){
@@ -304,13 +305,13 @@ function dateFormart(inputDate){
 
   if (date[0] == "Jan") {
     Month = "01";
-  }else if(date[0] == "Feb"){
+  }else if(date[0] == "Fev"){
     Month = "02";
   }else if(date[0] == "Mar"){
     Month = "03";
-  }else if(date[0] == "Apr"){
+  }else if(date[0] == "Abr"){
     Month = "04";
-  }else if(date[0] == "May"){
+  }else if(date[0] == "Mai"){
     Month = "05";
   }else if(date[0] == "Jun"){
     Month = "06";
@@ -318,13 +319,13 @@ function dateFormart(inputDate){
     Month = "07";
   }else if(date[0] == "Aug"){
     Month = "08";
-  }else if(date[0] == "Sep"){
+  }else if(date[0] == "Set"){
     Month = "09";
-  }else if(date[0] == "Oct"){
+  }else if(date[0] == "Out"){
     Month = "10";
   }else if(date[0] == "Nov"){
     Month = "11";
-  }else if(date[0] == "Dec"){
+  }else if(date[0] == "Dez"){
     Month = "12";
   }
 
@@ -350,27 +351,27 @@ function DateFormtDatePicker(value){
   if (value[1] == "01") {
     Month = "Jan";
   }else if(value[1] == "02"){
-    Month = "Feb";
+    Month = "Fev";
   }else if(value[1] == "03"){
     Month = "Mar";
   }else if(value[1] == "04"){
-    Month = "Apr";
+    Month = "Abr";
   }else if(value[1] == "05"){
-    Month = "May";
+    Month = "Mai";
   }else if(value[1] == "06"){
     Month = "Jun";
   }else if(value[1] == "07"){
     Month = "Jul";
   }else if(value[1] == "08"){
-    Month = "Aug";
+    Month = "Ago";
   }else if(value[1] == "09"){
-    Month = "Sep";
+    Month = "Set";
   }else if(value[1] == "10"){
-    Month = "Oct";
+    Month = "Out";
   }else if(value[1] == "11"){
     Month = "Nov";
   }else if(value[1] == "12"){
-    Month = "Dec";
+    Month = "Dez";
   }
 
   return `${Month} ${Day}, ${Year}`

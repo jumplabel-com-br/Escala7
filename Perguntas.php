@@ -5,6 +5,7 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
+	<title>Perguntas</title>
 	<meta charset="utf-8">
 	<!--Import Jquey-->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -76,10 +77,10 @@ session_start();
 						<li class="li-icon" title="Campanhas" ><a href="Campanhas.php"><i class="material-icons i-default">record_voice_over</i> Campanhas</a></li>
 						<li class="li-icon dropdown-trigger" title="Questionário" href="#dropdownQuestionario"><a href="#"><i class="material-icons i-default">assignment</i> Questionários</a></li>
 						<ul id='dropdownQuestionario' class='dropdown-content'>
-							<li><a href="Questionario.php">Questionário</a></li>
+							<li><a href="Questionario.php">Questionários</a></li>
 							<li><a href="Perguntas.php">Perguntas</a></li>
 						</ul>
-						<li class="li-icon" title="Respostas"><a href="#"><i class="material-icons i-default">check_box</i> Respostas</a></li>
+						<li class="li-icon" title="Respostas"><a href="Respostas.php"><i class="material-icons i-default">check_box</i> Respostas</a></li>
 						<li class="li-icon" title="Video Institucional"><a href="VideoInstitucional.php"><i class="material-icons i-default">videocam</i> Video Institucional</a></li>
 						<li class="li-icon sair" title="Sair"><a onclick="logoff();"><i class="material-icons i-default">settings</i> Sair</a></li>
 					</ul>
@@ -148,7 +149,7 @@ session_start();
 					</div>
 
 					<div class="input-field col s12 m7">
-						<select id="Tipo" class="c-blue" plc="Tipo">
+						<select id="Tipo" class="c-blue" plc="Tipo" onchange="toggleRespostas();">
 							<option value="" disabled selected>Tipo</option>
 							<option value="1">Combo</option>
 							<option value="0">Texto</option>
@@ -166,11 +167,11 @@ session_start();
 					<div class="input-field col s12 m7">
 						<input type="text" name="Resposta" id="Resposta" class="autocomplete c-blue" plc="Resposta">
 						<label for="Resposta" class="c-blue">Resposta</label>
-						<i class="material-icons prefix right i-default" onclick="CRUDRespostas();">add_circle</i>
+						<i class="material-icons prefix right i-default add-circle-respostas" onclick="CRUDRespostas();">add_circle</i>
 					</div>
 
 					<div class="input-field col s12 m7">
-						<table class="responsive-table">
+						<table class="responsive-table" id="table-Respostas">
 						<thead class="color-default">
 							<tr>
 								<th>#</th>
@@ -209,10 +210,9 @@ session_start();
 	<input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">
 	<input type="hidden" name="UserInactivity" id="UserInactivity" value="<?=$_SESSION['User']?>">
 	<!-- Compiled and minified JavaScript -->
-	<script type="text/javascript" src="ajax/AjaxGenericDB.js"></script>
 	<script type="text/javascript" src="ajax/GenericFunctions.js"></script>
-	<script src="materialize/js/materialize.js"></script>
 	<script type="text/javascript" src="js/Generic.js?<?=date('d/m/Y-H:i:s')?>"></script>
 	<script type="text/javascript" src="js/Perguntas/Perguntas.js?<?=date('d/m/Y-H:i:s')?>"></script>
+	<script src="materialize/js/materialize.js"></script>
 </body>
 </html>

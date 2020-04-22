@@ -1,13 +1,6 @@
 var dataInfos;
 
 $(document).ready(function(){
-  $('.sidenav').sidenav();
-  $('.dropdown-trigger').dropdown();
-  $('.modal').modal();
-  $('select').formSelect();
-  $('.datepicker').datepicker();
-  $('.tooltipped').tooltip();
-
   select('templateTableCampanhas');
 });
 
@@ -33,6 +26,53 @@ function clearForm(form){
   document.querySelectorAll(`${form} input`).forEach(input => input.value = '');
 }
 
+function selectedQuestionario(option = 'Select'){
+
+  let Schema = 'Escala7';
+  let tableName = 'Questionarios';
+  let columns = 'Id, Name';
+
+  let params = {
+    option,
+    Schema,
+    tableName,
+    columns
+
+  }
+
+  $.ajax({
+    url: 'DBInserts.php',
+    type: 'POST',
+    dataType: 'json',
+    data: params,
+    beforeSend: function(){
+      $('#modalProgress').modal('open');
+    }
+  })
+  .done(function(data) {
+
+    if (data.length > 0 ) {
+      $('#Questionarios').html(templateQuestionario(data));
+      $('select').formSelect();
+    }
+
+    $('#modalProgress').modal('close');
+  })
+  .fail(function() {
+    console.log("error");
+  });
+
+}
+
+function templateQuestionario(model){
+  return `
+  <option value="">Questionarios</option>
+  ${model.map(x =>{
+    return `<option value="${x.Id}">${x.Name}</option>`;
+    }).join('')}`
+}
+
+
 function CRUDCampanhas(option){
 
 
@@ -45,6 +85,7 @@ function CRUDCampanhas(option){
   let Id = $('#Id').val();
   let QRCode = $('#QRCode').val();
   let Campanha = $('#Campanha').val();
+  let Questionarios = $('#Questionarios').val();
   let Dt_Inicio = dateFormart($('#Dt_Inicio').val());
   let Dt_Termino = dateFormart($('#Dt_Termino').val());
   let Status = $('#Status').val();
@@ -55,6 +96,7 @@ function CRUDCampanhas(option){
   let param = {
     QRCode,
     Campanha,
+    Questionarios,
     Dt_Inicio,
     Dt_Termino,
     Status,
@@ -66,10 +108,10 @@ function CRUDCampanhas(option){
 
   let Schema = 'Escala7';
   let tableName = 'Campanhas';
-  let columns = 'QRCode,Campanha,Dt_Inicio,Dt_Termino,Status,IFrame,UserRegistration,DateRegistration,UserInactivity,DateInactivity'
-  let lastquery = `'${param.QRCode}','${param.Campanha}','${param.Dt_Inicio}','${param.Dt_Termino}',${param.Status},'${param.IFrame}','${param.UserRegistration}',now(),'${param.UserInactivity}',now()`;
+  let columns = 'QRCode,Campanha,IdQuestionario, Dt_Inicio,Dt_Termino,Status,IFrame,UserRegistration,DateRegistration,UserInactivity,DateInactivity'
+  let lastquery = `'${param.QRCode}','${param.Campanha}', '${param.Questionarios}', '${param.Dt_Inicio}','${param.Dt_Termino}',${param.Status},'${param.IFrame}','${param.UserRegistration}',now(),'${param.UserInactivity}',now()`;
 
-  let setQuery = `QRCode = '${param.QRCode}',Campanha = '${param.Campanha}',Dt_Inicio = '${param.Dt_Inicio}', Dt_Termino = '${param.Dt_Termino}', Status = ${param.Status},
+  let setQuery = `QRCode = '${param.QRCode}',Campanha = '${param.Campanha}',IdQuestionario = '${param.Questionarios}', Dt_Inicio = '${param.Dt_Inicio}', Dt_Termino = '${param.Dt_Termino}', Status = ${param.Status},
   IFrame = '${param.IFrame}',UserRegistration = '${param.UserRegistration}'`
   let where = `id = ${Id}`
 
@@ -137,6 +179,7 @@ $.ajax({
 
   if (data.length > 0 && nameFunction == 'templateTableCampanhas') {
 
+    selectedQuestionario();
     $('.tbody-campanhas').html(templateTableCampanhas(data));
     $('.dropdown-trigger').dropdown();
     $('#modalCampanha').modal('close');
@@ -161,7 +204,7 @@ function templateTableCampanhas(model){
   return model.map(x => {
     return`
       <tr>
-        <td>${x.QRCode}</td>
+        <td>#${x.QRCode}</td>
         <td>${x.Campanha}</td>
         <td>${DateFormatPtBr(x.Dt_Inicio)}</td>
         <td>${DateFormatPtBr(x.Dt_Termino)}</td>
@@ -184,10 +227,14 @@ function setInputsModal(model){
   $('#Id').val(model[0].Id);
   $('#QRCode').val(model[0].QRCode);
   $('#Campanha').val(model[0].Campanha);
+  $('#Questionarios').val(model[0].IdQuestionario);
   $('#Dt_Inicio').val(DateFormtDatePicker(model[0].Dt_Inicio));
   $('#Dt_Termino').val(DateFormtDatePicker(model[0].Dt_Termino));
   $('#Status').val(model[0].Status);
   $('#IFrame').val(model[0].IFrame);
+  $('#iframeCampanha').attr({
+    src: model[0].IFrame
+  });
 
    $('select').formSelect();
 }
@@ -202,13 +249,13 @@ function dateFormart(inputDate){
 
   if (date[0] == "Jan") {
     Month = "01";
-  }else if(date[0] == "Feb"){
+  }else if(date[0] == "Fev"){
     Month = "02";
   }else if(date[0] == "Mar"){
     Month = "03";
-  }else if(date[0] == "Apr"){
+  }else if(date[0] == "Abr"){
     Month = "04";
-  }else if(date[0] == "May"){
+  }else if(date[0] == "Mai"){
     Month = "05";
   }else if(date[0] == "Jun"){
     Month = "06";
@@ -216,13 +263,13 @@ function dateFormart(inputDate){
     Month = "07";
   }else if(date[0] == "Aug"){
     Month = "08";
-  }else if(date[0] == "Sep"){
+  }else if(date[0] == "Set"){
     Month = "09";
-  }else if(date[0] == "Oct"){
+  }else if(date[0] == "Out"){
     Month = "10";
   }else if(date[0] == "Nov"){
     Month = "11";
-  }else if(date[0] == "Dec"){
+  }else if(date[0] == "Dez"){
     Month = "12";
   }
 
@@ -248,27 +295,27 @@ function DateFormtDatePicker(value){
   if (value[1] == "01") {
     Month = "Jan";
   }else if(value[1] == "02"){
-    Month = "Feb";
+    Month = "Fev";
   }else if(value[1] == "03"){
     Month = "Mar";
   }else if(value[1] == "04"){
-    Month = "Apr";
+    Month = "Abr";
   }else if(value[1] == "05"){
-    Month = "May";
+    Month = "Mai";
   }else if(value[1] == "06"){
     Month = "Jun";
   }else if(value[1] == "07"){
     Month = "Jul";
   }else if(value[1] == "08"){
-    Month = "Aug";
+    Month = "Ago";
   }else if(value[1] == "09"){
-    Month = "Sep";
+    Month = "Set";
   }else if(value[1] == "10"){
-    Month = "Oct";
+    Month = "Out";
   }else if(value[1] == "11"){
     Month = "Nov";
   }else if(value[1] == "12"){
-    Month = "Dec";
+    Month = "Dez";
   }
 
   return `${Month} ${Day}, ${Year}`

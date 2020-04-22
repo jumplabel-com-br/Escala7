@@ -181,9 +181,9 @@
 					<li class="li-icon"><a href="#"> &nbsp;</a></li>
 					<li class="li-icon" title="Usuários"><a href="Usuarios.php"><i class="material-icons i-default">account_circle</i> Usuários</a></li>
 					<li class="li-icon" title="Campanhas"><a href="Campanhas.php"><i class="material-icons i-default">record_voice_over</i> Campanhas</a></li>
-					<li class="li-icon dropdown-trigger" title="Questionário" href="#dropdownQuestionario"><a href="#"><i class="material-icons i-default">assignment</i> Questionário</a></li>
+					<li class="li-icon dropdown-trigger" title="Questionário" href="#dropdownQuestionario"><a href="#"><i class="material-icons i-default">assignment</i> Questionários</a></li>
 						<ul id='dropdownQuestionario' class='dropdown-content'>
-							<li><a href="Questionario.php">Questionário</a></li>
+							<li><a href="Questionario.php">Questionários</a></li>
 							<li><a href="Perguntas.php">Perguntas</a></li>
 						</ul>
 					<li class="li-icon" title="Respostas"><a href="Respostas.php"><i class="material-icons i-default">check_box</i> Respostas</a></li>
@@ -223,7 +223,7 @@
 				<button class="btn btn-default" type="submit">Relatório</button>
 			</div>
 			<div class="col s6 m9 right-align">
-				<button class="btn btn-default" type="button" onclick="$('#modalCampanha').modal('open');clearForm('#formCampanha');$('select').formSelect();"><span class="d-none-mobile">+</span> Cadastrar</button>
+				<button class="btn btn-default" type="button" onclick="$('#modalCampanha').modal('open');clearForm('#formCampanha');$('select').formSelect();selectedQuestionario();"><span class="d-none-mobile">+</span> Cadastrar</button>
 			</div>
 		</div>
 	</div>
@@ -257,6 +257,11 @@
 				</div>
 
 				<div class="input-field col s12 m7">
+						<select id="Questionarios" class="c-blue" plc="Questionarios">
+						</select>
+				</div>
+
+				<div class="input-field col s12 m7">
 					<input type="text" id="Dt_Inicio" class="datepicker c-blue" plc="Data Inicio">
 					<label for="Dt_Inicio" class="c-blue">Data Inicio</label>
 				</div>
@@ -277,6 +282,10 @@
 				<div class="input-field col s12 m7">
 					<input type="text" id="IFrame" class="autocomplete c-blue" plc="IFrame">
 					<label for="IFrame" class="c-blue" class="c-blue">IFrame</label>
+				</div>
+
+				<div class="input-field col s12 m7">
+					<iframe src="" id="iframeCampanha" style="width: auto; height: auto"></iframe>
 				</div>
 
 				<input type="hidden" name="controlButton" id="controlButton" value="Salvar">
@@ -306,8 +315,8 @@
 <script type="text/javascript" src="ajax/AjaxGenericDB.js"></script>
 <script type="text/javascript" src="ajax/GenericFunctions.js"></script>
 <script src="materialize/js/materialize.js"></script>
+<script type="text/javascript" src="js/Generic.js?<?=date('d/m/Y-H:i:s')?>"></script>
 <script type="text/javascript" src="js/Campanhas/Campanhas.js?<?=date('d/m/Y-H:i:s')?>"></script>
-<script type="text/javascript" src="js/Generic.js"></script>
 <!--
 <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript" src="js/geoLocation.js"></script>
