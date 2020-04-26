@@ -88,7 +88,7 @@ $Campanha = Select('Escala7', '*', 'Campanhas', "Id = $IC", "",$link);
 			<div class="col s12 m12">
 				<div class="card-content center">
 					<div class="center col s12">
-						<button class="btn hide" onclick="takePicture();">Tirar Foto</button>
+						<button class="btn" onclick="takePicture();">Tirar Foto</button>
 					</div>
 				</div>
 			</div>	
@@ -123,13 +123,13 @@ $Campanha = Select('Escala7', '*', 'Campanhas', "Id = $IC", "",$link);
 
 					<div class="row mt-2">
 						<div class="col s4 m4 center">
-							<div class="min-cards-footer center">FOTO 1</div>
+							<div class="min-cards-footer center pictures" id="picture_1" img="" onclick="setPrevia(pictures[0].img)">FOTO 1</div>
 						</div>
 						<div class="col s4 m4 center">
-							<div class="min-cards-footer center">FOTO 2</div>
+							<div class="min-cards-footer center pictures" id="picture_2" img="" onclick="setPrevia(pictures[0].img)">FOTO 2</div>
 						</div>
 						<div class="col s4 m4 center">
-							<div class="min-cards-footer center">FOTO 3</div>
+							<div class="min-cards-footer center pictures" id="picture_3" img="" onclick="setPrevia(pictures[0].img)">FOTO 3</div>
 						</div>
 					</div>
 				</div>
@@ -137,10 +137,10 @@ $Campanha = Select('Escala7', '*', 'Campanhas', "Id = $IC", "",$link);
 		</div>
 		<div class="row">
 			<div class="col s4 m4 center">
-				<div class="min-cards-footer center">EXCLUIR</div>
+				<div class="min-cards-footer center" onclick="deletePicture();">EXCLUIR</div>
 			</div>
 			<div class="col s4 m4 center">
-				<div class="min-cards-footer center">NOVA FOTO</div>
+				<div class="min-cards-footer center" onclick="newPicture();">NOVA FOTO</div>
 			</div>
 			<div class="col s4 m4 center">
 				<div class="min-cards-footer center" onclick="savePicture();">ENVIAR</div>

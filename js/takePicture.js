@@ -1,7 +1,12 @@
-
+var arrpictures = [];
+var pictures = [];
 
 function takePicture()
 {
+	if (autorizationLocation == false) {
+		M.toast({html: errorCode, displayLength: 4000});
+		return;
+	}
 
 	$('.container-new-foto').hide();
 	$('.container-view-fotos').show();
@@ -9,8 +14,41 @@ function takePicture()
 	Webcam.snap(function(data_uri)
 	{
 		document.querySelector('#results').innerHTML = '<img id="base64image" src="'+data_uri+'" style="width: 100%"/>';
+		arrpictures.push({
+			img : data_uri
+		})
 	});
+
+	arrpictures[0] != undefined ? document.querySelector('#picture_1').setAttribute("img" , arrpictures[0].img) : '';
+	arrpictures[1] != undefined ? document.querySelector('#picture_2').setAttribute("img" , arrpictures[1].img) : '';
+	arrpictures[2] != undefined ? document.querySelector('#picture_3').setAttribute("img" , arrpictures[2].img) : '';
+	
 }
+
+function setPrevia(img){
+	 document.querySelector('#base64image').setAttribute("img" , img)
+}
+
+function newPicture(){
+	$('.container-view-fotos').hide();
+	$('.container-new-foto').show();
+}
+
+function deletePicture(){
+	if (arrpictures[0].img != undefined && arrpictures[0].img == document.querySelector('#base64image').getAttribute("src")) {
+		arrpictures[1] != undefined ? pictures.push(arrpictures[1]) : '';
+		arrpictures[2] != undefined ? pictures.push(arrpictures[2]) : '';
+
+	}else if (arrpictures[1].img != undefined && arrpictures[1].img == document.querySelector('#base64image').getAttribute("src")) {
+		arrpictures[0] != undefined ? pictures.push(arrpictures[0]) : '';
+		arrpictures[2] != undefined ? pictures.push(arrpictures[2]) : '';
+
+	}else if (arrpictures[2].img != undefined && arrpictures[2].img == document.querySelector('#base64image').getAttribute("src")) {
+		arrpictures[0] != undefined ? pictures.push(arrpictures[0]) : '';
+		arrpictures[1] != undefined ? pictures.push(arrpictures[1]) : '';
+	}
+}
+
 
 function showCamera()
 {
