@@ -53,9 +53,8 @@ $Campanha = Select('Escala7', '*', 'Campanhas', "Id = $IC", "",$link);
 	</style>
 </head>
 
-<body class="background background-home">
-
-	<div class="container-new-foto">
+<body class="">
+	<nav>
 		<div class="row">
 			<div class="col s6 m6">
 				<a href="HomeMobile.php?getType=usr&IC=<?=$IC?>"><i class="medium material-icons">keyboard_backspace</i></a>
@@ -65,97 +64,18 @@ $Campanha = Select('Escala7', '*', 'Campanhas', "Id = $IC", "",$link);
 				<a href="HomeMobile.php?getType=usr&IC=<?=$IC?>"><i class="medium material-icons right">home</i></a>
 			</div>
 		</div>
-
-		<div class="row">
-			<div class="col s12 m12">
-				<div class="card-content center white color-default">
-					<div class="center col s12 white">
-						<h5 class="title-campanha"></h5>
-					</div>
-				</div>
-			</div>	
-		</div>
-
-		<div class="row">
-			<div class="col s12 m12">
-				<div class="cards-footer" id="myCamera">
-
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col s12 m12">
-				<div class="card-content center">
-					<div class="center col s12">
-						<button class="btn" onclick="takePicture();">Tirar Foto</button>
-					</div>
-				</div>
-			</div>	
+	</nav>
+	
+	<div class="row">
+		<div class="col s12 m12 center">
+			<h5 class="title-campanha"></label>
+			</h5>
 		</div>
 	</div>
 
-	<div class="container-view-fotos" style="display: none">
-		<div class="row">
-			<div class="col s6 m6">
-				<a href="HomeMobile.php?getType=usr&IC=<?=$IC?>"><i class="medium material-icons">keyboard_backspace</i></a>
-			</div>
+	<div class="row form-questionario-campanha" value="">
 
-			<div class="col s6 m6">
-				<a href="HomeMobile.php?getType=usr&IC=<?=$IC?>"><i class="medium material-icons right">home</i></a>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col s12 m12">
-				<div class="card-content center white color-default">
-					<div class="center col s12 white">
-						<h5 class="title-campanha"></h5>
-					</div>
-				</div>
-			</div>	
-		</div>
-
-		<div class="row opacity-70">
-			<div class="col s12 m12">
-				<div class="cards-footer">
-					<div id="results"></div>
-
-					<div class="row mt-2">
-						<div class="col s4 m4 center">
-							<div class="min-cards-footer center pictures" id="picture_1" img="" onclick="setPrevia(arrpictures[0].img)">
-								<div class=" ">
-									<label class="label-pictures">FOTO 1</label>
-								</div>
-							</div>
-						</div>
-						<div class="col s4 m4 center">
-							<div class="min-cards-footer center pictures" id="picture_2" img="" onclick="setPrevia(arrpictures[0].img)">
-								<label class="label-pictures">FOTO 2</label>
-							</div>
-						</div>
-						<div class="col s4 m4 center">
-							<div class="min-cards-footer center pictures" id="picture_3" img="" onclick="setPrevia(arrpictures[0].img)">
-								<label class="label-pictures">FOTO 3</label>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col s4 m4 center">
-				<div class="min-cards-buttons center" onclick="deletePicture();">EXCLUIR</div>
-			</div>
-			<div class="col s4 m4 center">
-				<div class="min-cards-buttons center" onclick="newPicture();">NOVA FOTO</div>
-			</div>
-			<div class="col s4 m4 center">
-				<div class="min-cards-buttons center" onclick="savePicture();">ENVIAR</div>
-			</div>
-		</div>
 	</div>
-
 
 	<input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">
 
@@ -173,14 +93,12 @@ $Campanha = Select('Escala7', '*', 'Campanhas', "Id = $IC", "",$link);
 	<script type="text/javascript" src="ajax/AjaxGenericDB.js"></script>
 	<script type="text/javascript" src="ajax/GenericFunctions.js"></script>
 	<script src="materialize/js/materialize.js"></script>
-	<script src="js/geoLocation.js"></script>
-	<script src="js/takePicture.js"></script>
-	<script type="text/javascript" src="js/VideoInstitucional/Video.js?<?=date('d/m/Y-H:i:s')?>"></script>
+	<script src="js/Questionarios/QuestionarioCampanha.js"></script>
 
 	<script type="text/javascript">
 		Campanha = <?=$Campanha?>;
 
-		$('.title-campanha').html(`${Campanha[0]['Campanha']}`)
+		$('.title-campanha').html(`Questionário ${Campanha[0]['Campanha']}`)
 	</script>
 </body>
 </html>

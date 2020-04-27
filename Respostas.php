@@ -101,10 +101,7 @@ session_start();
 						</thead>
 
 						<tbody class="color-default tbody-Respostas">
-							<td>Ativo</td>
-							<td>Campanha A</td>
-							<td><button type="button" class="btn btn-blue waves-effect tooltipped"  data-position="bottom" data-tooltip="Visualizar respostas">Respostas (20)</button></td>
-							<td><i class="material-icons i-default tooltipped" data-position="bottom" data-tooltip="Visualizar respostas">remove_red_eye</i></td>
+							
 						</tbody>
 					</table>
 				</div>
@@ -127,42 +124,7 @@ session_start();
 
 	<!-- Modal Structure -->
 	<div id="modalResposta" class="modal">
-		<div class="modal-content">
-			<div class="col s12 m12 right-align">
-				<img src="icons/close.png" class="responsive-img modal-close" onclick="clearForm('#formResposta')">
-			</div>
-
-			<div class="">
-				<div class="col s12 m3 center-align">
-					<img src="icons/user-bgd-blue.png" class="responsive-img">
-				</div>
-			</div>
-
-			<div class="container center-align">
-				<form id="formResposta">
-					<div class="input-field col s12 m7">
-						<input type="text" name="Name" id="Name" class="autocomplete c-blue">
-						<label for="Name" class="c-blue">Nome</label>
-					</div>
-
-					<div class="input-field col s12 m7">
-						<select id="Status" class="c-blue">
-							<option value="" disabled selected>Status</option>
-							<option value="1">Ativo</option>
-							<option value="0">Desativado</option>
-						</select>
-					</div>
-
-					<input type="hidden" name="controlButton" id="controlButton" value="Salvar">
-					<input type="hidden" name="Id" id="Id">
-				</form>
-
-				<div class="modal-footer">
-					<div class="col s12 m12">
-						<button type="button" class="btn btn-blue btn-action-formResposta">Salvar</button>
-					</div>
-				</div>
-			</div>
+		<div class="modal-content div-questionario-campanha">
 		</div>
 	</div>
 

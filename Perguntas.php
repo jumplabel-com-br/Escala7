@@ -139,7 +139,7 @@ session_start();
 			<div class="container center-align">
 				<form id="formPergunta">
 					<div class="input-field col s12 m7">
-						<select id="Questionarios" class="c-blue" plc="Questionarios">
+						<select id="Questionarios" class="c-blue SelectQuestionarios" plc="Questionarios">
 						</select>
 					</div>
 
@@ -164,9 +164,63 @@ session_start();
 						</select>
 					</div>
 
+
+					<input type="hidden" name="controlButton" id="controlButton" value="Salvar">
+					<input type="hidden" name="Id" id="Id">
+				</form>
+
+				<div class="modal-footer">
+					<div class="col s12 m12">
+						<button type="button" class="btn btn-blue btn-action-formPergunta" onclick="CRUDPerguntas('Insert','#formPergunta')">Salvar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="modalEditPergunta" class="modal">
+		<div class="modal-content">
+			<div class="col s12 m12 right-align">
+				<img src="icons/close.png" class="responsive-img modal-close" onclick="clearForm('#formPergunta')">
+			</div>
+
+			<div class="">
+				<div class="col s12 m3 center-align">
+					<img src="icons/user-bgd-blue.png" class="responsive-img">
+				</div>
+			</div>
+
+			<div class="container center-align">
+				<form id="formEditPergunta">
 					<div class="input-field col s12 m7">
+						<select id="Questionarios" class="c-blue SelectQuestionarios" plc="Questionarios">
+						</select>
+					</div>
+
+					<div class="input-field col s12 m7">
+						<input type="text" name="Pergunta" id="Pergunta" class="autocomplete c-blue" plc="Pergunta">
+						<label for="Pergunta" class="c-blue">Pergunta</label>
+					</div>
+
+					<div class="input-field col s12 m7">
+						<select id="Tipo" class="c-blue" plc="Tipo" onchange="toggleRespostas();">
+							<option value="" disabled selected>Tipo</option>
+							<option value="1">Combo</option>
+							<option value="0">Texto</option>
+						</select>
+					</div>
+
+					<div class="input-field col s12 m7">
+						<select id="Status" class="c-blue" plc="Status">
+							<option value="" disabled selected>Status</option>
+							<option value="1">Ativo</option>
+							<option value="0">Inativo</option>
+						</select>
+					</div>
+
+					<div class="input-field col s12 m7 div-respostas">
 						<input type="text" name="Resposta" id="Resposta" class="autocomplete c-blue" plc="Resposta">
-						<label for="Resposta" class="c-blue">Resposta</label>
+						<label for="Resposta"0 class="c-blue">Resposta</label>
 						<i class="material-icons prefix right i-default add-circle-respostas" onclick="CRUDRespostas();">add_circle</i>
 					</div>
 
@@ -192,7 +246,7 @@ session_start();
 
 				<div class="modal-footer">
 					<div class="col s12 m12">
-						<button type="button" class="btn btn-blue btn-action-formPergunta">Salvar</button>
+						<button type="button" class="btn btn-blue btn-action-formPergunta" onclick="CRUDPerguntas('Update','#formEditPergunta')">Salvar</button>
 					</div>
 				</div>
 			</div>

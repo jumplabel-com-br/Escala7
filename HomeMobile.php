@@ -97,7 +97,7 @@ function data($data){
 
 			<div class="row">
 				<div class="col s12 center">
-					<a class="btn btn-rounded b-blue bkg-white c-blue topics-buttons">
+					<a class="btn btn-rounded b-blue bkg-white c-blue topics-buttons" href="QuestionarioCampanha.php?type=New&getType=usr&IC=<?=$IC?>">
 						Questionario
 						<i class="fas fa-exclamation-circle i-default right"></i>
 						<i class="fas fa-question-circle right"></i>
@@ -139,7 +139,7 @@ function data($data){
 		});
 
 		var Campanha = <?=$Campanha?>;
-		Campanha = JSON.Parse(Campanha);
+		Campanha = Campanha;
 
 		function datePtBr(date){
 			date = date.replace(' 00:00:00', '');

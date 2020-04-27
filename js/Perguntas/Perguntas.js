@@ -27,7 +27,7 @@ function clearForm(form){
 }
 
 function toggleRespostas(){
-  if ($('#Tipo').val() == 1) {
+  if ($('#formEditPergunta #Tipo').val() == 1) {
     $('.add-circle-respostas, #table-Respostas').show();
   }else{
      $('.add-circle-respostas, #table-Respostas').hide();
@@ -67,6 +67,7 @@ function selectedQuestionario(option = 'Select'){
     type: 'POST',
     dataType: 'json',
     data: params,
+    async: false,
     beforeSend: function(){
       $('#modalProgress').modal('open');
     }
@@ -74,7 +75,7 @@ function selectedQuestionario(option = 'Select'){
   .done(function(data) {
 
     if (data.length > 0 ) {
-      $('#Questionarios').html(templateQuestionario(data));
+      $('.SelectQuestionarios').html(templateQuestionario(data));
       $('select').formSelect();
     }
 
@@ -94,7 +95,7 @@ function templateQuestionario(model){
     }).join('')}`
 }
 
-function CRUDPerguntas(option){
+function CRUDPerguntas(option, form){
 
 
   validarForm('#formPergunta');
@@ -103,14 +104,43 @@ function CRUDPerguntas(option){
     return false;
   }
 
-  let Id = $('#Id').val();
-  let Questionario = $('#Questionario').val();
-  let Pergunta = $('#Pergunta').val();
-  let Tipo = $('#Tipo').val();
-  let Status = $('#Status').val();
-  let Resposta = $('#Resposta').val();
-  let UserRegistration = $('#UserRegistration').val();
-  let UserInactivity = $('#UserInactivity').val();
+  let Id = $(`${form} #Id`).val();
+  let Questionario = $(`${form} #Questionarios`).val();
+  let Pergunta = $(`${form} #Pergunta`).val();
+  let Tipo = $(`${form} #Tipo`).val();
+  let Status = $(`${form} #Status`).val();
+  let Resposta = $(`${form} #Resposta`).val();
+  let UserRegistration = $(`#UserRegistration`).val();
+  let UserInactivity = $(`#UserInactivity`).val();
+
+  if (form == '#formEditPergunta') {
+    if (Questionario == '') {
+      alert('Preecha o questionário');
+      return false;
+    }
+
+    if (Pergunta == '') {
+      alert('Preecha o questionário');
+      return false;
+    }
+
+    if (Tipo == '') {
+      alert('Preecha o questionário');
+      return false;
+    }
+
+    if (Status == '') {
+      alert('Preecha o questionário');
+      return false;
+    }
+
+    if (Resposta == '' && Tipo == '1') {
+      alert('Preecha o questionário');
+      return false;
+    }
+  }
+
+ 
 
   let param = {
     Questionario,
@@ -124,11 +154,11 @@ function CRUDPerguntas(option){
 
   let Schema = 'Escala7';
   let tableName = 'Perguntas';
-  let columns = 'Questionario,Pergunta,Tipo,Status,UserRegistration,DateRegistration,UserInactivity,DateInactivity'
+  let columns = 'IdQuestionario,Pergunta,Tipo,Status,UserRegistration,DateRegistration,UserInactivity,DateInactivity'
   let lastquery = `'${param.Questionario}','${param.Pergunta}','${param.Tipo}','${param.Status}','${param.UserRegistration}',now(),'${param.UserInactivity}',now()`;
 
-  let setQuery = `Questionario = '${param.Questionario}',Pergunta = '${param.Pergunta}',Tipo = '${param.Tipo}', Status = '${param.Status}', UserRegistration = '${param.UserRegistration}'`
-  let where = `id = ${Id}`
+  let setQuery = `IdQuestionario = '${param.Questionario}',Pergunta = '${param.Pergunta}',Tipo = '${param.Tipo}', Status = '${param.Status}', UserRegistration = '${param.UserRegistration}'`
+  let where = form == '#formEditPergunta' ? `id = ${Id}` : ''
 
   if ($('#Status').val() == 0) {
     setQuery += `, UserInactivity = '${param.UserInactivity}',DateInactivity = now()`
@@ -151,7 +181,7 @@ function CRUDPerguntas(option){
     data: params,
   })
   .done(function(data) {
-
+    Perguntas();
     $('#modalUser').modal('close');
   })
   .fail(function() {
@@ -233,6 +263,7 @@ $.ajax({
 
   if (data.length > 0 && id > 0 && nameFunction == '') {
 
+    selectedQuestionario();
     setInputsModal(data);
     select('templateRespostas', $('#Id').val(), 'Respostas', '*');
 
@@ -262,7 +293,7 @@ function templateTablePerguntas(model){
       <td>${x.Name}</td>
       <td>${x.Pergunta}</td>
       <td>${x.Status == 1 ? 'Ativo' : 'Inativo'}</td>
-      <td><a href="#modalPergunta" class="modal-trigger" onclick="$('.btn-action-formPergunta').html('Editar'); select('', ${x.Id});selectedQuestionario();"><i class="fas fa-edit"></i></a></td>
+      <td><a href="#modalEditPergunta" class="modal-trigger" onclick="$('.btn-action-formPergunta').html('Editar'); select('', ${x.Id});"><i class="fas fa-edit"></i></a></td>
     </tr>
     `});
 }
@@ -279,17 +310,15 @@ function templateRespostas(model){
 }
 
 function setInputsModal(model){
-
   $('label[for="Pergunta"]').addClass('active');
   $('label[for="Tipo"]').addClass('active');
   $('label[for="Status"]').addClass('active');
 
-
-  $('#Id').val(model[0].Id);
-  $('#Questionarios').val(model[0].IdQuestionario);
-  $('#Pergunta').val(model[0].Pergunta);
-  $('#Tipo').val(model[0].Tipo);
-  $('#Status').val(model[0].Status);
+  $('#formEditPergunta #Id').val(model[0].Id);
+  $('#formEditPergunta #Questionarios').val(model[0].IdQuestionario);
+  $('#formEditPergunta #Pergunta').val(model[0].Pergunta);
+  $('#formEditPergunta #Tipo').val(model[0].Tipo);
+  $('#formEditPergunta #Status').val(model[0].Status);
 
   $('select').formSelect();
   toggleRespostas();

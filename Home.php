@@ -100,7 +100,7 @@ $dados_usuario = mysqli_fetch_array($result);
 		</div>
 
 		<div class="col s12">
-			<h3 class="white-text"><strong>olá Henrique</strong></h3>
+			<h3 class="white-text"><strong>Seja Bem-Vindo</strong></h3>
 			<h5 class="white-text">Administrador</h5>
 		</div>
 	</div>

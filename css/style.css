@@ -199,9 +199,17 @@ input[type=text]:not(.browser-default):focus:not([readonly]) + label.c-blue,
 }
 
 .min-cards-footer{
-	padding-top: 5%;
-	padding-bottom: 5%;
 	background-color: #fff;
+	height: 75px;
+    width: 60px;
+}
+
+.min-cards-buttons{
+	background-color: #fff;
+	height: 50px;
+}
+.label-pictures{
+	align-items: center;
 	color: #2A64AD;
 }
 
@@ -210,10 +218,14 @@ input[type=text]:not(.browser-default):focus:not([readonly]) + label.c-blue,
 }
 
 .opacity-70{
-	background-color: rgba(0,0,0,234);
+	background-color:rgba(28,28,28,0.3);
 }
 
 #myCamera video{
 	width: 100% !important;
 	height: auto !important;
+}
+
+#results{
+	margin-top: 5%;
 }

@@ -26,7 +26,7 @@ function takePicture()
 }
 
 function setPrevia(img){
-	 document.querySelector('#base64image').setAttribute("img" , img)
+	 document.querySelector('#base64image').setAttribute("src" , img)
 }
 
 function newPicture(){
