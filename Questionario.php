@@ -125,12 +125,12 @@ session_start();
 	<div id="modalQuestionario" class="modal">
 		<div class="modal-content">
 			<div class="col s12 m12 right-align">
-				<img src="icons/close.png" class="responsive-img modal-close" onclick="clearForm('#formQuestionario')">
+				<img src="images/icons/close.png" class="responsive-img modal-close" onclick="clearForm('#formQuestionario')">
 			</div>
 
 			<div class="">
 				<div class="col s12 m3 center-align">
-					<img src="icons/user-bgd-blue.png" class="responsive-img">
+					<img src="images/icons/user-bgd-blue.png" class="responsive-img">
 				</div>
 			</div>
 

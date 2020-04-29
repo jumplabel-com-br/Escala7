@@ -56,93 +56,97 @@ if (empty($getType)) {
 
 <body class="background-option background-index">
 	<section class="mt-3">
-		<div class="container ml-10-p">
-			<div class="row center-align">
-				<div class="col s12 center-align">
-					<div class="col s4"></div>
-					<div class="col s4">
-						<img src="images/DESK/1_wireframes_web_login/logo_branco.png" class="responsive-img">
-					</div>
-					<div class="col s4"></div>
-				</div>
-			</div>
-
-			<?php
-			if ($getType === 'adm' || $getType === 'cli') {				
-				echo '
-					<div class="row center-align">
-						<div class="col s12">
-							<div class="row">
-								<div class="input-field col s12">
-									<i class="material-icons prefix">assignment_ind</i>
-									<input type="text" id="autocomplete-input-usuario" class="autocomplete usuario color-white bb-white-input">
-									<label for="autocomplete-input-usuario">Usuário</label>
-								</div>
-							</div>
+		<form id="HomeMobile" action="HomeMobile.php" method="POST">
+			<div class="container ml-10-p">
+				<div class="row center-align">
+					<div class="col s12 center-align">
+						<div class="col s4"></div>
+						<div class="col s4">
+							<img src="images/DESK/1_wireframes_web_login/logo_branco.png" class="responsive-img">
 						</div>
-					</div>
-
-
-					<div class="row">
-						<div class="col s12">
-							<div class="row">
-								<div class="input-field col s12">
-									<i class="material-icons prefix remove_red_eye">remove_red_eye</i>
-									<input type="password" id="autocomplete-input-password" class="autocomplete autocomplete-input-password color-white">
-									<label for="password" class="autocomplete-input-password">Senha</label>
-
-									<input type="text" id="autocomplete-input-text-password" class="autocomplete autocomplete-input-text-password color-white" style="display: 		none">
-									<label for="autocomplete-input" class="autocomplete-input-text-password" style="display: none">Senha</label>
-								</div>
-							</div>
-						</div>
-						<div class="col s12 center-align">
-							<span class="helper-text color-white" data-error="wrong" data-success="left" onclick="newPassoword();">Esqueci minha senha?</span>
-						</div>
-					</div>
-				';
-			}else if($getType == 'usr'){
-				echo '
-					<div class="row center-align">
-						<div class="col s12">
-							<div class="row">
-								<div class="input-field col s12">
-									<i class="material-icons prefix">assignment_ind</i>
-									<input type="text" id="autocomplete-input-cpf" class="autocomplete cpf color-white bb-white-input">
-									<label for="autocomplete-input-cpf">CPF</label>
-								</div>
-							</div>
-						</div>
-					</div>
-
-
-					<div class="row">
-						<div class="col s12">
-							<div class="row">
-								<div class="input-field col s12">
-									<i class="material-icons prefix assignment_ind">assignment_ind</i>
-									<select id="Campanha" disabled>
-									</select>
-								</div>
-							</div>
-						</div>
-					</div>
-				';
-			};
-			?>
-			<div class="row">
-				<div class="col s12">
-					<div class="row">
-						<div class="col s12 center-align">
-							<button class="btn btn-default pulse" type="submit" name="action" onclick="verificaUsuario()">Entrar
-								<i class="material-icons right">send</i>
-							</button>
-						</div>
-
+						<div class="col s4"></div>
 					</div>
 				</div>
+				<?php
+				if ($getType === 'adm' || $getType === 'cli') {				
+					echo '
+						<div class="row center-align">
+							<div class="col s12">
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">assignment_ind</i>
+										<input type="text" id="autocomplete-input-usuario" class="autocomplete usuario color-white bb-white-input">
+										<label for="autocomplete-input-usuario">Usuário</label>
+									</div>
+								</div>
+							</div>
+						</div>
+	
+	
+						<div class="row">
+							<div class="col s12">
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix remove_red_eye">remove_red_eye</i>
+										<input type="password" id="autocomplete-input-password" class="autocomplete autocomplete-input-password color-white">
+										<label for="password" class="autocomplete-input-password">Senha</label>
+	
+									<input type="text" id="autocomplete-input-text-password" class="autocomplete autocomplete-input-text-password color-white" 	style="display: 		none">
+										<label for="autocomplete-input" class="autocomplete-input-text-password" style="display: none">Senha</label>
+									</div>
+								</div>
+							</div>
+							<div class="col s12 center-align">
+								<span class="helper-text color-white" data-error="wrong" data-success="left" onclick="newPassoword();">Esqueci minha senha?</span>
+							</div>
+						</div>
+					';
+				}else if($getType == 'usr'){
+					echo '
+						<div class="row center-align">
+							<div class="col s12">
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">assignment_ind</i>
+										<input type="text" name="Usuario" id="autocomplete-input-cpf" class="autocomplete cpf color-white bb-white-input">
+										<label for="autocomplete-input-cpf">CPF</label>
+									</div>
+								</div>
+							</div>
+						</div>
+	
+	
+						<div class="row">
+							<div class="col s12">
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix assignment_ind">assignment_ind</i>
+										<select name="Campanha" id="Campanha" disabled>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<input type="hidden" name="getType" id="getType">
+						<input type="hidden" name="IC" id="IC">
+					';
+				};
+				?>
+				<div class="row">
+					<div class="col s12">
+						<div class="row">
+							<div class="col s12 center-align">
+								<button class="btn btn-default pulse" type="button" name="action" onclick="verificaUsuario()">Entrar
+									<i class="material-icons right">send</i>
+								</button>
+							</div>
+	
+						</div>
+					</div>
+				</div>
 			</div>
-		</div>
+		</form>
 	</section>
 
 	<div id="modalProgress" class="modal modal-progress">
@@ -261,8 +265,12 @@ if (empty($getType)) {
 		function validUser(){
 
 			if (getType == 'usr') {
-				redirectToAction(`HomeMobile.php?getType=${getType}&IC=${Campanha}`);
-				return false;
+				if (ValidatorCPF($('#autocomplete-input-cpf').val())) {
+					$('#getType').val(getType);
+					$('#IC').val(Campanha);
+					$('#HomeMobile').submit();
+					return false;
+				}
 			}
 
 

@@ -28,9 +28,9 @@ function clearForm(form){
 
 function toggleRespostas(){
   if ($('#formEditPergunta #Tipo').val() == 1) {
-    $('.add-circle-respostas, #table-Respostas').show();
+    $('.div-respostas, #table-Respostas').show();
   }else{
-     $('.add-circle-respostas, #table-Respostas').hide();
+     $('.div-respostas, #table-Respostas').hide();
   }
 }
 
@@ -95,7 +95,7 @@ function templateQuestionario(model){
     }).join('')}`
 }
 
-function CRUDPerguntas(option, form){
+function CreatePerguntas(option = 'Insert'){
 
 
   validarForm('#formPergunta');
@@ -104,12 +104,51 @@ function CRUDPerguntas(option, form){
     return false;
   }
 
-  let Id = $(`${form} #Id`).val();
-  let Questionario = $(`${form} #Questionarios`).val();
-  let Pergunta = $(`${form} #Pergunta`).val();
-  let Tipo = $(`${form} #Tipo`).val();
-  let Status = $(`${form} #Status`).val();
-  let Resposta = $(`${form} #Resposta`).val();
+  let Questionario = $(`#formPergunta #Questionarios`).val();
+  let Pergunta = $(`#formPergunta #Pergunta`).val();
+  let Tipo = $(`#formPergunta #Tipo`).val();
+  let Status = $(`#formPergunta #Status`).val();
+  let Resposta = $(`#formPergunta #Resposta`).val();
+  let UserRegistration = $(`#UserRegistration`).val();
+  let UserInactivity = $(`#UserInactivity`).val();
+
+
+  let Schema = 'Escala7';
+  let tableName = 'Perguntas';
+  let columns = 'IdQuestionario,Pergunta,Tipo,Status,UserRegistration,DateRegistration,UserInactivity,DateInactivity'
+  let lastquery = `'${Questionario}','${Pergunta}','${Tipo}','${Status}','${UserRegistration}',now(),'${UserInactivity}',now()`;
+
+  let params = {
+    Schema, 
+    tableName,
+    columns,
+    lastquery,
+    option
+  }
+
+  $.ajax({
+    url: 'DBInserts.php',
+    type: 'POST',
+    dataType: 'html',
+    data: params,
+  })
+  .done(function(data) {
+    Perguntas();
+    $('#modalPergunta').modal('close');
+  })
+  .fail(function() {
+    console.log("error");
+  });
+
+}
+
+function UpdatePerguntas(option = 'Update'){
+  let Id = $(`#formEditPergunta #Id`).val();
+  let Questionario = $(`#formEditPergunta #Questionarios`).val();
+  let Pergunta = $(`#formEditPergunta #Pergunta`).val();
+  let Tipo = $(`#formEditPergunta #Tipo`).val();
+  let Status = $(`#formEditPergunta #Status`).val();
+  let Resposta = $(`#formEditPergunta #Resposta`).val();
   let UserRegistration = $(`#UserRegistration`).val();
   let UserInactivity = $(`#UserInactivity`).val();
 
@@ -133,32 +172,13 @@ function CRUDPerguntas(option, form){
       alert('Preecha o questionário');
       return false;
     }
-
-    if (Resposta == '' && Tipo == '1') {
-      alert('Preecha o questionário');
-      return false;
-    }
-  }
-
- 
-
-  let param = {
-    Questionario,
-    Pergunta,
-    Tipo,
-    Status,
-    UserRegistration,
-    UserInactivity,
   }
 
 
   let Schema = 'Escala7';
   let tableName = 'Perguntas';
-  let columns = 'IdQuestionario,Pergunta,Tipo,Status,UserRegistration,DateRegistration,UserInactivity,DateInactivity'
-  let lastquery = `'${param.Questionario}','${param.Pergunta}','${param.Tipo}','${param.Status}','${param.UserRegistration}',now(),'${param.UserInactivity}',now()`;
-
-  let setQuery = `IdQuestionario = '${param.Questionario}',Pergunta = '${param.Pergunta}',Tipo = '${param.Tipo}', Status = '${param.Status}', UserRegistration = '${param.UserRegistration}'`
-  let where = form == '#formEditPergunta' ? `id = ${Id}` : ''
+  let setQuery = `IdQuestionario = '${Questionario}',Pergunta = '${Pergunta}',Tipo = '${Tipo}', Status = '${Status}', UserRegistration = '${UserRegistration}'`;
+  let where = `id = ${Id}`;
 
   if ($('#Status').val() == 0) {
     setQuery += `, UserInactivity = '${param.UserInactivity}',DateInactivity = now()`
@@ -167,11 +187,9 @@ function CRUDPerguntas(option, form){
   let params = {
     Schema, 
     tableName,
-    columns,
-    lastquery,
-    option,
     setQuery,
-    where
+    where,
+    option
   }
 
   $.ajax({
@@ -182,23 +200,23 @@ function CRUDPerguntas(option, form){
   })
   .done(function(data) {
     Perguntas();
-    $('#modalUser').modal('close');
+    $('#modalEditPergunta').modal('close');
   })
   .fail(function() {
     console.log("error");
   });
-
 }
 
-function CRUDRespostas(option = 'Insert'){
+function CreateRespostas(option = 'Insert'){
 
 
   let resposta = $('#Resposta').val();
-  let IdQuestionario = $('#Questionarios').val();
+  let IdPergunta = $('#formEditPergunta #Id').val();
+  let IdQuestionario = $('#formEditPergunta #Questionarios').val();
   let Schema = 'Escala7';
   let tableName = 'Respostas';
-  let columns = 'IdQuestionario, Respostas'
-  let lastquery = `${IdQuestionario}, '${resposta}'`;
+  let columns = 'IdPergunta, IdQuestionario, Respostas'
+  let lastquery = `${IdPergunta}, ${IdQuestionario}, '${resposta}'`;
 
 
   let param = {
@@ -214,17 +232,46 @@ function CRUDRespostas(option = 'Insert'){
     type: 'POST',
     dataType: 'html',
     data: param,
-    async: false,
-    beforeSend: function(){
-      $('#modalProgress').modal('open');
-    }
   })
   .done(function() {
     console.log("success respostas");
+    selectRespostas();
+  })
+  .fail(function() {
+    console.log("error");
+  });
+  
+}
 
-    select('templateRespostas', $('#Questionarios').val(), 'Respostas', '*');
+function selectRespostas(option = 'Select'){
 
-    $('#modalProgress').modal('close');
+  let Schema = 'Escala7';
+  let tableName = 'Respostas';
+  let columns = '*';
+  let where = `IdPergunta = ${$('#formEditPergunta #Id').val()}`;
+
+  let params = {
+    option,
+    Schema,
+    tableName,
+    columns,
+    where
+  }
+
+  $.ajax({
+    url: 'DBInserts.php',
+    type: 'POST',
+    dataType: 'json',
+    data: params,
+  })
+  .done(function(data) {
+    console.log("success");
+    
+    if (data.length > 0) {
+      $('.tbody-Respostas').html(templateRespostas(data));
+    }else{
+      $('.tbody-Respostas').html('<tr><td>0</td><td>Nenhum registro encontrado</td></tr>')
+    }
   })
   .fail(function() {
     console.log("error");
@@ -238,11 +285,7 @@ function select(nameFunction, id, tableName = 'Perguntas', columns = '*', comple
  let Schema = 'Escala7';
  let where = id > 0 ? `id = ${id}` : '';
 
-if (id > 0 && tableName == 'Respostas') {
-  where = `IdQuestionario = ${id}`;
-}
-
- let params = {
+let params = {
   option,
   Schema,
   tableName,
@@ -265,12 +308,7 @@ $.ajax({
 
     selectedQuestionario();
     setInputsModal(data);
-    select('templateRespostas', $('#Id').val(), 'Respostas', '*');
 
-  }else if (data.length > 0 && nameFunction == 'templateRespostas') {
-    
-    $('.tbody-Respostas').html(templateRespostas(data));
-    
   }else{
     return data;
   }
@@ -295,7 +333,7 @@ function templateTablePerguntas(model){
       <td>${x.Status == 1 ? 'Ativo' : 'Inativo'}</td>
       <td><a href="#modalEditPergunta" class="modal-trigger" onclick="$('.btn-action-formPergunta').html('Editar'); select('', ${x.Id});"><i class="fas fa-edit"></i></a></td>
     </tr>
-    `});
+    `}).join('');
 }
 
 function templateRespostas(model){
@@ -306,7 +344,7 @@ function templateRespostas(model){
         <td>${x.Respostas}</td>
       </tr>
     `
-  })
+  }).join('');
 }
 
 function setInputsModal(model){
@@ -322,6 +360,7 @@ function setInputsModal(model){
 
   $('select').formSelect();
   toggleRespostas();
+  selectRespostas();
 }
 
 function dateFormart(inputDate){

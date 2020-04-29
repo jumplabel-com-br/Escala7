@@ -28,19 +28,19 @@ function fnTemplateIndex(model){
 		<tr>
 			<td>${x.Status == 0 ? 'Desativado' : 'Ativo'}</td>
 			<td>${x.Campanha}</td>
-			<td><button type="button" class="btn btn-blue waves-effect tooltipped"  data-position="bottom" data-tooltip="Visualizar respostas" onclick="returnPerguntas(${x.IdQuestionario}, ${x.IdCampanha})">Respostas (${x.countRespostas})</button></td>
-			<td><i class="material-icons i-default tooltipped" data-position="bottom" data-tooltip="Visualizar respostas" onclick="returnPerguntas(${x.IdQuestionario}, ${x.IdCampanha})">remove_red_eye</i></td>
+			<td><button type="button" class="btn btn-blue waves-effect tooltipped"  data-position="bottom" data-tooltip="Visualizar respostas" onclick="returnPerguntas(${x.IdCampanha})">Respostas (${x.countRespostas})</button></td>
+			<td><i class="material-icons i-default tooltipped" data-position="bottom" data-tooltip="Visualizar respostas" onclick="returnPerguntas(${x.IdCampanha})">remove_red_eye</i></td>
 		</tr>
 		`
 	});
 }
 
-function returnPerguntas(IdQuestionario, IdCampanha, option = 'Select'){
+function returnPerguntas(IdCampanha, option = 'Select'){
 
 	let Schema = 'Escala7';
   	let tableName = 'Perguntas';
   	let columns = 'Id, IdQuestionario, Pergunta, Tipo'
-  	let where = `IdQuestionario = ${IdQuestionario}`
+  	let where = `IdQuestionario = ${IdCampanha}`
 
 	let params = {
 		Schema,

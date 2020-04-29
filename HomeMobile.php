@@ -2,14 +2,35 @@
 session_start();
 require_once('DBInserts.php');
 
-$User = isset($_SESSION['User']);
-$IC = isset($_GET['IC']);
-$Campanha = Select('Escala7', '*', 'Campanhas', "Id = $IC", "",$link);
 
-function data($data){
-    return date("d/m/Y", strtotime($data));
+$_SESSION['Questionario'] = "";
+$_SESSION["VI"] = "";
+$_SESSION["VC"] = "";
+$_SESSION["FotosOk"] = "";
+
+$User = isset($_SESSION['User']) ? $_SESSION['User'] : '';
+$_SESSION['Questionario'] = isset($_GET['Questionario']) ? $_SESSION['Questionario'] : '';
+
+if (isset($_GET['IC'])) {
+	$IC = $_GET['IC'];
 }
 
+if (isset($_POST['IC'])) {
+	$IC = $_POST['IC'];
+}
+
+$_SESSION["IC"] = $IC;
+$replaceUser = array(".", "-");
+
+isset($_POST['Usuario']) ? $_SESSION['User'] = str_replace($replaceUser, "", $_POST['Usuario']) : '';
+
+$Campanha = Select('Escala7', 'Id, QRCode, Campanha, IdQuestionario, IFrame, Dt_Inicio, Dt_Termino', 'Campanhas', "Id =".$_SESSION["IC"], "",$link);
+$_SESSION["Campanha"] = $Campanha;
+
+
+$VI = isset($_GET["VI"]) ? $_SESSION["VI"] = $_GET["VI"] : '';
+$VC = isset($_GET["VC"]) ? $_SESSION["VC"] = $_GET["VC"] : '';
+$FotosOk = isset($_GET["FotosOk"]) ? $_SESSION["FotosOk"] = $_GET["FotosOk"] : '';
 ?>
 
 <!DOCTYPE html>
@@ -69,17 +90,8 @@ function data($data){
 		<div class="container center">
 			<div class="row">
 				<div class="col s12 center">
-					<a class="btn btn-rounded b-blue bkg-white c-blue topics-buttons" href="Videos.php?type=Inst&getType=usr&IC=<?=$IC?>">
-						<i class="material-icons right i-default">videocam</i>Video Institucional
-					</a>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col s12 center">
-					<a class="btn btn-rounded b-blue bkg-white c-blue topics-buttons" href="Videos.php?type=Mont&getType=usr&IC=<?=$IC?>">
-						Video Montagem
-						<i class="fas fa-exclamation-circle i-default right"></i>
+					<a class="btn btn-rounded b-blue bkg-white c-blue topics-buttons" href="Videos.php?type=Inst&getType=usr&IC=<?=$IC?>&VI=F">
+						Video Institucional
 						<i class="material-icons right i-default">videocam</i>
 					</a>
 				</div>
@@ -87,9 +99,31 @@ function data($data){
 
 			<div class="row">
 				<div class="col s12 center">
-					<a class="btn btn-rounded b-blue bkg-white c-blue topics-buttons" href="Fotos.php?type=New&getType=usr&IC=<?=$IC?>">
+					<a class="btn btn-rounded b-blue bkg-white c-blue topics-buttons" href="Videos.php?type=Mont&getType=usr&IC=<?=$IC?>&VC=F">
+						Video Montagem
+						<?php 
+							if ($_SESSION["VC"] == "T") {
+								echo '<i class="material-icons right i-default">check</i>';
+							}else{
+								echo '<i class="fas fa-exclamation-circle right "></i>';
+							}
+						?>
+						<i class="material-icons right i-default">videocam</i>
+					</a>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col s12 center">
+					<a class="btn btn-rounded b-blue bkg-white c-blue topics-buttons <?=$_SESSION["FotosOk"] == "T" ? "disabled" : ''?>" href="Fotos.php?type=New&getType=usr&IC=<?=$IC?>">
 						Foto
-						<i class="fas fa-exclamation-circle i-default right"></i>
+						<?php 
+							if ($_SESSION["FotosOk"] == "T") {
+								echo '<i class="material-icons right i-default">check</i>';
+							}else{
+								echo '<i class="fas fa-exclamation-circle right "></i>';
+							}
+						?>
 						<i class="fas fa-camera right"></i>
 					</a>
 				</div>
@@ -99,7 +133,13 @@ function data($data){
 				<div class="col s12 center">
 					<a class="btn btn-rounded b-blue bkg-white c-blue topics-buttons" href="QuestionarioCampanha.php?type=New&getType=usr&IC=<?=$IC?>">
 						Questionario
-						<i class="fas fa-exclamation-circle i-default right"></i>
+						<?php 
+							if ($_SESSION["Questionario"] == "OK") {
+								echo '<i class="material-icons right i-default">check</i>';
+							}else{
+								echo '<i class="fas fa-exclamation-circle right "></i>';
+							}
+						?>
 						<i class="fas fa-question-circle right"></i>
 					</a>
 				</div>
@@ -111,7 +151,7 @@ function data($data){
 		<section class="center">
 			<div class="container center">
 				<div class="col s12 center">
-					<button class="btn btn-rounded b-blue bkg-blue c-white" onclick="logoff();">Sair</button>
+					<button class="btn btn-rounded b-blue bkg-blue c-white" onclick="logoff('usr');">Sair</button>
 				</div>
 				<div class="col s12 center">
 					<i class="medium material-icons i-default" onclick="$('.section-minha-campanha').toggle(); $('.section-estrutura-campanha').toggle();">keyboard_arrow_up</i>
@@ -131,6 +171,7 @@ function data($data){
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 	<script type="text/javascript" src="materialize/js/materialize.js"></script>
 	<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+	<script type="text/javascript" src="ajax/GenericFunctions.js"></script>
 
 	<script type="text/javascript">
 

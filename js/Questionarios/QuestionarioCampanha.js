@@ -4,6 +4,14 @@ $(document).ready(function($) {
 });
 
 function sendForm(option = 'Insert'){
+
+	validarForm('#formQuestionarioCampanha');
+
+	if (v == false) {
+		return false;
+	}
+
+	InserRespostasUsers();
 	let str = "";
 
 	let Schema = 'Escala7';
@@ -35,6 +43,45 @@ function sendForm(option = 'Insert'){
 	})
 	.done(function(data) {
 		console.log("send success");
+		$('#modalProgress').modal('close');
+
+		window.location.href = window.location.href.replace('QuestionarioCampanha', 'HomeMobile')+"&Questionario=OK"
+	})
+	.fail(function() {
+		console.log("error");
+		$('#modalProgress').modal('close');
+	});
+}
+
+
+function InserRespostasUsers(option = 'Insert'){
+	let Schema = 'Escala7';
+  	let tableName = 'RespostasUsers';
+  	let columns = 'IdCampanha, CPF, Status, DataCriacao'
+
+  	let lastquery = `${$('#IdQuestionario').val()}, '${$('#UserRegistration').val()}', 1, now()`
+
+
+  	let params = {
+		Schema,
+		tableName,
+		columns,
+		lastquery,
+		option
+	};
+
+	$.ajax({
+		url: 'DBInserts.php',
+		type: 'POST',
+		dataType: 'html',
+		data: params,
+		beforeSend: function(){
+			$('#modalProgress').modal('open');
+		}
+	})
+	.done(function(data) {
+		console.log("send success");
+		$('#modalProgress').modal('close');
 	})
 	.fail(function() {
 		console.log("error");
@@ -46,12 +93,14 @@ function returnPerguntas(option = 'Select'){
 
 	let Schema = 'Escala7';
   	let tableName = 'Perguntas';
-  	let columns = 'Id, IdQuestionario, Pergunta, Tipo'
+  	let columns = 'Id, IdQuestionario, Pergunta, Tipo';
+  	let where = `IdQuestionario = ${Campanha[0].Id}`
 
 	let params = {
 		Schema,
 		tableName,
 		columns,
+		where,
 		option
 	};
 
@@ -80,7 +129,7 @@ function returnPerguntas(option = 'Select'){
 function templatePerguntas(model){
 	return`
 		<input type="hidden" name="IdQuestionario" id="IdQuestionario" value="${model[0].IdQuestionario}">
-		<form class="col s12">
+		<form class="col s12" id="formQuestionarioCampanha">
 			${model.map(value =>{
 				return`
 					<div class="row">
@@ -88,14 +137,14 @@ function templatePerguntas(model){
 							${value.Tipo == 0 ? 
 								`
 									<div class="input-field col s12">
-										<input type="text" id="${value.IdQuestionario}" class="autocomplete c-blue">
-										<label for="${value.IdQuestionario}" class="c-blue">${value.Pergunta}</label>
+										<input type="text" id="${value.Id}" class="autocomplete c-blue" plc="'${value.Pergunta}'">
+										<label for="${value.Id}" class="c-blue">${value.Pergunta}</label>
 									</div>
 								`
 							: `
 								<div class="input-field col s12">
-								    <select id="${value.IdQuestionario}">
-								      ${returnOptions(value.IdQuestionario, value.Pergunta)}								      	
+								    <select id="${value.Id}" plc="'${value.Pergunta}'">
+								      ${returnOptions(value.Id, value.IdQuestionario, value.Pergunta)}								      	
 								    </select>
 								    <label>${value.Pergunta}</label>
 								  </div>
@@ -116,15 +165,17 @@ function templatePerguntas(model){
 	`;
 }
 
-function returnOptions(IdQuestionario,firstOption, option = 'Select'){
+function returnOptions(IdPergunta, IdQuestionario,firstOption, option = 'Select'){
 	let Schema = 'Escala7';
   	let tableName = 'Respostas';
-  	let columns = 'Id, IdQuestionario,Respostas'
+  	let columns = 'Id, IdPergunta, IdQuestionario,Respostas'
+  	let where = `IdPergunta = ${IdPergunta}`
 
 	let params = {
 		Schema,
 		tableName,
 		columns,
+		where,
 		option
 	};
 
@@ -138,8 +189,11 @@ function returnOptions(IdQuestionario,firstOption, option = 'Select'){
 		}
 	})
 	.done(function(data) {
-		$('#'+IdQuestionario).html(templateOptions(data, firstOption));
+		$('#'+IdPergunta).html(templateOptions(data, firstOption));
 		$('select').formSelect();
+		$('.select-dropdown li span').each(function(){
+    		$(this).html($(this).html().replace(/star/g, '<i class="material-icons yellow-text">star</i>'));
+		})
 	})
 	.fail(function() {
 		console.log("error");
@@ -149,11 +203,27 @@ function returnOptions(IdQuestionario,firstOption, option = 'Select'){
 
 function templateOptions(model, firstOption){
 	return`
-		<option selected disabled>${firstOption}</option>
-		${model.map(value => {
+		<option selected disabled value="">${firstOption}</option>
+		${model.map((value, i) => {
 			return`
-				<option value="${value.Id}">${value.Respostas}</option>
+				<option value="${value.Id}">${value.Respostas/*Stars(i)*/}</option>
 			`	
-		})}
+		}).join('')}
 	`
+}
+
+function Stars(totalStars){
+	stars = [];
+	for (var i = 0; i <= totalStars; i++) {
+   		stars.push({
+   			'star' : i
+   		})
+   		// more statements
+	}
+
+	return stars.map(x => {
+		return `
+			<label>star</label>
+		`
+	}).join('')
 }

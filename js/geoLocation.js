@@ -21,22 +21,11 @@ function getLocation()
 
 function showPosition(position)
 {
-	lat = position.coords.latitude;
-	lon = position.coords.longitude;
-	//latlon = new google.maps.LatLng(lat, lon)
-	//mapholder = document.getElementById('mapholder')
-	//mapholder.style.height = '400px';
-	//mapholder.style.width = '423px';
+	let lat = position.coords.latitude;
+	let lon = position.coords.longitude;
 
-	//var myOptions = {
-	//	center:latlon,zoom:20,
-	//	mapTypeId:google.maps.MapTypeId.ROADMAP,
-	//	mapTypeControl:false,
-	//	navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
-	//};
-
-	//var map = new google.maps.Map(document.getElementById("mapholder"),myOptions);
-	//var marker = new google.maps.Marker({position:latlon,map:map,title:"Você está Aqui!"});
+	$('#latitue').val(lat);
+	$('#longitude').val(lon);
 
 	autorizationLocation = true
 }

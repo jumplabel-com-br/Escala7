@@ -131,3 +131,13 @@ function onChipUpdate(option = 'Update'){
 	});	
 }
 
+function redirectHomeParams(){
+	
+	if (VI == 'F') {
+		window.location.href = "http://localhost/Escala7/HomeMobile.php?type=Inst&getType=usr&IC=1&VI=T"
+	}else if (VC == 'F') {
+		window.location.href = `http://localhost/Escala7/HomeMobile.php?type=Inst&getType=usr&IC=1&VI=${VI}&VC=T`
+	}
+	
+}
+

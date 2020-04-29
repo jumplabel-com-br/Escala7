@@ -63,6 +63,18 @@ i.i-default{
 	color: #5B87BF !important;
 }
 
+i.i-red{
+	color: #d50000 !important;
+}
+
+i.i-green{
+	color: #00c853 !important;
+}
+
+i.i-black{
+	color: #000000  !important;
+}
+
 .color-default{
 	color: #2A64AD;
 }

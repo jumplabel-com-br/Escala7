@@ -1,9 +1,8 @@
-function logoff(){
+function logoff(type = 'adm'){
 
 	let option = 'logoff';
-	let type = window.location.href.split('=')[1].substr(0,3);
-	let IC = window.location.href.split('=')[2].replace('&QCC','');
-	let QCC = window.location.href.split('=')[3];
+	let IC = Campanha[0].Id;
+	let QCC = Campanha[0].QRCode;
 
 	$.ajax({
 		url: 'GenericFunctions.php',

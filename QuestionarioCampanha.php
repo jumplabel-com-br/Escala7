@@ -93,6 +93,7 @@ $Campanha = Select('Escala7', '*', 'Campanhas', "Id = $IC", "",$link);
 	<script type="text/javascript" src="ajax/AjaxGenericDB.js"></script>
 	<script type="text/javascript" src="ajax/GenericFunctions.js"></script>
 	<script src="materialize/js/materialize.js"></script>
+	<script src="js/Generic.js"></script>
 	<script src="js/Questionarios/QuestionarioCampanha.js"></script>
 
 	<script type="text/javascript">
