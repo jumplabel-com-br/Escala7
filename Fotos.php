@@ -53,7 +53,7 @@ $Campanha = Select('Escala7', '*', 'Campanhas', "Id = $IC", "",$link);
 	</style>
 </head>
 
-<body class="background background-home">
+<body class="background-home">
 
 	<div class="container-new-foto">
 		<div class="row">

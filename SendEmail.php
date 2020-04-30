@@ -1,5 +1,6 @@
 <?php
 
+
 // O remetente deve ser um e-mail do seu domínio conforme determina a RFC 822.
 // O return-path deve ser ser o mesmo e-mail do remetente.
 $destinatario = $_POST["destinatario"];
@@ -17,4 +18,22 @@ if($envio)
  echo "Mensagem enviada com sucesso";
 else
  echo "A mensagem não pode ser enviada";
+
+ /*ini_set('display_errors', 1);
+
+ error_reporting(E_ALL);
+
+ $from = "contato@jumplabel.com.br";
+
+ $to = "matheus01gomes01ferreira2001@gmail.com";
+
+ $subject = "Verificando o correio do PHP";
+
+ $message = "O correio do PHP funciona bem";
+
+ $headers = "De:". $from;
+
+ mail($to, $subject, $message, $headers);
+
+ echo "A mensagem de e-mail foi enviada.";*/
 ?>

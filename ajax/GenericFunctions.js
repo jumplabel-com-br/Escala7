@@ -1,8 +1,12 @@
 function logoff(type = 'adm'){
 
 	let option = 'logoff';
-	let IC = Campanha[0].Id;
-	let QCC = Campanha[0].QRCode;
+	let IC;
+	let QCC;
+	if (type != 'adm') {
+		IC = Campanha[0].Id;
+		QCC = Campanha[0].QRCode;
+	}
 
 	$.ajax({
 		url: 'GenericFunctions.php',

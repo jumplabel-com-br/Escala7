@@ -53,6 +53,10 @@
 	background-size: cover;	
 }
 
+.background-questionatio{
+	background-image: url('../images/MOBILE/7_wireframes_mobile_responderquestionario_V2/fundo_colorido.png');
+	background-size: cover;
+}
 
 .color-white,
 i.material-icons {
@@ -213,7 +217,7 @@ input[type=text]:not(.browser-default):focus:not([readonly]) + label.c-blue,
 .min-cards-footer{
 	background-color: #fff;
 	height: 75px;
-    width: 60px;
+	width: 60px;
 }
 
 .min-cards-buttons{
@@ -240,4 +244,64 @@ input[type=text]:not(.browser-default):focus:not([readonly]) + label.c-blue,
 
 #results{
 	margin-top: 5%;
+}
+
+
+
+
+
+
+
+
+
+/**********************************QR Code *******************************/
+.qr-code-generator {
+	width: 500px;
+	margin: 0 auto;
+}
+
+.qr-code-generator * {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+#qrcode {
+	width: 128px;
+	height: 128px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+#qrcode a {
+	font-size: 0.8em;
+}
+
+.qr-url, .qr-size {
+	padding: 0.5em;
+	border: 1px solid #ddd;
+	border-radius: 2px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.qr-url {
+	width: 79%;
+}
+
+.qr-size {
+	width: 20%;
+}
+
+.generate-qr-code {
+	display: block;
+	width: 100%;
+	margin: 0.5em 0 0;
+	padding: 0.25em;
+	font-size: 1.2em;
+	border: none;
+	cursor: pointer;
+	background-color: #e5554e;
+	color: #fff;
 }

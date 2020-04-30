@@ -237,6 +237,20 @@ function setInputsModal(model){
   });
 
    $('select').formSelect();
+
+   let url = `https://pjle7.000webhostapp.com/?type=usr&IC=${model[0].Id}&QCC=${model[0].QRCode}`
+      
+      // Clear Previous QR Code
+      $('#qrcode').empty();
+
+      // Set Size to Match User Input
+      $('#qrcode').css({
+        'width' : 158,
+        'height' : 158
+      })
+
+      // Generate and Output QR Code
+      $('#qrcode').qrcode({width: 158,height: 158,text: url});
 }
 
 function dateFormart(inputDate){

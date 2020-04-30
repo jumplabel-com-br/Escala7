@@ -2,7 +2,7 @@
 session_start();
 require_once('DBInserts.php');
 
-$getType = (isset($_GET["type"])) ? $_GET["type"] : '';
+$getType = (isset($_GET["type"])) ? $_GET["type"] : 'adm';
 $IdCampanha = (isset($_GET["IC"])) ? $_GET["IC"] : '';
 $QrCodeCampanha = (isset($_GET["QCC"])) ? $_GET["QCC"] : '';
 $countCampanha = 2; 

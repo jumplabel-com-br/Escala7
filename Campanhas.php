@@ -285,6 +285,9 @@
 				</div>
 
 				<div class="input-field col s12 m7">
+						<div id="qrcode"></div>
+				</div>
+				<div class="input-field col s12 m7">
 					<iframe src="" id="iframeCampanha" style="width: auto; height: auto"></iframe>
 				</div>
 
@@ -312,6 +315,7 @@
 <input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">
 <input type="hidden" name="UserInactivity" id="UserInactivity" value="<?=$_SESSION['User']?>">
 <!-- Compiled and minified JavaScript -->
+<script type="text/javascript" src="QRCode/qrcodeJquery.js"></script>
 <script type="text/javascript" src="ajax/AjaxGenericDB.js"></script>
 <script type="text/javascript" src="ajax/GenericFunctions.js"></script>
 <script src="materialize/js/materialize.js"></script>

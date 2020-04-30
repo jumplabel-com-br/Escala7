@@ -54,7 +54,7 @@ $Campanha = Select('Escala7', '*', 'Campanhas', "Id = $IC", "",$link);
 </head>
 
 <body class="">
-	<nav>
+	<nav class="background-questionatio">
 		<div class="row">
 			<div class="col s6 m6">
 				<a href="HomeMobile.php?getType=usr&IC=<?=$IC?>"><i class="medium material-icons">keyboard_backspace</i></a>
