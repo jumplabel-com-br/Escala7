@@ -275,7 +275,7 @@ session_start();
 
 				<div class="input-field col s12 m7">
 
-					<input type="text" id="CPF" class="autocomplete c-blue" plc="CPF">
+					<input type="text" id="CPF" class="autocomplete c-blue">
 					<label for="CPF" class="c-blue">CPF</label>
 				</div>
 
