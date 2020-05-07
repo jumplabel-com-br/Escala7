@@ -35,8 +35,8 @@ function toggleRespostas(){
 }
 
 function Perguntas(){
-  let sql = `SELECT perguntas.*, questionarios.Name FROM Escala7.Perguntas as perguntas
-    join Escala7.Questionarios as questionarios on perguntas.IdQuestionario = questionarios.Id;`
+  let sql = `SELECT perguntas.*, questionarios.Name FROM escala75_Easy7.Perguntas as perguntas
+    join escala75_Easy7.Questionarios as questionarios on perguntas.IdQuestionario = questionarios.Id;`
   
   SelectAdvanced(sql);
 
@@ -50,7 +50,7 @@ function Perguntas(){
 
 function selectedQuestionario(option = 'Select'){
 
-  let Schema = 'Escala7';
+  let Schema = 'escala75_Easy7';
   let tableName = 'Questionarios';
   let columns = 'Id, Name';
 
@@ -113,7 +113,7 @@ function CreatePerguntas(option = 'Insert'){
   let UserInactivity = $(`#UserInactivity`).val();
 
 
-  let Schema = 'Escala7';
+  let Schema = 'escala75_Easy7';
   let tableName = 'Perguntas';
   let columns = 'IdQuestionario,Pergunta,Tipo,Status,UserRegistration,DateRegistration,UserInactivity,DateInactivity'
   let lastquery = `'${Questionario}','${Pergunta}','${Tipo}','${Status}','${UserRegistration}',now(),'${UserInactivity}',now()`;
@@ -152,7 +152,7 @@ function UpdatePerguntas(option = 'Update'){
   let UserRegistration = $(`#UserRegistration`).val();
   let UserInactivity = $(`#UserInactivity`).val();
 
-  if (form == '#formEditPergunta') {
+  
     if (Questionario == '') {
       alert('Preecha o questionário');
       return false;
@@ -172,10 +172,9 @@ function UpdatePerguntas(option = 'Update'){
       alert('Preecha o questionário');
       return false;
     }
-  }
 
 
-  let Schema = 'Escala7';
+  let Schema = 'escala75_Easy7';
   let tableName = 'Perguntas';
   let setQuery = `IdQuestionario = '${Questionario}',Pergunta = '${Pergunta}',Tipo = '${Tipo}', Status = '${Status}', UserRegistration = '${UserRegistration}'`;
   let where = `id = ${Id}`;
@@ -213,7 +212,7 @@ function CreateRespostas(option = 'Insert'){
   let resposta = $('#Resposta').val();
   let IdPergunta = $('#formEditPergunta #Id').val();
   let IdQuestionario = $('#formEditPergunta #Questionarios').val();
-  let Schema = 'Escala7';
+  let Schema = 'escala75_Easy7';
   let tableName = 'Respostas';
   let columns = 'IdPergunta, IdQuestionario, Respostas'
   let lastquery = `${IdPergunta}, ${IdQuestionario}, '${resposta}'`;
@@ -245,7 +244,7 @@ function CreateRespostas(option = 'Insert'){
 
 function selectRespostas(option = 'Select'){
 
-  let Schema = 'Escala7';
+  let Schema = 'escala75_Easy7';
   let tableName = 'Respostas';
   let columns = '*';
   let where = `IdPergunta = ${$('#formEditPergunta #Id').val()}`;
@@ -282,7 +281,7 @@ function selectRespostas(option = 'Select'){
 function select(nameFunction, id, tableName = 'Perguntas', columns = '*', complement){
 
  let option = 'Select';
- let Schema = 'Escala7';
+ let Schema = 'escala75_Easy7';
  let where = id > 0 ? `id = ${id}` : '';
 
 let params = {

@@ -59,7 +59,7 @@ var dataInfos;
   	}
 
 
-  	let Schema = 'Escala7';
+  	let Schema = 'escala75_Easy7';
   	let tableName = 'Users';
   	let columns = 'Nome,Email,CPF,Senha,Status,UserType,UserRegistration,DateRegistration,UserInactivity,DateInactivity'
   	let lastquery = `'${param.Nome}','${param.Email}','${param.CPF}','${param.Senha}',${param.Status},'${param.UserType}','${param.UserRegistration}',now(),'${param.UserInactivity}',now()`;
@@ -101,7 +101,7 @@ var dataInfos;
 
   function select(columns, nameFunction, option = 'Select', where = '', search = false){
 
-  	let Schema = 'Escala7';
+  	let Schema = 'escala75_Easy7';
   	let tableName = 'Users';
 
   	let params = {

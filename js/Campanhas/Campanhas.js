@@ -1,7 +1,7 @@
 var dataInfos;
 
 $(document).ready(function(){
-  select('templateTableCampanhas');
+  $('#IC').val() != undefined ? select('templateTableCampanhas', $('#IC').val()) : select('templateTableCampanhas');
 });
 
 
@@ -28,7 +28,7 @@ function clearForm(form){
 
 function selectedQuestionario(option = 'Select'){
 
-  let Schema = 'Escala7';
+  let Schema = 'escala75_Easy7';
   let tableName = 'Questionarios';
   let columns = 'Id, Name';
 
@@ -106,7 +106,7 @@ function CRUDCampanhas(option){
   }
 
 
-  let Schema = 'Escala7';
+  let Schema = 'escala75_Easy7';
   let tableName = 'Campanhas';
   let columns = 'QRCode,Campanha,IdQuestionario, Dt_Inicio,Dt_Termino,Status,IFrame,UserRegistration,DateRegistration,UserInactivity,DateInactivity'
   let lastquery = `'${param.QRCode}','${param.Campanha}', '${param.Questionarios}', '${param.Dt_Inicio}','${param.Dt_Termino}',${param.Status},'${param.IFrame}','${param.UserRegistration}',now(),'${param.UserInactivity}',now()`;
@@ -150,7 +150,7 @@ function CRUDCampanhas(option){
 function select(nameFunction, id){
 
  let option = 'Select';
- let Schema = 'Escala7';
+ let Schema = 'escala75_Easy7';
  let tableName = 'Campanhas';
 
  let columns = '*';
@@ -238,7 +238,8 @@ function setInputsModal(model){
 
    $('select').formSelect();
 
-   let url = `https://pjle7.000webhostapp.com/?type=usr&IC=${model[0].Id}&QCC=${model[0].QRCode}`
+   let wlh = window.location.href.split('/');
+   let url = wlh[0]+'//'+wlh[2]+`?type=usr&IC=${model[0].Id}&QCC=${model[0].QRCode}`;
       
       // Clear Previous QR Code
       $('#qrcode').empty();

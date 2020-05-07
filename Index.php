@@ -2,17 +2,21 @@
 session_start();
 require_once('DBInserts.php');
 
+ 
 $getType = (isset($_GET["type"])) ? $_GET["type"] : 'adm';
 $IdCampanha = (isset($_GET["IC"])) ? $_GET["IC"] : '';
 $QrCodeCampanha = (isset($_GET["QCC"])) ? $_GET["QCC"] : '';
 $countCampanha = 2; 
 
 if ($getType != 'adm' && $getType != '') {
-	$countCampanha = Select('Escala7', 'Campanha', 'Campanhas', "Id = $IdCampanha and QRCode = '$QrCodeCampanha'", "",$link);
+	global $_SESSION;
+	$countCampanha = Select('escala75_Easy7', 'Campanha', 'Campanhas', "Id = $IdCampanha and QRCode = '$QrCodeCampanha'", "",$link);
+	$_SESSION["IC"] = $IdCampanha;
+
 }
 
 
-//echo "Id = $IdCampanha and QRCode = '#$QrCodeCampanha'"."teste: ".empty(Select('Escala7', 'Campanha', 'Campanhas', "Id = $IdCampanha and QRCode = '#$QrCodeCampanha'", $link));
+//echo "Id = $IdCampanha and QRCode = '#$QrCodeCampanha'"."teste: ".empty(Select('escala75_Easy7', 'Campanha', 'Campanhas', "Id = $IdCampanha and QRCode = '#$QrCodeCampanha'", $link));
 //die;
 
 //echo 'strlen: '.strlen($countCampanha);
@@ -184,7 +188,7 @@ if (empty($getType)) {
 
 		function verificaUsuario(){
 			
-				if (getType == 'adm' || getType == 'cl' && $('#autocomplete-input-text-password').val() != '') {
+				if (getType == 'adm' || getType == 'cli' && $('#autocomplete-input-text-password').val() != '') {
 					validUser();
 				}else if(getType == 'usr' && $('#Campanha').val() != '' && ValidatorCPF($('#autocomplete-input-cpf').val())){
 					validUser();
@@ -195,7 +199,7 @@ if (empty($getType)) {
 
 		function selectedCampanha(option = 'Select'){
 
-			let Schema = 'Escala7';
+			let Schema = 'escala75_Easy7';
 			let tableName = 'Campanhas';
 			let columns = 'Id, Campanha';
 
@@ -274,7 +278,7 @@ if (empty($getType)) {
 			}
 
 
-			let sql = `select CPF, Senha from Escala7.Users where Email = '${$('#autocomplete-input-usuario').val()}'`
+			let sql = `select CPF, Senha from escala75_Easy7.Users where Email = '${$('#autocomplete-input-usuario').val()}'`
 			let option = 'validLogin';
 
 			getType == 'adm' ? sql += ` and Senha = '${$('#autocomplete-input-password').val()}'` : '';
@@ -289,7 +293,7 @@ if (empty($getType)) {
 				console.log("success:",data);
 
 				if (data.trim() == 'true') {
-					if (getType == 'adm') {
+					if (getType == 'adm' || getType == 'cli') {
 						
 						redirectToAction(`Home.php?getType=${getType}`);
 

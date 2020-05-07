@@ -50,7 +50,8 @@
 	bottom: 0;
 	background-position: center center;
 	background-repeat: no-repeat;
-	background-size: cover;	
+	background-size: cover;
+	overflow: auto !important;
 }
 
 .background-questionatio{
@@ -143,7 +144,8 @@ input[type=text]:not(.browser-default):focus:not([readonly]) + label.c-blue,
 }
 
 .list-ul-organize .sair{
-	margin-top: 60%;
+	position: absolute;
+    bottom: 20px;
 }
 
 .f-Helvetica-Bold{

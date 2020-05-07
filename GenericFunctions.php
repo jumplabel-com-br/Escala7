@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('conn.php');
 
 $objBd = new db();
@@ -21,11 +22,13 @@ function select_db($sql,$link){
 }
 
 function validLogin($sql, $link){
+	
+	global $_SESSION;
+	
 	if ($result = mysqli_query($link, $sql)) {
 		$dados_usuario = mysqli_fetch_array($result);
 
 		if (isset($dados_usuario['CPF'])) {
-			session_start();
 			$_SESSION["User"] = $dados_usuario['CPF'];
 			echo 'true';
 			return true;

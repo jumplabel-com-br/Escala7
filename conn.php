@@ -3,16 +3,16 @@
 class db{
 
 	//host
-	private $host = 'escala7.ci9niqaqsefm.us-east-1.rds.amazonaws.com';
+	private $host = '162.241.2.128:3306';
 
 	//usuario
-	private $usuario = 'admin';
+	private $usuario = 'escala75_easy7';
 
 	//senha
-	private $senha = 'Escala7!';
+	private $senha = 'easy7database';//'Escala7!';
 
 	//banco de dados
-	private $database = 'Escala7';
+	private $database = 'escala75_Easy7';
 
 	public function conecta_mysql(){
 

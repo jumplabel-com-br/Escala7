@@ -6,8 +6,9 @@ $(document).ready(function($) {
 });
 
 function Respostas(){
-  let sql = `select Campanha ,COUNT(a.IdCampanha) as countRespostas, a.Status, IdQuestionario, IdCampanha from Escala7.RespostasUsers a
-join Escala7.Campanhas b on a.IdCampanha = b.Id
+  let sql = `select Campanha ,COUNT(a.IdCampanha) as countRespostas, a.Status, IdQuestionario, IdCampanha from escala75_Easy7.RespostasUsers a
+join escala75_Easy7.Campanhas b on a.IdCampanha = b.Id
+${$('#IC').val() != undefined ? `where a.IdCampanha = ${$('#IC').val()}` : ''}
 group by Campanha;`
   
   SelectAdvanced(sql);
@@ -37,7 +38,7 @@ function fnTemplateIndex(model){
 
 function returnPerguntas(IdCampanha, option = 'Select'){
 
-	let Schema = 'Escala7';
+	let Schema = 'escala75_Easy7';
   	let tableName = 'Perguntas';
   	let columns = 'Id, IdQuestionario, Pergunta, Tipo'
   	let where = `IdQuestionario = ${IdCampanha}`
@@ -74,7 +75,7 @@ function returnPerguntas(IdCampanha, option = 'Select'){
 
 function returnRespostas(IdCampanha, Perguntas, option = 'Select'){
 
-	let Schema = 'Escala7';
+	let Schema = 'escala75_Easy7';
   	let tableName = 'RespostasCampanha';
   	let columns = 'Id, IdCampanha, CPF, Respostas'
   	let where = `IdCampanha = ${IdCampanha}`

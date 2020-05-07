@@ -14,9 +14,9 @@ function sendForm(option = 'Insert'){
 	InserRespostasUsers();
 	let str = "";
 
-	let Schema = 'Escala7';
+	let Schema = 'escala75_Easy7';
   	let tableName = 'RespostasCampanha';
-  	let columns = 'IdCampanha, CPF, Respostas, DataCriacao'
+  	let columns = 'IdCampanha, CPF, Respostas, DateRegistration'
   	
   	document.querySelectorAll('form input').forEach(x => str += x.value + ',');
   	let respostas = str.substr(0,str.length-1);
@@ -55,9 +55,9 @@ function sendForm(option = 'Insert'){
 
 
 function InserRespostasUsers(option = 'Insert'){
-	let Schema = 'Escala7';
+	let Schema = 'escala75_Easy7';
   	let tableName = 'RespostasUsers';
-  	let columns = 'IdCampanha, CPF, Status, DataCriacao'
+  	let columns = 'IdCampanha, CPF, Status, DateRegistration'
 
   	let lastquery = `${$('#IdQuestionario').val()}, '${$('#UserRegistration').val()}', 1, now()`
 
@@ -91,7 +91,7 @@ function InserRespostasUsers(option = 'Insert'){
 
 function returnPerguntas(option = 'Select'){
 
-	let Schema = 'Escala7';
+	let Schema = 'escala75_Easy7';
   	let tableName = 'Perguntas';
   	let columns = 'Id, IdQuestionario, Pergunta, Tipo';
   	let where = `IdQuestionario = ${Campanha[0].Id}`
@@ -166,7 +166,7 @@ function templatePerguntas(model){
 }
 
 function returnOptions(IdPergunta, IdQuestionario,firstOption, option = 'Select'){
-	let Schema = 'Escala7';
+	let Schema = 'escala75_Easy7';
   	let tableName = 'Respostas';
   	let columns = 'Id, IdPergunta, IdQuestionario,Respostas'
   	let where = `IdPergunta = ${IdPergunta}`

@@ -31,7 +31,7 @@ if (!empty($img0)) {
 	$file0 = UPLOAD_DIR . $Data0  . '.jpg';
 	$success1 = file_put_contents($file0, $data);
 
-	$sql = Insert('Escala7', 'ImagensCampanha', 'Usuario, Imagem, Latitude, Longitude, Status, DataCriacao',  "'$user', '$file0', '$lat', '$lon', 1, now()");
+	$sql = Insert('escala75_Easy7', 'ImagensCampanha', 'Usuario, Imagem, Latitude, Longitude, Status, DateRegistration',  "'$user', '$file0', '$lat', '$lon', 1, now()");
 	mysqli_query($link, $sql);
 }
 
@@ -42,7 +42,7 @@ if (!empty($img1) ) {
 	$file1 = UPLOAD_DIR . $Data1  . '.jpg';
 	$success2 = file_put_contents($file1, $data);
 
-	$sql = Insert('Escala7', 'ImagensCampanha', 'Usuario, Imagem, Latitude, Longitude, Status, DataCriacao',  "$user, $file1, $lat, $lon, 1, now()");
+	$sql = Insert('escala75_Easy7', 'ImagensCampanha', 'Usuario, Imagem, Latitude, Longitude, Status, DateRegistration',  "$user, $file1, $lat, $lon, 1, now()");
 	mysqli_query($link, $sql);
 }
 
@@ -53,7 +53,7 @@ if (!empty($img2) ) {
 	$file2 = UPLOAD_DIR . $Data2  . '.jpg';
 	$success3 = file_put_contents($file2, $data);
 
-	$sql = Insert('Escala7', 'ImagensCampanha', 'Usuario, Imagem, Latitude, Longitude, Status, DataCriacao',  "$user, $file2, $lat, $lon, 1, now()");
+	$sql = Insert('escala75_Easy7', 'ImagensCampanha', 'Usuario, Imagem, Latitude, Longitude, Status, DateRegistration',  "$user, $file2, $lat, $lon, 1, now()");
 	mysqli_query($link, $sql);
 }
 ?>

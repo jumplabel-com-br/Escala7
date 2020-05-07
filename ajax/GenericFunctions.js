@@ -3,7 +3,7 @@ function logoff(type = 'adm'){
 	let option = 'logoff';
 	let IC;
 	let QCC;
-	if (type != 'adm') {
+	if (type != 'adm' && Campanha != null) {
 		IC = Campanha[0].Id;
 		QCC = Campanha[0].QRCode;
 	}

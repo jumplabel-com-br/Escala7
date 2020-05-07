@@ -55,7 +55,7 @@ function CRUDQuestionarios(option){
   }
 
 
-  let Schema = 'Escala7';
+  let Schema = 'escala75_Easy7';
   let tableName = 'Questionarios';
   let columns = 'Name,Status,UserRegistration,DateRegistration,UserInactivity,DateInactivity'
   let lastquery = `'${param.Name}', ${param.Status}, '${param.UserRegistration}',now(),'${param.UserInactivity}',now()`;
@@ -97,7 +97,7 @@ function CRUDQuestionarios(option){
 function select(nameFunction, id){
 
  let option = 'Select';
- let Schema = 'Escala7';
+ let Schema = 'escala75_Easy7';
  let tableName = 'Questionarios';
 
  let columns = '*';

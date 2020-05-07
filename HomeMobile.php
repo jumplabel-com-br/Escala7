@@ -24,7 +24,7 @@ $replaceUser = array(".", "-");
 
 isset($_POST['Usuario']) ? $_SESSION['User'] = str_replace($replaceUser, "", $_POST['Usuario']) : '';
 
-$Campanha = Select('Escala7', 'Id, QRCode, Campanha, IdQuestionario, IFrame, Dt_Inicio, Dt_Termino', 'Campanhas', "Id =".$_SESSION["IC"], "",$link);
+$Campanha = Select('escala75_Easy7', 'Id, QRCode, Campanha, IdQuestionario, IFrame, Dt_Inicio, Dt_Termino', 'Campanhas', "Id =".$_SESSION["IC"], "",$link);
 $_SESSION["Campanha"] = $Campanha;
 
 
@@ -36,26 +36,8 @@ $FotosOk = isset($_GET["FotosOk"]) ? $_SESSION["FotosOk"] = $_GET["FotosOk"] : '
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<!--Import Jquey-->
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-	<!--Import Google Icon Font-->
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<!-- Compiled and minified CSS -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
-	<link rel="stylesheet" type="text/css" href="materialize/css/materialize.css">
-	<!--Let browser know website is optimized for mobile-->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-	<!--Impor JQuery Mask Plugin-->
-	<script type="text/javascript" src="jQuery-Mask-Plugin-master/dist/jquery.mask.js"></script>
-	<script type="text/javascript" src="jQuery-Mask-Plugin-master/dist/jquery.mask.min.js"></script>
-	<script type="text/javascript" src="jQuery-Mask-Plugin-master/src/jquery.mask.js"></script>
-
-	<link rel="stylesheet" type="text/css" href="css/style.css?<?=date('d/m/Y-H:i:s')?>">
-	<!-- Place your kit's code here -->
-	<script src="https://kit.fontawesome.com/12838c155d.js" crossorigin="anonymous"></script>
+	<title>Home</title>
+	<?php require_once("header.php")?>
 
 </head>
 

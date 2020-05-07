@@ -22,7 +22,7 @@ function keypressChip(){
 function onChipAdd(option = 'Insert'){
 	
 
-	let Schema = 'Escala7'
+	let Schema = 'escala75_Easy7'
 	let tableName = 'VideoInstitucional'
 	let link = $('.chips .chip').html() != undefined ? $('.chips .chip').html().replace('<i class="material-icons close">close</i>', '') : '';
 	let Status = 1
@@ -57,7 +57,7 @@ function onChipAdd(option = 'Insert'){
 
 function returnIframe(option = 'Select'){
 
-	let Schema = 'Escala7';
+	let Schema = 'escala75_Easy7';
 	let tableName = 'VideoInstitucional';
 	let columns = 'link';
 	let where = 'Status = 1';
@@ -99,7 +99,7 @@ function returnIframe(option = 'Select'){
 
 function onChipUpdate(option = 'Update'){
 	
-	let Schema = 'Escala7'
+	let Schema = 'escala75_Easy7'
 	let tableName = 'VideoInstitucional'
 	let link = $('.chips input').val();
 	let Status = 1
