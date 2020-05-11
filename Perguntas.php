@@ -65,11 +65,6 @@ session_start();
 			<div class="container center-align">
 				<form id="formPergunta">
 					<div class="input-field col s12 m7">
-						<select id="Questionarios" class="c-blue SelectQuestionarios" plc="Questionarios">
-						</select>
-					</div>
-
-					<div class="input-field col s12 m7">
 						<input type="text" name="Pergunta" id="Pergunta" class="autocomplete c-blue" plc="Pergunta">
 						<label for="Pergunta" class="c-blue">Pergunta</label>
 					</div>
@@ -121,7 +116,10 @@ session_start();
 					<div class="input-field col s12 m7">
 						<select id="Questionarios" class="c-blue SelectQuestionarios" plc="Questionarios">
 						</select>
+						<i class="material-icons right i-default add-circle-respostas" onclick="CreateQuestionarioPerguntas();">add_circle</i>
 					</div>
+
+					<br>
 
 					<div class="input-field col s12 m7">
 						<input type="text" name="Pergunta" id="Pergunta" class="autocomplete c-blue" plc="Pergunta">

@@ -157,12 +157,12 @@ function select(nameFunction, id){
  let where = id > 0 ? `id = ${id}` : '';
 
  let params = {
-  option,
-  Schema,
-  tableName,
-  columns,
-  where
-}
+    option,
+    Schema,
+    tableName,
+    columns,
+    where
+  }
 
 $.ajax({
   url: 'DBInserts.php',
@@ -187,6 +187,7 @@ $.ajax({
 
   }else if (data.length > 0 && id > 0) {
     setInputsModal(data);
+    selectClientes();
   }
 
 
@@ -198,6 +199,105 @@ $.ajax({
   $('#modalProgress').modal('close');
 })
 
+}
+
+function addClientInTemplate(option = 'Insert'){
+
+  let Schema = 'escala75_Easy7';
+  let tableName = 'ClientesCampanhas';
+  let columns = 'IdCampanha, IdUsuario, UserRegistration , DateRegistration'
+  let lastquery = `${$('#Id').val()}, ${$('#VinculoCliente').val()}, '${$('#UserRegistration').val()}', now()`;
+
+  let params = {
+    option,
+    Schema,
+    tableName,
+    columns,
+    lastquery
+  }
+
+  $.ajax({
+    url: 'DBInserts.php',
+    type: 'POST',
+    dataType: 'html',
+    data: params,
+  })
+  .done(function() {
+    console.log("success");
+    returnClientes();
+  })
+  .fail(function() {
+    console.log("error");
+  });
+}
+
+function selectClientes(){
+
+  let option = 'Select';
+  let Schema = 'escala75_Easy7';
+  let tableName = 'Users';
+
+  let columns = 'Id, Email';
+  let where = 'UserType = 2';
+
+  let params = {
+     option,
+     Schema,
+     tableName,
+     columns,
+     where
+   }
+
+  $.ajax({
+    url: 'DBInserts.php',
+    type: 'POST',
+    dataType: 'json',
+    data: params,
+  })
+  .done(function(data) {
+    console.log("success");
+    $('#VinculoCliente').html(templateClientes(data));
+    $('select').formSelect();
+  })
+  .fail(function() {
+    console.log("error");
+  });
+}
+
+function returnClientes(){
+
+  let sql = `SELECT a.Id, Email FROM escala75_Easy7.Users a
+  join escala75_Easy7.ClientesCampanhas b on a.Id = b.IdUsuario where IdCampanha = ${$('#Id').val()};`
+  
+  SelectAdvanced(sql);
+
+  let data = dataSelectAdvanced;
+
+  data != null && data != undefined && data.length > 0 ? $('#table-Clientes').show() : $('#table-Clientes').hide()
+  $('.tbody-Clientes').html(templateTableClientes(data));
+
+}
+
+function templateTableClientes(model){
+  return model.map((x,i) => {
+    return `
+      <tr>
+        <td>${i+1}</td>
+        <td>${x.Email}</td>
+      </tr>
+    `
+  })
+}
+
+function templateClientes(model){
+  return`
+    <option value="">Selecione</option>
+    ${model.map(x => {
+      return`
+        <option value="${x.Id}">${x.Email}</option>
+      `
+    }).join('')}
+  `
 }
 
 function templateTableCampanhas(model){
@@ -236,11 +336,13 @@ function setInputsModal(model){
     src: model[0].IFrame
   });
 
-   $('select').formSelect();
+  $('.editShow').removeClass('hide');
+  returnClientes();
+  $('select').formSelect();
 
-   let wlh = window.location.href.split('/');
-   let url = wlh[0]+'//'+wlh[2]+`?type=usr&IC=${model[0].Id}&QCC=${model[0].QRCode}`;
-      
+  let wlh = window.location.href.split('/');
+  let url = wlh[0]+'//'+wlh[2]+`?type=usr&IC=${model[0].Id}&QCC=${model[0].QRCode}`;
+
       // Clear Previous QR Code
       $('#qrcode').empty();
 
@@ -252,7 +354,7 @@ function setInputsModal(model){
 
       // Generate and Output QR Code
       $('#qrcode').qrcode({width: 158,height: 158,text: url});
-}
+    }
 
 function dateFormart(inputDate){
   date = inputDate.replace(',','').split(" ");

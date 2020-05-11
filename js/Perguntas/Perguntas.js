@@ -1,4 +1,5 @@
 var dataInfos;
+var IdQuestionario;
 
 $(document).ready(function(){
  Perguntas();
@@ -35,8 +36,9 @@ function toggleRespostas(){
 }
 
 function Perguntas(){
-  let sql = `SELECT perguntas.*, questionarios.Name FROM escala75_Easy7.Perguntas as perguntas
-    join escala75_Easy7.Questionarios as questionarios on perguntas.IdQuestionario = questionarios.Id;`
+  let sql = `SELECT perguntas.Id, questionarioperguntas.IdQuestionario, perguntas.Pergunta, perguntas.Status, questionarios.Name FROM escala75_Easy7.Perguntas as perguntas
+    left join escala75_Easy7.QuestionarioPerguntas as questionarioperguntas on perguntas.Id = questionarioperguntas.IdPergunta
+    left join escala75_Easy7.Questionarios as questionarios on questionarioperguntas.IdQuestionario = questionarios.Id;`
   
   SelectAdvanced(sql);
 
@@ -95,6 +97,42 @@ function templateQuestionario(model){
     }).join('')}`
 }
 
+function CreateQuestionarioPerguntas(option = 'Insert'){
+  
+  let IdQuestionario = $('#formEditPergunta #Questionarios').val();
+  let IdPergunta = $('#formEditPergunta #Id').val();
+  let UserRegistration = $('#UserRegistration').val();
+
+  let Schema = 'escala75_Easy7';
+  let tableName = 'QuestionarioPerguntas';
+  let columns = 'IdQuestionario,IdPergunta,UserRegistration,DateRegistration'
+  let lastquery = `${IdQuestionario},${IdPergunta},'${UserRegistration}',now()`;
+
+  let params = {
+    Schema, 
+    tableName,
+    columns,
+    lastquery,
+    option
+  }
+
+  $.ajax({
+    url: 'DBInserts.php',
+    type: 'POST',
+    dataType: 'html',
+    data: params,
+  })
+  .done(function(data) {
+    Perguntas();
+    M.toast({html: 'Questionário cadastrado com êxito', displayLength: 4000})
+    //$('#modalPergunta').modal('close');
+  })
+  .fail(function() {
+    console.log("error");
+  });
+
+}
+
 function CreatePerguntas(option = 'Insert'){
 
 
@@ -104,7 +142,6 @@ function CreatePerguntas(option = 'Insert'){
     return false;
   }
 
-  let Questionario = $(`#formPergunta #Questionarios`).val();
   let Pergunta = $(`#formPergunta #Pergunta`).val();
   let Tipo = $(`#formPergunta #Tipo`).val();
   let Status = $(`#formPergunta #Status`).val();
@@ -115,8 +152,8 @@ function CreatePerguntas(option = 'Insert'){
 
   let Schema = 'escala75_Easy7';
   let tableName = 'Perguntas';
-  let columns = 'IdQuestionario,Pergunta,Tipo,Status,UserRegistration,DateRegistration,UserInactivity,DateInactivity'
-  let lastquery = `'${Questionario}','${Pergunta}','${Tipo}','${Status}','${UserRegistration}',now(),'${UserInactivity}',now()`;
+  let columns = 'Pergunta,Tipo,Status,UserRegistration,DateRegistration,UserInactivity,DateInactivity'
+  let lastquery = `'${Pergunta}','${Tipo}','${Status}','${UserRegistration}',now(),'${UserInactivity}',now()`;
 
   let params = {
     Schema, 
@@ -327,10 +364,10 @@ function templateTablePerguntas(model){
   return model.map(x => {
     return`
     <tr>
-      <td>${x.Name}</td>
+      <td>${x.Name == null ? 'Definir Questionario' : x.Name}</td>
       <td>${x.Pergunta}</td>
       <td>${x.Status == 1 ? 'Ativo' : 'Inativo'}</td>
-      <td><a href="#modalEditPergunta" class="modal-trigger" onclick="$('.btn-action-formPergunta').html('Editar'); select('', ${x.Id});"><i class="fas fa-edit"></i></a></td>
+      <td><a href="#modalEditPergunta" class="modal-trigger" onclick="Editar(${x.Id}, ${x.IdQuestionario})"><i class="fas fa-edit"></i></a></td>
     </tr>
     `}).join('');
 }
@@ -352,7 +389,7 @@ function setInputsModal(model){
   $('label[for="Status"]').addClass('active');
 
   $('#formEditPergunta #Id').val(model[0].Id);
-  $('#formEditPergunta #Questionarios').val(model[0].IdQuestionario);
+  $('#formEditPergunta #Questionarios').val(IdQuestionario);
   $('#formEditPergunta #Pergunta').val(model[0].Pergunta);
   $('#formEditPergunta #Tipo').val(model[0].Tipo);
   $('#formEditPergunta #Status').val(model[0].Status);
@@ -443,4 +480,10 @@ function DateFormtDatePicker(value){
 
   return `${Month} ${Day}, ${Year}`
 
+}
+
+function Editar(idPergunta, idQuestionario){
+  $('.btn-action-formPergunta').html('Editar'); 
+  select('', idPergunta);
+  IdQuestionario = idQuestionario;
 }

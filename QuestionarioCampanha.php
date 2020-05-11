@@ -51,16 +51,15 @@ $Campanha = Select('escala75_Easy7', '*', 'Campanhas', "Id = $IC", "",$link);
 	<input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">
 	<input type="hidden" name="UserInactivity" id="UserInactivity" value="<?=$_SESSION['User']?>">
 	<!-- Compiled and minified JavaScript -->
+	<script type="text/javascript">
+		var Campanha = <?=$Campanha?>;
+		$('.title-campanha').html(`Questionário ${Campanha[0]['Campanha']}`)
+	</script>
+
 	<script type="text/javascript" src="ajax/AjaxGenericDB.js"></script>
 	<script type="text/javascript" src="ajax/GenericFunctions.js"></script>
 	<script src="materialize/js/materialize.js"></script>
 	<script src="js/Generic.js"></script>
 	<script src="js/Questionarios/QuestionarioCampanha.js"></script>
-
-	<script type="text/javascript">
-		Campanha = <?=$Campanha?>;
-
-		$('.title-campanha').html(`Questionário ${Campanha[0]['Campanha']}`)
-	</script>
 </body>
 </html>

@@ -1,3 +1,5 @@
+var IdQuestionario = Campanha[0]["IdQuestionario"]
+
 $(document).ready(function($) {
 	$('.modal').modal();
 	returnPerguntas();
@@ -89,46 +91,23 @@ function InserRespostasUsers(option = 'Insert'){
 	});
 }
 
-function returnPerguntas(option = 'Select'){
-
-	let Schema = 'escala75_Easy7';
-  	let tableName = 'Perguntas';
-  	let columns = 'Id, IdQuestionario, Pergunta, Tipo';
-  	let where = `IdQuestionario = ${Campanha[0].Id}`
-
-	let params = {
-		Schema,
-		tableName,
-		columns,
-		where,
-		option
-	};
-
-	$.ajax({
-		url: 'DBInserts.php',
-		type: 'POST',
-		dataType: 'json',
-		data: params,
-		beforeSend: function(){
-			$('#modalProgress').modal('open');
-		}
-	})
-	.done(function(data) {
-		console.log("success");
-		$('.form-questionario-campanha').html(templatePerguntas(data));
-		$('select').formSelect();
-		$('#modalProgress').modal('close');
-	})
-	.fail(function() {
-		console.log("error");
-		$('#modalProgress').modal('close');
-	});
+function returnPerguntas(){
+	let sql = `SELECT perguntas.Id, questionarioperguntas.IdQuestionario, perguntas.Pergunta, perguntas.Status, questionarios.Name FROM escala75_Easy7.Perguntas as perguntas
+	  left join escala75_Easy7.QuestionarioPerguntas as questionarioperguntas on perguntas.Id = questionarioperguntas.IdPergunta
+	  left join escala75_Easy7.Questionarios as questionarios on questionarioperguntas.IdQuestionario = questionarios.Id
+	  where  questionarioperguntas.IdQuestionario = ${IdQuestionario};`
 	
+	SelectAdvanced(sql);
+
+	let data = dataSelectAdvanced;
+
+	$('.form-questionario-campanha').html(templatePerguntas(data));
+	$('#modalProgress').modal('close');
 }
 
 function templatePerguntas(model){
 	return`
-		<input type="hidden" name="IdQuestionario" id="IdQuestionario" value="${model[0].IdQuestionario}">
+		<input type="hidden" name="IdQuestionario" id="IdQuestionario" value="${IdQuestionario}">
 		<form class="col s12" id="formQuestionarioCampanha">
 			${model.map(value =>{
 				return`
