@@ -132,11 +132,12 @@ function onChipUpdate(option = 'Update'){
 }
 
 function redirectHomeParams(){
-	
+	let wlo = window.location.origin
+
 	if (VI == 'F') {
-		window.location.href = "http://localhost/Escala7/HomeMobile.php?type=Inst&getType=usr&IC=1&VI=T"
+		window.location.href = wlo+"/HomeMobile.php?type=Inst&getType=usr&IC=1&VI=T"
 	}else if (VC == 'F') {
-		window.location.href = `http://localhost/Escala7/HomeMobile.php?type=Inst&getType=usr&IC=1&VI=${VI}&VC=T`
+		window.location.href = `${wlo}/HomeMobile.php?type=Inst&getType=usr&IC=1&VI=${VI}&VC=T`
 	}
 	
 }

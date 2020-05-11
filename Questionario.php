@@ -82,12 +82,28 @@ session_start();
 
 				<div class="modal-footer">
 					<div class="col s12 m12">
+						<button type="button" class="btn btn-blue btn-view-perguntas left" onclick="returnPerguntas()">Visualizar</button>
 						<button type="button" class="btn btn-blue btn-action-formQuestionario">Salvar</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<div id="modalPerguntas" class="modal">
+		<div class="modal-content">
+			<h4 class="title-campanha center color-default"></h4>
+			<p class="return-perguntas"></p>
+
+			<div class="modal-footer">
+				<div class="col s12 m12">
+					<button type="button" class="btn btn-blue" onclick="$('#modalPerguntas').modal('close');$('#modalQuestionario').modal('open');">Fechar</button>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
 
 	<div id="modalProgress" class="modal modal-progress">
 		<div class="modal-content">
@@ -99,6 +115,7 @@ session_start();
 	<input type="hidden" name="valueScanner" id="valueScanner">
 	<input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">
 	<input type="hidden" name="UserInactivity" id="UserInactivity" value="<?=$_SESSION['User']?>">
+	<input type="hidden" name="Campanha" id="Campanha" value="<?=$_SESSION["Campanha"]?>">
 	<!-- Compiled and minified JavaScript -->
 	<script type="text/javascript" src="js/Generic.js?<?=date('d/m/Y-H:i:s')?>"></script>
 	<script type="text/javascript" src="ajax/AjaxGenericDB.js"></script>
