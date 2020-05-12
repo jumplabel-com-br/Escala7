@@ -6,9 +6,10 @@ $(document).ready(function($) {
 });
 
 function Respostas(){
-  let sql = `select Campanha ,COUNT(a.IdCampanha) as countRespostas, a.Status, IdQuestionario, IdCampanha from escala75_Easy7.RespostasUsers a
+  let sql = `select Campanha ,COUNT(a.IdCampanha) as countRespostas, a.Status, IdQuestionario, a.IdCampanha from escala75_Easy7.RespostasUsers a
 join escala75_Easy7.Campanhas b on a.IdCampanha = b.Id
-${$('#IC').val() != undefined ? `where a.IdCampanha = ${$('#IC').val()}` : ''}
+left join escala75_Easy7.ClientesCampanhas c on a.IdCampanha = c.IdCampanha
+${$('#IdUser').val() != undefined ? `where c.IdUsuario = ${$('#IdUser').val()}` : ''}
 group by Campanha;`
   
   SelectAdvanced(sql);
@@ -29,25 +30,36 @@ function fnTemplateIndex(model){
 		<tr>
 			<td>${x.Status == 0 ? 'Desativado' : 'Ativo'}</td>
 			<td>${x.Campanha}</td>
-			<td><button type="button" class="btn btn-blue waves-effect tooltipped"  data-position="bottom" data-tooltip="Visualizar respostas" onclick="returnPerguntas(${x.IdCampanha})">Respostas (${x.countRespostas})</button></td>
-			<td><i class="material-icons i-default tooltipped" data-position="bottom" data-tooltip="Visualizar respostas" onclick="returnPerguntas(${x.IdCampanha})">remove_red_eye</i></td>
+			<td><button type="button" class="btn btn-blue waves-effect tooltipped"  data-position="bottom" data-tooltip="Visualizar respostas" onclick="returnPerguntas(${x.IdQuestionario})">Respostas (${x.countRespostas})</button></td>
+			<td><i class="material-icons i-default tooltipped" data-position="bottom" data-tooltip="Visualizar respostas" onclick="returnPerguntas(${x.IdQuestionario})">remove_red_eye</i></td>
 		</tr>
 		`
 	});
 }
 
-function returnPerguntas(IdCampanha, option = 'Select'){
+function returnPerguntas(IdQuestionario, option = 'Select'){
 
+	  let sql = `select a.* from escala75_Easy7.Perguntas a
+		join escala75_Easy7.QuestionarioPerguntas b on a.Id = b.IdPergunta
+		where IdQuestionario = ${IdQuestionario}
+		`
+	  
+	  SelectAdvanced(sql);
+
+	  let data = dataSelectAdvanced;
+	  returnRespostas(IdQuestionario, data);
+
+	/*
 	let Schema = 'escala75_Easy7';
   	let tableName = 'Perguntas';
-  	let columns = 'Id, IdQuestionario, Pergunta, Tipo'
-  	let where = `IdQuestionario = ${IdCampanha}`
+  	let columns = 'Id, Pergunta, Tipo'
+//  	let where = `IdQuestionario = ${IdCampanha}`
 
 	let params = {
 		Schema,
 		tableName,
 		columns,
-		where,
+//		where,
 		option
 	};
 
@@ -70,7 +82,7 @@ function returnPerguntas(IdCampanha, option = 'Select'){
 		console.log("error");
 		$('#modalProgress').modal('close');
 	});
-	
+	*/
 }
 
 function returnRespostas(IdCampanha, Perguntas, option = 'Select'){

@@ -307,3 +307,7 @@ input[type=text]:not(.browser-default):focus:not([readonly]) + label.c-blue,
 	background-color: #e5554e;
 	color: #fff;
 }
+
+.collection{
+	border: 0px;
+}

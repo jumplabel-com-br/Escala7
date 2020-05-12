@@ -30,6 +30,8 @@ function validLogin($sql, $link){
 
 		if (isset($dados_usuario['CPF'])) {
 			$_SESSION["User"] = $dados_usuario['CPF'];
+			$_SESSION["Email"] = $dados_usuario['Email'];
+			$_SESSION["IdUser"] = $dados_usuario['Id'];
 			echo 'true';
 			return true;
 		}else{;

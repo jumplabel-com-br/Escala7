@@ -3,9 +3,10 @@ session_start();
 require_once('conn.php');
 
 $user = isset($_SESSION['User']) ? $_SESSION['User'] : '';
+$Email = isset($_SESSION["Email"]) ? $_SESSION["Email"] : '';
 $objBd = new db();
 $link = $objBd->conecta_mysql();
-$sql = "select CPF from escala75_Easy7.Users where CPF = '$user'"; 
+$sql = "select CPF, Email, UserType from escala75_Easy7.Users where Email = '$Email'"; 
 
 //echo $sql;
 //die;
@@ -14,8 +15,11 @@ $sql = "select CPF from escala75_Easy7.Users where CPF = '$user'";
 $result = mysqli_query($link, $sql);
 $dados_usuario = mysqli_fetch_array($result);
 
-		if (!isset($dados_usuario['CPF']) || empty($dados_usuario['CPF'])) {
+		if (!isset($dados_usuario['Email']) || empty($dados_usuario['Email'])) {
 			header('Location: Error.php');
+		}else {
+			global $_SESSION;
+			$dados_usuario['UserType'] == 1 ? $_SESSION["UserType"] = 1 : $_SESSION["UserType"] = 0;
 		}
 ?>
 

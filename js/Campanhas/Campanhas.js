@@ -1,7 +1,7 @@
 var dataInfos;
 
 $(document).ready(function(){
-  $('#IC').val() != undefined ? select('templateTableCampanhas', $('#IC').val()) : select('templateTableCampanhas');
+  selectCampanhas();
 });
 
 
@@ -21,6 +21,20 @@ $('#li-img-logo-max').on('click', function(event) {
   /* Act on the event */
 });
 
+
+function selectCampanhas(){
+
+let sql = `select a.* from escala75_Easy7.Campanhas as a
+left join escala75_Easy7.ClientesCampanhas as b on a.Id = b.IdCampanha
+${$('#IdUser').val() != undefined ? `where b.IdUsuario = ${$('#IdUser').val()}` : ''};`
+
+SelectAdvanced(sql);
+
+let data = dataSelectAdvanced;
+
+data != null && data != undefined && data.length > 0 ? $('.tbody-campanhas').show() : $('.tbody-campanhas').hide()
+$('.tbody-campanhas').html(templateTableCampanhas(data));
+}
 
 function clearForm(form){
   document.querySelectorAll(`${form} input`).forEach(input => input.value = '');
@@ -68,7 +82,7 @@ function templateQuestionario(model){
   return `
   <option value="">Questionarios</option>
   ${model.map(x =>{
-    return `<option value="${x.Id}">${x.Name}</option>`;
+    return `<option ${x.Id == dataInfos[0].IdQuestionario ? 'selected' : ''} value="${x.Id}">${x.Name}</option>`;
     }).join('')}`
 }
 
@@ -179,13 +193,13 @@ $.ajax({
 
   if (data.length > 0 && nameFunction == 'templateTableCampanhas') {
 
-    selectedQuestionario();
-    $('.tbody-campanhas').html(templateTableCampanhas(data));
+    selectCampanhas();
     $('.dropdown-trigger').dropdown();
     $('#modalCampanha').modal('close');
     clearForm('#formCampanha');
 
   }else if (data.length > 0 && id > 0) {
+    selectedQuestionario();
     setInputsModal(data);
     selectClientes();
   }
@@ -327,7 +341,8 @@ function setInputsModal(model){
   $('#Id').val(model[0].Id);
   $('#QRCode').val(model[0].QRCode);
   $('#Campanha').val(model[0].Campanha);
-  $('#Questionarios').val(model[0].IdQuestionario);
+  $('#Questionarios').val(dataInfos[0].IdQuestionario);
+  $('#IdUser').val() != undefined ? $('#Questionarios').attr('disabled' , 'disabled') : '';
   $('#Dt_Inicio').val(DateFormtDatePicker(model[0].Dt_Inicio));
   $('#Dt_Termino').val(DateFormtDatePicker(model[0].Dt_Termino));
   $('#Status').val(model[0].Status);

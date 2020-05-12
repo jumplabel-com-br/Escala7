@@ -278,7 +278,7 @@ if (empty($getType)) {
 			}
 
 
-			let sql = `select CPF, Senha from escala75_Easy7.Users where Email = '${$('#autocomplete-input-usuario').val()}'`
+			let sql = `select Id, CPF, Senha, Email from escala75_Easy7.Users where Email = '${$('#autocomplete-input-usuario').val()}'`
 			let option = 'validLogin';
 
 			getType == 'adm' ? sql += ` and Senha = '${$('#autocomplete-input-password').val()}'` : '';

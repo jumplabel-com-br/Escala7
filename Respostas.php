@@ -56,8 +56,8 @@ session_start();
 	<input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">
 	<input type="hidden" name="UserInactivity" id="UserInactivity" value="<?=$_SESSION['User']?>">
 	<?php
-		if (isset($_SESSION["IC"])) {
-			echo "<input type='hidden' name='IC' id='IC' value=".$_SESSION["IC"].">";
+		if ($_SESSION["UserType"] == 0) {
+			echo "<input type='hidden' name='IdUser' id='IdUser' value=".$_SESSION["IdUser"].">";
 		}
 	?>
 	<!-- Compiled and minified JavaScript -->

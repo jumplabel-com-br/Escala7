@@ -1,48 +1,72 @@
 <div class="col s12 m3">
 	<div class="card white card-home">
 		<div class="card-content white-text">
-			<ul class="list-ul-organize">
-				<li class="li-icon"><a href="#"> &nbsp;</a></li>
+			<div class="collection">
+				<a href="#" class="collection-item" style="border-bottom: 0px;">
+					<span class="left badge">
+						&nbsp;
+					</span>
+					&nbsp;
+				</a>
 				<?php
-				if (!isset($_SESSION["IC"])) {
+				if ($_SESSION["UserType"] == 1) {
 					echo '
-					<li class="li-icon" title="Usuários">
-						<a href="Usuarios.php"><i class="material-icons i-default">account_circle</i> Usuários</a>
-					</li>
-					';
+				<a href="Usuarios.php" class="collection-item">
+					<span class="left badge">
+						<i class="material-icons i-default">account_circle</i>
+					</span>
+					Usuários
+				</a>';
 				}
 				?>
-				<li class="li-icon" title="Campanhas">
-					<a href="Campanhas.php"><i class="material-icons i-default">record_voice_over</i> Campanhas</a>
-				</li>
+
+				<a href="Campanhas.php" class="collection-item">
+					<span class="left badge">
+						<i class="material-icons i-default">record_voice_over</i>
+					</span>
+					Campanhas
+				</a>
+
 				<?php
-				if (!isset($_SESSION["IC"])) {
+				if ($_SESSION["UserType"] == 1) {
 					echo '
-					<li class="li-icon dropdown-trigger" title="Questionário" href="#dropdownQuestionario">
-						<a href="#"><i class="material-icons i-default">assignment</i> Questionários</a>
+				<a href="#dropdownQuestionario" class="collection-item li-icon dropdown-trigger">
+					<span class="left badge">
+						<i class="material-icons i-default">assignment</i>
+					</span>
+					Questionários
+				</a>
+				<ul id="dropdownQuestionario" class="dropdown-content">
+					<li>
+						<a href="Questionario.php">Questionários</a>
 					</li>
-					<ul id="dropdownQuestionario" class="dropdown-content">
-						<li>
-							<a href="Questionario.php">Questionários</a>
-						</li>
-						<li>
-							<a href="Perguntas.php">Perguntas</a>
-						</li>
-					</ul>
+					<li>
+						<a href="Perguntas.php">Perguntas</a>
+					</li>
+				</ul>
 					';
 				}
 				?>
 
-				<li class="li-icon" title="Respostas"><a href="Respostas.php">
-					<i class="material-icons i-default">check_box</i> Respostas</a>
-				</li>
-				<li class="li-icon" title="Video Institucional">
-					<a href="VideoInstitucional.php"><i class="material-icons i-default">videocam</i> Video Institucional</a>
-				</li>
-				<li class="li-icon sair" title="Sair">
-					<a onclick="logoff();"><i class="material-icons i-default">settings</i> Sair</a>
-				</li>
-			</ul>
+				<a href="Respostas.php" class="collection-item">
+					<span class="left badge">
+						<i class="material-icons i-default">check_box</i>
+					</span>
+					Respostas
+				</a>
+				<a href="VideoInstitucional.php" class="collection-item">
+					<span class="left badge">
+						<i class="material-icons i-default">videocam</i>
+					</span>
+					Video Institucional
+				</a>
+				<a onclick="logoff();" class="collection-item" style="bottom: 0;margin-top: 150px;">
+					<span class="left badge">
+						<i class="material-icons i-default">settings</i>
+					</span>
+					Sair
+				</a>
+			</div>
 		</div>
 	</div>
 </div>
