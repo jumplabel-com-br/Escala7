@@ -165,6 +165,7 @@ var dataInfos;
             <p class="card-ml-20-p">
               <p class="color-default">${x.Nome}</p>
               <p class="color-default">${x.CPF}</p>
+              <p class="color-default">${x.UserType == 1 ? 'Administrador' : 'Cliente'}</p>
             </p>
           </div>
         </div>

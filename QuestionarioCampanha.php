@@ -7,6 +7,11 @@ $getType = $_GET["getType"];
 $IC = $_GET["IC"];
 
 $Campanha = Select('escala75_Easy7', '*', 'Campanhas', "Id = $IC", "",$link);
+
+function createSession(){
+	global $_SESSION;
+	$_SESSION["Questionario"] = 'OK';
+}
 ?>
 
 <!DOCTYPE html>
@@ -19,11 +24,7 @@ $Campanha = Select('escala75_Easy7', '*', 'Campanhas', "Id = $IC", "",$link);
 <body class="">
 	<nav class="background-questionatio">
 		<div class="row">
-			<div class="col s6 m6">
-				<a href="HomeMobile.php?getType=usr&IC=<?=$IC?>"><i class="medium material-icons">keyboard_backspace</i></a>
-			</div>
-
-			<div class="col s6 m6">
+			<div class="col s12 m12">
 				<a href="HomeMobile.php?getType=usr&IC=<?=$IC?>"><i class="medium material-icons right">home</i></a>
 			</div>
 		</div>
@@ -53,13 +54,16 @@ $Campanha = Select('escala75_Easy7', '*', 'Campanhas', "Id = $IC", "",$link);
 	<!-- Compiled and minified JavaScript -->
 	<script type="text/javascript">
 		var Campanha = <?=$Campanha?>;
+		function createSession(){
+			<?=createSession()?>
+		}
 		$('.title-campanha').html(`Questionário ${Campanha[0]['Campanha']}`)
 	</script>
 
-	<script type="text/javascript" src="ajax/AjaxGenericDB.js"></script>
-	<script type="text/javascript" src="ajax/GenericFunctions.js"></script>
-	<script src="materialize/js/materialize.js"></script>
-	<script src="js/Generic.js"></script>
-	<script src="js/Questionarios/QuestionarioCampanha.js"></script>
+	<script type="text/javascript" src="ajax/AjaxGenericDB.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+	<script type="text/javascript" src="ajax/GenericFunctions.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+	<script src="materialize/js/materialize.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+	<script src="js/Generic.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+	<script src="js/Questionarios/QuestionarioCampanha.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 </body>
 </html>

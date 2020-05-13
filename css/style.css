@@ -101,8 +101,7 @@ input.c-blue {
 
 input[type=text]:not(.browser-default):focus:not([readonly]) + label.c-blue,
 .input-field > label.c-blue,
-.dropdown-content li > span,
-.select-wrapper input.select-dropdown {
+.dropdown-content li > span {
 	color: #2A64AD !important;
 }
 

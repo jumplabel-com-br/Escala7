@@ -305,7 +305,7 @@ function templateTableClientes(model){
 
 function templateClientes(model){
   return`
-    <option value="">Selecione</option>
+    <option value="" disabled selected>Selecione o cliente que acessará a campanha</option>
     ${model.map(x => {
       return`
         <option value="${x.Id}">${x.Email}</option>

@@ -46,7 +46,7 @@ function sendForm(option = 'Insert'){
 	.done(function(data) {
 		console.log("send success");
 		$('#modalProgress').modal('close');
-
+		createSession();
 		window.location.href = window.location.href.replace('QuestionarioCampanha', 'HomeMobile')+"&Questionario=OK"
 	})
 	.fail(function() {
@@ -125,7 +125,7 @@ function templatePerguntas(model){
 								    <select id="${value.Id}" plc="'${value.Pergunta}'">
 								      ${returnOptions(value.Id, value.IdQuestionario, value.Pergunta)}								      	
 								    </select>
-								    <label>${value.Pergunta}</label>
+								    <label class="color-default">${value.Pergunta}</label>
 								  </div>
 							`}
 							

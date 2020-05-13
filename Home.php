@@ -96,9 +96,9 @@ $dados_usuario = mysqli_fetch_array($result);
 <input type="hidden" name="valueScanner" id="valueScanner">
 <input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">
 <!-- Compiled and minified JavaScript -->
-<script type="text/javascript" src="js/Generic.js"></script>
-<script type="text/javascript" src="ajax/AjaxGenericDB.js"></script>
-<script type="text/javascript" src="ajax/GenericFunctions.js"></script>
+<script type="text/javascript" src="js/Generic.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+<script type="text/javascript" src="ajax/AjaxGenericDB.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+<script type="text/javascript" src="ajax/GenericFunctions.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 <script type="text/javascript">
   $('#li-img-logo-min').on('click', function(event) {
   	$('#mobile-demo').show();
@@ -114,12 +114,12 @@ $dados_usuario = mysqli_fetch_array($result);
   	/* Act on the event */
   });
 </script>
-<script src="materialize/js/materialize.js"></script>
+<script src="materialize/js/materialize.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 <!--
 <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script type="text/javascript" src="js/geoLocation.js"></script>
-<script type="text/javascript" src="js/readQrCode.js"></script>
-<script type="text/javascript" src="js/takePicture.js"></script>
+<script type="text/javascript" src="js/geoLocation.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+<script type="text/javascript" src="js/readQrCode.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+<script type="text/javascript" src="js/takePicture.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 -->
 </body>
 </html>

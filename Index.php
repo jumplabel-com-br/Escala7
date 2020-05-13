@@ -51,9 +51,9 @@ if (empty($getType)) {
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 	<!--Impor JQuery Mask Plugin-->
-	<script type="text/javascript" src="jQuery-Mask-Plugin-master/dist/jquery.mask.js"></script>
-	<script type="text/javascript" src="jQuery-Mask-Plugin-master/dist/jquery.mask.min.js"></script>
-	<script type="text/javascript" src="jQuery-Mask-Plugin-master/src/jquery.mask.js"></script>
+	<script type="text/javascript" src="jQuery-Mask-Plugin-master/dist/jquery.mask.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+	<script type="text/javascript" src="jQuery-Mask-Plugin-master/dist/jquery.mask.min.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+	<script type="text/javascript" src="jQuery-Mask-Plugin-master/src/jquery.mask.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 
 	<link rel="stylesheet" type="text/css" href="css/style.css?<?=date('d/m/Y-H:i:s')?>">
 </head>
@@ -127,6 +127,7 @@ if (empty($getType)) {
 										<i class="material-icons prefix assignment_ind">assignment_ind</i>
 										<select name="Campanha" id="Campanha" disabled>
 										</select>
+										<label class="color-default">Campanha</label>
 									</div>
 								</div>
 							</div>
@@ -170,9 +171,9 @@ if (empty($getType)) {
 	</div>
 
 	<!-- Compiled and minified JavaScript -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-	<script type="text/javascript" src="materialize/js/materialize.js"></script>
-	<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+	<script type="text/javascript" src="materialize/js/materialize.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+	<script type="text/javascript" src="materialize/js/materialize.min.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 	<script type="text/javascript">
 		var randomPassword = '';
 		var Campanha = "<?=$IdCampanha?>";

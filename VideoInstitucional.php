@@ -45,16 +45,16 @@ session_start();
 <input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">
 <input type="hidden" name="UserInactivity" id="UserInactivity" value="<?=$_SESSION['User']?>">
 <!-- Compiled and minified JavaScript -->
-<script type="text/javascript" src="ajax/AjaxGenericDB.js"></script>
-<script type="text/javascript" src="ajax/GenericFunctions.js"></script>
-<script src="materialize/js/materialize.js"></script>
+<script type="text/javascript" src="ajax/AjaxGenericDB.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+<script type="text/javascript" src="ajax/GenericFunctions.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+<script src="materialize/js/materialize.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 <script type="text/javascript" src="js/VideoInstitucional/Video.js?<?=date('d/m/Y-H:i:s')?>"></script>
-<script type="text/javascript" src="js/Generic.js"></script>
+<script type="text/javascript" src="js/Generic.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 <!--
 <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script type="text/javascript" src="js/geoLocation.js"></script>
-<script type="text/javascript" src="js/readQrCode.js"></script>
-<script type="text/javascript" src="js/takePicture.js"></script>
+<script type="text/javascript" src="js/geoLocation.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+<script type="text/javascript" src="js/readQrCode.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+<script type="text/javascript" src="js/takePicture.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 -->
 </body>
 </html>

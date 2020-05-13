@@ -6,7 +6,6 @@
 					<span class="left badge">
 						&nbsp;
 					</span>
-					&nbsp;
 				</a>
 				<?php
 				if ($_SESSION["UserType"] == 1) {
@@ -54,19 +53,27 @@
 					</span>
 					Respostas
 				</a>
+				<?php
+				if ($_SESSION["UserType"] == 1) {
+					echo '
 				<a href="VideoInstitucional.php" class="collection-item">
 					<span class="left badge">
 						<i class="material-icons i-default">videocam</i>
 					</span>
 					Video Institucional
 				</a>
-				<a onclick="logoff();" class="collection-item" style="bottom: 0;margin-top: 150px;">
-					<span class="left badge">
-						<i class="material-icons i-default">settings</i>
-					</span>
-					Sair
-				</a>
+				';
+				}
+				?>
 			</div>
 		</div>
+		<footer class="footer" style="position: absolute;bottom:0;margin: 35px 35px;">
+			<a onclick="logoff();" class="collection-item">
+				<span class="left badge">
+					<i class="material-icons i-default">settings</i>
+				</span>
+				Sair
+			</a>
+		</footer>
 	</div>
 </div>

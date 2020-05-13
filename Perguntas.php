@@ -75,6 +75,7 @@ session_start();
 							<option value="1">Combo</option>
 							<option value="0">Texto</option>
 						</select>
+						<label class="color-default">Tipo</label>
 					</div>
 
 					<div class="input-field col s12 m7">
@@ -83,6 +84,7 @@ session_start();
 							<option value="1">Ativo</option>
 							<option value="0">Inativo</option>
 						</select>
+						<label class="color-default">Status</label>
 					</div>
 
 
@@ -116,6 +118,7 @@ session_start();
 					<div class="input-field col s12 m7">
 						<select id="Questionarios" class="c-blue SelectQuestionarios" plc="Questionarios">
 						</select>
+						<label class="color-default">Questionários</label>
 						<i class="material-icons right i-default add-circle-respostas" onclick="CreateQuestionarioPerguntas();">add_circle</i>
 					</div>
 
@@ -132,6 +135,7 @@ session_start();
 							<option value="1">Combo</option>
 							<option value="0">Texto</option>
 						</select>
+						<label class="color-default">Tipo</label>
 					</div>
 
 					<div class="input-field col s12 m7">
@@ -140,6 +144,7 @@ session_start();
 							<option value="1">Ativo</option>
 							<option value="0">Inativo</option>
 						</select>
+						<label class="color-default">Status</label>
 					</div>
 
 					<div class="input-field col s12 m7 div-respostas" style="display: none">
@@ -188,9 +193,9 @@ session_start();
 	<input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">
 	<input type="hidden" name="UserInactivity" id="UserInactivity" value="<?=$_SESSION['User']?>">
 	<!-- Compiled and minified JavaScript -->
-	<script type="text/javascript" src="ajax/GenericFunctions.js"></script>
+	<script type="text/javascript" src="ajax/GenericFunctions.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 	<script type="text/javascript" src="js/Generic.js?<?=date('d/m/Y-H:i:s')?>"></script>
 	<script type="text/javascript" src="js/Perguntas/Perguntas.js?<?=date('d/m/Y-H:i:s')?>"></script>
-	<script src="materialize/js/materialize.js"></script>
+	<script src="materialize/js/materialize.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 </body>
 </html>

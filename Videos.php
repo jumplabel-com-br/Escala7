@@ -2,6 +2,8 @@
 session_start();
 require_once('DBInserts.php');
 
+global $_SESSION;
+
 $getType = $_GET["getType"];
 $IC = $_GET["IC"];
 $VI = isset($_GET["VI"]) ? $_GET["VI"] : '';
@@ -12,6 +14,11 @@ if (!empty($VI)) {
 	$_SESSION["VideoInstitucional"] = Select('escala75_Easy7', 'link', 'VideoInstitucional', "Status = 1", "",$link);
 }
 
+
+function createSession(){
+	global $_SESSION;
+	$_SESSION["VC"] = 'T';
+}
 ?>
 
 <!DOCTYPE html>
@@ -24,11 +31,7 @@ if (!empty($VI)) {
 <body class="background background-home">
 
 <div class="row">
-	<div class="col s6 m6">
-			<a href="HomeMobile.php?getType=usr&IC=<?=$IC?>"><i class="medium material-icons">keyboard_backspace</i></a>
-	</div>
-
-	<div class="col s6 m6">
+	<div class="col s12 m12">
 			<a href="HomeMobile.php?getType=usr&IC=<?=$IC?>"><i class="medium material-icons right">home</i></a>
 	</div>
 </div>
@@ -63,7 +66,7 @@ if (!empty($VI)) {
 	<div class="col s12 m12">
 		<div class="card-content center">
 			<div class="center col s12">
-				<button class="btn" onclick="redirectHomeParams()">Video Concluído</button>
+				<button class="btn" onclick="redirectHomeParams();createSession()">Video Concluído</button>
 			</div>
 		</div>
 	</div>	
@@ -88,6 +91,10 @@ if (!empty($VI)) {
 	var Campanha = <?=isset($_SESSION["Campanha"])?> ? <?=$_SESSION["Campanha"]?> : undefined;
 	var VideoInstitucional = <?=$_SESSION["VideoInstitucional"]?>[0].link
 
+	function createSession(){
+		<?=createSession()?>
+	}
+
 	setTimeout(function(){
 		if (Campanha != "" && Campanha != undefined && VC != "") {
 			document.querySelector('#Iframe').setAttribute("src", Campanha[0].IFrame)
@@ -96,9 +103,9 @@ if (!empty($VI)) {
 		}
 	}, 1000)
 </script>
-<script type="text/javascript" src="ajax/AjaxGenericDB.js"></script>
-<script type="text/javascript" src="ajax/GenericFunctions.js"></script>
-<script src="materialize/js/materialize.js"></script>
+<script type="text/javascript" src="ajax/AjaxGenericDB.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+<script type="text/javascript" src="ajax/GenericFunctions.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+<script src="materialize/js/materialize.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 <script type="text/javascript" src="js/VideoInstitucional/Video.js?<?=date('d/m/Y-H:i:s')?>"></script>
 
 </body>

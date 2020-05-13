@@ -7,6 +7,11 @@ $getType = $_GET["getType"];
 $IC = $_GET["IC"];
 
 $Campanha = Select('escala75_Easy7', '*', 'Campanhas', "Id = $IC", "",$link);
+
+function createSession(){
+	global $_SESSION;
+	$_SESSION["FotosOk"] = 'T';
+}
 ?>
 
 <!DOCTYPE html>
@@ -20,11 +25,7 @@ $Campanha = Select('escala75_Easy7', '*', 'Campanhas', "Id = $IC", "",$link);
 
 	<div class="container-new-foto">
 		<div class="row">
-			<div class="col s6 m6">
-				<a href="HomeMobile.php?getType=usr&IC=<?=$IC?>"><i class="medium material-icons">keyboard_backspace</i></a>
-			</div>
-
-			<div class="col s6 m6">
+			<div class="col s12 m12">
 				<a href="HomeMobile.php?getType=usr&IC=<?=$IC?>"><i class="medium material-icons right">home</i></a>
 			</div>
 		</div>
@@ -40,10 +41,21 @@ $Campanha = Select('escala75_Easy7', '*', 'Campanhas', "Id = $IC", "",$link);
 		</div>
 
 		<div class="row">
-			<div class="col s12 m12">
-				<div class="cards-footer" id="myCamera">
+			<div class="col s12 m12 center">
+				<div class="select" style="display: none">
+				    <label for="audioSource">Audio source: </label>
+				    <select id="audioSource">
+				      <option value="default">Padrão - Microfone (Realtek(R) Audio)</option>
+				      <option value="communications">Comunicações - Microfone (Realtek(R) Audio)</option>
+				      <option value="7109f7fcef65033867e85a310cd04ac8437e6c00e414cce09049649eba6cf8f2">Microfone (Realtek(R) Audio)</option></select>
+				  </div>
 
-				</div>
+				  <div class="select">
+				    <select id="videoSource">
+				    	<option value="b9b429884cc4d7588abfd55620b13f526e228faa58d204312ef54a7480703847">Câmera</option></select>
+				  </div>
+
+				  <video autoplay="" muted="" playsinline="" style="width: 100%" id="myCamera"></video>
 			</div>
 		</div>
 
@@ -60,10 +72,6 @@ $Campanha = Select('escala75_Easy7', '*', 'Campanhas', "Id = $IC", "",$link);
 
 	<div class="container-view-fotos" style="display: none">
 		<div class="row">
-			<div class="col s6 m6">
-				<a href="HomeMobile.php?getType=usr&IC=<?=$IC?>"><i class="medium material-icons">keyboard_backspace</i></a>
-			</div>
-
 			<div class="col s6 m6">
 				<a href="HomeMobile.php?getType=usr&IC=<?=$IC?>"><i class="medium material-icons right">home</i></a>
 			</div>
@@ -114,7 +122,7 @@ $Campanha = Select('escala75_Easy7', '*', 'Campanhas', "Id = $IC", "",$link);
 				<i class="medium material-icons i-black tooltipped" data-position="top" data-tooltip="Nova foto" onclick="newPicture();">add_circle_outline</i>
 			</div>
 			<div class="col s4 m4 center">
-				<i class="medium material-icons i-green tooltipped" data-position="top" data-tooltip="Enviar fotos" onclick="savePicture();">send</i>
+				<i class="medium material-icons i-green tooltipped" data-position="top" data-tooltip="Enviar fotos" onclick="savePicture();createSession();">send</i>
 			</div>
 		</div>
 	</div>
@@ -133,18 +141,25 @@ $Campanha = Select('escala75_Easy7', '*', 'Campanhas', "Id = $IC", "",$link);
 	<input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">
 	<input type="hidden" name="UserInactivity" id="UserInactivity" value="<?=$_SESSION['User']?>">
 	<!-- Compiled and minified JavaScript -->
-	<script type="text/javascript" src="ajax/AjaxGenericDB.js"></script>
-	<script type="text/javascript" src="ajax/GenericFunctions.js"></script>
-	<script src="materialize/js/materialize.js"></script>
-	<script src="js/Generic.js"></script>
-	<script src="js/geoLocation.js"></script>
-	<script src="js/takePicture.js"></script>
+	<script type="text/javascript" src="ajax/AjaxGenericDB.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+	<script type="text/javascript" src="ajax/GenericFunctions.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+	<script src="materialize/js/materialize.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+	<script src="js/Generic.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+	<script src="js/geoLocation.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+	<script src="js/takePicture.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+	<script src="js/loadCamera.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+	<script src="js/ga.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 	<script type="text/javascript" src="js/VideoInstitucional/Video.js?<?=date('d/m/Y-H:i:s')?>"></script>
 
 	<script type="text/javascript">
-		Campanha = <?=$Campanha?>;
+		var Campanha = <?=$Campanha?>;
 
-		$('.title-campanha').html(`${Campanha[0]['Campanha']}`)
+		function createSession(){
+			<?=createSession()?>
+		}
+		$('.title-campanha').html(`${Campanha[0]['Campanha']}`);
+
+		setTimeout(function(){videoSourceOptions();},1000) 
 	</script>
 </body>
 </html>

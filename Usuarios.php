@@ -80,6 +80,7 @@ session_start();
 						<option value="1">Ativo</option>
 						<option value="0">Desativado</option>
 					</select>
+					<label class="color-default">Status</label>
 				</div>
 
 				<div class="input-field col s12 m7">
@@ -89,6 +90,7 @@ session_start();
 						<option value="1">Administrador</option>
 						<option value="2">Cliente</option>
 					</select>
+					<label class="color-default">Tipo de usuário</label>
 				</div>
 
 				<input type="hidden" name="controlButton" id="controlButton" value="Salvar">
@@ -116,16 +118,16 @@ session_start();
 <input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">
 <input type="hidden" name="UserInactivity" id="UserInactivity" value="<?=$_SESSION['User']?>">
 <!-- Compiled and minified JavaScript -->
-<script type="text/javascript" src="ajax/AjaxGenericDB.js"></script>
-<script type="text/javascript" src="ajax/GenericFunctions.js"></script>
-<script src="materialize/js/materialize.js"></script>
-<script type="text/javascript" src="js/Usuarios/Usuarios.js"></script>
-<script type="text/javascript" src="js/Generic.js"></script>
+<script type="text/javascript" src="ajax/AjaxGenericDB.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+<script type="text/javascript" src="ajax/GenericFunctions.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+<script src="materialize/js/materialize.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+<script type="text/javascript" src="js/Usuarios/Usuarios.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+<script type="text/javascript" src="js/Generic.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 <!--
 <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script type="text/javascript" src="js/geoLocation.js"></script>
-<script type="text/javascript" src="js/readQrCode.js"></script>
-<script type="text/javascript" src="js/takePicture.js"></script>
+<script type="text/javascript" src="js/geoLocation.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+<script type="text/javascript" src="js/readQrCode.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+<script type="text/javascript" src="js/takePicture.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 -->
 </body>
 </html>

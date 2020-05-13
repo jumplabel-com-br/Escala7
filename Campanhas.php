@@ -23,7 +23,7 @@ session_start();
 							<tr>
 								<th>QR Code</th>
 								<th>Campanha</th>
-								<th>Data Iniciio</th>
+								<th>Data Inicio</th>
 								<th>Data Término</th>
 								<th>Status</th>
 								<th></th>
@@ -80,6 +80,7 @@ session_start();
 					<div class="input-field col s12 m7">
 						<select id="Questionarios" class="c-blue" plc="Questionarios">
 						</select>
+						<label class="color-default">Questionários</label>
 					</div>
 
 					<div class="input-field col s12 m7">
@@ -98,6 +99,7 @@ session_start();
 							<option value="1">Ativo</option>
 							<option value="0">Desativado</option>
 						</select>
+						<label class="color-default">Status</label>
 					</div>
 
 					<div class="input-field col s12 m7">
@@ -111,6 +113,7 @@ session_start();
 							<select id="VinculoCliente" class="c-blue">
 
 							</select>
+							<label class="color-default">Vinculo de cliente por campanha</label>
 							<i class="material-icons right i-default add-circle-respostas" onclick="addClientInTemplate();">add_circle</i>
 						</div>
 
@@ -168,17 +171,17 @@ session_start();
 	}
 	?>
 	<!-- Compiled and minified JavaScript -->
-	<script type="text/javascript" src="QRCode/qrcodeJquery.js"></script>
-	<script type="text/javascript" src="ajax/AjaxGenericDB.js"></script>
-	<script type="text/javascript" src="ajax/GenericFunctions.js"></script>
-	<script src="materialize/js/materialize.js"></script>
+	<script type="text/javascript" src="QRCode/qrcodeJquery.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+	<script type="text/javascript" src="ajax/AjaxGenericDB.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+	<script type="text/javascript" src="ajax/GenericFunctions.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+	<script src="materialize/js/materialize.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 	<script type="text/javascript" src="js/Generic.js?<?=date('d/m/Y-H:i:s')?>"></script>
 	<script type="text/javascript" src="js/Campanhas/Campanhas.js?<?=date('d/m/Y-H:i:s')?>"></script>
 <!--
 <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script type="text/javascript" src="js/geoLocation.js"></script>
-<script type="text/javascript" src="js/readQrCode.js"></script>
-<script type="text/javascript" src="js/takePicture.js"></script>
+<script type="text/javascript" src="js/geoLocation.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+<script type="text/javascript" src="js/readQrCode.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+<script type="text/javascript" src="js/takePicture.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 -->
 </body>
 </html>

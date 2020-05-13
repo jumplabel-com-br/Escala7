@@ -74,6 +74,7 @@ session_start();
 							<option value="1">Ativo</option>
 							<option value="0">Desativado</option>
 						</select>
+						<label class="color-default">Status</label>
 					</div>
 
 					<input type="hidden" name="controlButton" id="controlButton" value="Salvar">
@@ -118,9 +119,9 @@ session_start();
 	<input type="hidden" name="Campanha" id="Campanha" value="<?=$_SESSION["Campanha"]?>">
 	<!-- Compiled and minified JavaScript -->
 	<script type="text/javascript" src="js/Generic.js?<?=date('d/m/Y-H:i:s')?>"></script>
-	<script type="text/javascript" src="ajax/AjaxGenericDB.js"></script>
-	<script type="text/javascript" src="ajax/GenericFunctions.js"></script>
-	<script src="materialize/js/materialize.js"></script>
+	<script type="text/javascript" src="ajax/AjaxGenericDB.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+	<script type="text/javascript" src="ajax/GenericFunctions.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+	<script src="materialize/js/materialize.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 	<script type="text/javascript" src="js/Questionarios/Questionarios.js?<?=date('d/m/Y-H:i:s')?>"></script>
 </body>
 </html>

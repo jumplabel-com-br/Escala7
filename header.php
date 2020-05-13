@@ -10,12 +10,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 <!--Impor JQuery Mask Plugin-->
-<script type="text/javascript" src="jQuery-Mask-Plugin-master/dist/jquery.mask.js"></script>
-<script type="text/javascript" src="jQuery-Mask-Plugin-master/dist/jquery.mask.min.js"></script>
-<script type="text/javascript" src="jQuery-Mask-Plugin-master/src/jquery.mask.js"></script>
+<script type="text/javascript" src="jQuery-Mask-Plugin-master/dist/jquery.mask.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+<script type="text/javascript" src="jQuery-Mask-Plugin-master/dist/jquery.mask.min.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+<script type="text/javascript" src="jQuery-Mask-Plugin-master/src/jquery.mask.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 
 <!--Import InstaScan-->
 <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js" ></script>	
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 
 <script src="https://kit.fontawesome.com/12838c155d.js" crossorigin="anonymous"></script>

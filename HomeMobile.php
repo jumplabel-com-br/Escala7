@@ -2,12 +2,6 @@
 session_start();
 require_once('DBInserts.php');
 
-
-$_SESSION['Questionario'] = "";
-$_SESSION["VI"] = "";
-$_SESSION["VC"] = "";
-$_SESSION["FotosOk"] = "";
-
 $User = isset($_SESSION['User']) ? $_SESSION['User'] : '';
 $_SESSION['Questionario'] = isset($_GET['Questionario']) ? $_SESSION['Questionario'] : '';
 
@@ -26,11 +20,6 @@ isset($_POST['Usuario']) ? $_SESSION['User'] = str_replace($replaceUser, "", $_P
 
 $Campanha = Select('escala75_Easy7', 'Id, QRCode, Campanha, IdQuestionario, IFrame, Dt_Inicio, Dt_Termino', 'Campanhas', "Id =".$_SESSION["IC"], "",$link);
 $_SESSION["Campanha"] = $Campanha;
-
-
-$VI = isset($_GET["VI"]) ? $_SESSION["VI"] = $_GET["VI"] : '';
-$VC = isset($_GET["VC"]) ? $_SESSION["VC"] = $_GET["VC"] : '';
-$FotosOk = isset($_GET["FotosOk"]) ? $_SESSION["FotosOk"] = $_GET["FotosOk"] : '';
 ?>
 
 <!DOCTYPE html>
@@ -113,7 +102,7 @@ $FotosOk = isset($_GET["FotosOk"]) ? $_SESSION["FotosOk"] = $_GET["FotosOk"] : '
 
 			<div class="row">
 				<div class="col s12 center">
-					<a class="btn btn-rounded b-blue bkg-white c-blue topics-buttons" href="QuestionarioCampanha.php?type=New&getType=usr&IC=<?=$IC?>">
+					<a class="btn btn-rounded b-blue bkg-white c-blue topics-buttons <?=$_SESSION["Questionario"] == "OK" ? "disabled" : '' ?>" href="QuestionarioCampanha.php?type=New&getType=usr&IC=<?=$IC?>">
 						Questionario
 						<?php 
 							if ($_SESSION["Questionario"] == "OK") {
@@ -150,10 +139,10 @@ $FotosOk = isset($_GET["FotosOk"]) ? $_SESSION["FotosOk"] = $_GET["FotosOk"] : '
 		});
 	</script>
 	<!-- Compiled and minified JavaScript -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-	<script type="text/javascript" src="materialize/js/materialize.js"></script>
-	<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
-	<script type="text/javascript" src="ajax/GenericFunctions.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+	<script type="text/javascript" src="materialize/js/materialize.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+	<script type="text/javascript" src="materialize/js/materialize.min.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+	<script type="text/javascript" src="ajax/GenericFunctions.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 
 	<script type="text/javascript">
 
