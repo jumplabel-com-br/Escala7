@@ -6,6 +6,9 @@
 <!-- Compiled and minified CSS -->
 <link rel="stylesheet" href="materialize/css/materialize.css?<?=date('d/m/Y-H:i:s')?>">
 <link rel="stylesheet" type="text/css" href="css/style.css?<?=date('d/m/Y-H:i:s')?>">
+<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 

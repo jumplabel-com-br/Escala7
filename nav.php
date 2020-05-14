@@ -6,6 +6,7 @@
 					<span class="left badge">
 						&nbsp;
 					</span>
+					&nbsp;
 				</a>
 				<?php
 				if ($_SESSION["UserType"] == 1) {
@@ -65,6 +66,13 @@
 				';
 				}
 				?>
+
+				<a href="Relatorios.php" class="collection-item">
+					<span class="left badge">
+						<i class="material-icons i-default">archive</i>
+					</span>
+					Relatorios
+				</a>
 			</div>
 		</div>
 		<footer class="footer" style="position: absolute;bottom:0;margin: 35px 35px;">

@@ -18,7 +18,7 @@ function sendForm(option = 'Insert'){
 
 	let Schema = 'escala75_Easy7';
   	let tableName = 'RespostasCampanha';
-  	let columns = 'IdCampanha, CPF, Respostas, DateRegistration'
+  	let columns = 'IdQuestionario, CPF, Respostas, DateRegistration'
   	
   	document.querySelectorAll('form input').forEach(x => str += x.value + ',');
   	let respostas = str.substr(0,str.length-1);
@@ -92,7 +92,7 @@ function InserRespostasUsers(option = 'Insert'){
 }
 
 function returnPerguntas(){
-	let sql = `SELECT perguntas.Id, questionarioperguntas.IdQuestionario, perguntas.Pergunta, perguntas.Status, questionarios.Name FROM escala75_Easy7.Perguntas as perguntas
+	let sql = `SELECT perguntas.Id, questionarioperguntas.IdQuestionario, perguntas.Pergunta, perguntas.Status, perguntas.Tipo, questionarios.Name FROM escala75_Easy7.Perguntas as perguntas
 	  left join escala75_Easy7.QuestionarioPerguntas as questionarioperguntas on perguntas.Id = questionarioperguntas.IdPergunta
 	  left join escala75_Easy7.Questionarios as questionarios on questionarioperguntas.IdQuestionario = questionarios.Id
 	  where  questionarioperguntas.IdQuestionario = ${IdQuestionario};`

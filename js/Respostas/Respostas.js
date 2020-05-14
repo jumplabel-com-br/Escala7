@@ -48,49 +48,14 @@ function returnPerguntas(IdQuestionario, option = 'Select'){
 
 	  let data = dataSelectAdvanced;
 	  returnRespostas(IdQuestionario, data);
-
-	/*
-	let Schema = 'escala75_Easy7';
-  	let tableName = 'Perguntas';
-  	let columns = 'Id, Pergunta, Tipo'
-//  	let where = `IdQuestionario = ${IdCampanha}`
-
-	let params = {
-		Schema,
-		tableName,
-		columns,
-//		where,
-		option
-	};
-
-	$.ajax({
-		url: 'DBInserts.php',
-		type: 'POST',
-		dataType: 'json',
-		data: params,
-		beforeSend: function(){
-			$('#modalProgress').modal('open');
-		}
-	})
-	.done(function(data) {
-		console.log("success");
-		
-		returnRespostas(IdCampanha, data);
-		
-	})
-	.fail(function() {
-		console.log("error");
-		$('#modalProgress').modal('close');
-	});
-	*/
 }
 
-function returnRespostas(IdCampanha, Perguntas, option = 'Select'){
+function returnRespostas(IdQuestionario, Perguntas, option = 'Select'){
 
 	let Schema = 'escala75_Easy7';
   	let tableName = 'RespostasCampanha';
-  	let columns = 'Id, IdCampanha, CPF, Respostas'
-  	let where = `IdCampanha = ${IdCampanha}`
+  	let columns = 'Id, IdQuestionario, CPF, Respostas'
+  	let where = `IdQuestionario = ${IdQuestionario}`
 
 	let params = {
 		Schema,

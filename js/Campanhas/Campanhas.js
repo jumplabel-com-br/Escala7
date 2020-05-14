@@ -66,7 +66,7 @@ function selectedQuestionario(option = 'Select'){
   .done(function(data) {
 
     if (data.length > 0 ) {
-      $('#Questionarios').html(templateQuestionario(data));
+      $('#Questionarios, .Questionarios').html(templateQuestionario(data));
       $('select').formSelect();
     }
 
@@ -82,7 +82,7 @@ function templateQuestionario(model){
   return `
   <option value="">Questionarios</option>
   ${model.map(x =>{
-    return `<option ${x.Id == dataInfos[0].IdQuestionario ? 'selected' : ''} value="${x.Id}">${x.Name}</option>`;
+    return `<option value="${x.Id}">${x.Name}</option>`;
     }).join('')}`
 }
 
