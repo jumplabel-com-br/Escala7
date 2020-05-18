@@ -2,12 +2,12 @@ var infosRespostas = [];
 var respostas = [];
 
 function extrairRespostasLivres(){
-	if ($('#Questionarios').val() == "") {
+	if ($('#QuestionariosRL').val() == "") {
 		M.toast({html: 'Preencha o campo questionário', displayLength: 4000});
 		return false;
 	}
 
-	returnPerguntas($('#Questionarios').val());
+	returnPerguntas($('#QuestionariosRL').val());
 }
 function returnPerguntas(IdQuestionario, option = 'Select'){
 
