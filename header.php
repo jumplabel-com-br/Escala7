@@ -1,3 +1,4 @@
+<script src="https://maps.google.com/maps/api/js?key=AIzaSyDv2yk_203Fn3MlfqoMbJ22OIkbqWW3YLQ&callback=initMap&sensor=false" type="text/javascript"></script>
 <meta charset="utf-8">
 <!--Import Jquey-->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
