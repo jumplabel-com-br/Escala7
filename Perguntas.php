@@ -119,7 +119,7 @@ session_start();
 						<select id="Questionarios" class="c-blue SelectQuestionarios" plc="Questionarios">
 						</select>
 						<label class="color-default">Questionários</label>
-						<i class="material-icons right i-default add-circle-respostas" onclick="CreateQuestionarioPerguntas();">add_circle</i>
+						<i class="material-icons right i-default add-circle-respostas pointer" onclick="CreateQuestionarioPerguntas();">add_circle</i>
 					</div>
 
 					<br>
@@ -150,7 +150,7 @@ session_start();
 					<div class="input-field col s12 m7 div-respostas" style="display: none">
 						<input type="text" name="Resposta" id="Resposta" class="autocomplete c-blue" plc="Resposta">
 						<label for="Resposta"0 class="c-blue">Resposta</label>
-						<i class="material-icons prefix right i-default add-circle-respostas" onclick="CreateRespostas();">add_circle</i>
+						<i class="material-icons right i-default add-circle-respostas pointer" onclick="CreateRespostas();">add_circle</i>
 					</div>
 
 					<div class="input-field col s12 m7">
@@ -182,6 +182,9 @@ session_start();
 		</div>
 	</div>
 
+	<?
+		require_once('footer.php');
+	?>
 	<div id="modalProgress" class="modal modal-progress">
 		<div class="modal-content">
 			<div class="progress">

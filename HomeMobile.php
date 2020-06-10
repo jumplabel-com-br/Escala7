@@ -2,8 +2,26 @@
 session_start();
 require_once('DBInserts.php');
 
+if (!isset($_SESSION["ultimoAcesso"])) {
+	if (empty($_SESSION["ultimoAcesso"])) {
+		$_SESSION["ultimoAcesso"] = date("Y-n-j H:i:s");
+	}
+}else{
+	$_SESSION["ultimoAcesso"] = $_SESSION["ultimoAcesso"];
+}
+
+//$_SESSION['BarOpen'] = isset($_GET['BarOpen']) ? $_GET['BarOpen'] : '';
+
+if (isset($_GET['Questionario'])) {
+	$_SESSION['Questionario'] = $_GET['Questionario'];
+}else{
+	$_SESSION["Questionario"] = $_SESSION["Questionario"]	;
+}
+//$_SESSION["Questionario"] = isset($_GET['Questionario']) ? $_SESSION['Questionario'] : '';
+//$_SESSION["Questionario"]
+
 $User = isset($_SESSION['User']) ? $_SESSION['User'] : '';
-$_SESSION['Questionario'] = isset($_GET['Questionario']) ? $_SESSION['Questionario'] : '';
+//$BarOpen = $_SESSION['BarOpen'];
 
 if (isset($_GET['IC'])) {
 	$IC = $_GET['IC'];
@@ -13,6 +31,18 @@ if (isset($_POST['IC'])) {
 	$IC = $_POST['IC'];
 }
 
+if (isset($_GET['VC'])) {
+	$_SESSION["VC"] = $_GET['VC']; 
+}else{
+	$_SESSION["VC"] = $_SESSION["VC"]; 
+}
+
+if (isset($_GET['FotosOk'])) {
+	$_SESSION["FotosOk"] = $_GET['FotosOk']; 
+}else{
+	$_SESSION["FotosOk"] = $_SESSION["FotosOk"]; 
+}
+
 $_SESSION["IC"] = $IC;
 $replaceUser = array(".", "-");
 
@@ -20,6 +50,8 @@ isset($_POST['Usuario']) ? $_SESSION['User'] = str_replace($replaceUser, "", $_P
 
 $Campanha = Select('escala75_Easy7', 'Id, QRCode, Campanha, IdQuestionario, IFrame, Dt_Inicio, Dt_Termino', 'Campanhas', "Id =".$_SESSION["IC"], "",$link);
 $_SESSION["Campanha"] = $Campanha;
+
+//echo "BarOpen".$BarOpen;
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +77,7 @@ $_SESSION["Campanha"] = $Campanha;
 		</div>
 	</section>
 
-	<section class="center section-minha-campanha">
+	<section class="center section-minha-campanha" style="display: none">
 		<div class="container center">
 			<div class="col s12 center">
 				<button class="btn btn-rounded b-blue bkg-white c-blue" onclick="$('.section-minha-campanha').hide(); $('.section-estrutura-campanha').show();">Minha Campanha</button>
@@ -131,11 +163,13 @@ $_SESSION["Campanha"] = $Campanha;
 		</section>		
 	</footer>
 
-
+	<?php
+		require_once("footer.php");
+	?>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$('.collapsible').collapsible();
-			$('.section-estrutura-campanha').hide();
+			$('.collapsible').collapsible('open');
+			//$('.section-estrutura-campanha').hide();
 		});
 	</script>
 	<!-- Compiled and minified JavaScript -->

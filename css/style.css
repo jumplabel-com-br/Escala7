@@ -170,7 +170,8 @@ input[type=text]:not(.browser-default):focus:not([readonly]) + label.c-blue,
 }
 
 .card-campanha,
-.card-Questionario{
+.card-Questionario,
+.card-Pergunta{
 	height: 450px;
 	overflow-y: auto;
 }
@@ -247,8 +248,9 @@ input[type=text]:not(.browser-default):focus:not([readonly]) + label.c-blue,
 	margin-top: 5%;
 }
 
-
-
+.pointer{
+	cursor: pointer;
+}
 
 
 

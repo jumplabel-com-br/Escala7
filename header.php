@@ -1,4 +1,6 @@
-<script src="https://maps.google.com/maps/api/js?key=AIzaSyDv2yk_203Fn3MlfqoMbJ22OIkbqWW3YLQ&callback=initMap&sensor=false" type="text/javascript"></script>
+<?
+	ini_set("display_errors", 1);
+?>
 <meta charset="utf-8">
 <!--Import Jquey-->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -17,9 +19,5 @@
 <script type="text/javascript" src="jQuery-Mask-Plugin-master/dist/jquery.mask.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 <script type="text/javascript" src="jQuery-Mask-Plugin-master/dist/jquery.mask.min.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 <script type="text/javascript" src="jQuery-Mask-Plugin-master/src/jquery.mask.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
-
-<!--Import InstaScan-->
-<script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js" ></script>	
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 
 <script src="https://kit.fontawesome.com/12838c155d.js" crossorigin="anonymous"></script>

@@ -1,0 +1,174 @@
+var str = '';
+var locations = [];
+var infosLocation;
+var strArr = [];
+var strArrStr = []; 
+jQuery(document).ready(function($) {
+  selectCampanhas();
+});
+
+function createLocations(){
+
+  if ($('#CampanhasMapa').val() == '') {
+    M.toast({html: 'Selecione a campanha para montar o mapa', displayLength: 10000});
+  }
+
+  $('#modalProgress').modal('open');
+
+  let Schema = 'escala75_Easy7';
+  let tableName = 'ImagensCampanha';
+  let columns = 'Latitude, Longitude';
+  let where = `IdCampanha = ${$('#CampanhasMapa').val()}`
+  let option = 'Select'
+
+  let params = {
+    Schema,
+    tableName,
+    columns,
+    where,
+    option
+  }
+
+  $.ajax({
+    url: 'DBInserts.php',
+    type: 'POST',
+    dataType: 'json',
+    data: params,
+  })
+  .done(function(data) {
+    console.log("success");
+
+    if (data.length > 0) {
+      locations = [];
+      str = ''
+      data.map(elem => {
+        returnLocation(elem.Latitude, elem.Longitude);
+
+                //locations += `[${returnLocation(elem.Latitude, elem.Longitude)}, ${elem.Latitude}, ${elem.Longitude}]`;
+              });
+
+      str = str.substr(0,str.length-1).split('],');
+
+      setTimeout(function (){
+        str.forEach(elem => {
+          strArrStr.push(elem.replace("]]", "]").replace('undefined', ''));
+        });
+
+        strArrStr.forEach(elem => {
+          elem != "" ? locations.push(JSON.parse(elem)) : '';
+        });
+
+        initMap(locations);
+      },3000)
+    }else{
+      document.querySelector('#map').innerHTML = '<label style-"color:black">Sem informações para esta campanha</label>'
+    }
+
+    $('#modalProgress').modal('close');
+  })
+  .fail(function() {
+    console.log("error");
+  });
+}
+
+
+function returnLocation(lat, log){
+  let latlng = 'latlng='+lat+','+log;
+  let key = 'key=AIzaSyBOni-fl7eqwuCXR7qUppY4-afzDp31oaU';
+
+  $.ajax({
+    url: 'https://maps.googleapis.com/maps/api/geocode/json?'+key+'&'+latlng,
+    type: 'GET',
+    dataType: 'json',
+    async: false,
+        //data: {latlng, key},
+      })
+  .done(function(data) {
+        //console.log("success: ", data.results[0].formatted_address);
+        str += `["${data.results[0].formatted_address}", ${lat}, ${log}]],`;
+
+        // str = str.replace(/undefined/g,'');
+
+      })
+  .fail(function() {
+    console.log("error");
+  });
+
+}
+
+
+function initMap(locations){
+
+  var map = new google.maps.Map(document.querySelector('#map'), {
+    zoom: 6,
+    center: new google.maps.LatLng(-22, -45),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  });
+
+  var infowindow = new google.maps.InfoWindow();
+
+  var marker, i;
+
+  for (i = 0; i < locations.length; i++) {  
+    marker = new google.maps.Marker({
+      position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+      map: map,
+      title: locations[i][0]
+    });
+
+        /*google.maps.event.addListener(marker, 'click', (function(marker, i) {
+          return function() {
+            infowindow.setContent(locations[i][0]);
+            infowindow.open(map, marker);
+          }
+        })(marker, i));*/
+  }
+
+}
+
+function selectCampanhas(option = 'Select'){
+  
+  let Schema = 'escala75_Easy7';
+  let columns = 'Id, Campanha';
+  let tableName = 'Campanhas';
+
+  let params = {
+    option,
+    Schema,
+    columns,
+    tableName
+  }
+
+  $.ajax({
+    url: 'DBInserts.php',
+    type: 'POST',
+    dataType: 'json',
+    data: params,
+  })
+  .done(function(data) {
+    console.log("success");
+    if(data.length > 0){
+      $('.Campanhas').html(templaceCampanhas(data));
+    }else{
+      $('.Campanhas').html('<option value="" disabled>Sem campanha cadastrada</option>')
+    }
+
+    $('select').formSelect();
+  })
+  .fail(function() {
+    console.log("error");
+  });
+  
+}
+
+
+function templaceCampanhas(model){
+  return`
+    <option value="">Selecione</option>
+    ${model.map(elem => {
+      return`
+        <option value="${elem.Id}">${elem.Campanha}</option>
+      `
+    })}
+  `
+}

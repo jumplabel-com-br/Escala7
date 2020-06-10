@@ -1,6 +1,4 @@
-<?php
-session_start();
-?>
+<?php session_start();?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +19,7 @@ session_start();
 					<table class="responsive-table">
 						<thead class="color-default">
 							<tr>
+								<th>Id</th>
 								<th>QR Code</th>
 								<th>Campanha</th>
 								<th>Data Inicio</th>
@@ -41,7 +40,7 @@ session_start();
 		<div class="col s12 m9">
 			<div class="cards-footer">
 				<div class="col s6 m3 left-align">
-					<button class="btn btn-default" type="submit">Relatório</button>
+					<!--<button class="btn btn-default" type="submit">Relatório</button>-->
 				</div>
 				<div class="col s6 m9 right-align">
 					<button class="btn btn-default" type="button" onclick="$('#modalCampanha').modal('open');clearForm('#formCampanha');$('select').formSelect();selectedQuestionario();$('.editShow').addClass('hide');"><span class="d-none-mobile">+</span> Cadastrar</button>
@@ -67,6 +66,11 @@ session_start();
 
 			<div class="container center-align">
 				<form id="formCampanha">
+					<div class="input-field col s12 m7">
+						<input type="text" name="Id" id="Id" disabled="">
+						<label for="Id" class="c-blue">Id</label>
+					</div>
+
 					<div class="input-field col s12 m7">
 						<input type="text" name="QRCode" id="QRCode" class="autocomplete c-blue" plc="QR Code">
 						<label for="QRCode" class="c-blue">QR Code</label>
@@ -114,7 +118,7 @@ session_start();
 
 							</select>
 							<label class="color-default">Vinculo de cliente por campanha</label>
-							<i class="material-icons right i-default add-circle-respostas" onclick="addClientInTemplate();">add_circle</i>
+							<i class="material-icons right i-default pointer add-circle-respostas" onclick="addClientInTemplate();">add_circle</i>
 						</div>
 
 						<br>
@@ -143,12 +147,16 @@ session_start();
 					</div>
 
 					<input type="hidden" name="controlButton" id="controlButton" value="Salvar">
-					<input type="hidden" name="Id" id="Id">
 				</form>
 
 				<div class="modal-footer">
 					<div class="col s12 m12">
-						<button type="button" class="btn btn-blue btn-action-formCampanha" onclick="$(this).html() == 'Salvar' ? CRUDCampanhas('Insert') : CRUDCampanhas('Update')">Salvar</button>
+						<? 
+							if ($_SESSION["UserType"] == 1) { 
+								echo "<button type='button' class='btn btn-blue btn-action-formCampanha' onclick='$(this).html() == `Salvar` ? CRUDCampanhas(`Insert`) : CRUDCampanhas(`Update`)'>Salvar</button>";
+							}
+						?>
+						
 					</div>
 				</div>
 			</div>
@@ -169,6 +177,7 @@ session_start();
 	if ($_SESSION["UserType"] == 0) {
 		echo "<input type='hidden' name='IdUser' id='IdUser' value=".$_SESSION["IdUser"].">";
 	}
+	require_once('footer.php');
 	?>
 	<!-- Compiled and minified JavaScript -->
 	<script type="text/javascript" src="QRCode/qrcodeJquery.js?date=<?=date('d/m/Y-H:i:s')?>"></script>

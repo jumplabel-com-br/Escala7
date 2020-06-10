@@ -8,19 +8,74 @@ function takePicture()
 		return;
 	}
 
-	$('.container-new-foto').hide();
-	$('.container-view-fotos').show();
+
+	if (file0.value == '') {
+		M.toast({html: 'É necessário anexar ao menos 1 imagem', displayLength: 4000});
+		return;
+	}
+
+	$('#modalProgress').modal('open');
+	//$('.container-new-foto').hide();
+	//$('.container-view-fotos').show();
 
 
-	Webcam.snap(function(data_uri)
+	/*Webcam.snap(function(data_uri)
 	{
 		document.querySelector('#results').innerHTML = '<img id="base64image" src="'+data_uri+'" style="width: 100%"/>';
 		pictures.push({
 			img : data_uri
 		})
-	});
+	});*/
 
-	if (pictures[0] != undefined) {
+	var reader0 = new FileReader();
+	var reader1 = new FileReader();
+	var reader2 = new FileReader();
+		
+	var baseString0;
+	var baseString1;
+	var baseString2;
+
+		reader0.onloadend = function () {
+		        baseString0 = reader0.result;
+		};
+
+		reader1.onloadend = function () {
+		        baseString1 = reader1.result;
+		};
+
+		reader2.onloadend = function () {
+		        baseString2 = reader2.result;
+		};
+
+
+		document.querySelector('#file0')['files'][0] != undefined ? reader0.readAsDataURL(document.querySelector('#file0')['files'][0]) : '';
+		document.querySelector('#file1')['files'][0] != undefined ? reader1.readAsDataURL(document.querySelector('#file1')['files'][0]) : '';
+		document.querySelector('#file2')['files'][0] != undefined ? reader2.readAsDataURL(document.querySelector('#file2')['files'][0]) : '';
+
+		setTimeout(function(){
+
+			if (baseString0 != undefined) {
+				pictures.push({
+					img : baseString0
+				})	
+			}
+
+			if (baseString1 != undefined) {
+				pictures.push({
+					img : baseString1
+				})
+			}
+
+			if (baseString2 != undefined) {
+				pictures.push({
+					img : baseString2
+				});	
+			}
+			savePicture()
+		}, 2000)
+
+
+	/*if (pictures[0] != undefined) {
 		document.querySelector('#picture_1').setAttribute("img" , pictures[0].img);
 		document.querySelector('#picture_1').innerHTML = `<img src="${pictures[0].img}" name="file0" id="file0" style="width: 100%">`;
 	}
@@ -31,7 +86,7 @@ function takePicture()
 	if (pictures[2] != undefined) {
 		document.querySelector('#picture_3').setAttribute("img" , pictures[2].img);
 		document.querySelector('#picture_3').innerHTML = `<img src="${pictures[2].img}" name="file2" id="file2" style="width: 100%">`
-	}
+	}*/
 	
 }
 
@@ -129,17 +184,15 @@ function savePicture(){
 	let Data0 = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate()+"-"+date.getMinutes()+"-"+date.getSeconds()+'-'+date.getMilliseconds();
 	let Data1 = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate()+"-"+date.getMinutes()+"-"+date.getSeconds()+'-'+date.getMilliseconds();
 	let Data2 = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate()+"-"+date.getMinutes()+"-"+date.getSeconds()+'-'+date.getMilliseconds();
-	let file0 = document.querySelector('#file0') != null ? document.querySelector('#file0').src : '';
-	let file1 = document.querySelector('#file1') != null ? document.querySelector('#file1').src : '';
-	let file2 = document.querySelector('#file2') != null ? document.querySelector('#file2').src : '';
+	let file0 = pictures[0] != null ? pictures[0].img : '';
+	let file1 = pictures[1] != null ? pictures[1].img : '';
+	let file2 = pictures[2] != null ? pictures[2].img : '';
 	let lat = document.querySelector('#latitue').value;
 	let lon = document.querySelector('#longitude').value;
 
-	if (file0 == '') {
-		M.toast({html: 'É necessário anexar ao menos 1 imagem', displayLength: 4000});
-		return;
-	}
-
+	//console.log('file0 : ', file0);
+	//console.log('file1 : ', file1);
+	//console.log('file2 : ', file2);
 	file0 != '' ? formdata.append("file0", file0) : '';
 	file1 != '' ? formdata.append("file1", file1) : '';
 	file2 != '' ? formdata.append("file2", file2) : '';
@@ -150,6 +203,7 @@ function savePicture(){
 	file2 != "" ? formdata.append('Data2', Data2) : '';
 	lat != "" ? formdata.append('lat', lat) : '';
 	lon != "" ? formdata.append('lon', lon) : '';
+	IdCampanha != "" ? formdata.append('IdCampanha', IdCampanha) : '';
 
 	ajax.addEventListener("load", function(event) { upload_completo(event);}, false);
 	ajax.open("POST", "upload.php");
@@ -157,7 +211,8 @@ function savePicture(){
 }
 
 function upload_completo(event){
+	$('#modalProgress').modal('close');
 	window.location.href = window.location.href.replace('Fotos','HomeMobile')+'&FotosOk=T'
 }
 
-window.onload = showCamera;
+//window.onload = showCamera;

@@ -14,6 +14,7 @@ $Data1 = date('d-m-y-H-i-s-365');
 $Data2 = date('d-m-y-H-i-s-366');
 $lat = $_POST["lat"];
 $lon = $_POST["lon"];
+$IdCampanha = $_POST["IdCampanha"];
 
 $user = $_SESSION['User'];
 
@@ -31,8 +32,10 @@ if (!empty($img0)) {
 	$file0 = UPLOAD_DIR . $Data0  . '.jpg';
 	$success1 = file_put_contents($file0, $data);
 
-	$sql = Insert('escala75_Easy7', 'ImagensCampanha', 'Usuario, Imagem, Latitude, Longitude, Status, DateRegistration',  "'$user', '$file0', '$lat', '$lon', 1, now()");
+	$sql = Insert('escala75_Easy7', 'ImagensCampanha', 'Usuario, Imagem, Latitude, Longitude, Status, DateRegistration, IdCampanha',  "'$user', '$file0', '$lat', '$lon', 1, now(), $IdCampanha");
 	mysqli_query($link, $sql);
+
+	echo 'teste : '.$success1.' file : '.$file0;
 }
 
 if (!empty($img1) ) {
@@ -42,8 +45,10 @@ if (!empty($img1) ) {
 	$file1 = UPLOAD_DIR . $Data1  . '.jpg';
 	$success2 = file_put_contents($file1, $data);
 
-	$sql = Insert('escala75_Easy7', 'ImagensCampanha', 'Usuario, Imagem, Latitude, Longitude, Status, DateRegistration',  "$user, $file1, $lat, $lon, 1, now()");
+	$sql = Insert('escala75_Easy7', 'ImagensCampanha', 'Usuario, Imagem, Latitude, Longitude, Status, DateRegistration, IdCampanha',  "$user, $file1, $lat, $lon, 1, now(), $IdCampanha");
 	mysqli_query($link, $sql);
+
+	echo 'teste : '.$success2.' file : '.$file1;
 }
 
 if (!empty($img2) ) {
@@ -53,7 +58,9 @@ if (!empty($img2) ) {
 	$file2 = UPLOAD_DIR . $Data2  . '.jpg';
 	$success3 = file_put_contents($file2, $data);
 
-	$sql = Insert('escala75_Easy7', 'ImagensCampanha', 'Usuario, Imagem, Latitude, Longitude, Status, DateRegistration',  "$user, $file2, $lat, $lon, 1, now()");
+	$sql = Insert('escala75_Easy7', 'ImagensCampanha', 'Usuario, Imagem, Latitude, Longitude, Status, DateRegistration. IdCampanha',  "$user, $file2, $lat, $lon, 1, now(), $IdCampanha");
 	mysqli_query($link, $sql);
+
+	echo 'teste : '.$success3.' file : '.$file2;
 }
 ?>

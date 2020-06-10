@@ -24,7 +24,7 @@ $('#li-img-logo-max').on('click', function(event) {
 
 function selectCampanhas(){
 
-let sql = `select a.* from escala75_Easy7.Campanhas as a
+let sql = `select distinct a.* from escala75_Easy7.Campanhas as a
 left join escala75_Easy7.ClientesCampanhas as b on a.Id = b.IdCampanha
 ${$('#IdUser').val() != undefined ? `where b.IdUsuario = ${$('#IdUser').val()}` : ''};`
 
@@ -82,7 +82,7 @@ function templateQuestionario(model){
   return `
   <option value="">Questionarios</option>
   ${model.map(x =>{
-    return `<option value="${x.Id}">${x.Name}</option>`;
+    return `<option ${dataInfos != undefined && dataInfos[0].IdQuestionario == x.Id ? 'selected' : ''} value="${x.Id}">${x.Name}</option>`;
     }).join('')}`
 }
 
@@ -318,6 +318,7 @@ function templateTableCampanhas(model){
   return model.map(x => {
     return`
       <tr>
+        <td>${x.Id}</td>
         <td>#${x.QRCode}</td>
         <td>${x.Campanha}</td>
         <td>${DateFormatPtBr(x.Dt_Inicio)}</td>
@@ -329,13 +330,14 @@ function templateTableCampanhas(model){
 }
 
 function setInputsModal(model){
-
+  $('#formCampanha label').addClass('active');
+  /*$('label[for="Id"]').addClass('active');
   $('label[for="QRCode"]').addClass('active');
   $('label[for="Campanha"]').addClass('active');
   $('label[for="Dt_Inicio"]').addClass('active');
   $('label[for="Dt_Termino"]').addClass('active');
   $('label[for="Status"]').addClass('active');
-  $('label[for="IFrame"]').addClass('active');
+  $('label[for="IFrame"]').addClass('active');*/
 
 
   $('#Id').val(model[0].Id);
@@ -393,7 +395,7 @@ function dateFormart(inputDate){
     Month = "06";
   }else if(date[0] == "Jul"){
     Month = "07";
-  }else if(date[0] == "Aug"){
+  }else if(date[0] == "Ago"){
     Month = "08";
   }else if(date[0] == "Set"){
     Month = "09";

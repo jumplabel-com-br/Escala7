@@ -109,11 +109,13 @@ function SelectAdvanced(sql, option = 'SelectAdvanced'){
 
 function clearForm(form){
 	document.querySelectorAll(`${form} input`).forEach(input => input.value = '');
+    $('select').formSelect();
 }
 
 function exportExcel(id, nome){
     var table_div = document.getElementById(id);   
-          // esse "\ufeff" é importante para manter os acentos
+    
+    // esse "\ufeff" é importante para manter os acentos
     
     var blobData = new Blob(['\ufeff'+table_div.outerHTML], { type: 'application/vnd.ms-excel' });
     var url = window.URL.createObjectURL(blobData);
@@ -129,7 +131,7 @@ function grafico(div_montagem, dataPoints){
         animationEnabled: true,
         axisY: {
             title: "Gráfico perguntas combo",
-            suffix: "%",
+            suffix: "",
             includeZero: true
         },
         /*axisX: {
@@ -137,7 +139,7 @@ function grafico(div_montagem, dataPoints){
         },*/
         data: [{
             type: "column",
-            yValueFormatString: "#,##0.0#"%"",
+            yValueFormatString: "#,##0.0#"*"",
             dataPoints
          }]
     };

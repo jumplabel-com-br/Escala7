@@ -10,11 +10,10 @@ $countCampanha = 2;
 
 if ($getType != 'adm' && $getType != '') {
 	global $_SESSION;
-	$countCampanha = Select('escala75_Easy7', 'Campanha', 'Campanhas', "Id = $IdCampanha and QRCode = '$QrCodeCampanha'", "",$link);
+	$countCampanha = Select('escala75_Easy7', 'Campanha', 'Campanhas', "Id = $IdCampanha and QRCode = '$QrCodeCampanha' and Status = 1", "",$link);
 	$_SESSION["IC"] = $IdCampanha;
 
 }
-
 
 //echo "Id = $IdCampanha and QRCode = '#$QrCodeCampanha'"."teste: ".empty(Select('escala75_Easy7', 'Campanha', 'Campanhas', "Id = $IdCampanha and QRCode = '#$QrCodeCampanha'", $link));
 //die;
@@ -29,7 +28,7 @@ if (empty($getType)) {
 }else if ($getType == 'usr' && (empty($IdCampanha) || empty($QrCodeCampanha))) {
 	header('Location: Error.php?M=Params-not-found');
 }else if (strlen($countCampanha) == 2 && $getType != 'adm' && $getType != '') {
-	header('Location: Error.php?M=Params-not-found');
+	header('Location: Error.php?M=CE');
 }
 //	echo 'teste: '.$getType;
 

@@ -146,6 +146,38 @@ $.ajax({
 
 }
 
+function returnPerguntas(id, tableName = 'Perguntas', columns = '*', complement){
+
+  let sql = `SELECT perguntas.Id, questionarioperguntas.IdQuestionario, perguntas.Pergunta, perguntas.Status, questionarios.Name FROM escala75_Easy7.Perguntas as perguntas
+     left join escala75_Easy7.QuestionarioPerguntas as questionarioperguntas on perguntas.Id = questionarioperguntas.IdPergunta
+     left join escala75_Easy7.Questionarios as questionarios on questionarioperguntas.IdQuestionario = questionarios.Id
+     where questionarios.Id = ${id || $('#formQuestionario #Id').val()}
+     `
+   
+   SelectAdvanced(sql);
+
+   let data = dataSelectAdvanced;
+   PerguntasQuestionarios = dataSelectAdvanced;
+
+  if (PerguntasQuestionarios.length > 0) {
+    $('.return-perguntas').html(templatePerguntas(data));
+  }else{
+    $('.return-perguntas').html('Nenhuma pergunta cadastrada');
+  }
+
+  $('#modalPerguntas').modal('open');
+  $('#modalQuestionario').modal('close');
+
+}
+
+function templatePerguntas(model){
+  return model.map(x => {
+    return`
+    <label>${x.Pergunta}</label><br />
+    `});
+
+}
+
 function templateTableQuestionarios(model){
   return model.map(x => {
     return`

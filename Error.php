@@ -1,6 +1,15 @@
 <?php
 $User = isset($_SESSION['User']);
+$M = $_GET["M"];
+$Message;
 
+if ($M == "QRCodeUser") {
+	$Message = "Escaniar novamente o QR Code pois sua sessão foi expirada";
+}else if ($M == "CE") {
+	$Message = "Campanha Expirada";
+};
+
+session_destroy(); // destruo a sessão
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +56,7 @@ $User = isset($_SESSION['User']);
 								Erro identificado
 								<span class="new badge"></span>
 							</div>
-							<div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+							<div class="collapsible-body"><p><?=$Message?></p></div>
 						</li>
 					</ul>				
 				</div>

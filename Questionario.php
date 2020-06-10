@@ -83,7 +83,7 @@ session_start();
 
 				<div class="modal-footer">
 					<div class="col s12 m12">
-						<button type="button" class="btn btn-blue btn-view-perguntas left" onclick="returnPerguntas()">Visualizar</button>
+						<button type="button" class="btn btn-blue btn-view-perguntas left" onclick="returnPerguntas($('#formQuestionario #Id').val())">Visualizar</button>
 						<button type="button" class="btn btn-blue btn-action-formQuestionario">Salvar</button>
 					</div>
 				</div>
@@ -113,6 +113,10 @@ session_start();
 			</div>
 		</div>
 	</div>
+
+	<?
+		require_once('footer.php');
+	?>
 	<input type="hidden" name="valueScanner" id="valueScanner">
 	<input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">
 	<input type="hidden" name="UserInactivity" id="UserInactivity" value="<?=$_SESSION['User']?>">
@@ -123,5 +127,6 @@ session_start();
 	<script type="text/javascript" src="ajax/GenericFunctions.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 	<script src="materialize/js/materialize.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 	<script type="text/javascript" src="js/Questionarios/Questionarios.js?<?=date('d/m/Y-H:i:s')?>"></script>
+	
 </body>
 </html>

@@ -1,5 +1,6 @@
 var dataInfos;
 var IdQuestionario;
+var PerguntasQuestionarios;
 
 $(document).ready(function(){
  Perguntas();
@@ -43,6 +44,7 @@ function Perguntas(){
   SelectAdvanced(sql);
 
   let data = dataSelectAdvanced;
+  PerguntasQuestionarios = dataSelectAdvanced;
 
   $('.tbody-Perguntas').html(templateTablePerguntas(data));
   $('.dropdown-trigger').dropdown();
@@ -99,6 +101,14 @@ function templateQuestionario(model){
 
 function CreateQuestionarioPerguntas(option = 'Insert'){
   
+  let verificaExistencia = PerguntasQuestionarios.filter(elem => elem.Id == $('#formEditPergunta #Id').val() && elem.IdQuestionario == $('#formEditPergunta #Questionarios').val());
+
+  if (verificaExistencia.length > 0) {
+    M.toast({html: 'O cadastro dessa pergunta a este questionário já foi executado', displayLength: 10000});
+    return;
+  }
+
+
   let IdQuestionario = $('#formEditPergunta #Questionarios').val();
   let IdPergunta = $('#formEditPergunta #Id').val();
   let UserRegistration = $('#UserRegistration').val();
@@ -124,7 +134,7 @@ function CreateQuestionarioPerguntas(option = 'Insert'){
   })
   .done(function(data) {
     Perguntas();
-    M.toast({html: 'Questionário cadastrado com êxito', displayLength: 4000})
+    M.toast({html: 'Questionário cadastrado com êxito', displayLength: 10000})
     //$('#modalPergunta').modal('close');
   })
   .fail(function() {
@@ -213,8 +223,8 @@ function UpdatePerguntas(option = 'Update'){
 
   let Schema = 'escala75_Easy7';
   let tableName = 'Perguntas';
-  let setQuery = `IdQuestionario = '${Questionario}',Pergunta = '${Pergunta}',Tipo = '${Tipo}', Status = '${Status}', UserRegistration = '${UserRegistration}'`;
-  let where = `id = ${Id}`;
+  let setQuery = `Pergunta = '${Pergunta}',Tipo = '${Tipo}', Status = '${Status}', UserRegistration = '${UserRegistration}'`;
+  let where = `Id = ${Id}`;
 
   if ($('#Status').val() == 0) {
     setQuery += `, UserInactivity = '${param.UserInactivity}',DateInactivity = now()`
@@ -284,7 +294,7 @@ function selectRespostas(option = 'Select'){
   let Schema = 'escala75_Easy7';
   let tableName = 'Respostas';
   let columns = '*';
-  let where = `IdPergunta = ${$('#formEditPergunta #Id').val()}`;
+  let where = `IdPergunta = ${$('#formEditPergunta #Id').val()} and Trash = 0`;
 
   let params = {
     option,
@@ -305,6 +315,7 @@ function selectRespostas(option = 'Select'){
     
     if (data.length > 0) {
       $('.tbody-Respostas').html(templateRespostas(data));
+      $('#Resposta').val('');
     }else{
       $('.tbody-Respostas').html('<tr><td>0</td><td>Nenhum registro encontrado</td></tr>')
     }
@@ -313,6 +324,40 @@ function selectRespostas(option = 'Select'){
     console.log("error");
   });
   
+}
+
+function deleteRespostas(id, option = 'Update'){
+  let Schema = 'escala75_Easy7';
+  let tableName = 'Respostas';
+  let setQuery = 'Trash = 1';
+  let where = `Id = ${id}`;
+
+  let params = {
+    option,
+    Schema,
+    tableName,
+    setQuery,
+    where
+  }
+
+  $.ajax({
+    url: 'DBInserts.php',
+    type: 'POST',
+    dataType: 'html',
+    data: params,
+    beforeSend: function(){
+      M.toast({html: 'Deletando....'})
+    }
+  })
+  .done(function(data) {
+    console.log("success");
+    
+    selectRespostas();
+    M.toast({html: 'Deletado com êxito', displayLength: 10000})
+  })
+  .fail(function() {
+    console.log("error");
+  });
 }
 
 function select(nameFunction, id, tableName = 'Perguntas', columns = '*', complement){
@@ -378,6 +423,7 @@ function templateRespostas(model){
       <tr>
         <td>${i + 1}</td>
         <td>${x.Respostas}</td>
+        <td><i class="material-icons red-text darken-3-text pointer" onclick="deleteRespostas(${x.Id})">delete_forever</i></td>
       </tr>
     `
   }).join('');

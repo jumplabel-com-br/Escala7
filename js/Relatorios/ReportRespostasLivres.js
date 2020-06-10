@@ -7,23 +7,28 @@ function extrairRespostasLivres(){
 		return false;
 	}
 
-	returnPerguntas($('#QuestionariosRL').val());
-}
-function returnPerguntas(IdQuestionario, option = 'Select'){
+	if ($('#CampanhasRL').val() == "") {
+		M.toast({html: 'Preencha o campo campanhas', displayLength: 4000});
+		return false;
+	}
 
-	  let sql = `select c.Id as IdCampanha,d.Campanha, c.Name, a.Pergunta, a.Tipo from escala75_Easy7.Perguntas a
+	returnPerguntasLivres($('#QuestionariosRL').val(), $('#CampanhasRL').val());
+}
+function returnPerguntasLivres(IdQuestionario, IdCampanha, option = 'Select'){
+
+	  let sql = `select d.Id as IdCampanha,d.Campanha, c.Name, a.Pergunta, a.Tipo from escala75_Easy7.Perguntas a
 		join escala75_Easy7.QuestionarioPerguntas b on a.Id = b.IdPergunta
 		join escala75_Easy7.Questionarios c on b.IdQuestionario = c.Id
 		join escala75_Easy7.Campanhas d on c.Id = d.IdQuestionario
-		where b.IdQuestionario = ${IdQuestionario}
+		where b.IdQuestionario = ${IdQuestionario}  and d.Id = ${IdCampanha}
 		`
 	  SelectAdvanced(sql);
 
 	  let data = dataSelectAdvanced;
-	  returnRespostas(IdQuestionario, data);
+	  returnRespostasLivres(IdQuestionario, data);
 }
 
-function returnRespostas(IdQuestionario, Perguntas, option = 'Select'){
+function returnRespostasLivres(IdQuestionario, Perguntas, option = 'Select'){
 
 	let Schema = 'escala75_Easy7';
   	let tableName = 'RespostasCampanha';
@@ -51,8 +56,12 @@ function returnRespostas(IdQuestionario, Perguntas, option = 'Select'){
 		console.log("success");
 		infosRespostas = data;
 
-		$('#tbodyRespostasLivres').html(templatePerguntas(Perguntas));
-		exportExcel('relatorioRespostasLivres', 'Relatório Respostas Livres')
+		if (data.length > 0) {
+			$('#tbodyRespostasLivres').html(templatePerguntasLivres(Perguntas));
+			exportExcel('relatorioRespostasLivres', 'Relatório Respostas Livres')
+		}else{
+			M.toast({html: 'Não há informações para esse questionário', displayLength: 4000});
+		}
 		//$('#modalResposta').modal('open');
 		$('#modalProgress').modal('close');
 	})
@@ -64,7 +73,7 @@ function returnRespostas(IdQuestionario, Perguntas, option = 'Select'){
 }
 
 
-function templatePerguntas(model){
+function templatePerguntasLivres(model){
 return infosRespostas.map((value, i) => {
 		respostas = infosRespostas[i].Respostas.split(',');
 		infos =  infosRespostas[i]
@@ -77,7 +86,7 @@ return infosRespostas.map((value, i) => {
 							<td>${valuePergunta.Campanha}</td>
 							<td>${valuePergunta.Name}</td>
 							<td>${valuePergunta.Pergunta}</td>
-							<td>${respostas[i]}</td>
+							<td>${respostas[i] == undefined ? 'Pergunta cadastradas pós resposta' : respostas[i]}</td>
 						</tr>
 				`
 				}

@@ -26,7 +26,7 @@ function createSession(){
 	<div class="container-new-foto">
 		<div class="row">
 			<div class="col s12 m12">
-				<a href="HomeMobile.php?getType=usr&IC=<?=$IC?>"><i class="medium material-icons right">home</i></a>
+				<a href="HomeMobile.php?getType=usr&IC=<?=$IC?>&BarOpen=OPEN"><i class="medium material-icons right">home</i></a>
 			</div>
 		</div>
 
@@ -42,6 +42,7 @@ function createSession(){
 
 		<div class="row">
 			<div class="col s12 m12 center">
+				<!--
 				<div class="select" style="display: none">
 				    <label for="audioSource">Audio source: </label>
 				    <select id="audioSource">
@@ -56,20 +57,59 @@ function createSession(){
 				  </div>
 
 				  <video autoplay="" muted="" playsinline="" style="width: 100%" id="myCamera"></video>
+				-->
+
+				<form action="#" id="formFiles">
+				   <div class="file-field input-field">
+				     <div class="btn">
+				       <span>Foto 1</span>
+				       <input type="file" id="file0">
+				     </div>
+				     <div class="file-path-wrapper">
+				       <input class="file-path validate" type="text">
+				     </div>
+				   </div>
+
+				   <div class="file-field input-field">
+				     <div class="btn">
+				       <span>Foto 2</span>
+				       <input type="file" id="file1">
+				     </div>
+				     <div class="file-path-wrapper">
+				       <input class="file-path validate" type="text">
+				     </div>
+				   </div>
+
+				   <div class="file-field input-field">
+				     <div class="btn">
+				       <span>Foto 3</span>
+				       <input type="file" id="file2">
+				     </div>
+				     <div class="file-path-wrapper">
+				       <input class="file-path validate" type="text">
+				     </div>
+				   </div>
+				 </form>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col s12 m12">
 				<div class="card-content center">
-					<div class="center col s12">
-						<button class="btn" onclick="takePicture();">Tirar Foto</button>
+					<div class="col s12 m12 center">
+						<a class="waves-effect btn-default btn tooltipped" data-position="top" data-tooltip="Enviar fotos" onclick="takePicture();">
+							<i class="medium material-icons right">send</i>Enviar
+						</a>
 					</div>
+					<!--
+					<div class="center col s12">
+						<button class="btn" onclick="//takePicture();">Tirar Foto</button>
+					</div>--->
 				</div>
 			</div>	
 		</div>
 	</div>
-
+<!--
 	<div class="container-view-fotos" style="display: none">
 		<div class="row">
 			<div class="col s6 m6">
@@ -122,10 +162,11 @@ function createSession(){
 				<i class="medium material-icons i-black tooltipped" data-position="top" data-tooltip="Nova foto" onclick="newPicture();">add_circle_outline</i>
 			</div>
 			<div class="col s4 m4 center">
-				<i class="medium material-icons i-green tooltipped" data-position="top" data-tooltip="Enviar fotos" onclick="savePicture();createSession();">send</i>
+				<i class="medium material-icons i-green tooltipped" data-position="top" data-tooltip="Enviar fotos" onclick="savePicture();">send</i>
 			</div>
 		</div>
 	</div>
+-->
 
 	<input type="hidden" name="latitue" id="latitue">
 	<input type="hidden" name="longitude" id="longitude">
@@ -137,6 +178,10 @@ function createSession(){
 			</div>
 		</div>
 	</div>
+
+	<?
+		require_once('footer.php');
+	?>
 	<input type="hidden" name="valueScanner" id="valueScanner">
 	<input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">
 	<input type="hidden" name="UserInactivity" id="UserInactivity" value="<?=$_SESSION['User']?>">
@@ -147,19 +192,17 @@ function createSession(){
 	<script src="js/Generic.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 	<script src="js/geoLocation.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 	<script src="js/takePicture.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
-	<script src="js/loadCamera.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
-	<script src="js/ga.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+	<!--<script src="js/loadCamera.js?date=<?=date('d/m/Y-H:i:s')?>"></script>-->
+	<!--<script src="js/ga.js?date=<?=date('d/m/Y-H:i:s')?>"></script>-->
 	<script type="text/javascript" src="js/VideoInstitucional/Video.js?<?=date('d/m/Y-H:i:s')?>"></script>
 
 	<script type="text/javascript">
 		var Campanha = <?=$Campanha?>;
+		var IdCampanha = Campanha[0]['Id']
 
-		function createSession(){
-			<?=createSession()?>
-		}
 		$('.title-campanha').html(`${Campanha[0]['Campanha']}`);
 
-		setTimeout(function(){videoSourceOptions();},1000) 
+		//setTimeout(function(){videoSourceOptions();},1000) 
 	</script>
 </body>
 </html>

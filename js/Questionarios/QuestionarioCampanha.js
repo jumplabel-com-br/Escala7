@@ -148,7 +148,7 @@ function returnOptions(IdPergunta, IdQuestionario,firstOption, option = 'Select'
 	let Schema = 'escala75_Easy7';
   	let tableName = 'Respostas';
   	let columns = 'Id, IdPergunta, IdQuestionario,Respostas'
-  	let where = `IdPergunta = ${IdPergunta}`
+  	let where = `IdPergunta = ${IdPergunta} and Trash = 0`
 
 	let params = {
 		Schema,

@@ -2,6 +2,8 @@
 session_start();
 require_once('conn.php');
 
+$_SESSION["ultimoAcesso"]= date("Y-n-j H:i:s");
+
 $user = isset($_SESSION['User']) ? $_SESSION['User'] : '';
 $Email = isset($_SESSION["Email"]) ? $_SESSION["Email"] : '';
 $objBd = new db();
@@ -78,7 +80,7 @@ $dados_usuario = mysqli_fetch_array($result);
 		<div class="card white card-home">
 			<div class="card-content white-text">
 				<span class="card-title color-default f-Helvetica-Bold left-align">Questiónarios <br> Preenchidos</span>
-
+				<div class="questionarios-preenchidos center"></div>
 			</div>
 		</div>
 	</div>
@@ -87,12 +89,15 @@ $dados_usuario = mysqli_fetch_array($result);
 		<div class="card white card-home">
 			<div class="card-content white-text">
 				<span class="card-title color-default f-Helvetica-Bold left-align">Campanhas <br> Cadastradas</span>
-
+				<div class="campanhas-cadastradas center"></div>
 			</div>
 		</div>
 	</div>
 </div>
 
+<?
+	require_once('footer.php');
+?>
 <input type="hidden" name="valueScanner" id="valueScanner">
 <input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">
 <!-- Compiled and minified JavaScript -->
@@ -115,6 +120,8 @@ $dados_usuario = mysqli_fetch_array($result);
   });
 </script>
 <script src="materialize/js/materialize.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+<script type="text/javascript" src="js/Generic.js?<?=date('d/m/Y-H:i:s')?>"></script>
+<script type="text/javascript" src="js/Home/Home.js?<?=date('d/m/Y-H:i:s')?>"></script>
 <!--
 <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript" src="js/geoLocation.js?date=<?=date('d/m/Y-H:i:s')?>"></script>

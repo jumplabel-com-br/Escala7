@@ -59,6 +59,8 @@ session_start();
 		if ($_SESSION["UserType"] == 0) {
 			echo "<input type='hidden' name='IdUser' id='IdUser' value=".$_SESSION["IdUser"].">";
 		}
+
+		require_once('footer.php');
 	?>
 	<!-- Compiled and minified JavaScript -->
 	<script type="text/javascript" src="js/Generic.js?<?=date('d/m/Y-H:i:s')?>"></script>

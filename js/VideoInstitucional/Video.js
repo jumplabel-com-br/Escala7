@@ -134,6 +134,8 @@ function onChipUpdate(option = 'Update'){
 function redirectHomeParams(){
 	let wlo = window.location.origin
 
+	$('#modalProgress').modal('open')
+
 	if (VI == 'F') {
 		window.location.href = wlo+"/HomeMobile.php?type=Inst&getType=usr&IC=1&VI=T"
 	}else if (VC == 'F') {

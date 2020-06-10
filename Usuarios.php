@@ -27,7 +27,7 @@ session_start();
 		<div class="cards-footer">
 			<div class="col s12 m1"></div>
 			<div class="col s6 m2 center">
-				<button class="btn btn-default" type="submit">Relatório</button>
+				<!--<button class="btn btn-default" type="submit">Relatório</button>-->
 			</div>
 			<div class="col s2 m7"></div>
 			<div class="col s6 m2 right-align">
@@ -114,6 +114,7 @@ session_start();
 	</div>
 </div>
 
+
 <input type="hidden" name="valueScanner" id="valueScanner">
 <input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">
 <input type="hidden" name="UserInactivity" id="UserInactivity" value="<?=$_SESSION['User']?>">
@@ -123,6 +124,10 @@ session_start();
 <script src="materialize/js/materialize.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 <script type="text/javascript" src="js/Usuarios/Usuarios.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 <script type="text/javascript" src="js/Generic.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
+
+<?
+	require_once('footer.php');
+?>
 <!--
 <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript" src="js/geoLocation.js?date=<?=date('d/m/Y-H:i:s')?>"></script>

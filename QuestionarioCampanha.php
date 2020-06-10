@@ -25,7 +25,7 @@ function createSession(){
 	<nav class="background-questionatio">
 		<div class="row">
 			<div class="col s12 m12">
-				<a href="HomeMobile.php?getType=usr&IC=<?=$IC?>"><i class="medium material-icons right">home</i></a>
+				<a href="HomeMobile.php?getType=usr&IC=<?=$IC?>&BarOpen=OPEN"><i class="medium material-icons right">home</i></a>
 			</div>
 		</div>
 	</nav>
@@ -48,6 +48,10 @@ function createSession(){
 			</div>
 		</div>
 	</div>
+
+	<?
+		require_once('footer.php');
+	?>
 	<input type="hidden" name="valueScanner" id="valueScanner">
 	<input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">
 	<input type="hidden" name="UserInactivity" id="UserInactivity" value="<?=$_SESSION['User']?>">

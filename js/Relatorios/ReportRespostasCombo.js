@@ -7,13 +7,19 @@ var repetidos = [];
 var unicos = [];
 var dataPoints = [];
 var labelY;
+
 function extrairRespostasCombo(){
 	if ($('#QuestionariosRC').val() == "") {
 		M.toast({html: 'Preencha o campo questionário', displayLength: 4000});
 		return false;
 	}
 
-	returnPerguntas($('#QuestionariosRC').val());
+	if ($('#CampanhasRC').val() == "") {
+		M.toast({html: 'Preencha o campo campanhas', displayLength: 4000});
+		return false;
+	}
+
+	returnPerguntas($('#QuestionariosRC').val(), $('#CampanhasRC').val());
 }
 
 function returnGrafico(option = 'Insert'){
@@ -116,13 +122,13 @@ function deleteGrafico(option = 'Delete'){
 	});
 }
 
-function returnPerguntas(IdQuestionario, option = 'Select'){
+function returnPerguntas(IdQuestionario, IdCampanha, option = 'Select'){
 
-	  let sql = `select c.Id as IdCampanha,d.Campanha, c.Name, a.Pergunta, a.Tipo from escala75_Easy7.Perguntas a
+	  let sql = `select d.Id as IdCampanha,d.Campanha, c.Name, a.Pergunta, a.Tipo from escala75_Easy7.Perguntas a
 		join escala75_Easy7.QuestionarioPerguntas b on a.Id = b.IdPergunta
 		join escala75_Easy7.Questionarios c on b.IdQuestionario = c.Id
 		join escala75_Easy7.Campanhas d on c.Id = d.IdQuestionario
-		where b.IdQuestionario = ${IdQuestionario}
+		where b.IdQuestionario = ${IdQuestionario} and d.Id = ${IdCampanha};
 		`
 	  SelectAdvanced(sql);
 
@@ -159,8 +165,12 @@ function returnRespostas(IdQuestionario, Perguntas, option = 'Select'){
 		console.log("success");
 		infosRespostas = data;
 
-		$('#tbodyRespostasCombo').html(templatePerguntas(Perguntas));
-		returnGrafico()
+		if (data.length > 0 ) {
+			$('#tbodyRespostasCombo').html(templatePerguntas(Perguntas));
+			returnGrafico()
+		}else{
+			M.toast({html: 'Não há informações para esse questionário', displayLength: 4000});
+		}
 		//$('#modalResposta').modal('open');
 		//$('#modalProgress').modal('close');
 	})

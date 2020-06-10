@@ -32,6 +32,8 @@ function validLogin($sql, $link){
 			$_SESSION["User"] = $dados_usuario['CPF'];
 			$_SESSION["Email"] = $dados_usuario['Email'];
 			$_SESSION["IdUser"] = $dados_usuario['Id'];
+			$_SESSION["TipoUsuario"] = $dados_usuario['UserType'];
+			$_SESSION["ultimoAcesso"] = date("Y-n-j H:i:s");
 			echo 'true';
 			return true;
 		}else{;

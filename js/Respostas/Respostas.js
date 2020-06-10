@@ -101,7 +101,7 @@ function templatePerguntas(model){
 				${
 					model.map((valuePergunta, i) => {
 						return`
-						<label class="lb-Perguntas">Pergunta: ${valuePergunta.Pergunta}</label> <label class="lb-respostas">Resposta: ${respostas[i]}</label>
+						<label class="lb-Perguntas">Pergunta: ${valuePergunta.Pergunta}</label> <label class="lb-respostas">Resposta: ${respostas[i] == undefined ? "cadastro de pergunta pós resposta" : respostas[i]}</label>
 						<br>
 						`
 					}).join('')	
