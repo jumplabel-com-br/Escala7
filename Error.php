@@ -4,7 +4,7 @@ $M = $_GET["M"];
 $Message;
 
 if ($M == "QRCodeUser") {
-	$Message = "Escaniar novamente o QR Code pois sua sessão foi expirada";
+	$Message = "Escanear novamente o QR Code/Logar novamente, pois sua sessão foi expirada";
 }else if ($M == "CE") {
 	$Message = "Campanha Expirada";
 };

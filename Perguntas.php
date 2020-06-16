@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once('startPage.php');
 ?>
 
 <!DOCTYPE html>
@@ -182,9 +183,6 @@ session_start();
 		</div>
 	</div>
 
-	<?
-		require_once('footer.php');
-	?>
 	<div id="modalProgress" class="modal modal-progress">
 		<div class="modal-content">
 			<div class="progress">

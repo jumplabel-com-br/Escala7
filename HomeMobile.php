@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once('DBInserts.php');
+require_once('startPage.php');
 
 if (!isset($_SESSION["ultimoAcesso"])) {
 	if (empty($_SESSION["ultimoAcesso"])) {
@@ -17,8 +18,6 @@ if (isset($_GET['Questionario'])) {
 }else{
 	$_SESSION["Questionario"] = $_SESSION["Questionario"]	;
 }
-//$_SESSION["Questionario"] = isset($_GET['Questionario']) ? $_SESSION['Questionario'] : '';
-//$_SESSION["Questionario"]
 
 $User = isset($_SESSION['User']) ? $_SESSION['User'] : '';
 //$BarOpen = $_SESSION['BarOpen'];
@@ -162,13 +161,62 @@ $_SESSION["Campanha"] = $Campanha;
 			</div>
 		</section>		
 	</footer>
-
+	
 	<?php
-		require_once("footer.php");
+		if ($_SESSION["Questionario"] == "OK" && $_SESSION["FotosOk"] == "T" && $_SESSION["VC"] == "T") {
+			echo '
+				<div id="modalFinish" class="modal modal-finish open background bckg-modal-finish">
+					<div class="modal-content center">
+						<div class="row col s12 m4 center">
+							<img src="images/MOBILE/4_wireframes_mobile_etapaconcluida/logo_branco.png" class="responsive-img">
+						</div>
+
+						<div class="col s12 m4 center box-opacity-white">
+							<img src="images/MOBILE/4_wireframes_mobile_etapaconcluida/icone_etapaconcluida.png" width="100" class="ml-10-p">
+							<p class="color-default upper">
+								<strong>Parábens</strong>
+								<br>
+								Você concluiu todas as etapas.
+								<br>
+								<strong>Não há pendências</strong> em suas campanhas.
+							</p>
+							<p>
+								&nbsp;
+							</p>
+						</div>
+
+						<div class="col s12 m4 center">
+							<button type="button" class="btn btn-default" onclick="logoff(`usr`);">Confirmar</button>
+						</div>
+					</div>
+				</div>
+
+				<script type="text/javascript">
+					$(document).ready(function(){
+						$(".modal").modal();
+						$("#modalFinish").modal("open");
+					});
+				</script>
+			';
+		}
 	?>
+	
+
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('.collapsible').collapsible('open');
+			
+			/*			
+			let VC  = <?=isset($_SESSION["VC"]) ? $_SESSION["VC"] : ""?>;
+			let FotosOk  = <?=isset($_SESSION["FotosOk"]) ? $_SESSION["FotosOk"] : ""?>;
+			let Questionario  = <?=isset($_SESSION["Questionario"]) ? $_SESSION["Questionario"] : ""?>;
+
+
+
+			if (VC == "T" && FotosOk == "T" && Questionario == "OK") {
+				$('#modalFinish').modal('open');
+			}
+			*/
 			//$('.section-estrutura-campanha').hide();
 		});
 	</script>
@@ -181,7 +229,7 @@ $_SESSION["Campanha"] = $Campanha;
 	<script type="text/javascript">
 
 		jQuery(document).ready(function($) {
-			templateInformacoesCampanha(Campanha);	
+			templateInformacoesCampanha(Campanha);
 		});
 
 		var Campanha = <?=$Campanha?>;

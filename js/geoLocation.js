@@ -12,7 +12,9 @@ function getLocation()
 {
 	if (navigator.geolocation)
 	{
-		navigator.geolocation.getCurrentPosition(showPosition,showError);
+		let confirmation = confirm("Deseja ativar a localização ?");
+		confirmation == true ? navigator.geolocation.getCurrentPosition(showPosition) : navigator.geolocation.getCurrentPosition(showError);
+		//navigator.geolocation.getCurrentPosition(showPosition,showError);
 	}
 	else{
 		M.toast({html: "Geolocalização não é suportada nesse browser.", displayLength: 4000});

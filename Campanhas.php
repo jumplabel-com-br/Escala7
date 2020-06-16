@@ -1,4 +1,7 @@
-<?php session_start();?>
+<?php 
+	session_start();
+	require_once('startPage.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,14 +43,31 @@
 		<div class="col s12 m9">
 			<div class="cards-footer">
 				<div class="col s6 m3 left-align">
-					<!--<button class="btn btn-default" type="submit">Relatório</button>-->
+					<button class="btn btn-default" type="button" onclick="$('#modalFiltros').modal('open')">Filtros</button>
 				</div>
 				<div class="col s6 m9 right-align">
 					<button class="btn btn-default" type="button" onclick="$('#modalCampanha').modal('open');clearForm('#formCampanha');$('select').formSelect();selectedQuestionario();$('.editShow').addClass('hide');"><span class="d-none-mobile">+</span> Cadastrar</button>
 				</div>
 			</div>
 		</div>
+	</div>
 
+	<div id="modalFiltros" class="modal">
+		<div class="modal-content">
+			<img src="images/icons/close.png" class="responsive-img modal-close">
+		</div>
+		<div class="container center-align">
+			<form id="formFilters">
+				<div class="input-field col s12 m7">
+						<select id="StatusFilter" class="c-blue">
+							<option value="" disabled selected>Status</option>
+							<option value="1">Ativo</option>
+							<option value="0">Desativado</option>
+						</select>
+						<label class="color-default">Status</label>
+					</div>
+			</form>
+		</div>
 	</div>
 
 
@@ -177,7 +197,6 @@
 	if ($_SESSION["UserType"] == 0) {
 		echo "<input type='hidden' name='IdUser' id='IdUser' value=".$_SESSION["IdUser"].">";
 	}
-	require_once('footer.php');
 	?>
 	<!-- Compiled and minified JavaScript -->
 	<script type="text/javascript" src="QRCode/qrcodeJquery.js?date=<?=date('d/m/Y-H:i:s')?>"></script>

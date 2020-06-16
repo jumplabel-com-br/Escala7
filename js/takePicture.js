@@ -9,7 +9,7 @@ function takePicture()
 	}
 
 
-	if (file0.value == '') {
+	if (file0.value == '' && file1.value == '' && file2.value == '') {
 		M.toast({html: 'É necessário anexar ao menos 1 imagem', displayLength: 4000});
 		return;
 	}

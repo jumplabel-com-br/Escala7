@@ -253,8 +253,20 @@ input[type=text]:not(.browser-default):focus:not([readonly]) + label.c-blue,
 }
 
 
+.bckg-modal-finish{
+	background-color: transparent;
+	background-image: url('../images/MOBILE/4_wireframes_mobile_etapaconcluida/fundo.png');
+	height: 500px !important;
+}
 
+.box-opacity-white{
+	background-color: #fff;
+	opacity: 0.9;
+}
 
+.upper{
+	text-transform: uppercase;
+}
 
 
 /**********************************QR Code *******************************/

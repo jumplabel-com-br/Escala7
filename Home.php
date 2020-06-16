@@ -95,9 +95,6 @@ $dados_usuario = mysqli_fetch_array($result);
 	</div>
 </div>
 
-<?
-	require_once('footer.php');
-?>
 <input type="hidden" name="valueScanner" id="valueScanner">
 <input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">
 <!-- Compiled and minified JavaScript -->

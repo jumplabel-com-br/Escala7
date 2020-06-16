@@ -21,6 +21,11 @@ $('#li-img-logo-max').on('click', function(event) {
   /* Act on the event */
 });
 
+function filtersCampanhas(){
+  if ($('#IdUser').val() != undefined) {
+    return `where b.IdUsuario = ${$('#IdUser').val()}`
+  }
+}
 
 function selectCampanhas(){
 

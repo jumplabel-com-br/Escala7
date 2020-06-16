@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once('startPage.php');
 ?>
 
 <!DOCTYPE html>
@@ -125,9 +126,6 @@ session_start();
 <script type="text/javascript" src="js/Usuarios/Usuarios.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 <script type="text/javascript" src="js/Generic.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 
-<?
-	require_once('footer.php');
-?>
 <!--
 <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript" src="js/geoLocation.js?date=<?=date('d/m/Y-H:i:s')?>"></script>

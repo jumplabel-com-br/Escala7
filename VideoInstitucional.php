@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once('startPage.php');
 ?>
 
 <!DOCTYPE html>
@@ -42,9 +43,6 @@ session_start();
 	</div>
 </div>
 
-<?
-	require_once('footer.php');
-?>
 <input type="hidden" name="valueScanner" id="valueScanner">
 <input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">
 <input type="hidden" name="UserInactivity" id="UserInactivity" value="<?=$_SESSION['User']?>">

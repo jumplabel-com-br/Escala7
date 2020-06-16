@@ -137,9 +137,9 @@ function redirectHomeParams(){
 	$('#modalProgress').modal('open')
 
 	if (VI == 'F') {
-		window.location.href = wlo+"/HomeMobile.php?type=Inst&getType=usr&IC=1&VI=T"
+		window.location.href = wlo+"/HomeMobile.php?type=Inst&getType=usr&IC="+Campanha[0].Id+"&VI=T"
 	}else if (VC == 'F') {
-		window.location.href = `${wlo}/HomeMobile.php?type=Inst&getType=usr&IC=1&VI=${VI}&VC=T`
+		window.location.href = `${wlo}/HomeMobile.php?type=Inst&getType=usr&IC=${Campanha[0].Id}&VI=${VI}&VC=T`
 	}
 	
 }

@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once('startPage.php');
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +61,6 @@ session_start();
 			echo "<input type='hidden' name='IdUser' id='IdUser' value=".$_SESSION["IdUser"].">";
 		}
 
-		require_once('footer.php');
 	?>
 	<!-- Compiled and minified JavaScript -->
 	<script type="text/javascript" src="js/Generic.js?<?=date('d/m/Y-H:i:s')?>"></script>

@@ -14,5 +14,3 @@ if($tempo_transcorrido >= 1600) {//6400 se passaram 120 minutos ou mais, 1600 pa
   }else {
   	$_SESSION["ultimoAcesso"] = $agora;
 }
-
-?>
