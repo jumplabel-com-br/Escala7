@@ -36,10 +36,30 @@ function toggleRespostas(){
   }
 }
 
+function filtersPerguntas(){
+  let statusFilter = '';
+  let perguntasFilter = '';
+
+  if ($('#StatusFilter').val() != null && $('#StatusFilter').val().length > 0){
+    statusFilter = `perguntas.Status = ${$('#StatusFilter').val()}`  
+  }
+
+  if ($('#PerguntasFilter').val() != null && $('#PerguntasFilter').val().length > 0) {
+    perguntasFilter = `perguntas.Pergunta like '%${$('#PerguntasFilter').val()}%'`
+  }
+
+  if (statusFilter.length > 0 || perguntasFilter.length > 0) {
+      return `where ${statusFilter} ${statusFilter.length > 0 ? 'and' : ''} ${perguntasFilter}`;
+  }
+
+  return '';
+}
+
 function Perguntas(){
   let sql = `SELECT perguntas.Id, questionarioperguntas.IdQuestionario, perguntas.Pergunta, perguntas.Status, questionarios.Name FROM escala75_Easy7.Perguntas as perguntas
     left join escala75_Easy7.QuestionarioPerguntas as questionarioperguntas on perguntas.Id = questionarioperguntas.IdPergunta
-    left join escala75_Easy7.Questionarios as questionarios on questionarioperguntas.IdQuestionario = questionarios.Id;`
+    left join escala75_Easy7.Questionarios as questionarios on questionarioperguntas.IdQuestionario = questionarios.Id
+    ${filtersPerguntas()};`
   
   SelectAdvanced(sql);
 

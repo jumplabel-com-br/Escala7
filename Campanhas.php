@@ -59,13 +59,25 @@
 		<div class="container center-align">
 			<form id="formFilters">
 				<div class="input-field col s12 m7">
-						<select id="StatusFilter" class="c-blue">
-							<option value="" disabled selected>Status</option>
-							<option value="1">Ativo</option>
-							<option value="0">Desativado</option>
-						</select>
-						<label class="color-default">Status</label>
+					<select id="StatusFilter" class="c-blue">
+						<option value="" selected>Status</option>
+						<option value="1">Ativo</option>
+						<option value="0">Desativado</option>
+					</select>
+					<label class="color-default">Status</label>
+				</div>
+
+				<div class="input-field col s12 m7">
+					<input type="text" name="CampanhasFilter" id="CampanhasFilter" class="autocomplete c-blue">
+					<label for="CampanhasFilter" class="c-blue">Campanha</label>
+				</div>
+
+				<div class="modal-footer">
+					<div class="col s12 m12">
+						<button type="button" class="btn btn-blue" onclick="selectCampanhas(); $('#modalFiltros').modal('close');">Aplicar</button>
+						
 					</div>
+				</div>
 			</form>
 		</div>
 	</div>

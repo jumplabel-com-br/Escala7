@@ -2,30 +2,30 @@ var infosRespostas = [];
 var respostas = [];
 
 function extrairRespostasLivres(){
-	if ($('#QuestionariosRL').val() == "") {
+	/*if ($('#QuestionariosRL').val() == "") {
 		M.toast({html: 'Preencha o campo questionário', displayLength: 4000});
 		return false;
-	}
+	}*/
 
 	if ($('#CampanhasRL').val() == "") {
 		M.toast({html: 'Preencha o campo campanhas', displayLength: 4000});
 		return false;
 	}
 
-	returnPerguntasLivres($('#QuestionariosRL').val(), $('#CampanhasRL').val());
+	returnPerguntasLivres($('#CampanhasRL').val());
 }
-function returnPerguntasLivres(IdQuestionario, IdCampanha, option = 'Select'){
+function returnPerguntasLivres(IdCampanha, option = 'Select'){
 
-	  let sql = `select d.Id as IdCampanha,d.Campanha, c.Name, a.Pergunta, a.Tipo from escala75_Easy7.Perguntas a
+	  let sql = `select d.Id as IdCampanha,d.Campanha, c.Name, a.Pergunta, a.Tipo, d.IdQuestionario from escala75_Easy7.Perguntas a
 		join escala75_Easy7.QuestionarioPerguntas b on a.Id = b.IdPergunta
 		join escala75_Easy7.Questionarios c on b.IdQuestionario = c.Id
 		join escala75_Easy7.Campanhas d on c.Id = d.IdQuestionario
-		where b.IdQuestionario = ${IdQuestionario}  and d.Id = ${IdCampanha}
+		where d.Id = ${IdCampanha} and b.IdQuestionario = d.IdQuestionario
 		`
 	  SelectAdvanced(sql);
 
 	  let data = dataSelectAdvanced;
-	  returnRespostasLivres(IdQuestionario, data);
+	  returnRespostasLivres(data[0].IdQuestionario, data);
 }
 
 function returnRespostasLivres(IdQuestionario, Perguntas, option = 'Select'){

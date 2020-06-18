@@ -70,6 +70,13 @@
 					</span>
 					Relatorios
 				</a>
+
+				<a href="Imagens.php" class="collection-item">
+					<span class="left badge">
+						<i class="material-icons i-default">folder</i>
+					</span>
+					Fotos
+				</a>
 				';
 				}
 

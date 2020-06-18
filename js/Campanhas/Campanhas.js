@@ -22,16 +22,37 @@ $('#li-img-logo-max').on('click', function(event) {
 });
 
 function filtersCampanhas(){
+  let statusFilter = '';
+  let campanhasFilter = ''
+  let idUsuario = '';
+
+  if ($('#StatusFilter').val().length > 0) {
+    statusFilter =  `a.Status = ${$('#StatusFilter').val()}`  
+  };
+
   if ($('#IdUser').val() != undefined) {
-    return `where b.IdUsuario = ${$('#IdUser').val()}`
+    idUsuario =  `b.IdUsuario = ${$('#IdUser').val()}`
+  };
+
+  if ($('#CampanhasFilter').val() != null && $('#CampanhasFilter').val().length > 0) {
+    campanhasFilter = `a.Campanha like '%${$('#CampanhasFilter').val()}%'`
   }
+
+  if ($('#IdUser').val() != undefined || statusFilter.length > 0 || CampanhasFilter > 0) {
+    return `
+      where ${statusFilter} ${statusFilter.length > 0 ? 'and' : ''}
+            ${idUsuario} ${idUsuario.length > 0 ? 'and' : ''}
+            ${campanhasFilter}
+    `
+  }
+  return '';
 }
 
 function selectCampanhas(){
 
 let sql = `select distinct a.* from escala75_Easy7.Campanhas as a
 left join escala75_Easy7.ClientesCampanhas as b on a.Id = b.IdCampanha
-${$('#IdUser').val() != undefined ? `where b.IdUsuario = ${$('#IdUser').val()}` : ''};`
+${filtersCampanhas()};`
 
 SelectAdvanced(sql);
 

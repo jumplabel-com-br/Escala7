@@ -180,7 +180,7 @@ function savePicture(){
 	let formdata = new FormData();
 
 	let CPF = $('#UserRegistration').val();
-	let Campanha = $('.title-campanha:eq(0)').html().replace(' ', '');
+	let Campanha = $('.title-campanha:eq(0)').html();
 	let Data0 = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate()+"-"+date.getMinutes()+"-"+date.getSeconds()+'-'+date.getMilliseconds();
 	let Data1 = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate()+"-"+date.getMinutes()+"-"+date.getSeconds()+'-'+date.getMilliseconds();
 	let Data2 = date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate()+"-"+date.getMinutes()+"-"+date.getSeconds()+'-'+date.getMilliseconds();

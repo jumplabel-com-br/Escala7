@@ -22,7 +22,7 @@
 			<div class="card white card-home">
 				<div class="card-content white-text">
 					<span class="card-title color-default f-Helvetica-Bold left-align">Relatório <br> Respostas livres</span>
-					<select class="center Questionarios" id="QuestionariosRL"></select>
+					<!--<select class="center Questionarios" id="QuestionariosRL"></select>-->
 					<select class="center Campanhas" id="CampanhasRL"></select>
 				</div>
 
@@ -36,7 +36,7 @@
 			<div class="card white card-home">
 				<div class="card-content white-text">
 					<span class="card-title color-default f-Helvetica-Bold left-align">Gráfico <br> Respostas combos</span>
-					<select class="center Questionarios" id="QuestionariosRC" onchange="extrairRespostasCombo()"></select>
+					<!--<select class="center Questionarios" id="QuestionariosRC" onchange="extrairRespostasCombo()"></select>-->
 					<select class="center Campanhas" id="CampanhasRC" onchange="extrairRespostasCombo()"></select>
 				</div>
 			</div>

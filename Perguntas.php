@@ -41,12 +41,43 @@ require_once('startPage.php');
 
 		<div class="col s12 m9">
 			<div class="cards-footer">
-				<div class="col s12 m12 right-align">
+				<div class="col s6 m3 left-align">
+					<button class="btn btn-default" type="button" onclick="$('#modalFiltros').modal('open')">Filtros</button>
+				</div>
+				<div class="col s6 m9 right-align">
 					<button class="btn btn-default" type="button" onclick="selectedQuestionario();$('#modalPergunta').modal('open');"><span class="d-none-mobile">+</span> Cadastrar</button>
 				</div>
 			</div>
 		</div>
 
+	</div>
+
+	<div id="modalFiltros" class="modal">
+		<div class="modal-content">
+			<img src="images/icons/close.png" class="responsive-img modal-close">
+		</div>
+		<div class="container center-align">
+			<form id="formFilters">
+				<div class="input-field col s12 m7">
+					<select id="StatusFilter" class="c-blue">
+						<option value="" selected>Status</option>
+						<option value="1">Ativo</option>
+						<option value="0">Desativado</option>
+					</select>
+					<label class="color-default">Status</label>
+				</div>
+				<div class="input-field col s12 m7">
+					<input type="text" name="PerguntasFilter" id="PerguntasFilter" class="autocomplete c-blue">
+					<label for="PerguntasFilter" class="c-blue">Pergunta</label>
+				</div>
+				<div class="modal-footer">
+					<div class="col s12 m12">
+						<button type="button" class="btn btn-blue" onclick="Perguntas(); $('#modalFiltros').modal('close');">Aplicar</button>
+						
+					</div>
+				</div>
+			</form>
+		</div>
 	</div>
 
 
