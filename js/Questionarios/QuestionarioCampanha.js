@@ -1,4 +1,5 @@
-var IdQuestionario = Campanha[0]["IdQuestionario"]
+var IdQuestionario = Campanha[0]["IdQuestionario"];
+var IdCampanha = Campanha[0]["Id"];
 
 $(document).ready(function($) {
 	$('.modal').modal();
@@ -61,7 +62,7 @@ function InserRespostasUsers(option = 'Insert'){
   	let tableName = 'RespostasUsers';
   	let columns = 'IdCampanha, CPF, Status, DateRegistration'
 
-  	let lastquery = `${$('#IdQuestionario').val()}, '${$('#UserRegistration').val()}', 1, now()`
+  	let lastquery = `${IdCampanha}, '${$('#UserRegistration').val()}', 1, now()`
 
 
   	let params = {
@@ -105,6 +106,169 @@ function returnPerguntas(){
 	$('#modalProgress').modal('close');
 }
 
+function Avaliar(estrela, id) {
+	//var url = window.location;
+	//url = url.toString()
+	//url = url.split("index.html");
+	//url = url[0];
+
+	var s1 = document.querySelector("#s1").src;
+	var s2 = document.querySelector("#s2").src;
+	var s3 = document.querySelector("#s3").src;
+	var s4 = document.querySelector("#s4").src;
+	var s5 = document.querySelector("#s5").src;
+	var id = $(`#${id}`);
+	var avaliacao = 0;
+
+	if (estrela == 5){ 
+		if (s5 == "https://easy7.info/images/icons/star_vazia.png") {
+			document.querySelector("#s1").src = "images/icons/star_cheia.png";
+			document.querySelector("#s2").src = "images/icons/star_cheia.png";
+			document.querySelector("#s3").src = "images/icons/star_cheia.png";
+			document.querySelector("#s4").src = "images/icons/star_cheia.png";
+			document.querySelector("#s5").src = "images/icons/star_cheia.png";
+			avaliacao = 5;
+		} else {
+			document.querySelector("#s1").src = "images/icons/star_cheia.png";
+			document.querySelector("#s2").src = "images/icons/star_cheia.png";
+			document.querySelector("#s3").src = "images/icons/star_cheia.png";
+			document.querySelector("#s4").src = "images/icons/star_cheia.png";
+			document.querySelector("#s5").src = "images/icons/star_vazia.png";
+			avaliacao = 4;
+		}}
+
+ //ESTRELA 4
+ if (estrela == 4){ 
+ 	if (s4 == "https://easy7.info/images/icons/star_vazia.png") {
+ 		document.querySelector("#s1").src = "images/icons/star_cheia.png";
+ 		document.querySelector("#s2").src = "images/icons/star_cheia.png";
+ 		document.querySelector("#s3").src = "images/icons/star_cheia.png";
+ 		document.querySelector("#s4").src = "images/icons/star_cheia.png";
+ 		document.querySelector("#s5").src = "images/icons/star_vazia.png";
+ 		avaliacao = 4;
+ 	} else {
+ 		document.querySelector("#s1").src = "images/icons/star_cheia.png";
+ 		document.querySelector("#s2").src = "images/icons/star_cheia.png";
+ 		document.querySelector("#s3").src = "images/icons/star_cheia.png";
+ 		document.querySelector("#s4").src = "images/icons/star_vazia.png";
+ 		document.querySelector("#s5").src = "images/icons/star_vazia.png";
+ 		avaliacao = 3;
+ 	}}
+
+//ESTRELA 3
+if (estrela == 3){ 
+	if (s3 == "https://easy7.info/images/icons/star_vazia.png") {
+		document.querySelector("#s1").src = "images/icons/star_cheia.png";
+		document.querySelector("#s2").src = "images/icons/star_cheia.png";
+		document.querySelector("#s3").src = "images/icons/star_cheia.png";
+		document.querySelector("#s4").src = "images/icons/star_vazia.png";
+		document.querySelector("#s5").src = "images/icons/star_vazia.png";
+		avaliacao = 3;
+	} else {
+		document.querySelector("#s1").src = "images/icons/star_cheia.png";
+		document.querySelector("#s2").src = "images/icons/star_cheia.png";
+		document.querySelector("#s3").src = "images/icons/star_vazia.png";
+		document.querySelector("#s4").src = "images/icons/star_vazia.png";
+		document.querySelector("#s5").src = "images/icons/star_vazia.png";
+		avaliacao = 2;
+	}}
+
+//ESTRELA 2
+if (estrela == 2){ 
+	if (s2 == "https://easy7.info/images/icons/star_vazia.png") {
+		document.querySelector("#s1").src = "images/icons/star_cheia.png";
+		document.querySelector("#s2").src = "images/icons/star_cheia.png";
+		document.querySelector("#s3").src = "images/icons/star_vazia.png";
+		document.querySelector("#s4").src = "images/icons/star_vazia.png";
+		document.querySelector("#s5").src = "images/icons/star_vazia.png";
+		avaliacao = 2;
+	} else {
+		document.querySelector("#s1").src = "images/icons/star_cheia.png";
+		document.querySelector("#s2").src = "images/icons/star_vazia.png";
+		document.querySelector("#s3").src = "images/icons/star_vazia.png";
+		document.querySelector("#s4").src = "images/icons/star_vazia.png";
+		document.querySelector("#s5").src = "images/icons/star_vazia.png";
+		avaliacao = 1;
+	}}
+
+ //ESTRELA 1
+ if (estrela == 1){ 
+ 	if (s1 == "https://easy7.info/images/icons/star_vazia.png") {
+ 		document.querySelector("#s1").src = "images/icons/star_cheia.png";
+ 		document.querySelector("#s2").src = "images/icons/star_vazia.png";
+ 		document.querySelector("#s3").src = "images/icons/star_vazia.png";
+ 		document.querySelector("#s4").src = "images/icons/star_vazia.png";
+ 		document.querySelector("#s5").src = "images/icons/star_vazia.png";
+ 		avaliacao = 1;
+ 	} else {
+ 		document.querySelector("#s1").src = "images/icons/star_vazia.png";
+ 		document.querySelector("#s2").src = "images/icons/star_vazia.png";
+ 		document.querySelector("#s3").src = "images/icons/star_vazia.png";
+ 		document.querySelector("#s4").src = "images/icons/star_vazia.png";
+ 		document.querySelector("#s5").src = "images/icons/star_vazia.png";
+ 		avaliacao = 0;
+ 	}}
+
+ 	if (avaliacao == 0) {
+ 		id.val('Sem nota');
+ 	}else if(avaliacao == 1){
+ 		id.val('Péssimo');
+ 	}else if(avaliacao == 2){
+ 		id.val('Ruim');
+ 	}else if(avaliacao == 3){
+ 		id.val('Médio');
+ 	}else if(avaliacao == 4){
+ 		id.val('Bom');
+ 	}else if(avaliacao == 5){
+ 		id.val('Excelente');
+ 	}
+
+ }
+
+function valuesTypes(elem){
+	if (elem.Tipo == 0) {
+		return`
+			<div class="input-field col s12">
+				<input type="text" id="${elem.Id}" class="autocomplete c-blue" plc="'${elem.Pergunta}'">
+				<label for="${elem.Id}" class="c-blue">${elem.Pergunta}</label>
+			</div>
+		` 
+	}else if (elem.Tipo == 1){
+		return`
+			<div class="input-field col s12">
+				<select id="${elem.Id}" plc="'${elem.Pergunta}'">
+					${returnOptions(elem.Id, elem.IdQuestionario, elem.Pergunta)}								      	
+				</select>
+				<label class="color-default">${elem.Pergunta}</label>
+			</div>
+		`
+	}else if (elem.Tipo == 2){
+		return`
+			<div class="input-field col s12">
+			<label class="color-default">${elem.Pergunta}</label>
+			<br>
+			<br>
+				<a onclick="Avaliar(1, ${elem.Id})">
+				<img src="images/icons/star_vazia.png" width="40" id="s1"></a>
+
+				<a onclick="Avaliar(2, ${elem.Id})">
+				<img src="images/icons/star_vazia.png" width="40" id="s2"></a>
+
+				<a onclick="Avaliar(3, ${elem.Id})">
+				<img src="images/icons/star_vazia.png" width="40" id="s3"></a>
+
+				<a onclick="Avaliar(4, ${elem.Id})">
+				<img src="images/icons/star_vazia.png" width="40" id="s4"></a>
+
+				<a onclick="Avaliar(5, ${elem.Id})">
+				<img src="images/icons/star_vazia.png" width="40" id="s5"></a>
+				<input type="hidden" id="${elem.Id}" class="autocomplete c-blue" plc="${elem.Pergunta}"">
+			</div>
+		`
+	}
+}
+
+
 function templatePerguntas(model){
 	return`
 		<input type="hidden" name="IdQuestionario" id="IdQuestionario" value="${IdQuestionario}">
@@ -113,22 +277,7 @@ function templatePerguntas(model){
 				return`
 					<div class="row">
 						<div class="input-field col s12">
-							${value.Tipo == 0 ? 
-								`
-									<div class="input-field col s12">
-										<input type="text" id="${value.Id}" class="autocomplete c-blue" plc="'${value.Pergunta}'">
-										<label for="${value.Id}" class="c-blue">${value.Pergunta}</label>
-									</div>
-								`
-							: `
-								<div class="input-field col s12">
-								    <select id="${value.Id}" plc="'${value.Pergunta}'">
-								      ${returnOptions(value.Id, value.IdQuestionario, value.Pergunta)}								      	
-								    </select>
-								    <label class="color-default">${value.Pergunta}</label>
-								  </div>
-							`}
-							
+							${valuesTypes(value)}
 						</div>
 					</div>
 				`

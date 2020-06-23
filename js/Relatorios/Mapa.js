@@ -74,7 +74,7 @@ function createLocations(){
 
 function returnLocation(lat, log){
   let latlng = 'latlng='+lat+','+log;
-  let key = 'key=AIzaSyBOni-fl7eqwuCXR7qUppY4-afzDp31oaU';
+  let key = 'key=AIzaSyBOni-fl7eqwuCXR7qUppY4-afzDp31oaU'//AIzaSyBOni-fl7eqwuCXR7qUppY4-afzDp31oaU;
 
   $.ajax({
     url: 'https://maps.googleapis.com/maps/api/geocode/json?'+key+'&'+latlng,

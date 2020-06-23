@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once('DBInserts.php');
-
+//require_once('PHPMailer/send-email.php');
  
 $getType = (isset($_GET["type"])) ? $_GET["type"] : 'adm';
 $IdCampanha = (isset($_GET["IC"])) ? $_GET["IC"] : '';
@@ -174,7 +174,6 @@ if (empty($getType)) {
 	<script type="text/javascript" src="materialize/js/materialize.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 	<script type="text/javascript" src="materialize/js/materialize.min.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 	<script type="text/javascript">
-		var randomPassword = '';
 		var Campanha = "<?=$IdCampanha?>";
 		var getType = "<?=$getType?>";
 
@@ -245,26 +244,65 @@ if (empty($getType)) {
 			)
 		}
 
-		function SendEmail(){
+		function SendEmail(randomPassword){
+			let inputEmail = $('#autocomplete-input-usuario').val();
 
-			let destinatario = 'matheus01gomes01ferreira2001@gmail.com';
+			let destinatarioNome = inputEmail.replace(/@\w+\.\w{2,}(?:\.\w{2})?$/, '');
+			let destinatarioEmail = inputEmail
+
+			let remetenteNome = 'Easy7';
+			let remetenteEmail = 'easy7@escala7.com.br';
+
+			let assunto = 'Nova Senha'
+			let mensagem = 'Sua nova senha para acesso é: ' + randomPassword + ' até ser alterada';
 			let senha = randomPassword;
 
 			$.ajax({
-				url: 'SendEmail.php',
+				url: 'PHPMailer/send-email.php',
 				type: 'POST',
 				dataType: 'html',
-				data: {destinatario, senha},
+				data: {destinatarioEmail,destinatarioNome, remetenteEmail, remetenteNome, assunto, mensagem ,senha},
 			})
 			.done(function(data) {
 				console.log("success: ", data);
-				M.toast({html: data, displayLength: 4000});
+				//atualizaSenha(randomPassword);
+				M.toast({html: 'Sua senha foi alterada, verifique em seu email e altere ao logar > configurações > alterar senha', displayLength: 20000});
 			})
 			.fail(function() {
 				console.log("error");
 			});
 
 		}
+
+		/*function atualizaSenha(randomPassword){
+			let Schema = 'escala75_Easy7';
+			let tableName = 'Users';
+			let setQuery = `Senha = '${randomPassword}'`;
+			let where = `Email = ${$('#autocomplete-input-usuario').val()}`;
+			let option = 'Update'
+			let params = {
+			  option,
+			  Schema,
+			  tableName,
+			  setQuery,
+			  where
+
+			}
+
+
+			$.ajax({
+				url: 'DBInserts.php',
+				type: 'POST',
+				dataType: 'html',
+				data: params,
+			})
+			.done(function(data) {
+				console.log("success: ");
+			})
+			.fail(function() {
+				console.log("error");
+			});
+		}*/
 
 		function validUser(){
 
@@ -309,6 +347,7 @@ if (empty($getType)) {
 		}
 
 		function newPassoword(){
+			var randomPassword = '';
 			var arrayToRandomic = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'];
 
 
@@ -316,7 +355,7 @@ if (empty($getType)) {
 				randomPassword += arrayToRandomic[Math.ceil(Math.random() * (arrayToRandomic.length - 1))]
 			}
 
-			SendEmail();
+			SendEmail(randomPassword);
 
 				//alert(`sua nova senha é: ${randomPassword}`)
 			}

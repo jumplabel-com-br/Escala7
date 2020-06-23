@@ -38,6 +38,7 @@
 					<span class="card-title color-default f-Helvetica-Bold left-align">Gráfico <br> Respostas combos</span>
 					<!--<select class="center Questionarios" id="QuestionariosRC" onchange="extrairRespostasCombo()"></select>-->
 					<select class="center Campanhas" id="CampanhasRC" onchange="extrairRespostasCombo()"></select>
+					<!--<select class="center Perguntas" id="PerguntasRC" onchange="extrairRespostasCombo()"></select>-->
 				</div>
 			</div>
 		</div>
@@ -56,10 +57,11 @@
 	
 	<div id="modal1" class="modal">
 		<div class="modal-content">
-			<div id="RespostasCombo" class="col"></div>
+			<a href="#!" class="modal-close waves-effect btn btn-blue right" onclick="$('#modalProgress').modal('close')">x</a>
+			<div id="RespostasCombo" style="height: 370px; width: 100%;"></div>
 		</div>
 		<div class="modal-footer">
-			<a href="#!" class="modal-close waves-effect btn btn-blue">x</a>
+			
 		</div>
 	</div>
 

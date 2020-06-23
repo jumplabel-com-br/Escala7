@@ -128,6 +128,8 @@ function exportExcel(id, nome){
 function grafico(div_montagem, dataPoints){
 
     var options = {
+        width: 880,
+        height: 470,
         animationEnabled: true,
         axisY: {
             title: "Gráfico perguntas combo",

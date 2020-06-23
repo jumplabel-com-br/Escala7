@@ -104,8 +104,9 @@ require_once('startPage.php');
 					<div class="input-field col s12 m7">
 						<select id="Tipo" class="c-blue" plc="Tipo" onchange="toggleRespostas();">
 							<option value="" disabled selected>Tipo</option>
-							<option value="1">Combo</option>
 							<option value="0">Texto</option>
+							<option value="1">Combo</option>
+							<option value="2">Avaliação</option>
 						</select>
 						<label class="color-default">Tipo</label>
 					</div>
@@ -164,8 +165,9 @@ require_once('startPage.php');
 					<div class="input-field col s12 m7">
 						<select id="Tipo" class="c-blue" plc="Tipo" onchange="toggleRespostas();" disabled>
 							<option value="" disabled selected>Tipo</option>
-							<option value="1">Combo</option>
 							<option value="0">Texto</option>
+							<option value="1">Combo</option>
+							<option value="2">Avaliação</option>
 						</select>
 						<label class="color-default">Tipo</label>
 					</div>

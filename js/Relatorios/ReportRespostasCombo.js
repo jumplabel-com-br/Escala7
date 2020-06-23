@@ -19,6 +19,12 @@ function extrairRespostasCombo(){
 		return false;
 	}
 
+	/*
+	if ($('#PerguntasRC').val() == "") {
+		M.toast({html: 'Preencha o campo pergunta', displayLength: 4000});
+		return false;
+	}*/
+
 	returnPerguntas($('#CampanhasRC').val());
 }
 
@@ -86,10 +92,12 @@ function selectGrafico(){
 	        y : parseInt(elem.y)
 	    });
 	});
-
-	grafico('#RespostasCombo', dataPoints);
-	$('#modal1').modal('open');
-	$('#modalProgress').modal('close');
+	if (dataSelectAdvanced.length > 0) {
+		grafico('#RespostasCombo', dataPoints);
+		$('#modal1').modal('open');
+	}else{
+		M.toast({html: 'Não há informações de acordo com o selecionado', displayLength: 4000});
+	}
 }
 
 function deleteGrafico(option = 'Delete'){
@@ -124,7 +132,8 @@ function deleteGrafico(option = 'Delete'){
 
 function returnPerguntas(IdCampanha, option = 'Select'){
 
-	  let sql = `select d.Id as IdCampanha,d.Campanha, c.Name, a.Pergunta, a.Tipo,  d.IdQuestionario from escala75_Easy7.Perguntas a
+	  let sql = `select d.Id as IdCampanha,d.Campanha, c.Name, a.Pergunta, a.Tipo,  d.IdQuestionario 
+	  	from escala75_Easy7.Perguntas a
 		join escala75_Easy7.QuestionarioPerguntas b on a.Id = b.IdPergunta
 		join escala75_Easy7.Questionarios c on b.IdQuestionario = c.Id
 		join escala75_Easy7.Campanhas d on c.Id = d.IdQuestionario
@@ -133,8 +142,13 @@ function returnPerguntas(IdCampanha, option = 'Select'){
 	  SelectAdvanced(sql);
 
 	  let data = dataSelectAdvanced;
-	  returnRespostas(data[0].IdQuestionario, data);
-	  deleteGrafico();
+	  if (dataSelectAdvanced.length > 0) {
+	  	returnRespostas(data[0].IdQuestionario, data);
+	  	deleteGrafico();
+	  }else{
+	  	M.toast({html: 'Não há informações de acordo com o selecionado', displayLength: 4000});
+	  }
+	  
 }
 
 function returnRespostas(IdQuestionario, Perguntas, option = 'Select'){
@@ -180,6 +194,60 @@ function returnRespostas(IdQuestionario, Perguntas, option = 'Select'){
 	});
 	
 }
+
+/*
+function returnOptionPerguntas(){
+	let Schema = 'escala75_Easy7';
+  	let tableName = 'Perguntas';
+  	let columns = 'Id, Pergunta'
+  	let option = 'Select';
+
+	let params = {
+		Schema,
+		tableName,
+		columns,
+		option
+	};
+
+	$.ajax({
+		url: 'DBInserts.php',
+		type: 'POST',
+		dataType: 'json',
+		data: params,
+		beforeSend: function(){
+			$('#modalProgress').modal('open');
+		}
+	})
+	.done(function(data) {
+		console.log("success");
+
+		if (data.length > 0 ) {
+			$('#PerguntasRC').html(templateOptionPerguntas(data));
+		}else{
+			M.toast({html: 'Não há informações para essa campanha com essa pergunta', displayLength: 4000});
+		}
+		//$('#modalResposta').modal('open');
+		$('select').formSelect();
+		$('#modalProgress').modal('close');
+	})
+	.fail(function() {
+		console.log("error");
+		$('#modalProgress').modal('close');
+	});
+}
+
+function templateOptionPerguntas(model){
+	return`
+		<option value="">Selecione</option>
+		${
+			model.map(elem => {
+				return`
+					<option value="${elem.Id}">${elem.Pergunta}</option>
+				`
+			})
+		}
+	`
+}*/
 
 
 function templatePerguntas(model){
