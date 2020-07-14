@@ -128,36 +128,26 @@ function initMap(locations){
 
 function selectCampanhas(option = 'Select'){
   
-  let Schema = 'escala75_Easy7';
-  let columns = 'Id, Campanha';
-  let tableName = 'Campanhas';
+  let sql = `SELECT a.* FROM escala75_Easy7.Campanhas a 
+  ${$('#UserRegistration').val() != "" && $('#IdUser').val() != undefined ? 
+  `
+  join escala75_Easy7.ClientesCampanhas b on a.Id = b.IdCampanha
+  join escala75_Easy7.Users c on b.IdUsuario = c.Id*
+  where c.CPF = ${$('#UserRegistration').val()}` 
+  : ''}
+  group by a.Campanha;`
 
-  let params = {
-    option,
-    Schema,
-    columns,
-    tableName
+  SelectAdvanced(sql);
+
+  let data = dataSelectAdvanced;
+
+  if(data.length > 0){
+    $('.Campanhas').html(templaceCampanhas(data));
+  }else{
+    $('.Campanhas').html('<option value="" disabled>Sem campanha cadastrada</option>')
   }
 
-  $.ajax({
-    url: 'DBInserts.php',
-    type: 'POST',
-    dataType: 'json',
-    data: params,
-  })
-  .done(function(data) {
-    console.log("success");
-    if(data.length > 0){
-      $('.Campanhas').html(templaceCampanhas(data));
-    }else{
-      $('.Campanhas').html('<option value="" disabled>Sem campanha cadastrada</option>')
-    }
-
-    $('select').formSelect();
-  })
-  .fail(function() {
-    console.log("error");
-  });
+  $('select').formSelect();
   
 }
 

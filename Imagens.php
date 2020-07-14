@@ -1,6 +1,6 @@
 <?php 
-	session_start();
-	require_once('startPage.php');
+session_start();
+require_once('startPage.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,11 +17,31 @@
 		<?php require_once("nav.php")?>
 
 		<div class="col s12 m9">
-			<div class="card white">
+			<div class="card white" style="overflow-y: auto;height: 500px;">
 				<div class="card-content white-text card-fotos">
-				
+
+				</div>
 			</div>
 		</div>
+	</div>	
+
+
+	<div id="modalView" class="modal modal-view">
+		<div class="modal-content">
+			<div class="row">
+				<div class="col s12">
+					<a href="" download="" class="download-image tooltipped" data-position="bottom" data-tooltip="Baixar imagem">
+						<img id="view-image" src="" style="width: 100%; height: 100%">
+					</a>
+				</div>
+				<div class="col s12 center">
+					  <a href="" download="" class="download-image center tooltipped" data-position="bottom" data-tooltip="Baixar imagem">
+					  	<i class="material-icons large i-default">cloud_download</i>
+					  </a>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<input type="hidden" name="valueScanner" id="valueScanner">
 	<input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">

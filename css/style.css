@@ -269,6 +269,10 @@ input[type=text]:not(.browser-default):focus:not([readonly]) + label.c-blue,
 }
 
 
+canvas{
+	max-width: 100%;
+}
+
 /**********************************QR Code *******************************/
 .qr-code-generator {
 	width: 500px;

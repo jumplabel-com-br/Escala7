@@ -77,12 +77,14 @@ function selectedQuestionario(option = 'Select'){
   let Schema = 'escala75_Easy7';
   let tableName = 'Questionarios';
   let columns = 'Id, Name';
+  let where = 'Status = 1'
 
   let params = {
     option,
     Schema,
     tableName,
-    columns
+    columns,
+    where
 
   }
 

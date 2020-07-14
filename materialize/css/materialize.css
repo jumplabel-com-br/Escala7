@@ -5776,7 +5776,7 @@ video.responsive-video {
   background-color: #fafafa;
   padding: 0;
   /*max-height: 70%;*/
-  width: 55%;
+  width: 65%;
   margin: auto;
   overflow-y: auto;
   border-radius: 2px;
@@ -6162,7 +6162,7 @@ textarea.materialize-textarea {
   height: 3rem;
   width: 100%;
   font-size: 16px;
-  margin: 0 0 8px 0;
+  margin: 18px 0 8px 0;
   padding: 0;
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -7225,6 +7225,12 @@ select {
 .select-wrapper + label {
   position: absolute;
   top: -26px;
+  font-size: 0.8rem;
+}
+
+.select-wrapper + label.top-0 {
+  position: absolute;
+  top: 0px !important;
   font-size: 0.8rem;
 }
 
@@ -8428,7 +8434,7 @@ input[type=range]::-ms-thumb {
   overflow: hidden;
   position: relative;
   width: 100%;
-  height: 400px;
+  height: 350px;
   -webkit-perspective: 500px;
   perspective: 500px;
   -webkit-transform-style: preserve-3d;
@@ -8483,7 +8489,8 @@ input[type=range]::-ms-thumb {
 }
 
 .carousel .carousel-item > img {
-  width: 100%;
+  width: auto;
+  height: 365px;
 }
 
 .carousel .indicators {

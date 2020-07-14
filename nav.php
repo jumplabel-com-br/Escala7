@@ -63,6 +63,10 @@
 					</span>
 					Video Institucional
 				</a>
+				';
+				}
+
+				?>
 
 				<a href="Relatorios.php" class="collection-item">
 					<span class="left badge">
@@ -77,10 +81,6 @@
 					</span>
 					Fotos
 				</a>
-				';
-				}
-
-				?>
 			</div>
 		</div>
 		<footer class="footer" style="position: absolute;bottom:0;margin: 35px 35px;">

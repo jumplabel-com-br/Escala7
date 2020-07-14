@@ -75,7 +75,7 @@ function returnRespostasLivres(IdQuestionario, Perguntas, option = 'Select'){
 
 function templatePerguntasLivres(model){
 return infosRespostas.map((value, i) => {
-		respostas = infosRespostas[i].Respostas.split(',');
+		respostas = infosRespostas[i].Respostas.split('$&');
 		infos =  infosRespostas[i]
 			return model.map((valuePergunta, i) => {
 				if (valuePergunta.Tipo == "0") {

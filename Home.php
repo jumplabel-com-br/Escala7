@@ -68,16 +68,18 @@ $dados_usuario = mysqli_fetch_array($result);
 	<?php require_once("nav.php")?>
 
 	<div class="col s12 m3">
-		<div class="card white card-home">
+		<div class="card white card-home" style="overflow-y: auto">
 			<div class="card-content white-text">
-				<span class="card-title color-default f-Helvetica-Bold left-align">Implatação <br> por Campanha</span>
-
+				<span class="card-title color-default f-Helvetica-Bold left-align">Implantação <br> por Campanha</span>
+				<div class="row">
+					<div class="implantacao-campanha center"></div>
+				</div>
 			</div>
 		</div>
 	</div>
 
 	<div class="col s12 m3">
-		<div class="card white card-home">
+		<div class="card white card-home" style="overflow-y: auto">
 			<div class="card-content white-text">
 				<span class="card-title color-default f-Helvetica-Bold left-align">Questiónarios <br> Preenchidos</span>
 				<div class="questionarios-preenchidos center"></div>
@@ -86,7 +88,7 @@ $dados_usuario = mysqli_fetch_array($result);
 	</div>
 
 	<div class="col s12 m3">
-		<div class="card white card-home">
+		<div class="card white card-home" style="overflow-y: auto">
 			<div class="card-content white-text">
 				<span class="card-title color-default f-Helvetica-Bold left-align">Campanhas <br> Cadastradas</span>
 				<div class="campanhas-cadastradas center"></div>
@@ -97,6 +99,11 @@ $dados_usuario = mysqli_fetch_array($result);
 
 <input type="hidden" name="valueScanner" id="valueScanner">
 <input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">
+<?php
+if ($_SESSION["UserType"] == 0) {
+	echo "<input type='hidden' name='IdUser' id='IdUser' value=".$_SESSION["IdUser"].">";
+}
+?>
 <!-- Compiled and minified JavaScript -->
 <script type="text/javascript" src="js/Generic.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 <script type="text/javascript" src="ajax/AjaxGenericDB.js?date=<?=date('d/m/Y-H:i:s')?>"></script>

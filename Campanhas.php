@@ -43,7 +43,7 @@
 		<div class="col s12 m9">
 			<div class="cards-footer">
 				<div class="col s6 m3 left-align">
-					<button class="btn btn-default" type="button" onclick="$('#modalFiltros').modal('open')">Filtros</button>
+					<button class="btn btn-default" type="button" onclick="$('#modalFiltros').modal('open'); templateIdCampanha(CampanhasId)">Filtros</button>
 				</div>
 				<div class="col s6 m9 right-align">
 					<button class="btn btn-default" type="button" onclick="$('#modalCampanha').modal('open');clearForm('#formCampanha');$('select').formSelect();selectedQuestionario();$('.editShow').addClass('hide');"><span class="d-none-mobile">+</span> Cadastrar</button>
@@ -58,6 +58,14 @@
 		</div>
 		<div class="container center-align">
 			<form id="formFilters">
+
+				<div class="input-field col s12 m7">
+					<select id="IdFilter" class="c-blue">
+					</select>
+					<label class="color-default">Id</label>
+				</div>
+
+
 				<div class="input-field col s12 m7">
 					<select id="StatusFilter" class="c-blue">
 						<option value="" selected>Status</option>
@@ -116,7 +124,7 @@
 					<div class="input-field col s12 m7">
 						<select id="Questionarios" class="c-blue" plc="Questionarios">
 						</select>
-						<label class="color-default">Questionários</label>
+						<label class="color-default top-0">Questionários</label>
 					</div>
 
 					<div class="input-field col s12 m7">
@@ -135,7 +143,7 @@
 							<option value="1">Ativo</option>
 							<option value="0">Desativado</option>
 						</select>
-						<label class="color-default">Status</label>
+						<label class="color-default top-0">Status</label>
 					</div>
 
 					<div class="input-field col s12 m7">
@@ -149,7 +157,7 @@
 							<select id="VinculoCliente" class="c-blue">
 
 							</select>
-							<label class="color-default">Vinculo de cliente por campanha</label>
+							<label class="color-default top-0">Vinculo de cliente por campanha</label>
 							<i class="material-icons right i-default pointer add-circle-respostas" onclick="addClientInTemplate();">add_circle</i>
 						</div>
 

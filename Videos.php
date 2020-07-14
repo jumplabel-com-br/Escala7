@@ -46,7 +46,7 @@ function createSession(){
 					if (!empty($_SESSION["VideoInstitucional"]) && empty($VC) ) {
 						echo 'Video Institucional';
 					}else{
-						echo 'Video Campanha';
+						echo 'Video Montagem';
 					}
 				?>
 				</h5>
@@ -57,7 +57,7 @@ function createSession(){
 
 <div class="row">
 	<div class="col s12 m12">
-		<div class="cards-footer">
+		<div class="cards-footer iframe-toggle">
 			<iframe height="397" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="width-complete" id="Iframe"></iframe>
 		</div>
 	</div>
@@ -99,6 +99,8 @@ function createSession(){
 		}else if (VideoInstitucional != "" && VideoInstitucional != undefined && VI != "") {
 			document.querySelector('#Iframe').setAttribute("src", VideoInstitucional)	
 		}
+
+		$('.iframe-toggle').show();
 	}, 1000)
 </script>
 <script src="js/Generic.js?date=<?=date('d/m/Y-H:i:s')?>"></script>

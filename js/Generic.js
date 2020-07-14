@@ -19,7 +19,7 @@ $(document).ready(function($) {
         'Junho',
         'Julho',
         'Agosto',
-        'Setembto',
+        'Setembro',
         'Outubro',
         'Novembro',
         'Dezembro'
@@ -97,9 +97,13 @@ function SelectAdvanced(sql, option = 'SelectAdvanced'){
         dataType: 'json',
         async: false,
         data: {option, sql},
+        beforeSend: function(){
+            $('#modalProgress').modal('open');
+        }
     })
     .done(function(data) {
         dataSelectAdvanced = data;
+        $('#modalProgress').modal('close');
     })
     .fail(function() {
         console.log("error");
@@ -128,17 +132,17 @@ function exportExcel(id, nome){
 function grafico(div_montagem, dataPoints){
 
     var options = {
-        width: 880,
-        height: 470,
+        width: 999,
+        height: 600,
         animationEnabled: true,
         axisY: {
-            title: "Gráfico perguntas combo",
+            title: dataPoints[0].resposta,
             suffix: "",
             includeZero: true
         },
-        /*axisX: {
-            title: "Countries"
-        },*/
+        axisX: {
+            title: dataPoints[0].resposta
+        },
         data: [{
             type: "column",
             yValueFormatString: "#,##0.0#"*"",

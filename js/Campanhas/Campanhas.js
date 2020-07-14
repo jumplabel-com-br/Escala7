@@ -1,4 +1,5 @@
 var dataInfos;
+var CampanhasId;
 
 $(document).ready(function(){
   selectCampanhas();
@@ -22,9 +23,10 @@ $('#li-img-logo-max').on('click', function(event) {
 });
 
 function filtersCampanhas(){
-  let statusFilter = '';
-  let campanhasFilter = ''
-  let idUsuario = '';
+  let statusFilter;
+  let campanhasFilter;
+  let idUsuario;
+  let IdFilter;
 
   if ($('#StatusFilter').val().length > 0) {
     statusFilter =  `a.Status = ${$('#StatusFilter').val()}`  
@@ -38,25 +40,45 @@ function filtersCampanhas(){
     campanhasFilter = `a.Campanha like '%${$('#CampanhasFilter').val()}%'`
   }
 
-  if ($('#IdUser').val() != undefined || statusFilter.length > 0 || CampanhasFilter > 0) {
-    return `
-      where ${statusFilter} ${statusFilter.length > 0 ? 'and' : ''}
-            ${idUsuario} ${idUsuario.length > 0 ? 'and' : ''}
-            ${campanhasFilter}
-    `
+  if ($('#IdFilter').val() != null && $('#IdFilter').val().length > 0) {
+    IdFilter = `a.Id = ${$('#IdFilter').val()}`
   }
+
+  if ($('#IdUser').val() != undefined || statusFilter != undefined || campanhasFilter != undefined || IdFilter != undefined) {
+    let where = 'where';
+    
+    if (statusFilter != undefined) {
+      where += ` and ${statusFilter}` 
+    }
+
+    if (idUsuario != undefined) {
+      where +=  ` and ${idUsuario}`
+    }
+
+    if (campanhasFilter != undefined) {
+      where += ` and ${campanhasFilter}`      
+    }
+
+    if (IdFilter != undefined) {
+      where += ` and ${IdFilter}`      
+    }
+
+    return where.replace('where and', 'where');
+  }
+
   return '';
 }
 
 function selectCampanhas(){
 
 let sql = `select distinct a.* from escala75_Easy7.Campanhas as a
-left join escala75_Easy7.ClientesCampanhas as b on a.Id = b.IdCampanha
+${$('#IdUser').val() != undefined ? 'left join escala75_Easy7.ClientesCampanhas as b on a.Id = b.IdCampanha' : ''}
 ${filtersCampanhas()};`
 
 SelectAdvanced(sql);
 
 let data = dataSelectAdvanced;
+CampanhasId = dataSelectAdvanced;
 
 data != null && data != undefined && data.length > 0 ? $('.tbody-campanhas').show() : $('.tbody-campanhas').hide()
 $('.tbody-campanhas').html(templateTableCampanhas(data));
@@ -316,6 +338,18 @@ function returnClientes(){
   data != null && data != undefined && data.length > 0 ? $('#table-Clientes').show() : $('#table-Clientes').hide()
   $('.tbody-Clientes').html(templateTableClientes(data));
 
+}
+
+function templateIdCampanha(model){
+  $('#IdFilter').html(`
+    <option value="">Selecione</option>
+    ${model.map(elem => {
+        return `<option value="${elem.Id}">${elem.Id}</option>`
+      })
+    }
+  `);
+
+  $('select').formSelect();
 }
 
 function templateTableClientes(model){

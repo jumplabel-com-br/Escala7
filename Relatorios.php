@@ -35,11 +35,17 @@
 		<div class="col s12 m3">
 			<div class="card white card-home">
 				<div class="card-content white-text">
-					<span class="card-title color-default f-Helvetica-Bold left-align">Gráfico <br> Respostas combos</span>
+					<span class="card-title color-default f-Helvetica-Bold left-align">Gráfico <br> Respostas</span>
 					<!--<select class="center Questionarios" id="QuestionariosRC" onchange="extrairRespostasCombo()"></select>-->
 					<select class="center Campanhas" id="CampanhasRC" onchange="extrairRespostasCombo()"></select>
-					<!--<select class="center Perguntas" id="PerguntasRC" onchange="extrairRespostasCombo()"></select>-->
+					<div class="PerguntasRC">
+						<select class="center Perguntas" id="PerguntasRC" onchange="returnPerguntas($('#CampanhasRC').val());"></select>
+					</div>
 				</div>
+
+				<footer class="footer" style="position: absolute;bottom:0;margin: 35px 35px; width: 79%; text-align: center">
+					<button class="btn btn-blue" onclick="extractCombo();">Extrair</button>
+				</footer>
 			</div>
 		</div>
 
@@ -107,6 +113,12 @@
 	
 	<input type="hidden" name="valueScanner" id="valueScanner">
 	<input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">
+
+	<?	
+	if ($_SESSION["UserType"] == 0) {
+		echo "<input type='hidden' name='IdUser' id='IdUser' value=".$_SESSION["IdUser"].">";
+	}
+	?>
 	<!-- Compiled and minified JavaScript -->
 	<script type="text/javascript" src="js/Generic.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 	<script type="text/javascript" src="ajax/AjaxGenericDB.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
@@ -115,11 +127,11 @@
 	<script type="text/javascript" src="js/Campanhas/Campanhas.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 	<script type="text/javascript" src="js/Relatorios/ReportRespostasLivres.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 	<script type="text/javascript" src="js/Relatorios/ReportRespostasCombo.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
-	<script type="text/javascript" src="js/Relatorios/Mapa.js"></script>
+	<script type="text/javascript" src="js/Relatorios/Mapa.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 
 	<script type="text/javascript">
 		jQuery(document).ready(function($) {
-			selectedQuestionario();
+			selectCampanhas();
 			//createLocations();;
 		});
 

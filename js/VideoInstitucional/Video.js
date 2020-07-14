@@ -3,10 +3,12 @@ jQuery(document).ready(function($) {
 	$('.tooltipped').tooltip();
 	$('.dropdown-trigger').dropdown();
 	returnIframe();
+	$('.iframe-toggle').hide();
 });
 
 
 let chip;
+let link;
 
 function keypressChip(){
 
