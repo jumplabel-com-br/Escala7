@@ -60,8 +60,8 @@ require_once('startPage.php');
 			<form id="formFilters">
 				<div class="input-field col s12 m7">
 					<select id="StatusFilter" class="c-blue">
-						<option value="" selected>Status</option>
-						<option value="1">Ativo</option>
+						<option value="">Status</option>
+						<option value="1" selected>Ativo</option>
 						<option value="0">Desativado</option>
 					</select>
 					<label class="color-default">Status</label>

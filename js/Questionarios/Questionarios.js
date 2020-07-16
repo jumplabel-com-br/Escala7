@@ -94,6 +94,64 @@ function CRUDQuestionarios(option){
 
 }
 
+function fnFiltersQuestionario(id){
+  let where = 'where';
+  let status = '';
+  let questionario = '';
+
+  if ($('#StatusFilter').val() != undefined && $('#StatusFilter').val() != "") {
+    status += ` questionarios.Status = ${$('#StatusFilter').val()}`
+    where += ' and '+status;
+  }
+
+  if ($('#QuestionariosFilter').val() != undefined && $('#QuestionariosFilter').val() != "") {
+    questionario += ` questionarios.Name like '%${$('#QuestionariosFilter').val()}%'`
+    where += ' and '+questionario;
+  }
+
+  if (id > 0) {
+    where += ` and id = ${id}`   
+  }
+
+  if ($('#StatusFilter').val() != undefined && $('#StatusFilter').val() != "" || $('#QuestionariosFilter').val() != undefined && $('#QuestionariosFilter').val() != "" ) {
+    return where.replace('where and', 'where');
+  }
+
+
+  return ''
+
+}
+
+function select(nameFunction, id){
+
+  let sql = `SELECT * FROM 
+  escala75_Easy7.Questionarios as questionarios
+  ${fnFiltersQuestionario(id)}
+     `
+   SelectAdvanced(sql);
+
+   let data = dataSelectAdvanced;
+
+
+   if (data.length > 0 && nameFunction == 'templateTableQuestionarios') {
+
+     $('.tbody-Questionarios').html(templateTableQuestionarios(data));
+     $('.dropdown-trigger').dropdown();
+     $('#modalQuestionario').modal('close');
+     clearForm('#formQuestionario');
+
+   }else if (data.length > 0 && id > 0) {
+     setInputsModal(data);
+   }
+
+   if (data.length <= 0) {
+     M.toast({html: 'Não existem informações com os parâmetros informados', displayLength: 4000})
+   }
+
+   $('#modalProgress').modal('close');
+}
+
+/*
 function select(nameFunction, id){
 
  let option = 'Select';
@@ -145,7 +203,7 @@ $.ajax({
 })
 
 }
-
+*/
 function returnPerguntas(id, tableName = 'Perguntas', columns = '*', complement){
 
   let sql = `SELECT perguntas.Id, questionarioperguntas.IdQuestionario, perguntas.Pergunta, perguntas.Status, questionarios.Name FROM escala75_Easy7.Perguntas as perguntas

@@ -90,6 +90,26 @@ function validarForm(form){
     return v;
 }
 
+
+function validarForm2(form){
+    v = true;
+
+    $(`${form} input[type="text"], ${form} input[type="hidden"], ${form} input[type="password"], ${form} select`).each(function () {
+
+        if (($(this).val() == '' || $(this).val() == null) && $(this).attr('plc') != undefined) {
+            M.toast({html: 'Preencha o campo '+ $(this).attr('plc'), displayLength: 4000})
+            v = false;
+        }
+
+        if ($(this).attr('plc') == 'Email' && validarEmail($(this).val()) == false && $(this).attr('plc') != undefined) {
+            M.toast({html: 'O campo '+ $(this).attr('plc') + ' está inválido', displayLength: 4000})
+            v = false;
+        }
+    });
+
+    return v;
+}
+
 function SelectAdvanced(sql, option = 'SelectAdvanced'){
     $.ajax({
         url: 'DBInserts.php',

@@ -37,19 +37,22 @@ function toggleRespostas(){
 }
 
 function filtersPerguntas(){
+  let where = 'where'
   let statusFilter = '';
   let perguntasFilter = '';
 
   if ($('#StatusFilter').val() != null && $('#StatusFilter').val().length > 0){
-    statusFilter = `perguntas.Status = ${$('#StatusFilter').val()}`  
+    statusFilter = ` and perguntas.Status = ${$('#StatusFilter').val()}`  
+    where += statusFilter;
   }
 
   if ($('#PerguntasFilter').val() != null && $('#PerguntasFilter').val().length > 0) {
-    perguntasFilter = `perguntas.Pergunta like '%${$('#PerguntasFilter').val()}%'`
+    perguntasFilter = ` and perguntas.Pergunta like '%${$('#PerguntasFilter').val()}%'`
+    where += perguntasFilter;
   }
 
   if (statusFilter.length > 0 || perguntasFilter.length > 0) {
-      return `where ${statusFilter} ${statusFilter.length > 0 ? 'and' : ''} ${perguntasFilter}`;
+    return where.replace('where and', 'where').replace('whereand', 'where');
   }
 
   return '';

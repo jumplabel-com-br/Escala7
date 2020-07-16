@@ -6,6 +6,7 @@ var perguntaRespostaTotal = [];
 var repetidos = [];
 var unicos = [];
 var dataPoints = [];
+var divs = [];
 var labelY;
 
 jQuery(document).ready(function($) {
@@ -97,7 +98,8 @@ function fnPerguntas(){
 	join escala75_Easy7.QuestionarioPerguntas as questPerguntas on perguntas.Id = questPerguntas.IdPergunta
 	join escala75_Easy7.Questionarios as questionarios on questPerguntas.IdQuestionario = questionarios.Id
 	join escala75_Easy7.Campanhas as campanhas on questionarios.Id = campanhas.IdQuestionario
-	where campanhas.Id = ${$('#CampanhasRC').val()};`
+	where campanhas.Id = ${$('#CampanhasRC').val()}
+	${$('#PerguntasRC').val() != 0 ? `and perguntas.Pergunta = '${$('#PerguntasRC').val()}'` : ''};`
 
 	SelectAdvanced(sql);
 	let data = dataSelectAdvanced;
@@ -106,7 +108,6 @@ function fnPerguntas(){
 
 function templateDivsPerguntas(model){
 	//debugger;
-	let divs = '';
 	return model.map(elem => {
 		idPergunta = elem.Pergunta.normalize("NFD").replace(/[^a-zA-Zs]/g, "")+'_'+elem.Id;
 		return`
@@ -114,6 +115,9 @@ function templateDivsPerguntas(model){
 			</div> 
 			<script>
 				fnReturnCanvas('${idPergunta}', '${elem.Pergunta}')
+				${divs.push({
+					div : idPergunta
+				})}
 			</script>
 		`;
 		//return divs;
@@ -143,14 +147,20 @@ function fnReturnCanvas(IdPergunta, Pergunta){
 	    	});
 
 	    	grafico('#'+IdPergunta, dataPoints);
-		}else{
-			//debugger;
-			$(`#`+IdPergunta).remove()
 		}
 	});
 
 	$('#modal1').modal('open')
 	$('#modalProgress').modal('close');
+
+	setTimeout(function(){
+		divs.map(elem => {
+			div = document.querySelector('#'+elem.div).innerHTML.normalize("NFD").replace(/[^a-zA-Zs]/g, "")
+			if (div == '') {
+				$('#'+elem.div).remove()
+			} 
+		})
+	}, 3000)
 }
 
 

@@ -32,21 +32,29 @@ function templateImplantacaoCampanha(model){
 }
 
 function questionariosPreenchidos(){
-  let sql = `SELECT IdQuestionario, count(IdQuestionario) FROM escala75_Easy7.RespostasCampanha
-group by IdQuestionario;`
+  let sqlPreenchidos = `SELECT IdQuestionario, count(IdQuestionario) FROM escala75_Easy7.RespostasCampanha
+  group by IdQuestionario;`
   
-  SelectAdvanced(sql);
+  SelectAdvanced(sqlPreenchidos);
+  let dataPreenchidos = dataSelectAdvanced;
 
-  let data = dataSelectAdvanced;
+  let sqlCadastrados = `SELECT Name FROM escala75_Easy7.Questionarios
+  where status = 1;`
 
-  $('.questionarios-preenchidos').html(templateQuestionariosPreenchidos(data));
+  SelectAdvanced(sqlCadastrados);
+  let dataCadastrados = dataSelectAdvanced;
+
+  $('.questionarios-preenchidos').html(templateQuestionariosPreenchidos(dataPreenchidos, dataCadastrados));
 }
 
-function templateQuestionariosPreenchidos(model){
+function templateQuestionariosPreenchidos(model1, model2){
   return `
     <div>
-      <h2 class="color-default">${model.length}</h2>
+      <h2 class="color-default">${model1.length}</h2>
       <label class="color-default">Total de questionários preenchidos</label>
+
+      <h2 class="color-default">${model2.length}</h2>
+      <label class="color-default">Total de questionários cadastrados (ativos)</label>      
     </div>
   `
 }

@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+ini_set("display_errors", 1);
+
 require_once('DBInserts.php');
 require_once('startPage.php');
 
@@ -49,6 +52,18 @@ isset($_POST['Usuario']) ? $_SESSION['User'] = str_replace($replaceUser, "", $_P
 
 $Campanha = Select('escala75_Easy7', 'Id, QRCode, Campanha, IdQuestionario, IFrame, Dt_Inicio, Dt_Termino', 'Campanhas', "Id =".$_SESSION["IC"], "",$link);
 $_SESSION["Campanha"] = $Campanha;
+
+function bloqueioFotos(){
+	if ($_SESSION["VC"] != "T" || $_SESSION["FotosOk"] == "T") {
+		echo 'disabled';
+	}
+}
+
+function bloqueioQuestionario(){
+	if ($_SESSION["FotosOk"] != "T" || $_SESSION["Questionario"] == "OK") {
+		echo 'disabled';
+	}
+}
 
 //echo "BarOpen".$BarOpen;
 ?>
@@ -117,7 +132,7 @@ $_SESSION["Campanha"] = $Campanha;
 
 			<div class="row">
 				<div class="col s12 center">
-					<a class="btn btn-rounded b-blue bkg-white c-blue topics-buttons <?=$_SESSION["FotosOk"] == "T" ? "disabled" : ''?>" href="Fotos.php?type=New&getType=usr&IC=<?=$IC?>">
+					<a class="btn btn-rounded b-blue bkg-white c-blue topics-buttons <?php bloqueioFotos()?>" href="Fotos.php?type=New&getType=usr&IC=<?=$IC?>">
 						Foto
 						<?php 
 							if ($_SESSION["FotosOk"] == "T") {
@@ -133,7 +148,7 @@ $_SESSION["Campanha"] = $Campanha;
 
 			<div class="row">
 				<div class="col s12 center">
-					<a class="btn btn-rounded b-blue bkg-white c-blue topics-buttons <?=$_SESSION["Questionario"] == "OK" ? "disabled" : '' ?>" href="QuestionarioCampanha.php?type=New&getType=usr&IC=<?=$IC?>">
+					<a class="btn btn-rounded b-blue bkg-white c-blue topics-buttons <?php bloqueioQuestionario()?>" href="QuestionarioCampanha.php?type=New&getType=usr&IC=<?=$IC?>">
 						Questionario
 						<?php 
 							if ($_SESSION["Questionario"] == "OK") {

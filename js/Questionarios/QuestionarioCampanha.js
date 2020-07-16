@@ -8,7 +8,7 @@ $(document).ready(function($) {
 
 function sendForm(option = 'Insert'){
 
-	validarForm('#formQuestionarioCampanha');
+	validarForm2('#formQuestionarioCampanha');
 
 	if (v == false) {
 		return false;
