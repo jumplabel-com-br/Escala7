@@ -62,7 +62,8 @@ function Perguntas(){
   let sql = `SELECT perguntas.Id, questionarioperguntas.IdQuestionario, perguntas.Pergunta, perguntas.Status, questionarios.Name FROM escala75_Easy7.Perguntas as perguntas
     left join escala75_Easy7.QuestionarioPerguntas as questionarioperguntas on perguntas.Id = questionarioperguntas.IdPergunta
     left join escala75_Easy7.Questionarios as questionarios on questionarioperguntas.IdQuestionario = questionarios.Id
-    ${filtersPerguntas()};`
+    ${filtersPerguntas()}
+    order by questionarios.Name;`
   
   SelectAdvanced(sql);
 
@@ -184,6 +185,10 @@ function CreatePerguntas(option = 'Insert'){
   let UserRegistration = $(`#UserRegistration`).val();
   let UserInactivity = $(`#UserInactivity`).val();
 
+  if (Pergunta.length > 100) {
+    M.toast({html: 'A pergunta deve ter no máximo 100 caracteres', displayLength: 10000})
+    return false;
+  }
 
   let Schema = 'escala75_Easy7';
   let tableName = 'Perguntas';
@@ -242,6 +247,12 @@ function UpdatePerguntas(option = 'Update'){
 
     if (Status == '') {
       alert('Preecha o questionário');
+      return false;
+    }
+
+
+    if (Pergunta.length > 100) {
+      M.toast({html: 'A pergunta deve ter no máximo 100 caracteres', displayLength: 10000})
       return false;
     }
 

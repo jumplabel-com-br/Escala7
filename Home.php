@@ -4,6 +4,8 @@ require_once('conn.php');
 
 $_SESSION["ultimoAcesso"]= date("Y-n-j H:i:s");
 
+require_once('startPage.php');
+
 $user = isset($_SESSION['User']) ? $_SESSION['User'] : '';
 $Email = isset($_SESSION["Email"]) ? $_SESSION["Email"] : '';
 $objBd = new db();

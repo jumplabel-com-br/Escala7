@@ -9,10 +9,11 @@ $IC = $_GET["IC"];
 
 $Campanha = Select('escala75_Easy7', '*', 'Campanhas', "Id = $IC", "",$link);
 
+/*
 function createSession(){
 	global $_SESSION;
 	$_SESSION["Questionario"] = 'OK';
-}
+}*/
 ?>
 
 <!DOCTYPE html>
@@ -56,9 +57,6 @@ function createSession(){
 	<!-- Compiled and minified JavaScript -->
 	<script type="text/javascript">
 		var Campanha = <?=$Campanha?>;
-		function createSession(){
-			<?=createSession()?>
-		}
 		$('.title-campanha').html(`Questionário ${Campanha[0]['Campanha']}`)
 	</script>
 

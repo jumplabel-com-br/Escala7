@@ -19,7 +19,7 @@ if (!isset($_SESSION["ultimoAcesso"])) {
 if (isset($_GET['Questionario'])) {
 	$_SESSION['Questionario'] = $_GET['Questionario'];
 }else{
-	$_SESSION["Questionario"] = $_SESSION["Questionario"]	;
+	$_SESSION["Questionario"] = "";
 }
 
 $User = isset($_SESSION['User']) ? $_SESSION['User'] : '';

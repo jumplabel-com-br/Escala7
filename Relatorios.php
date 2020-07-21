@@ -37,8 +37,9 @@
 				<div class="card-content white-text">
 					<span class="card-title color-default f-Helvetica-Bold left-align">Gráfico <br> Respostas</span>
 					<!--<select class="center Questionarios" id="QuestionariosRC" onchange="extrairRespostasCombo()"></select>-->
-					<select class="center Campanhas" id="CampanhasRC" onchange="extrairRespostasCombo()"></select>
-					<div class="PerguntasRC">
+					<select class="center Campanhas" id="CampanhasRC"></select>
+
+					<div class="PerguntasRC" style="margin-top: 20px;">
 						<select class="center Perguntas" id="PerguntasRC" onchange="returnPerguntas($('#CampanhasRC').val());"></select>
 					</div>
 				</div>
@@ -132,7 +133,9 @@
 	<script type="text/javascript">
 		jQuery(document).ready(function($) {
 			selectCampanhas();
-			//createLocations();;
+			
+			$('.select-dropdown').hide()
+			$(".Campanhas").select2();
 		});
 
 		

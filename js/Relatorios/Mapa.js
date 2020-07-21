@@ -147,7 +147,10 @@ function selectCampanhas(option = 'Select'){
     $('.Campanhas').html('<option value="" disabled>Sem campanha cadastrada</option>')
   }
 
-  $('select').formSelect();
+  //$('select').formSelect();
+  $("#CampanhasMapa").select2().on("change", function(e){
+    createLocations()
+  });
   
 }
 

@@ -11,6 +11,10 @@ var labelY;
 
 jQuery(document).ready(function($) {
 	$('.PerguntasRC').hide();
+
+	$("#CampanhasRC").select2().on("change", function(e){
+	  extrairRespostasCombo();
+	});
 });
 
 function extractCombo(){
@@ -310,7 +314,7 @@ function returnOptionPerguntas(){
 		M.toast({html: 'Não há informações para essa campanha com essa pergunta', displayLength: 4000});
 	}
 	//$('#modalResposta').modal('open');
-	$('select').formSelect();
+	$('#PerguntasRC').formSelect();
 	$('#modalProgress').modal('close');
 
 }

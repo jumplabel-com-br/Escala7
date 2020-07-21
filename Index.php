@@ -192,7 +192,7 @@ if (empty($getType)) {
 				}else if(getType == 'usr' && $('#Campanha').val() != '' && ValidatorCPF($('#autocomplete-input-cpf').val())){
 					validUser();
 				}else{
-					M.toast({html: 'Informe um Usuario e Senha/Campanha válida', displayLength: 4000});
+					M.toast({html: 'Informe um Usuario e Senha/Campanha/CPF válido', displayLength: 4000});
 				}
 		}
 

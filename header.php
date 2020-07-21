@@ -9,6 +9,7 @@
 <!-- Compiled and minified CSS -->
 <link rel="stylesheet" href="materialize/css/materialize.css?<?=date('d/m/Y-H:i:s')?>">
 <link rel="stylesheet" type="text/css" href="css/style.css?<?=date('d/m/Y-H:i:s')?>">
+<link rel="stylesheet" type="text/css" href="css/select2.min.css?date=<?=date('d/m/Y-H:i:s')?>">
 <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
 <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
 
@@ -21,3 +22,4 @@
 <script type="text/javascript" src="jQuery-Mask-Plugin-master/src/jquery.mask.js?date=<?=date('d/m/Y-H:i:s')?>"></script>
 
 <script src="https://kit.fontawesome.com/12838c155d.js" crossorigin="anonymous"></script>
+<script src="js/select2.min.js?date=<?=date('d/m/Y-H:i:s')?>"></script>

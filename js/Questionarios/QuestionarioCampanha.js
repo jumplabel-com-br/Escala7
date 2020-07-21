@@ -47,7 +47,6 @@ function sendForm(option = 'Insert'){
 	.done(function(data) {
 		console.log("send success");
 		$('#modalProgress').modal('close');
-		createSession();
 		window.location.href = window.location.href.replace('QuestionarioCampanha', 'HomeMobile')+"&Questionario=OK"
 	})
 	.fail(function() {
@@ -113,7 +112,7 @@ function Avaliar(estrela, id, s1, s2, s3, s4, s5) {
 	//url = url.toString()
 	//url = url.split("index.html");
 	//url = url[0];
-	debugger;
+	//debugger;
 	var s1 = document.querySelector("#"+s1);
 	var s2 = document.querySelector("#"+s2);
 	var s3 = document.querySelector("#"+s3);
