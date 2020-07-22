@@ -1,5 +1,5 @@
 <?php
-$User = isset($_SESSION['User']);
+//$User = isset($_SESSION['User']);
 $M = $_GET["M"];
 $Message;
 

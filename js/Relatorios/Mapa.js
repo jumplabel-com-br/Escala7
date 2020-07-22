@@ -132,8 +132,8 @@ function selectCampanhas(option = 'Select'){
   ${$('#UserRegistration').val() != "" && $('#IdUser').val() != undefined ? 
   `
   join escala75_Easy7.ClientesCampanhas b on a.Id = b.IdCampanha
-  join escala75_Easy7.Users c on b.IdUsuario = c.Id*
-  where c.CPF = ${$('#UserRegistration').val()}` 
+  join escala75_Easy7.Users c on b.IdUsuario = c.Id
+  where c.Id = ${$('#IdUser').val()}` 
   : ''}
   group by a.Campanha;`
 
@@ -141,7 +141,7 @@ function selectCampanhas(option = 'Select'){
 
   let data = dataSelectAdvanced;
 
-  if(data.length > 0){
+  if(data != null && data.length > 0){
     $('.Campanhas').html(templaceCampanhas(data));
   }else{
     $('.Campanhas').html('<option value="" disabled>Sem campanha cadastrada</option>')

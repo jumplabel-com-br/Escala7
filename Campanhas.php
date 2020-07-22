@@ -124,7 +124,7 @@
 					<div class="input-field col s12 m7">
 						<select id="Questionarios" class="c-blue" plc="Questionarios">
 						</select>
-						<label class="color-default top-0">Questionários</label>
+						<label class="color-default top-0 active">Questionários</label>
 					</div>
 
 					<div class="input-field col s12 m7">
@@ -143,7 +143,7 @@
 							<option value="1">Ativo</option>
 							<option value="0">Desativado</option>
 						</select>
-						<label class="color-default top-0">Status</label>
+						<label class="color-default top-0 active">Status</label>
 					</div>
 
 					<div class="input-field col s12 m7">
@@ -157,7 +157,7 @@
 							<select id="VinculoCliente" class="c-blue">
 
 							</select>
-							<label class="color-default top-0">Vinculo de cliente por campanha</label>
+							<label class="color-default top-0 active">Vinculo de cliente por campanha</label>
 							<i class="material-icons right i-default pointer add-circle-respostas" onclick="addClientInTemplate();">add_circle</i>
 						</div>
 
