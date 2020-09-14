@@ -83,7 +83,7 @@ $dados_usuario = mysqli_fetch_array($result);
 	<div class="col s12 m3">
 		<div class="card white card-home" style="overflow-y: auto">
 			<div class="card-content white-text">
-				<span class="card-title color-default f-Helvetica-Bold left-align">Questiónarios <br> Preenchidos</span>
+				<span class="card-title color-default f-Helvetica-Bold left-align">Questionários <br> Preenchidos</span>
 				<div class="questionarios-preenchidos center"></div>
 			</div>
 		</div>

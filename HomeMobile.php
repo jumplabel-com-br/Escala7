@@ -50,7 +50,7 @@ $replaceUser = array(".", "-");
 
 isset($_POST['Usuario']) ? $_SESSION['User'] = str_replace($replaceUser, "", $_POST['Usuario']) : '';
 
-$Campanha = Select('escala75_Easy7', 'Id, QRCode, Campanha, IdQuestionario, IFrame, Dt_Inicio, Dt_Termino', 'Campanhas', "Id =".$_SESSION["IC"], "",$link);
+$Campanha = Select('escala75_Easy7', 'Id, QRCode, Campanha, IdQuestionario, IFrame, Dt_Inicio, Dt_Termino, Status', 'Campanhas', "Id =".$_SESSION["IC"], "",$link);
 $_SESSION["Campanha"] = $Campanha;
 
 function bloqueioFotos(){
@@ -65,7 +65,8 @@ function bloqueioQuestionario(){
 	}
 }
 
-//echo "BarOpen".$BarOpen;
+//var_dump($_SESSION["Campanha"]);
+//var_dump(array($Campanha));
 ?>
 
 <!DOCTYPE html>

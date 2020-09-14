@@ -176,7 +176,7 @@ if (empty($getType)) {
 	<script type="text/javascript">
 		var Campanha = "<?=$IdCampanha?>";
 		var getType = "<?=$getType?>";
-
+		var countCampanha = `<?=$countCampanha?>`;
 
 		$(document).ready(function($) {
 			$('select').formSelect({classes : 'text-white'});
@@ -254,7 +254,7 @@ if (empty($getType)) {
 			let remetenteEmail = 'easy7@escala7.com.br';
 
 			let assunto = 'Nova Senha'
-			let mensagem = 'Sua nova senha para acesso é: ' + randomPassword + ' até ser alterada';
+			let mensagem = 'Sua nova senha para acesso: ' + randomPassword;
 			let senha = randomPassword;
 
 			$.ajax({
@@ -305,6 +305,11 @@ if (empty($getType)) {
 		}*/
 
 		function validUser(){
+
+			if (countCampanha.length == 2) {
+				 Toast('Campanha inativa, não pode ser acessada');
+				 return false;
+			}
 
 			if (getType == 'usr') {
 				if (ValidatorCPF($('#autocomplete-input-cpf').val())) {

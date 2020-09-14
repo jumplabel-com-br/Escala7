@@ -3,6 +3,7 @@ var autorizationLocation;
 var errorCode;
 var lat;
 var lon;
+var confirmation = confirm("Deseja ativar a localização ?");
 
 $(document).ready(function($) {
 	getLocation();
@@ -12,7 +13,6 @@ function getLocation()
 {
 	if (navigator.geolocation)
 	{
-		let confirmation = confirm("Deseja ativar a localização ?");
 		confirmation == true ? navigator.geolocation.getCurrentPosition(showPosition) : navigator.geolocation.getCurrentPosition(showError);
 		//navigator.geolocation.getCurrentPosition(showPosition,showError);
 	}

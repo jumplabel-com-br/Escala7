@@ -6,21 +6,23 @@ $(document).ready(function($) {
 });
 
 function Respostas(){
-  let sql = `select Campanha ,COUNT(a.IdCampanha) as countRespostas, a.Status, IdQuestionario, a.IdCampanha from escala75_Easy7.RespostasUsers a
-join escala75_Easy7.Campanhas b on a.IdCampanha = b.Id
-left join escala75_Easy7.ClientesCampanhas c on a.IdCampanha = c.IdCampanha
-${$('#IdUser').val() != undefined ? `where c.IdUsuario = ${$('#IdUser').val()}` : ''}
-group by Campanha;`
+
+	let sql = `select Campanha ,COUNT(a.IdCampanha) as countRespostas, a.IdQuestionario, a.IdCampanha from escala75_Easy7.RespostasCampanha a
+	join escala75_Easy7.Campanhas b on a.IdCampanha = b.Id
+	${$('#IdUser').val() != undefined ? `
+										left join escala75_Easy7.ClientesCampanhas c on a.IdCampanha = c.IdCampanha
+										where c.IdUsuario = ${$('#IdUser').val()}` : ''}
+	group by a.IdCampanha;`
   
-  SelectAdvanced(sql);
+  	SelectAdvanced(sql);
 
-  let data = dataSelectAdvanced;
+  	let data = dataSelectAdvanced;
 
-  $('.tbody-Respostas').html(fnTemplateIndex(data));
-  $('.dropdown-trigger').dropdown();
-  $('#modalResposta').modal('close');
-  $('.tooltipped').tooltip();
-  clearForm('#formResposta');
+  	$('.tbody-Respostas').html(fnTemplateIndex(data));
+  	$('.dropdown-trigger').dropdown();
+  	$('#modalResposta').modal('close');
+  	$('.tooltipped').tooltip();
+  	clearForm('#formResposta');
 }
 
 
@@ -55,7 +57,7 @@ function returnRespostas(IdQuestionario, IdCampanha, Perguntas, option = 'Select
 
 	let sql = `SELECT * FROM escala75_Easy7.RespostasCampanha a
 	join escala75_Easy7.Campanhas b on a.IdQuestionario = b.IdQuestionario
-	where a.IdQuestionario = ${IdQuestionario} and b.Id = ${IdCampanha}`;
+	where a.IdQuestionario = ${IdQuestionario} and b.Id = ${IdCampanha} and a.IdCampanha = ${IdCampanha} `;
 
 	SelectAdvanced(sql);
 	infosRespostas = dataSelectAdvanced;
@@ -104,7 +106,7 @@ function returnRespostas(IdQuestionario, IdCampanha, Perguntas, option = 'Select
 
 function templatePerguntas(model){
 	return infosRespostas.map((value, i) => {
-	respostas = infosRespostas[i].Respostas.split(',');
+	respostas = infosRespostas[i].Respostas.split('$&');
 	return`
 		<ul class="collection">
 			<li class="collection-item avatar">

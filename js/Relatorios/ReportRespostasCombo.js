@@ -8,6 +8,7 @@ var unicos = [];
 var dataPoints = [];
 var divs = [];
 var labelY;
+var strPerguntaRespostaTotal = '';
 
 jQuery(document).ready(function($) {
 	$('.PerguntasRC').hide();
@@ -43,7 +44,7 @@ function extrairRespostasCombo(){
 	$('.PerguntasRC').show();
 }
 
-function returnGrafico(option = 'Insert'){
+function returnGrafico(option = 'InsertPlus'){
 	repetidos = [];
 	unicos = [];
 	labelY = [];
@@ -57,42 +58,50 @@ function returnGrafico(option = 'Insert'){
 	});
 
 	labelY = repetidos.concat(unicos);
+	dados = $('#PerguntasRC').val() != "0" ? labelY.filter(function(elem) { return elem.label == $('#PerguntasRC').val()}) : labelY;
 
-	labelY.map(x => {
+	strPerguntaRespostaTotal = strPerguntaRespostaTotal.substr(0, strPerguntaRespostaTotal.length-1)
+
+	/*let Schema = 'escala75_Easy7';
+	let tableName = 'grafico';
+	let columns = 'label, y, resposta';*/
+
+	let Schema = 'escala75_Easy7';
+	let tableName = 'grafico';
+	let columns = 'label, y, resposta';
+	let lastquery = strPerguntaRespostaTotal;
+
+	let param = {
+		Schema,
+		tableName,
+		columns,
+		lastquery,
+		option
+	}
+
+	$.ajax({
+		url: 'DBInserts.php',
+		type: 'POST',
+		dataType: 'html',
+		async : false,
+		data: param,
+		
+	})
+	.done(function() {
+		console.log("success insert grafico");
+		fnPerguntas();
+	})
+	.fail(function() {
+		console.log("error");
+	});
+	
+	/*dados.map(x => {
 		let label = x.label;
 		let y = x.y;
 		let resposta = x.resposta;
-		let Schema = 'escala75_Easy7';
-		let tableName = 'grafico';
-		let columns = 'label, y, resposta';
-		let lastquery = `'${label}', ${y}, '${resposta}'`;
+		
+	});*/
 
-		let param = {
-			Schema,
-			tableName,
-			columns,
-			lastquery,
-			option
-		}
-
-		$.ajax({
-			url: 'DBInserts.php',
-			type: 'POST',
-			dataType: 'html',
-			async : false,
-			data: param,
-			
-		})
-		.done(function() {
-			console.log("success insert grafico");
-		})
-		.fail(function() {
-			console.log("error");
-		});
-	});
-
-	
-	fnPerguntas();
 }
 
 function fnPerguntas(){
@@ -120,6 +129,8 @@ function templateDivsPerguntas(model){
 			<script>
 				fnReturnCanvas('${idPergunta}', '${elem.Pergunta}')
 				${divs.push({
+					id : elem.Id,
+					pergunta : elem.Pergunta,
 					div : idPergunta
 				})}
 			</script>
@@ -156,19 +167,19 @@ function fnReturnCanvas(IdPergunta, Pergunta){
 
 	$('#modal1').modal('open')
 	$('#modalProgress').modal('close');
-
+	
 	setTimeout(function(){
 		divs.map(elem => {
 			div = document.querySelector('#'+elem.div).innerHTML.normalize("NFD").replace(/[^a-zA-Zs]/g, "")
 			if (div == '') {
 				$('#'+elem.div).remove()
-			} 
+			}
 		})
 	}, 3000)
 }
 
 
-/*
+
 function selectGrafico(){
 	let sql = `select label, sum(y) as y, resposta from escala75_Easy7.grafico ${$('#PerguntasRC').val() != 0 ? `where label = '${$('#PerguntasRC').val()}'` : ''} group by label, resposta;`
 	SelectAdvanced(sql);
@@ -190,7 +201,7 @@ function selectGrafico(){
 		M.toast({html: 'Não há informações de acordo com o selecionado', displayLength: 4000});
 		$('#modalProgress').modal('close');
 	}
-}*/
+}
 
 function deleteGrafico(option = 'Delete'){
 	let Schema = 'escala75_Easy7';
@@ -224,6 +235,7 @@ function deleteGrafico(option = 'Delete'){
 
 function returnPerguntas(IdCampanha, option = 'Select'){
 
+
 	if ($('#PerguntasRC').val() == "") {
 		M.toast({html: 'Preencha o campo pergunta', displayLength: 4000});
 		return false;
@@ -242,7 +254,7 @@ function returnPerguntas(IdCampanha, option = 'Select'){
 
 	let data = dataSelectAdvanced;
 	if (dataSelectAdvanced.length > 0) {
-		returnRespostas(data[0].IdQuestionario, data);
+		returnRespostas(data[0].IdQuestionario, data, IdCampanha);
 		deleteGrafico();
 	}else{
 		M.toast({html: 'Não há informações de acordo com o selecionado', displayLength: 4000});
@@ -251,12 +263,13 @@ function returnPerguntas(IdCampanha, option = 'Select'){
 	
 }
 
-function returnRespostas(IdQuestionario, Perguntas, option = 'Select'){
+function returnRespostas(IdQuestionario, Perguntas, IdCampanha, option = 'Select'){
+
 
 	let Schema = 'escala75_Easy7';
   	let tableName = 'RespostasCampanha';
   	let columns = 'CPF, Respostas, DateRegistration'
-  	let where = `IdQuestionario = ${IdQuestionario}`
+  	let where = `IdQuestionario = ${IdQuestionario} and IdCampanha = ${IdCampanha}`
 
 	let params = {
 		Schema,
@@ -279,7 +292,7 @@ function returnRespostas(IdQuestionario, Perguntas, option = 'Select'){
 		console.log("success");
 		infosRespostas = data;
 
-		if (data.length > 0 ) {
+		if (data != null && data != undefined && data.length > 0 ) {
 			$('#tbodyRespostasCombo').html(templatePerguntas(Perguntas));
 			returnGrafico()
 		}else{
@@ -338,6 +351,7 @@ function templatePerguntas(model){
 	pergunta = [];
 	respostaTotal = [];
 	perguntaRespostaTotal = [];
+	strPerguntaRespostaTotal = '';
 
 return infosRespostas.map((value, i) => {
 		respostas = infosRespostas[i].Respostas.split('$&');
@@ -350,6 +364,8 @@ return infosRespostas.map((value, i) => {
 						Perguntas : valuePergunta.Pergunta,
 						Respostas : respostas[i]
 					})
+
+					respostas[i] != undefined ? strPerguntaRespostaTotal += `('${valuePergunta.Pergunta}', 1, '${respostas[i]}'),` : ''
 					return`
 						<tr>
 							<td>${infos.CPF}</td>
@@ -363,6 +379,7 @@ return infosRespostas.map((value, i) => {
 				}
 			}).join('')
 	}).join('')
+
 }
 
 function DatePtBr(date){

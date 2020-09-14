@@ -5,8 +5,39 @@ var strArr = [];
 var strArrStr = []; 
 jQuery(document).ready(function($) {
   selectCampanhas();
+  $("#CampanhasMapa").select2().on("change", function(e){
+    returnLocations()
+  })
 });
 
+function returnLocations(){
+  if ($('#CampanhasMapa').val() == '') {
+    M.toast({html: 'Selecione a campanha para montar o mapa', displayLength: 10000});
+  }
+
+  $('#modalProgress').modal('open');
+
+  //debugger;
+  sql = `SELECT a.* FROM escala75_Easy7.CoordenadasEndereco a
+  join escala75_Easy7.ImagensCampanha b on a.latitude = b.latitude and a.longitude = b.longitude
+  where b.IdCampanha = ${$('#CampanhasMapa').val()}
+  group by a.latitude, a.longitude, a.endereco;`;
+  
+  SelectAdvanced(sql);
+
+  let data = dataSelectAdvanced;
+  
+  locations = [];
+  
+  dataSelectAdvanced.map(elem => {
+    locations.push([elem.endereco, elem.latitude, elem.longitude])  
+  });
+
+  initMap(locations);
+  $('#modalProgress').modal('close');
+}
+
+/*
 function createLocations(){
 
   if ($('#CampanhasMapa').val() == '') {
@@ -73,11 +104,12 @@ function createLocations(){
 
 
 function returnLocation(lat, log){
-  let latlng = 'latlng='+lat+','+log;
-  let key = 'key=AIzaSyBOni-fl7eqwuCXR7qUppY4-afzDp31oaU'//AIzaSyBOni-fl7eqwuCXR7qUppY4-afzDp31oaU;
+  //let latlng = 'latlng='+lat+','+log;
+  //let key = 'key=AIzaSyBOni-fl7eqwuCXR7qUppY4-afzDp31oaU'//AIzaSyBOni-fl7eqwuCXR7qUppY4-afzDp31oaU;
+  let urlComplement = `https://nominatim.openstreetmap.org/reverse?format=json&lon=${log}&lat=${lat}`
 
   $.ajax({
-    url: 'https://maps.googleapis.com/maps/api/geocode/json?'+key+'&'+latlng,
+    url: urlComplement,
     type: 'GET',
     dataType: 'json',
     async: false,
@@ -85,7 +117,7 @@ function returnLocation(lat, log){
       })
   .done(function(data) {
         //console.log("success: ", data.results[0].formatted_address);
-        str += `["${data.results[0].formatted_address}", ${lat}, ${log}]],`;
+        str += `["${data.display_name}", ${lat}, ${log}]],`;
 
         // str = str.replace(/undefined/g,'');
 
@@ -94,7 +126,7 @@ function returnLocation(lat, log){
     console.log("error");
   });
 
-}
+}*/
 
 
 function initMap(locations){
@@ -116,12 +148,12 @@ function initMap(locations){
       title: locations[i][0]
     });
 
-        /*google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
           return function() {
             infowindow.setContent(locations[i][0]);
             infowindow.open(map, marker);
           }
-        })(marker, i));*/
+        })(marker, i));
   }
 
 }
@@ -147,10 +179,7 @@ function selectCampanhas(option = 'Select'){
     $('.Campanhas').html('<option value="" disabled>Sem campanha cadastrada</option>')
   }
 
-  //$('select').formSelect();
-  $("#CampanhasMapa").select2().on("change", function(e){
-    createLocations()
-  });
+  //$('select').formSelect();;
   
 }
 

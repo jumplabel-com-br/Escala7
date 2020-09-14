@@ -43,10 +43,10 @@
 						<select class="center Perguntas" id="PerguntasRC" onchange="returnPerguntas($('#CampanhasRC').val());"></select>
 					</div>
 				</div>
-
+				<!--
 				<footer class="footer" style="position: absolute;bottom:0;margin: 35px 35px; width: 79%; text-align: center">
 					<button class="btn btn-blue" onclick="extractCombo();">Extrair</button>
-				</footer>
+				</footer>-->
 			</div>
 		</div>
 
@@ -54,7 +54,7 @@
 			<div class="card white card-home">
 				<div class="card-content white-text">
 					<span class="card-title color-default f-Helvetica-Bold center-align">Mapa <br> &nbsp;</span>
-					<select class="center Campanhas" id="CampanhasMapa" onchange="createLocations();"></select>
+					<select class="center Campanhas" id="CampanhasMapa" onchange="returnLocations();"></select>
 					<div id="map" style="width: 100%; height: 330px;"></div>
 				</div>
 			</div>

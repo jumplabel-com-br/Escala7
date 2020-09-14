@@ -54,6 +54,7 @@ function createSession(){
 	<input type="hidden" name="valueScanner" id="valueScanner">
 	<input type="hidden" name="UserRegistration" id="UserRegistration" value="<?=$_SESSION['User']?>">
 	<input type="hidden" name="UserInactivity" id="UserInactivity" value="<?=$_SESSION['User']?>">
+	<input type="hidden" name="IC" id="IC" value="<?php echo $IC?>">
 	<!-- Compiled and minified JavaScript -->
 	<script type="text/javascript">
 		var Campanha = <?=$Campanha?>;

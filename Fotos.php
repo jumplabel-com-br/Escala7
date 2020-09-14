@@ -64,30 +64,30 @@ function createSession(){
 				   <div class="file-field input-field">
 				     <div class="btn">
 				       <span>Foto 1</span>
-				       <input type="file" id="file0">
+				       <input type="file" id="file0" accept="image/jpeg, image/png">
 				     </div>
 				     <div class="file-path-wrapper">
-				       <input class="file-path validate" type="text">
+				       <input class="file-path validate" type="text" accept="image/jpeg, image/png">
 				     </div>
 				   </div>
 
 				   <div class="file-field input-field">
 				     <div class="btn">
 				       <span>Foto 2</span>
-				       <input type="file" id="file1">
+				       <input type="file" id="file1" accept="image/jpeg, image/png">
 				     </div>
 				     <div class="file-path-wrapper">
-				       <input class="file-path validate" type="text">
+				       <input class="file-path validate" type="text" accept="image/jpeg, image/png">
 				     </div>
 				   </div>
 
 				   <div class="file-field input-field">
 				     <div class="btn">
 				       <span>Foto 3</span>
-				       <input type="file" id="file2">
+				       <input type="file" id="file2" accept="image/jpeg, image/png">
 				     </div>
 				     <div class="file-path-wrapper">
-				       <input class="file-path validate" type="text">
+				       <input class="file-path validate" type="text" accept="image/jpeg, image/png">
 				     </div>
 				   </div>
 				 </form>

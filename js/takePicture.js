@@ -3,16 +3,33 @@ var pictures = [];
 
 function takePicture()
 {
-	if (autorizationLocation == false) {
+
+	let verificationFile0 = $('#file0').val().substr($('#file0').val().length - 3);
+	let verificationFile1 = $('#file1').val().substr($('#file1').val().length - 3);
+	let verificationFile2 = $('#file2').val().substr($('#file2').val().length - 3);
+
+	if (confirmation == false) {
 		M.toast({html: errorCode, displayLength: 4000});
 		return;
 	}
-
 
 	if (file0.value == '' && file1.value == '' && file2.value == '') {
 		M.toast({html: 'É necessário anexar ao menos 1 imagem', displayLength: 4000});
 		return;
 	}
+
+	if ($('#latitue').val() == "" || $('#longitude').val() == "") {
+		M.toast({html: 'Favor aceitar o compartilhamento de localização', displayLength: 4000});
+		return;
+	}
+
+	/*if (verificationFile0.toUpperCase() != "JPG" || verificationFile0.toUpperCase() != "PNG" || verificationFile0.toUpperCase() != "JPEG" || 
+		verificationFile1.toUpperCase() != "JPG" || verificationFile1.toUpperCase() != "PNG" || verificationFile1.toUpperCase() != "JPEG" ||
+		verificationFile2.toUpperCase() != "JPG" || verificationFile2.toUpperCase() != "PNG" || verificationFile2.toUpperCase() != "JPEG") {
+
+		M.toast({html: 'Uma ou mias imagens não é PNG ou JPG então não pode ser enviada', displayLength: 4000});
+		return;	
+	}*/
 
 	$('#modalProgress').modal('open');
 	//$('.container-new-foto').hide();
@@ -205,9 +222,62 @@ function savePicture(){
 	lon != "" ? formdata.append('lon', lon) : '';
 	IdCampanha != "" ? formdata.append('IdCampanha', IdCampanha) : '';
 
-	ajax.addEventListener("load", function(event) { upload_completo(event);}, false);
+	ajax.addEventListener("load", function(event) { 
+		FindLocation();
+		upload_completo(event);
+	}, false);
+
 	ajax.open("POST", "upload.php");
 	ajax.send(formdata);
+}
+
+function FindLocation(){
+	let urlComplement = `https://nominatim.openstreetmap.org/reverse?format=json&lon=${document.querySelector('#longitude').value}&lat=${document.querySelector('#latitue').value}`
+
+	$.ajax({
+	  url: urlComplement,
+	  type: 'GET',
+	  dataType: 'json',
+	  async: false,
+	      //data: {latlng, key},
+	})
+	.done(function(data) {
+		addLocationDB(data.display_name);
+	})
+	.fail(function() {
+	  console.log("error");
+	});
+}
+
+function addLocationDB(endereco){
+	let option = 'Insert';
+	let longitude = document.querySelector('#longitude').value;
+	let latitue = document.querySelector('#latitue').value;
+	let Schema = 'escala75_Easy7' ;
+	let tableName = 'CoordenadasEndereco';
+	let columns = 'latitude, longitude, endereco';
+	let lastquery = `'${latitue}', '${longitude}', '${endereco}'`;
+	
+	let params = {
+		Schema,
+		tableName,
+		columns,
+		lastquery,
+		option
+	}
+
+	$.ajax({
+		url: 'DBInserts.php',
+		type: 'POST',
+		dataType: 'html',
+		data: params,
+	})
+	.done(function() {
+		console.log("success");
+	})
+	.fail(function() {
+		console.log("error");
+	});
 }
 
 function upload_completo(event){

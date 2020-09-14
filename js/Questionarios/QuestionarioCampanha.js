@@ -19,12 +19,12 @@ function sendForm(option = 'Insert'){
 
 	let Schema = 'escala75_Easy7';
   	let tableName = 'RespostasCampanha';
-  	let columns = 'IdQuestionario, CPF, Respostas, DateRegistration'
+  	let columns = 'IdQuestionario, CPF, Respostas, DateRegistration, IdCampanha'
   	
-  	document.querySelectorAll('form input').forEach(x => str += x.value + '$&');
-  	let respostas = str.substr(0,str.length-1);
+  	document.querySelectorAll('form input, form select').forEach(x => str += x.value + '$&');
+  	let respostas = str.substr(0,str.length-2);
 
-  	let lastquery = `${$('#IdQuestionario').val()}, '${$('#UserRegistration').val()}', '${respostas}', now()`
+  	let lastquery = `${$('#IdQuestionario').val()}, '${$('#UserRegistration').val()}', '${respostas}', now(), ${$('#IC').val()}`
 
 
   	let params = {
@@ -212,7 +212,7 @@ if (estrela == 2){
  	}}
 
  	if (avaliacao == 0) {
- 		id.val('Sem nota');
+ 		id.val('');
  	}else if(avaliacao == 1){
  		id.val('1 estrela');
  	}else if(avaliacao == 2){
@@ -237,11 +237,18 @@ function valuesTypes(elem){
 		` 
 	}else if (elem.Tipo == 1){
 		return`
-			<div class="input-field col s12">
-				<select id="${elem.Id}" plc="'${elem.Pergunta}'">
-					${returnOptions(elem.Id, elem.IdQuestionario, elem.Pergunta)}								      	
-				</select>
-				<label class="color-default">${elem.Pergunta}</label>
+			<div class="row">
+				<div class="input-field col s12">
+					<label class="color-default" ${elem.Pergunta.length > 52 ? 'style="margin-top: -10px;"' : 'style="margin-top: 15px;"'}>${elem.Pergunta}</label>
+				</div>	
+			</div>
+
+			<div class="row">
+				<div class="input-field col s12">
+					<select class="browser-default" id="${elem.Id}" plc="'${elem.Pergunta}'">
+						${returnOptions(elem.Id, elem.IdQuestionario, elem.Pergunta)}								      	
+					</select>
+				</div>
 			</div>
 		`
 	}else if (elem.Tipo == 2){
@@ -289,11 +296,8 @@ function templatePerguntas(model){
 		<form class="col s12" id="formQuestionarioCampanha">
 			${model.map(value =>{
 				return`
-					<div class="row">
-						<div class="input-field col s12">
-							${valuesTypes(value)}
-						</div>
-					</div>
+					
+					${valuesTypes(value)}
 				`
 			}).join('')}
 			<div class="row">
@@ -345,10 +349,10 @@ function returnOptions(IdPergunta, IdQuestionario,firstOption, option = 'Select'
 
 function templateOptions(model, firstOption){
 	return`
-		<option selected disabled value="">${firstOption}</option>
+		<option selected disabled value="">Selecione</option>
 		${model.map((value, i) => {
 			return`
-				<option value="${value.Id}">${value.Respostas/*Stars(i)*/}</option>
+				<option value="${value.Respostas}">${value.Respostas/*Stars(i)*/}</option>
 			`	
 		}).join('')}
 	`

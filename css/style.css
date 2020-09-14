@@ -273,6 +273,10 @@ canvas{
 	max-width: 100%;
 }
 
+.gm-style-iw-d > div {
+	color: #000;
+}
+
 /**********************************QR Code *******************************/
 .qr-code-generator {
 	width: 500px;

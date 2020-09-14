@@ -3,6 +3,7 @@ var dataSelectAdvanced;
 
 $(document).ready(function($) {
 
+    $('.carousel').carousel();
     $('.sidenav').sidenav();
     $('.dropdown-trigger').dropdown();
     $('.modal').modal();
@@ -156,7 +157,7 @@ function grafico(div_montagem, dataPoints){
         height: 600,
         animationEnabled: true,
         axisY: {
-            title: dataPoints[0].resposta,
+            //title: dataPoints[0].resposta,
             suffix: "",
             includeZero: true
         },
@@ -166,6 +167,7 @@ function grafico(div_montagem, dataPoints){
         data: [{
             type: "column",
             yValueFormatString: "#,##0.0#"*"",
+            indexLabel: "{y}",
             dataPoints
          }]
     };

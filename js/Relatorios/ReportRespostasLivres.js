@@ -25,15 +25,15 @@ function returnPerguntasLivres(IdCampanha, option = 'Select'){
 	  SelectAdvanced(sql);
 
 	  let data = dataSelectAdvanced;
-	  returnRespostasLivres(data[0].IdQuestionario, data);
+	  returnRespostasLivres(data[0].IdQuestionario, data, IdCampanha);
 }
 
-function returnRespostasLivres(IdQuestionario, Perguntas, option = 'Select'){
+function returnRespostasLivres(IdQuestionario, Perguntas, IdCampanha, option = 'Select'){
 
 	let Schema = 'escala75_Easy7';
   	let tableName = 'RespostasCampanha';
   	let columns = 'CPF, Respostas, DateRegistration'
-  	let where = `IdQuestionario = ${IdQuestionario}`
+  	let where = `IdQuestionario = ${IdQuestionario} and IdCampanha = ${IdCampanha}`
 
 	let params = {
 		Schema,

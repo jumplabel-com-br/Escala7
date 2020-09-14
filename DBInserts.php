@@ -21,6 +21,10 @@ function Insert($Schema, $tableName, $columns,  $lastquery){
 	return "insert into $Schema.$tableName ($columns) values ($lastquery)";
 }
 
+function InsertPlus($Schema, $tableName, $columns, $lastquery){
+	return "insert into $Schema.$tableName values $lastquery";
+}
+
 function Update($Schema, $tableName, $setQuery, $where){
 	return "update $Schema.$tableName set $setQuery where $where";
 }
@@ -69,6 +73,11 @@ function SelectAdvanced($sql, $link){
 switch ($option) {
 	case 'Insert':
 		$sqlQuery = Insert($Schema, $tableName, $columns, $lastquery);
+		mysqli_query($link, $sqlQuery);
+	break;
+
+	case 'InsertPlus':
+		$sqlQuery = InsertPlus($Schema, $tableName, $columns, $lastquery);
 		mysqli_query($link, $sqlQuery);
 	break;
 
